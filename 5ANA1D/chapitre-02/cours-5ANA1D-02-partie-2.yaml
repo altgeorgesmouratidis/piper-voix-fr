@@ -1,0 +1,481 @@
+meta:
+  course: 5ANA1D
+  course_name: Analyse de données
+  chapter: 2
+  part: 2
+  title: Les paramètres statistiques
+  subtitle: Dispersion, transformations et autres moyennes
+  output: cours-5ANA1D-02-partie-2
+
+scenes:
+  # ================================================================ TITRE
+  - id: s00_titre
+    layout: title
+    notion: 'Introduction'
+    beats:
+      - "Analyse de données, chapitre 2, deuxième partie."
+      - "On mesure maintenant l'étalement des données : étendue, écart-moyen, écart-type. Puis on voit les changements d'unité, et d'autres moyennes."
+    html: |
+      <svg viewBox="0 0 560 560" width="560" height="560">
+        <circle cx="280" cy="280" r="250" fill="var(--paper)" stroke="var(--line)" stroke-width="3"/>
+        <g data-beat="1" data-anim="draw" data-dur="1.4">
+          <line class="stroke muted" x1="100" y1="380" x2="460" y2="380"/>
+          <path class="stroke" d="M110,375 C200,370 220,170 280,170 C340,170 360,370 450,375" fill="none"/>
+          <line class="stroke accent" x1="280" y1="170" x2="280" y2="380" style="stroke-dasharray:10 8"/>
+        </g>
+        <g data-beat="1+1.5" data-anim="grow-x">
+          <line class="stroke gold" x1="215" y1="420" x2="345" y2="420" style="stroke-width:8"/>
+        </g>
+      </svg>
+
+  # ================================================================ INTRO
+  - id: s01_pourquoi
+    notion: 'Introduction'
+    title: 'La moyenne ne suffit pas'
+    subtitle: 'Même centre, étalements différents'
+    beats:
+      - "Une interro donne une moyenne de 11 dans un groupe, et de 15 dans un autre. Le second groupe semble meilleur."
+      - "Mais rien ne dit où est le meilleur étudiant. Il peut avoir 20 dans le premier groupe, alors que le second plafonne à 18."
+      - "Encore plus frappant : deux séries peuvent avoir la même moyenne. Ici, 9, 10, 10 et 11 ont une moyenne de 10."
+      - "Et 0, 5, 15 et 20 aussi ! Pourtant, la deuxième série est beaucoup plus étalée."
+      - "Les paramètres de dispersion mesurent cet étalement autour de la moyenne. Ils n'ont de sens que pour des données quantitatives."
+    html: |
+      <div class="col w40">
+        <div class="row" data-beat="0">
+          <div class="person"><div class="face">1</div>moy. 11</div>
+          <div class="person b"><div class="face">2</div>moy. 15</div>
+        </div>
+        <div class="calc" data-beat="1">meilleur : <b>20</b> dans le groupe 1 ?</div>
+        <div class="keep" data-beat="4">Dispersion = étalement autour de $\bar{x}$</div>
+      </div>
+      <svg class="grow" viewBox="0 0 900 420" width="900" height="420">
+        <line class="stroke muted" x1="60" y1="170" x2="860" y2="170" style="stroke-width:3"/>
+        <line class="stroke muted" x1="60" y1="350" x2="860" y2="350" style="stroke-width:3"/>
+        <g style="font-size:32px;fill:var(--muted)">
+          <text x="50" y="215">0</text><text x="410" y="215">10</text><text x="830" y="215">20</text>
+          <text x="50" y="395">0</text><text x="410" y="395">10</text><text x="830" y="395">20</text>
+        </g>
+        <line x1="460" y1="40" x2="460" y2="380" class="stroke accent" style="stroke-dasharray:10 8;stroke-width:3" data-beat="2" data-anim="draw"/>
+        <g data-beat="2" data-anim="pop">
+          <circle cx="420" cy="150" r="16" fill="var(--main)"/><circle cx="460" cy="150" r="16" fill="var(--main)"/>
+          <circle cx="460" cy="112" r="16" fill="var(--main)"/><circle cx="500" cy="150" r="16" fill="var(--main)"/>
+        </g>
+        <text x="60" y="80" style="font-size:34px;fill:var(--main-ink);font-weight:700" data-beat="2">Série A</text>
+        <g data-beat="3" data-anim="pop">
+          <circle cx="60" cy="330" r="16" fill="var(--accent)"/><circle cx="260" cy="330" r="16" fill="var(--accent)"/>
+          <circle cx="660" cy="330" r="16" fill="var(--accent)"/><circle cx="860" cy="330" r="16" fill="var(--accent)"/>
+        </g>
+        <text x="60" y="270" style="font-size:34px;fill:var(--accent);font-weight:700" data-beat="3">Série B</text>
+      </svg>
+
+  # ================================================================ NOTION 1 : ÉTENDUE
+  - id: s02_etendue
+    notion: 'Étendue'
+    tag: 'Notion 1 / 11'
+    title: 'L''étendue $E_t$'
+    subtitle: 'Le plus grand moins le plus petit'
+    beats:
+      - "Le paramètre le plus naturel : l'étendue, notée E t. C'est la plus grande valeur moins la plus petite."
+      - "Série A : 11 moins 9, égale 2. Série B : 20 moins 0, égale 20. On voit tout de suite que B est plus étalée."
+      - "En continu, on prend la borne supérieure de la dernière classe, moins la borne inférieure de la première. Pour les poids : 100 moins 50, égale 50 kilos."
+      - "Mais l'étendue est assez pauvre. Elle ne regarde que les deux valeurs extrêmes. Une seule valeur aberrante suffit à la gonfler."
+      - "Les paramètres suivants, eux, utilisent toutes les observations."
+    html: |
+      <div class="col w50">
+        <div class="formula" data-beat="0">$$E_t = x_{\max} - x_{\min}$$</div>
+        <div class="calc" data-beat="1">A : $11 - 9 = 2$ · B : $20 - 0 = $ <span class="res">20</span></div>
+        <div class="calc" data-beat="2">poids : $100 - 50 = 50$ kg</div>
+      </div>
+      <div class="col w50">
+        <div class="card accent" data-beat="3"><div class="label">⚠ Limite</div>ne regarde que les <b>extrêmes</b></div>
+        <div class="card main" data-beat="4"><div class="label">Ensuite</div>des paramètres qui utilisent <b>toutes</b> les valeurs</div>
+      </div>
+
+  # ================================================================ NOTION 2 : ÉCART-MOYEN
+  - id: s03_ecart_moyen
+    notion: 'Écart-moyen'
+    tag: 'Notion 2 / 11'
+    title: 'L''écart-moyen $E_m$'
+    subtitle: 'La distance moyenne à la moyenne'
+    beats:
+      - "Intuition : des amis attendent le bus. En moyenne, à quelle distance de l'arrêt se trouvent-ils ? C'est l'idée de l'écart-moyen."
+      - "L'écart-moyen, E m, c'est la moyenne des écarts entre chaque observation et la moyenne. Un sur n, fois la somme des valeurs absolues de x i moins x barre."
+      - "La valeur absolue est indispensable : sans elle, les écarts positifs et négatifs s'annuleraient."
+      - "Exemple : 4, 6, 8, 10, 12. La moyenne vaut 8. Les écarts, en valeur absolue : 4, 2, 0, 2 et 4."
+      - "Leur somme vaut 12. On divise par 5 : l'écart-moyen vaut 2,4. En moyenne, une valeur est à 2,4 de la moyenne."
+    html: |
+      <div class="col w50">
+        <div class="analogy" data-beat="0">
+          <div class="icon">🚏</div>
+          <div><b>Arrêt de bus</b><br><span class="muted">distance moyenne à l'arrêt</span></div>
+        </div>
+        <div class="card main" data-beat="1"><div class="formula sm">$$E_m = \frac{1}{n}\sum_{i=1}^{n} \htmlData{hl=2}{\left| x_i - \bar{x} \right|}$$</div></div>
+      </div>
+      <div class="col w50">
+        <table class="data" data-beat="3">
+          <tr><th>$x_i$</th><th>4</th><th>6</th><th>8</th><th>10</th><th>12</th></tr>
+          <tr><td>$|x_i - 8|$</td><td>4</td><td>2</td><td>0</td><td>2</td><td>4</td></tr>
+        </table>
+        <div class="calc" data-beat="4">$E_m = \dfrac{12}{5} = $ <span class="res">2,4</span></div>
+      </div>
+
+  # ================================================================ NOTION 3 : VARIANCE / ÉCART-TYPE (annoté)
+  - id: s04_variance
+    notion: 'Écart-type'
+    tag: 'Notion 3 / 11'
+    title: 'Variance $s^2$ et écart-type $s$'
+    subtitle: 'Point surligné : la formule de base'
+    hold: 0.5
+    beats:
+      - "Les statisticiens préfèrent l'écart-type, noté s. On définit d'abord son carré, la variance, s carré."
+      - "s carré, c'est un sur n, fois la somme des x i moins x barre, au carré. Au lieu de la valeur absolue, on élève les écarts au carré."
+      - "C'est la moyenne des écarts quadratiques. Et l'écart-type, c'est la racine carrée de la variance."
+      - "Même série : les écarts sont moins 4, moins 2, 0, 2 et 4. Au carré : 16, 4, 0, 4 et 16. Total : 40."
+      - "La variance vaut 40 sur 5, donc 8. L'écart-type vaut racine de 8, environ 2,83."
+      - "Compare avec l'écart-moyen, 2,4 : même ordre de grandeur, et s est un peu plus grand. C'est toujours le cas."
+    html: |
+      <div class="col w50">
+        <div class="card main" data-beat="1"><div class="formula sm">$$s^2 = \frac{1}{n}\sum_{i=1}^{n} \htmlData{hl=1+3}{(x_i - \bar{x})^2}$$</div></div>
+        <div class="formula sm" data-beat="2">$$s = \sqrt{s^2}$$</div>
+      </div>
+      <div class="col w50">
+        <table class="data" data-beat="3">
+          <tr><th>$x_i - 8$</th><th>−4</th><th>−2</th><th>0</th><th>2</th><th>4</th></tr>
+          <tr><td>au carré</td><td>16</td><td>4</td><td>0</td><td>4</td><td>16</td></tr>
+        </table>
+        <div class="calc" data-beat="4">$s^2 = \dfrac{40}{5} = 8$ · $s = \sqrt{8} \approx$ <span class="res">2,83</span></div>
+        <div class="calc" data-beat="5">$E_m = 2{,}4 &lt; s = 2{,}83$</div>
+      </div>
+
+  - id: s05_pourquoi_s
+    notion: 'Écart-type'
+    tag: 'Notion 3 / 11'
+    title: 'Pourquoi préférer l''écart-type ?'
+    subtitle: 'Plus maniable, et central en probabilité'
+    beats:
+      - "Pourquoi cette préférence ? D'abord, la formule est plus maniable. Les valeurs absolues de l'écart-moyen sont peu pratiques en calcul."
+      - "Ensuite, l'écart-type joue un rôle central dans la suite du cours : les probabilités et les distributions."
+      - "Attention aux unités. La variance est en unités au carré : des kilos carrés, par exemple."
+      - "L'écart-type, grâce à la racine, revient dans l'unité des données. C'est lui qu'on interprète."
+    html: |
+      <div class="col w50">
+        <div class="card" data-beat="0"><div class="label">1 · Maniable</div>un carré au lieu de $|\ldots|$</div>
+        <div class="card" data-beat="1"><div class="label">2 · Théorie</div>clé des probabilités</div>
+      </div>
+      <div class="col w50">
+        <div class="calc" data-beat="2">$s^2$ en kg²</div>
+        <div class="calc" data-beat="3">$s$ en <b>kg</b>, comme les données</div>
+        <div class="keep" data-beat="3+2">On interprète $s$, pas $s^2$</div>
+      </div>
+
+  # ================================================================ NOTION 4 : FORMULE PRATIQUE (annoté)
+  - id: s06_formule_pratique
+    notion: 'Écart-type'
+    tag: 'Notion 4 / 11'
+    title: 'La formule de calcul pratique'
+    subtitle: 'Point surligné : moyenne des carrés moins carré de la moyenne'
+    hold: 0.5
+    beats:
+      - "Pour calculer s carré, on retiendra une deuxième formule, équivalente mais plus rapide."
+      - "s carré égale un sur n, fois la somme des x i au carré, moins x barre au carré. La moyenne des carrés, moins le carré de la moyenne."
+      - "Plus besoin de calculer chaque écart. On élève directement les valeurs au carré."
+      - "Même série : 16, 36, 64, 100 et 144. La somme vaut 360. Divisée par 5 : 72."
+      - "On retire x barre au carré : 8 au carré, 64. 72 moins 64, égale 8. On retrouve bien la même variance."
+      - "Le cours démontre l'égalité en développant le carré. Ici, on l'a vérifiée sur un exemple."
+    html: |
+      <div class="col w50">
+        <div class="card main" data-beat="1"><div class="formula sm">$$s^2 = \htmlData{hl=1+2}{\frac{1}{n}\sum_{i=1}^{n} x_i^2} - \htmlData{hl=1+4}{\bar{x}^2}$$</div></div>
+        <div class="card gold" data-beat="2"><div class="label">Avantage</div>pas besoin des écarts $x_i - \bar{x}$</div>
+      </div>
+      <div class="col w50">
+        <table class="data" data-beat="3">
+          <tr><th>$x_i$</th><th>4</th><th>6</th><th>8</th><th>10</th><th>12</th></tr>
+          <tr><td>$x_i^2$</td><td>16</td><td>36</td><td>64</td><td>100</td><td>144</td></tr>
+        </table>
+        <div class="calc" data-beat="3+3">$\dfrac{360}{5} = 72$</div>
+        <div class="calc" data-beat="4">$s^2 = 72 - 8^2 = $ <span class="res">8</span> ✓</div>
+      </div>
+
+  # ================================================================ NOTION 5 : ADAPTER AUX CLASSES
+  - id: s07_classes
+    notion: 'Écart-type'
+    tag: 'Notion 5 / 11'
+    title: 'Écart-type de données en classes'
+    subtitle: 'Fréquences et centres de classe'
+    beats:
+      - "Comme pour la moyenne, la formule s'adapte. Avec un tableau, on pondère par f i. En continu, on remplace x i par le centre de classe c i."
+      - "Formule pratique en continu : s carré égale la somme des f i fois c i au carré, moins x barre au carré."
+      - "Reprenons les poids. Pour la deuxième classe : 0,35 fois 70 au carré, ça donne 1715. Sur les quatre classes, le total vaut 5425."
+      - "La moyenne vaut 72,75. Au carré, environ 5292,56."
+      - "s carré égale 5425 moins 5292,56, environ 132,44. L'écart-type vaut environ 11,51 kilos."
+    html: |
+      <table class="data">
+        <tr><th>$f_i$</th><th>$c_i$</th><th class="hl" data-hl="2">$f_i\,c_i^2$</th></tr>
+        <tr><td>0,25</td><td>57,5</td><td data-beat="2+3">826,56</td></tr>
+        <tr class="hl" data-hl="2"><td>0,35</td><td>70</td><td data-beat="2">1715</td></tr>
+        <tr><td>0,25</td><td>80</td><td data-beat="2+3.3">1600</td></tr>
+        <tr><td>0,15</td><td>92,5</td><td data-beat="2+3.6">1283,44</td></tr>
+        <tr class="tot"><td colspan="2">Total</td><td data-beat="2+4.5">5425</td></tr>
+      </table>
+      <div class="col grow">
+        <div class="card main" data-beat="1"><div class="formula sm">$$s^2 = \sum_{i=1}^{k} f_i\,c_i^2 - \bar{x}^2$$</div></div>
+        <div class="calc" data-beat="3">$\bar{x}^2 = 72{,}75^2 \approx 5292{,}56$</div>
+        <div class="calc" data-beat="4">$s^2 \approx 132{,}44$ · $s \approx$ <span class="res">11,51 kg</span></div>
+      </div>
+
+  # ================================================================ NOTION 6 : 68-95-99
+  - id: s08_intervalles
+    notion: 'Intérêt de l''écart-type'
+    tag: 'Notion 6 / 11'
+    title: 'La règle 68 – 95 – 99'
+    subtitle: 'Ce que dit l''écart-type'
+    hold: 0.5
+    beats:
+      - "Avec la moyenne et l'écart-type, on peut estimer où se trouvent les observations."
+      - "Exemple : ton trajet dure en moyenne 30 minutes, avec un écart-type de 5 minutes."
+      - "Entre x barre moins s et x barre plus s, donc entre 25 et 35 minutes : environ 68 pour cent des trajets."
+      - "Entre x barre moins 2 s et x barre plus 2 s, donc entre 20 et 40 minutes : environ 95 pour cent."
+      - "Et à 3 écarts-types, entre 15 et 45 minutes : environ 99 pour cent."
+      - "Attention : ce sont des approximations. Elles supposent une distribution à peu près symétrique, et beaucoup d'observations. On y reviendra avec la loi normale."
+    html: |
+      <svg class="w50" viewBox="0 0 900 480" width="860" height="460">
+        <polygon class="band3" points="150,420 150,417 161,416 172,414 183,412 194,410 205,407 216,403 227,399 238,393 249,387 260,379 271,371 282,361 293,349 304,337 315,323 326,307 337,291 348,274 359,256 370,238 381,220 392,202 403,185 414,169 425,155 436,143 447,133 458,126 469,121 480,120 491,121 502,126 513,133 524,143 535,155 546,169 557,185 568,202 579,220 590,238 601,256 612,274 623,291 634,307 645,323 656,337 667,349 678,361 689,371 700,379 711,387 722,393 733,399 744,403 755,407 766,410 777,412 788,414 799,416 810,417 810,420" fill="var(--gold)" opacity="0.30" data-beat="4" data-anim="fade"/>
+        <polygon points="260,420 260,379 267,374 275,367 282,361 289,353 297,345 304,337 311,327 319,318 326,307 333,297 341,286 348,274 355,262 363,250 370,238 377,226 385,214 392,202 399,191 407,180 414,169 421,160 429,151 436,143 443,136 451,130 458,126 465,123 473,121 480,120 487,121 495,123 502,126 509,130 517,136 524,143 531,151 539,160 546,169 553,180 561,191 568,202 575,214 583,226 590,238 597,250 605,262 612,274 619,286 627,297 634,307 641,318 649,327 656,337 663,345 671,353 678,361 685,367 693,374 700,379 700,420" fill="var(--main)" opacity="0.35" data-beat="3" data-anim="fade"/>
+        <polygon points="370,420 370,238 374,232 377,226 381,220 385,214 388,208 392,202 396,196 399,191 403,185 407,180 410,175 414,169 418,164 421,160 425,155 429,151 432,147 436,143 440,140 443,136 447,133 451,130 454,128 458,126 462,124 465,123 469,121 473,121 476,120 480,120 484,120 487,121 491,121 495,123 498,124 502,126 506,128 509,130 513,133 517,136 520,140 524,143 528,147 531,151 535,155 539,160 542,164 546,169 550,175 553,180 557,185 561,191 564,196 568,202 572,208 575,214 579,220 583,226 586,232 590,238 590,420" fill="var(--accent)" opacity="0.55" data-beat="2" data-anim="fade"/>
+        <polyline points="90,419 96,419 103,419 110,419 116,419 122,418 129,418 136,418 142,417 148,417 155,416 162,415 168,415 174,414 181,413 188,411 194,410 200,408 207,406 214,404 220,402 226,399 233,396 240,393 246,389 252,385 259,380 266,375 272,370 278,364 285,358 292,351 298,344 304,336 311,328 318,319 324,310 330,301 337,291 344,281 350,271 356,260 363,250 370,239 376,228 382,217 389,207 396,197 402,187 408,177 415,168 422,160 428,152 434,145 441,138 448,133 454,128 460,125 467,122 474,121 480,120 486,121 493,122 500,125 506,128 512,133 519,138 526,145 532,152 538,160 545,168 552,177 558,187 564,197 571,207 578,217 584,228 590,239 597,250 604,260 610,271 616,281 623,291 630,301 636,310 642,319 649,328 656,336 662,344 668,351 675,358 682,364 688,370 694,375 701,380 708,385 714,389 720,393 727,396 734,399 740,402 746,404 753,406 760,408 766,410 772,411 779,413 786,414 792,415 798,415 805,416 812,417 818,417 824,418 831,418 838,418 844,419 850,419 857,419 864,419 870,419" fill="none" class="stroke" style="stroke-width:6" data-beat="1" data-anim="draw"/>
+        <line class="stroke muted" x1="60" y1="420" x2="880" y2="420" style="stroke-width:3"/>
+        <g style="font-size:30px;fill:var(--muted)">
+          <text x="130" y="460" data-beat="4">15</text><text x="240" y="460" data-beat="3">20</text><text x="350" y="460" data-beat="2">25</text>
+          <text x="460" y="460" style="fill:var(--ink);font-weight:700" data-beat="1">30</text>
+          <text x="570" y="460" data-beat="2">35</text><text x="680" y="460" data-beat="3">40</text><text x="790" y="460" data-beat="4">45</text>
+        </g>
+        <text x="445" y="320" style="font-size:40px;fill:var(--paper);font-weight:700" data-beat="2+1">68 %</text>
+      </svg>
+      <div class="col grow">
+        <div class="calc" data-beat="1">$\bar{x} = 30$ min, $s = 5$ min</div>
+        <div class="calc" data-beat="2">$[\bar{x} - s\,;\,\bar{x} + s] = [25\,;\,35]$ → <b class="accent">68 %</b></div>
+        <div class="calc" data-beat="3">$[\bar{x} - 2s\,;\,\bar{x} + 2s] = [20\,;\,40]$ → <b>95 %</b></div>
+        <div class="calc" data-beat="4">$[\bar{x} - 3s\,;\,\bar{x} + 3s] = [15\,;\,45]$ → <b>99 %</b></div>
+        <div class="card gold" data-beat="5"><div class="label">Approximation</div>symétrie, grand $n$</div>
+      </div>
+
+  # ================================================================ NOTION 7 : CHANGEMENT D'ORIGINE ET D'UNITÉ
+  - id: s09_changement_def
+    notion: 'Changement d''origine et d''unité'
+    tag: 'Notion 7 / 11'
+    title: 'Changement d''origine et d''unité'
+    subtitle: 'Transformer toutes les données d''un coup'
+    beats:
+      - "Un changement d'origine ajoute la même quantité b à chaque observation. Par exemple, le patron augmente tous les salaires de 50 euros."
+      - "Ou le prof retire 1 point sur chaque copie. Chaque x i devient x i plus b."
+      - "Un changement d'unité multiplie chaque observation par un même nombre a, non nul. Par exemple, une augmentation de 5 pour cent : on multiplie par 1,05."
+      - "Ou une interro sur 30 ramenée sur 20 : on multiplie par 2 tiers. Chaque x i devient a fois x i."
+      - "Les deux ensemble, c'est une transformation linéaire : u i égale a fois x i, plus b. Question : faut-il tout recalculer ? Non !"
+    html: |
+      <div class="col w50">
+        <div class="card main" data-beat="0"><div class="label">Changement d'origine</div>$x_i \to x_i + b$ <span class="muted">· +50 €, −1 point</span></div>
+        <div class="card" data-beat="2"><div class="label">Changement d'unité</div>$x_i \to a\,x_i$ <span class="muted">· ×1,05, /30 → /20</span></div>
+      </div>
+      <div class="col w50">
+        <div class="formula lg" data-beat="4">$$u_i = a\,x_i + b$$</div>
+        <div class="calc" data-beat="4+3">tout recalculer ? <b class="accent">Non</b></div>
+      </div>
+
+  - id: s10_changement_proprietes
+    notion: 'Changement d''origine et d''unité'
+    tag: 'Notion 7 / 11'
+    title: 'Ce que deviennent les paramètres'
+    subtitle: 'Position : tout · Dispersion : seulement $a$'
+    hold: 0.6
+    beats:
+      - "Intuition : déplace tout un nuage de points vers la droite. Son centre bouge, mais son étalement ne change pas. Par contre, si tu l'étires, l'étalement change."
+      - "Les paramètres de position subissent tout, comme les observations. Le mode, la médiane et la moyenne deviennent a fois l'ancien paramètre, plus b."
+      - "Les paramètres de dispersion subissent le changement d'unité, mais pas le changement d'origine. Le plus b disparaît."
+      - "Attention, le cours écrit s u égale a fois s x. C'est une erreur : c'est vrai seulement si a est positif."
+      - "Un écart-type est toujours positif. La formule exacte est donc : s u égale valeur absolue de a, fois s x. Pareil pour l'étendue et l'écart-moyen."
+    html: |
+      <div class="col w50">
+        <div class="analogy" data-beat="0">
+          <div class="icon">☁️</div>
+          <div><b>Déplacer un nuage</b><br><span class="muted">le centre bouge, pas l'étalement</span></div>
+        </div>
+        <div class="card main" data-beat="1"><div class="label">Position : mode, médiane, moyenne</div>$\bar{u} = a\,\bar{x} + b$ <span class="muted">(idem $u_M$, $u_{1/2}$)</span></div>
+      </div>
+      <div class="col w50">
+        <div class="card" data-beat="2"><div class="label">Dispersion</div>$E_t$, $E_m$, $s$ : le $+\,b$ disparaît</div>
+        <div class="card accent" data-beat="3"><div class="label">⚠ Erreur du cours</div>$s_u = a\,s_x$ ✗ si $a &lt; 0$</div>
+        <div class="formula" data-beat="4">$$s_u = |a|\,s_x$$</div>
+      </div>
+
+  - id: s11_changement_exemple
+    notion: 'Changement d''origine et d''unité'
+    tag: 'Notion 7 / 11'
+    title: 'Exemple : une interro ramenée sur 20'
+    subtitle: 'Sans recalculer une seule copie'
+    beats:
+      - "Une interro est notée sur 30. La moyenne vaut 18, l'écart-type 6."
+      - "Le prof la ramène sur 20 : il multiplie chaque note par 2 tiers. La moyenne devient 2 tiers de 18, donc 12. L'écart-type, 2 tiers de 6, donc 4."
+      - "Puis il ajoute 1 point de bonus à tout le monde. C'est un changement d'origine, avec b égale 1."
+      - "La moyenne monte à 13. Mais l'écart-type reste 4 : les notes sont décalées, pas plus étalées."
+    html: |
+      <div class="col w40">
+        <div class="card" data-beat="0"><div class="label">Sur 30</div>$\bar{x} = 18$ · $s_x = 6$</div>
+        <div class="arrow-d" data-beat="1" data-anim="grow-x"></div>
+        <div class="card main" data-beat="1"><div class="label">Sur 20 · $a = \frac{2}{3}$</div>$\bar{u} = 12$ · $s = 4$</div>
+      </div>
+      <div class="col grow">
+        <div class="calc" data-beat="1">$\frac{2}{3} \times 18 = 12$ · $\frac{2}{3} \times 6 = 4$</div>
+        <div class="calc" data-beat="2">+1 point bonus : $b = 1$</div>
+        <div class="calc" data-beat="3">$\bar{u} = 13$ · $s_u = $ <span class="res">4</span> <span class="muted">(inchangé)</span></div>
+        <div class="keep" data-beat="3+2">Décaler ne change pas l'étalement</div>
+      </div>
+
+  # ================================================================ NOTION 8 : MOYENNE PONDÉRÉE
+  - id: s12_ponderee
+    notion: 'Autres moyennes'
+    tag: 'Notion 8 / 11'
+    title: 'La moyenne pondérée'
+    subtitle: 'Certaines valeurs pèsent plus'
+    beats:
+      - "Quand on parle de moyenne sans préciser, c'est la moyenne arithmétique. Mais il en existe d'autres. D'abord, la moyenne pondérée."
+      - "Chaque observation x i reçoit un poids P i, qui indique son importance. Tu connais ça : ta note finale à l'ESI."
+      - "Dans l'exemple du cours, les maths et la logique ont une pondération de 8, la statistique de 2. Les deux premiers cours pèsent 4 fois plus."
+      - "On multiplie chaque valeur par son poids, et on divise par la somme des poids."
+      - "Avec 12 en maths, 14 en logique et 17 en stat : 8 fois 12, plus 8 fois 14, plus 2 fois 17, ça fait 242. Divisé par 18 : environ 13,44."
+      - "C'est la même formule que la moyenne avec les n i, ou que la réunion de groupes. En physique, elle donne le centre de gravité."
+    html: |
+      <div class="col w50">
+        <div class="card main" data-beat="3"><div class="formula sm">$$\bar{x} = \frac{P_1 x_1 + P_2 x_2 + \dots + P_n x_n}{P_1 + P_2 + \dots + P_n}$$</div></div>
+        <div class="card gold" data-beat="5"><div class="label">Même idée</div>$n_i$ · réunion · centre de gravité</div>
+      </div>
+      <div class="col w50">
+        <table class="data" data-beat="2">
+          <tr><th>Cours</th><th>$P_i$</th><th>Note</th></tr>
+          <tr><td>Maths</td><td>8</td><td data-beat="4">12</td></tr>
+          <tr><td>Logique</td><td>8</td><td data-beat="4">14</td></tr>
+          <tr><td>Statistique</td><td>2</td><td data-beat="4">17</td></tr>
+        </table>
+        <div class="calc" data-beat="4+3">$\dfrac{242}{18} \approx$ <span class="res">13,44</span></div>
+      </div>
+
+  # ================================================================ NOTION 9 : GÉOMÉTRIQUE
+  - id: s13_geometrique
+    notion: 'Autres moyennes'
+    tag: 'Notion 9 / 11'
+    title: 'La moyenne géométrique $\bar{x}_G$'
+    subtitle: 'Pour des taux qui se multiplient'
+    beats:
+      - "En finance, on utilise la moyenne géométrique pour trouver le taux moyen d'un placement."
+      - "C'est la racine n-ième du produit des n valeurs. La somme est remplacée par un produit, et la division par n par une racine n-ième."
+      - "Exemple : ton épargne gagne 10 pour cent la première année, puis 30 pour cent la deuxième. On multiplie donc par 1,10, puis par 1,30."
+      - "Au total, le capital est multiplié par 1,43. La moyenne géométrique vaut racine de 1,43, environ 1,1958. Soit un taux moyen d'environ 19,58 pour cent."
+      - "Piège : la moyenne arithmétique donnerait 20 pour cent. Mais 1,20 au carré, ça fait 1,44, pas 1,43."
+      - "Enfin, le log de la moyenne géométrique, c'est la moyenne des log des valeurs."
+    html: |
+      <div class="col w50">
+        <div class="card main" data-beat="1"><div class="formula sm">$$\bar{x}_G = \sqrt[n]{x_1\,x_2 \cdots x_n}$$</div></div>
+        <div class="formula sm" data-beat="5">$$\log \bar{x}_G = \frac{1}{n}\sum_{i=1}^{n} \log x_i$$</div>
+      </div>
+      <div class="col w50">
+        <div class="analogy" data-beat="2">
+          <div class="icon">💶</div>
+          <div><b>+10 % puis +30 %</b><br><span class="muted">× 1,10 puis × 1,30</span></div>
+        </div>
+        <div class="calc" data-beat="3">$\sqrt{1{,}10 \times 1{,}30} = \sqrt{1{,}43} \approx$ <span class="res">1,1958</span></div>
+        <div class="card accent" data-beat="4"><div class="label">⚠ Pas 20 %</div>$1{,}20^2 = 1{,}44 \neq 1{,}43$</div>
+      </div>
+
+  # ================================================================ NOTION 10 : HARMONIQUE
+  - id: s14_harmonique
+    notion: 'Autres moyennes'
+    tag: 'Notion 10 / 11'
+    title: 'La moyenne harmonique $\bar{x}_H$'
+    subtitle: 'Pour des vitesses sur une même distance'
+    beats:
+      - "La moyenne harmonique sert en physique. Par exemple, pour la vitesse moyenne sur plusieurs trajets de même distance."
+      - "C'est l'inverse de la moyenne arithmétique des inverses. Un sur x barre H, égale un sur n, fois la somme des un sur x i."
+      - "Exemple : tu fais 120 kilomètres à l'aller à 60 kilomètres par heure, et le retour à 40 kilomètres par heure."
+      - "L'aller prend 2 heures, le retour 3 heures. Au total, 240 kilomètres en 5 heures : 48 kilomètres par heure."
+      - "C'est exactement la moyenne harmonique de 60 et 40. Et pas 50, car tu passes plus de temps à rouler lentement."
+    html: |
+      <div class="col w50">
+        <div class="card main" data-beat="1"><div class="formula sm">$$\frac{1}{\bar{x}_H} = \frac{1}{n}\left(\frac{1}{x_1} + \frac{1}{x_2} + \dots + \frac{1}{x_n}\right)$$</div></div>
+        <div class="calc" data-beat="4">$\bar{x}_H = \dfrac{2}{\frac{1}{60} + \frac{1}{40}} = $ <span class="res">48</span></div>
+      </div>
+      <div class="col w50">
+        <div class="row" data-beat="2"><span class="chip main">aller · 60 km/h</span><span class="chip">retour · 40 km/h</span></div>
+        <div class="calc" data-beat="3">2 h + 3 h = 5 h pour 240 km</div>
+        <div class="calc" data-beat="3+3">$\dfrac{240}{5} = 48$ km/h</div>
+        <div class="card accent" data-beat="4+2"><div class="label">⚠ Pas 50</div>plus de temps à 40 km/h</div>
+      </div>
+
+  # ================================================================ NOTION 11 : COEFFICIENT DE VARIATION (annoté)
+  - id: s15_cv
+    notion: 'Coefficient de variation'
+    tag: 'Notion 11 / 11'
+    title: 'Le coefficient de variation $C_v$'
+    subtitle: 'Point surligné : comparer des échelles différentes'
+    hold: 0.5
+    beats:
+      - "Dernier paramètre, surligné dans ton cours : le coefficient de variation, C v."
+      - "C'est un paramètre hybride : il combine un paramètre de position et un de dispersion. C v égale s divisé par x barre."
+      - "Il mesure la dispersion par rapport à l'ordre de grandeur des valeurs. Il sert à comparer des groupes sur des échelles différentes."
+      - "Exemple : l'action A vaut en moyenne 200 euros, avec un écart-type de 10. Son C v vaut 10 sur 200, donc 0,05."
+      - "L'action B vaut 20 euros en moyenne, avec un écart-type de 4. Son C v vaut 4 sur 20, donc 0,20."
+      - "B a le plus petit écart-type, mais elle est 4 fois plus volatile par rapport à son prix."
+    html: |
+      <div class="col w50">
+        <div class="card main" data-beat="1"><div class="label">Position + dispersion</div><div class="formula">$$C_v = \frac{s}{\bar{x}}$$</div></div>
+        <div class="calc" data-beat="2">dispersion <b>relative</b> à l'ordre de grandeur</div>
+      </div>
+      <div class="col w50">
+        <table class="data" data-beat="3">
+          <tr><th>Action</th><th>$\bar{x}$</th><th>$s$</th><th>$C_v$</th></tr>
+          <tr><td>A</td><td>200 €</td><td>10 €</td><td data-beat="3+2">0,05</td></tr>
+          <tr class="hl" data-hl="5"><td>B</td><td data-beat="4">20 €</td><td data-beat="4">4 €</td><td data-beat="4+2" class="ring" data-hl="5">0,20</td></tr>
+        </table>
+        <div class="keep" data-beat="5">B : 4 fois plus volatile</div>
+      </div>
+
+  # ================================================================ TABLEAU RÉCAPITULATIF
+  - id: s16_tableau
+    notion: 'Récapitulatif'
+    title: 'Le tableau récapitulatif'
+    subtitle: 'Une même formule, trois présentations'
+    beats:
+      - "Le cours termine par un grand tableau. Retiens la logique, pas chaque case."
+      - "Données brutes : on divise la somme par n."
+      - "Tableau recensé : on pondère chaque x i par sa fréquence f i."
+      - "Données en classes : on garde les f i, et on remplace x i par le centre c i."
+      - "C'est vrai pour la moyenne, l'écart-moyen et la variance. Et avec les n i, on remplace simplement f i par n i sur n."
+    html: |
+      <div class="col center">
+      <table class="data" style="font-size:44px">
+        <tr><th></th><th data-beat="1">Brutes</th><th data-beat="2">Recensées</th><th data-beat="3">Classes</th></tr>
+        <tr><td>$\bar{x}$</td><td data-beat="1">$\frac{1}{n}\sum x_i$</td><td data-beat="2">$\sum f_i x_i$</td><td data-beat="3">$\sum f_i c_i$</td></tr>
+        <tr><td>$E_m$</td><td data-beat="1">$\frac{1}{n}\sum |x_i - \bar{x}|$</td><td data-beat="2">$\sum f_i |x_i - \bar{x}|$</td><td data-beat="3">$\sum f_i |c_i - \bar{x}|$</td></tr>
+        <tr class="hl" data-hl="4"><td>$s^2$</td><td data-beat="1">$\frac{1}{n}\sum x_i^2 - \bar{x}^2$</td><td data-beat="2">$\sum f_i x_i^2 - \bar{x}^2$</td><td data-beat="3">$\sum f_i c_i^2 - \bar{x}^2$</td></tr>
+      </table>
+      <div class="keep" data-beat="4" style="margin-top:40px">Avec les $n_i$ : remplacer $f_i$ par $\dfrac{n_i}{n}$</div>
+      </div>
+
+  # ================================================================ RÉCAP
+  - id: s17_recap
+    notion: 'Récapitulatif'
+    title: 'Récap de la partie 2'
+    beats:
+      - "Récapitulons. L'étendue est simple, mais elle ne regarde que les extrêmes."
+      - "L'écart-moyen est la moyenne des écarts en valeur absolue. La variance est la moyenne des écarts au carré, et l'écart-type sa racine."
+      - "Pour calculer, on utilise la formule pratique : la moyenne des carrés, moins le carré de la moyenne."
+      - "Environ 68, 95 et 99 pour cent des valeurs sont à 1, 2 ou 3 écarts-types de la moyenne."
+      - "Si u i égale a x i plus b : la position subit tout, la dispersion seulement valeur absolue de a."
+      - "Enfin : pondérée pour des importances, géométrique pour des taux, harmonique pour des vitesses, et C v pour comparer des échelles."
+    html: |
+      <div class="recap">
+        <div class="item" data-beat="0"><b>Étendue</b> : $x_{\max} - x_{\min}$</div>
+        <div class="item" data-beat="1"><span class="tex">$E_m = \frac{1}{n}\sum |x_i - \bar{x}|$</span> · <span class="tex">$s = \sqrt{s^2}$</span></div>
+        <div class="item" data-beat="2"><span class="tex">$s^2 = \frac{1}{n}\sum x_i^2 - \bar{x}^2$</span></div>
+        <div class="item" data-beat="3">$\bar{x} \pm s, 2s, 3s$ : 68 · 95 · 99 %</div>
+        <div class="item" data-beat="4"><span class="tex">$\bar{u} = a\bar{x} + b$</span> · <span class="tex">$s_u = |a|\,s_x$</span></div>
+        <div class="item" data-beat="5">Pondérée · géométrique · harmonique · <span class="tex">$C_v = \frac{s}{\bar{x}}$</span></div>
+      </div>

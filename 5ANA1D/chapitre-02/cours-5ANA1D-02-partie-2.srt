@@ -1,0 +1,1011 @@
+1
+00:00:00,450 --> 00:00:03,956
+Analyse de données, chapitre 2, deuxième partie.
+
+2
+00:00:04,406 --> 00:00:06,868
+On mesure maintenant l'étalement des données :
+
+3
+00:00:06,868 --> 00:00:08,633
+étendue, écart-moyen, écart-type.
+
+4
+00:00:08,633 --> 00:00:11,790
+Puis on voit les changements d'unité, et
+d'autres moyennes.
+
+5
+00:00:13,150 --> 00:00:17,609
+Une interro donne une moyenne de 11 dans un
+groupe, et de 15 dans un autre.
+
+6
+00:00:17,609 --> 00:00:19,570
+Le second groupe semble meilleur.
+
+7
+00:00:20,020 --> 00:00:22,402
+Mais rien ne dit où est le meilleur étudiant.
+
+8
+00:00:22,402 --> 00:00:26,371
+Il peut avoir 20 dans le premier groupe, alors
+que le second plafonne à 18.
+
+9
+00:00:26,821 --> 00:00:28,382
+Encore plus frappant :
+
+10
+00:00:28,382 --> 00:00:31,363
+deux séries peuvent avoir la même moyenne.
+
+11
+00:00:31,363 --> 00:00:34,414
+Ici, 9, 10, 10 et 11 ont une moyenne de 10.
+
+12
+00:00:34,864 --> 00:00:36,754
+Et 0, 5, 15 et 20 aussi !
+
+13
+00:00:36,754 --> 00:00:40,762
+Pourtant, la deuxième série est beaucoup plus
+étalée.
+
+14
+00:00:41,212 --> 00:00:44,736
+Les paramètres de dispersion mesurent cet
+étalement autour de la moyenne.
+
+15
+00:00:44,736 --> 00:00:47,295
+Ils n'ont de sens que pour des données
+quantitatives.
+
+16
+00:00:48,650 --> 00:00:50,639
+Le paramètre le plus naturel :
+
+17
+00:00:50,639 --> 00:00:52,031
+l'étendue, notée E t.
+
+18
+00:00:52,031 --> 00:00:55,279
+C'est la plus grande valeur moins la plus
+petite.
+
+19
+00:00:55,729 --> 00:00:56,467
+Série A :
+
+20
+00:00:56,467 --> 00:00:58,106
+11 moins 9, égale 2.
+
+21
+00:00:58,106 --> 00:00:58,843
+Série B :
+
+22
+00:00:58,843 --> 00:01:00,564
+20 moins 0, égale 20.
+
+23
+00:01:00,564 --> 00:01:04,170
+On voit tout de suite que B est plus étalée.
+
+24
+00:01:04,620 --> 00:01:10,704
+En continu, on prend la borne supérieure de la
+dernière classe, moins la borne inférieure de la
+
+25
+00:01:10,704 --> 00:01:11,281
+première.
+
+26
+00:01:11,281 --> 00:01:12,306
+Pour les poids :
+
+27
+00:01:12,306 --> 00:01:14,163
+100 moins 50, égale 50 kilos.
+
+28
+00:01:14,613 --> 00:01:16,352
+Mais l'étendue est assez pauvre.
+
+29
+00:01:16,352 --> 00:01:18,851
+Elle ne regarde que les deux valeurs extrêmes.
+
+30
+00:01:18,851 --> 00:01:21,405
+Une seule valeur aberrante suffit à la gonfler.
+
+31
+00:01:21,855 --> 00:01:25,396
+Les paramètres suivants, eux, utilisent toutes
+les observations.
+
+32
+00:01:26,750 --> 00:01:27,401
+Intuition :
+
+33
+00:01:27,401 --> 00:01:28,939
+des amis attendent le bus.
+
+34
+00:01:28,939 --> 00:01:32,371
+En moyenne, à quelle distance de l'arrêt se
+trouvent-ils ?
+
+35
+00:01:32,371 --> 00:01:34,146
+C'est l'idée de l'écart-moyen.
+
+36
+00:01:34,596 --> 00:01:40,115
+L'écart-moyen, E m, c'est la moyenne des écarts
+entre chaque observation et la moyenne.
+
+37
+00:01:40,115 --> 00:01:44,301
+Un sur n, fois la somme des valeurs absolues de
+x i moins x barre.
+
+38
+00:01:44,751 --> 00:01:47,252
+La valeur absolue est indispensable :
+
+39
+00:01:47,252 --> 00:01:51,172
+sans elle, les écarts positifs et négatifs
+s'annuleraient.
+
+40
+00:01:51,622 --> 00:01:52,664
+Exemple :
+
+41
+00:01:52,664 --> 00:01:54,518
+4, 6, 8, 10, 12.
+
+42
+00:01:54,518 --> 00:01:56,603
+La moyenne vaut 8.
+
+43
+00:01:56,603 --> 00:02:00,194
+Les écarts, en valeur absolue :
+
+44
+00:02:00,194 --> 00:02:02,048
+4, 2, 0, 2 et 4.
+
+45
+00:02:02,498 --> 00:02:04,104
+Leur somme vaut 12.
+
+46
+00:02:04,104 --> 00:02:05,542
+On divise par 5 :
+
+47
+00:02:05,542 --> 00:02:07,486
+l'écart-moyen vaut 2,4.
+
+48
+00:02:07,486 --> 00:02:11,460
+En moyenne, une valeur est à 2,4 de la moyenne.
+
+49
+00:02:12,817 --> 00:02:16,315
+Les statisticiens préfèrent l'écart-type, noté
+s.
+
+50
+00:02:16,315 --> 00:02:19,957
+On définit d'abord son carré, la variance, s
+carré.
+
+51
+00:02:20,407 --> 00:02:25,302
+s carré, c'est un sur n, fois la somme des x i
+moins x barre, au carré.
+
+52
+00:02:25,302 --> 00:02:29,370
+Au lieu de la valeur absolue, on élève les
+écarts au carré.
+
+53
+00:02:29,820 --> 00:02:31,991
+C'est la moyenne des écarts quadratiques.
+
+54
+00:02:31,991 --> 00:02:34,905
+Et l'écart-type, c'est la racine carrée de la
+variance.
+
+55
+00:02:35,355 --> 00:02:36,714
+Même série :
+
+56
+00:02:36,714 --> 00:02:41,697
+les écarts sont moins 4, moins 2, 0, 2 et 4.
+
+57
+00:02:41,697 --> 00:02:42,830
+Au carré :
+
+58
+00:02:42,830 --> 00:02:44,869
+16, 4, 0, 4 et 16.
+
+59
+00:02:44,869 --> 00:02:45,661
+Total :
+
+60
+00:02:45,661 --> 00:02:46,001
+40.
+
+61
+00:02:46,451 --> 00:02:49,467
+La variance vaut 40 sur 5, donc 8.
+
+62
+00:02:49,467 --> 00:02:53,371
+L'écart-type vaut racine de 8, environ 2,83.
+
+63
+00:02:53,821 --> 00:02:56,004
+Compare avec l'écart-moyen, 2,4 :
+
+64
+00:02:56,004 --> 00:02:59,378
+même ordre de grandeur, et s est un peu plus
+grand.
+
+65
+00:02:59,378 --> 00:03:00,833
+C'est toujours le cas.
+
+66
+00:03:02,683 --> 00:03:04,277
+Pourquoi cette préférence ?
+
+67
+00:03:04,277 --> 00:03:06,519
+D'abord, la formule est plus maniable.
+
+68
+00:03:06,519 --> 00:03:10,474
+Les valeurs absolues de l'écart-moyen sont peu
+pratiques en calcul.
+
+69
+00:03:10,924 --> 00:03:14,902
+Ensuite, l'écart-type joue un rôle central dans
+la suite du cours :
+
+70
+00:03:14,902 --> 00:03:17,158
+les probabilités et les distributions.
+
+71
+00:03:17,608 --> 00:03:19,009
+Attention aux unités.
+
+72
+00:03:19,009 --> 00:03:21,411
+La variance est en unités au carré :
+
+73
+00:03:21,411 --> 00:03:23,413
+des kilos carrés, par exemple.
+
+74
+00:03:23,863 --> 00:03:27,719
+L'écart-type, grâce à la racine, revient dans
+l'unité des données.
+
+75
+00:03:27,719 --> 00:03:29,297
+C'est lui qu'on interprète.
+
+76
+00:03:30,650 --> 00:03:35,967
+Pour calculer s carré, on retiendra une deuxième
+formule, équivalente mais plus rapide.
+
+77
+00:03:36,417 --> 00:03:41,500
+s carré égale un sur n, fois la somme des x i au
+carré, moins x barre au carré.
+
+78
+00:03:41,500 --> 00:03:44,846
+La moyenne des carrés, moins le carré de la
+moyenne.
+
+79
+00:03:45,296 --> 00:03:47,384
+Plus besoin de calculer chaque écart.
+
+80
+00:03:47,384 --> 00:03:49,754
+On élève directement les valeurs au carré.
+
+81
+00:03:50,204 --> 00:03:51,833
+Même série :
+
+82
+00:03:51,833 --> 00:03:54,955
+16, 36, 64, 100 et 144.
+
+83
+00:03:54,955 --> 00:03:57,398
+La somme vaut 360.
+
+84
+00:03:57,398 --> 00:03:59,434
+Divisée par 5 :
+
+85
+00:03:59,434 --> 00:03:59,841
+72.
+
+86
+00:04:00,291 --> 00:04:02,669
+On retire x barre au carré :
+
+87
+00:04:02,669 --> 00:04:03,943
+8 au carré, 64.
+
+88
+00:04:03,943 --> 00:04:05,727
+72 moins 64, égale 8.
+
+89
+00:04:05,727 --> 00:04:08,615
+On retrouve bien la même variance.
+
+90
+00:04:09,065 --> 00:04:12,296
+Le cours démontre l'égalité en développant le
+carré.
+
+91
+00:04:12,296 --> 00:04:14,533
+Ici, on l'a vérifiée sur un exemple.
+
+92
+00:04:16,383 --> 00:04:19,427
+Comme pour la moyenne, la formule s'adapte.
+
+93
+00:04:19,427 --> 00:04:21,975
+Avec un tableau, on pondère par f i.
+
+94
+00:04:21,975 --> 00:04:25,938
+En continu, on remplace x i par le centre de
+classe c i.
+
+95
+00:04:26,388 --> 00:04:28,319
+Formule pratique en continu :
+
+96
+00:04:28,319 --> 00:04:33,180
+s carré égale la somme des f i fois c i au
+carré, moins x barre au carré.
+
+97
+00:04:33,630 --> 00:04:35,456
+Reprenons les poids.
+
+98
+00:04:35,456 --> 00:04:37,739
+Pour la deuxième classe :
+
+99
+00:04:37,739 --> 00:04:41,117
+0,35 fois 70 au carré, ça donne 1715.
+
+100
+00:04:41,117 --> 00:04:45,043
+Sur les quatre classes, le total vaut 5425.
+
+101
+00:04:45,493 --> 00:04:48,521
+La moyenne vaut 72,75.
+
+102
+00:04:48,521 --> 00:04:52,099
+Au carré, environ 5292,56.
+
+103
+00:04:52,549 --> 00:04:58,839
+s carré égale 5425 moins 5292,56, environ
+132,44.
+
+104
+00:04:58,839 --> 00:05:03,718
+L'écart-type vaut environ 11,51 kilos.
+
+105
+00:05:05,083 --> 00:05:09,193
+Avec la moyenne et l'écart-type, on peut estimer
+où se trouvent les observations.
+
+106
+00:05:09,643 --> 00:05:10,269
+Exemple :
+
+107
+00:05:10,269 --> 00:05:15,204
+ton trajet dure en moyenne 30 minutes, avec un
+écart-type de 5 minutes.
+
+108
+00:05:15,654 --> 00:05:20,736
+Entre x barre moins s et x barre plus s, donc
+entre 25 et 35 minutes :
+
+109
+00:05:20,736 --> 00:05:23,131
+environ 68 pour cent des trajets.
+
+110
+00:05:23,581 --> 00:05:29,378
+Entre x barre moins 2 s et x barre plus 2 s,
+donc entre 20 et 40 minutes :
+
+111
+00:05:29,378 --> 00:05:31,023
+environ 95 pour cent.
+
+112
+00:05:31,473 --> 00:05:34,972
+Et à 3 écarts-types, entre 15 et 45 minutes :
+
+113
+00:05:34,972 --> 00:05:36,605
+environ 99 pour cent.
+
+114
+00:05:37,055 --> 00:05:37,713
+Attention :
+
+115
+00:05:37,713 --> 00:05:39,329
+ce sont des approximations.
+
+116
+00:05:39,329 --> 00:05:44,295
+Elles supposent une distribution à peu près
+symétrique, et beaucoup d'observations.
+
+117
+00:05:44,295 --> 00:05:46,389
+On y reviendra avec la loi normale.
+
+118
+00:05:48,250 --> 00:05:52,681
+Un changement d'origine ajoute la même quantité
+b à chaque observation.
+
+119
+00:05:52,681 --> 00:05:56,551
+Par exemple, le patron augmente tous les
+salaires de 50 euros.
+
+120
+00:05:57,001 --> 00:05:59,791
+Ou le prof retire 1 point sur chaque copie.
+
+121
+00:05:59,791 --> 00:06:01,738
+Chaque x i devient x i plus b.
+
+122
+00:06:02,188 --> 00:06:07,723
+Un changement d'unité multiplie chaque
+observation par un même nombre a, non nul.
+
+123
+00:06:07,723 --> 00:06:10,867
+Par exemple, une augmentation de 5 pour cent :
+
+124
+00:06:10,867 --> 00:06:12,370
+on multiplie par 1,05.
+
+125
+00:06:12,820 --> 00:06:15,500
+Ou une interro sur 30 ramenée sur 20 :
+
+126
+00:06:15,500 --> 00:06:17,264
+on multiplie par 2 tiers.
+
+127
+00:06:17,264 --> 00:06:19,380
+Chaque x i devient a fois x i.
+
+128
+00:06:19,830 --> 00:06:23,948
+Les deux ensemble, c'est une transformation
+linéaire :
+
+129
+00:06:23,948 --> 00:06:26,160
+u i égale a fois x i, plus b.
+
+130
+00:06:26,160 --> 00:06:26,922
+Question :
+
+131
+00:06:26,922 --> 00:06:28,829
+faut-il tout recalculer ?
+
+132
+00:06:28,829 --> 00:06:29,210
+Non !
+
+133
+00:06:30,550 --> 00:06:31,266
+Intuition :
+
+134
+00:06:31,266 --> 00:06:34,327
+déplace tout un nuage de points vers la droite.
+
+135
+00:06:34,327 --> 00:06:37,648
+Son centre bouge, mais son étalement ne change
+pas.
+
+136
+00:06:37,648 --> 00:06:40,709
+Par contre, si tu l'étires, l'étalement change.
+
+137
+00:06:41,159 --> 00:06:44,905
+Les paramètres de position subissent tout, comme
+les observations.
+
+138
+00:06:44,905 --> 00:06:49,390
+Le mode, la médiane et la moyenne deviennent a
+fois l'ancien paramètre, plus b.
+
+139
+00:06:49,840 --> 00:06:54,366
+Les paramètres de dispersion subissent le
+changement d'unité, mais pas le changement
+
+140
+00:06:54,366 --> 00:06:54,904
+d'origine.
+
+141
+00:06:54,904 --> 00:06:55,982
+Le plus b disparaît.
+
+142
+00:06:56,432 --> 00:06:59,367
+Attention, le cours écrit s u égale a fois s x.
+
+143
+00:06:59,367 --> 00:07:00,491
+C'est une erreur :
+
+144
+00:07:00,491 --> 00:07:02,864
+c'est vrai seulement si a est positif.
+
+145
+00:07:03,314 --> 00:07:05,783
+Un écart-type est toujours positif.
+
+146
+00:07:05,783 --> 00:07:07,759
+La formule exacte est donc :
+
+147
+00:07:07,759 --> 00:07:10,581
+s u égale valeur absolue de a, fois s x.
+
+148
+00:07:10,581 --> 00:07:13,333
+Pareil pour l'étendue et l'écart-moyen.
+
+149
+00:07:15,283 --> 00:07:17,724
+Une interro est notée sur 30.
+
+150
+00:07:17,724 --> 00:07:20,670
+La moyenne vaut 18, l'écart-type 6.
+
+151
+00:07:21,120 --> 00:07:23,089
+Le prof la ramène sur 20 :
+
+152
+00:07:23,089 --> 00:07:25,890
+il multiplie chaque note par 2 tiers.
+
+153
+00:07:25,890 --> 00:07:29,070
+La moyenne devient 2 tiers de 18, donc 12.
+
+154
+00:07:29,070 --> 00:07:31,720
+L'écart-type, 2 tiers de 6, donc 4.
+
+155
+00:07:32,170 --> 00:07:35,022
+Puis il ajoute 1 point de bonus à tout le monde.
+
+156
+00:07:35,022 --> 00:07:37,755
+C'est un changement d'origine, avec b égale 1.
+
+157
+00:07:38,205 --> 00:07:39,695
+La moyenne monte à 13.
+
+158
+00:07:39,695 --> 00:07:41,524
+Mais l'écart-type reste 4 :
+
+159
+00:07:41,524 --> 00:07:44,370
+les notes sont décalées, pas plus étalées.
+
+160
+00:07:45,717 --> 00:07:49,910
+Quand on parle de moyenne sans préciser, c'est
+la moyenne arithmétique.
+
+161
+00:07:49,910 --> 00:07:51,504
+Mais il en existe d'autres.
+
+162
+00:07:51,504 --> 00:07:53,217
+D'abord, la moyenne pondérée.
+
+163
+00:07:53,667 --> 00:07:58,265
+Chaque observation x i reçoit un poids P i, qui
+indique son importance.
+
+164
+00:07:58,265 --> 00:07:59,236
+Tu connais ça :
+
+165
+00:07:59,236 --> 00:08:00,726
+ta note finale à l'ESI.
+
+166
+00:08:01,176 --> 00:08:07,282
+Dans l'exemple du cours, les maths et la logique
+ont une pondération de 8, la statistique de 2.
+
+167
+00:08:07,282 --> 00:08:10,046
+Les deux premiers cours pèsent 4 fois plus.
+
+168
+00:08:10,496 --> 00:08:14,594
+On multiplie chaque valeur par son poids, et on
+divise par la somme des poids.
+
+169
+00:08:15,044 --> 00:08:19,463
+Avec 12 en maths, 14 en logique et 17 en stat :
+
+170
+00:08:19,463 --> 00:08:24,635
+8 fois 12, plus 8 fois 14, plus 2 fois 17, ça
+fait 242.
+
+171
+00:08:24,635 --> 00:08:26,046
+Divisé par 18 :
+
+172
+00:08:26,046 --> 00:08:27,362
+environ 13,44.
+
+173
+00:08:27,812 --> 00:08:32,426
+C'est la même formule que la moyenne avec les n
+i, ou que la réunion de groupes.
+
+174
+00:08:32,426 --> 00:08:35,022
+En physique, elle donne le centre de gravité.
+
+175
+00:08:36,383 --> 00:08:41,213
+En finance, on utilise la moyenne géométrique
+pour trouver le taux moyen d'un placement.
+
+176
+00:08:41,663 --> 00:08:44,737
+C'est la racine n-ième du produit des n valeurs.
+
+177
+00:08:44,737 --> 00:08:49,987
+La somme est remplacée par un produit, et la
+division par n par une racine n-ième.
+
+178
+00:08:50,437 --> 00:08:51,101
+Exemple :
+
+179
+00:08:51,101 --> 00:08:57,000
+ton épargne gagne 10 pour cent la première
+année, puis 30 pour cent la deuxième.
+
+180
+00:08:57,000 --> 00:09:00,097
+On multiplie donc par 1,10, puis par 1,30.
+
+181
+00:09:00,547 --> 00:09:04,886
+Au total, le capital est multiplié par 1,43.
+
+182
+00:09:04,886 --> 00:09:10,703
+La moyenne géométrique vaut racine de 1,43,
+environ 1,1958.
+
+183
+00:09:10,703 --> 00:09:15,141
+Soit un taux moyen d'environ 19,58 pour cent.
+
+184
+00:09:15,591 --> 00:09:16,225
+Piège :
+
+185
+00:09:16,225 --> 00:09:20,483
+la moyenne arithmétique donnerait 20 pour cent.
+
+186
+00:09:20,483 --> 00:09:24,379
+Mais 1,20 au carré, ça fait 1,44, pas 1,43.
+
+187
+00:09:24,829 --> 00:09:29,392
+Enfin, le log de la moyenne géométrique, c'est
+la moyenne des log des valeurs.
+
+188
+00:09:30,750 --> 00:09:32,998
+La moyenne harmonique sert en physique.
+
+189
+00:09:32,998 --> 00:09:37,379
+Par exemple, pour la vitesse moyenne sur
+plusieurs trajets de même distance.
+
+190
+00:09:37,829 --> 00:09:41,736
+C'est l'inverse de la moyenne arithmétique des
+inverses.
+
+191
+00:09:41,736 --> 00:09:46,130
+Un sur x barre H, égale un sur n, fois la somme
+des un sur x i.
+
+192
+00:09:46,580 --> 00:09:47,114
+Exemple :
+
+193
+00:09:47,114 --> 00:09:52,564
+tu fais 120 kilomètres à l'aller à 60 kilomètres
+par heure, et le retour à 40 kilomètres par
+
+194
+00:09:52,564 --> 00:09:52,919
+heure.
+
+195
+00:09:53,369 --> 00:09:56,441
+L'aller prend 2 heures, le retour 3 heures.
+
+196
+00:09:56,441 --> 00:09:59,155
+Au total, 240 kilomètres en 5 heures :
+
+197
+00:09:59,155 --> 00:10:00,870
+48 kilomètres par heure.
+
+198
+00:10:01,320 --> 00:10:04,758
+C'est exactement la moyenne harmonique de 60 et
+40.
+
+199
+00:10:04,758 --> 00:10:08,669
+Et pas 50, car tu passes plus de temps à rouler
+lentement.
+
+200
+00:10:10,017 --> 00:10:13,088
+Dernier paramètre, surligné dans ton cours :
+
+201
+00:10:13,088 --> 00:10:15,392
+le coefficient de variation, C v.
+
+202
+00:10:15,842 --> 00:10:17,696
+C'est un paramètre hybride :
+
+203
+00:10:17,696 --> 00:10:21,405
+il combine un paramètre de position et un de
+dispersion.
+
+204
+00:10:21,405 --> 00:10:23,458
+C v égale s divisé par x barre.
+
+205
+00:10:23,908 --> 00:10:27,440
+Il mesure la dispersion par rapport à l'ordre de
+grandeur des valeurs.
+
+206
+00:10:27,440 --> 00:10:30,468
+Il sert à comparer des groupes sur des échelles
+différentes.
+
+207
+00:10:30,918 --> 00:10:31,696
+Exemple :
+
+208
+00:10:31,696 --> 00:10:37,144
+l'action A vaut en moyenne 200 euros, avec un
+écart-type de 10.
+
+209
+00:10:37,144 --> 00:10:40,171
+Son C v vaut 10 sur 200, donc 0,05.
+
+210
+00:10:40,621 --> 00:10:45,443
+L'action B vaut 20 euros en moyenne, avec un
+écart-type de 4.
+
+211
+00:10:45,443 --> 00:10:48,051
+Son C v vaut 4 sur 20, donc 0,20.
+
+212
+00:10:48,501 --> 00:10:52,867
+B a le plus petit écart-type, mais elle est 4
+fois plus volatile par rapport à son prix.
+
+213
+00:10:54,717 --> 00:10:56,970
+Le cours termine par un grand tableau.
+
+214
+00:10:56,970 --> 00:10:59,105
+Retiens la logique, pas chaque case.
+
+215
+00:10:59,555 --> 00:11:00,702
+Données brutes :
+
+216
+00:11:00,702 --> 00:11:02,493
+on divise la somme par n.
+
+217
+00:11:02,943 --> 00:11:04,193
+Tableau recensé :
+
+218
+00:11:04,193 --> 00:11:07,354
+on pondère chaque x i par sa fréquence f i.
+
+219
+00:11:07,804 --> 00:11:09,349
+Données en classes :
+
+220
+00:11:09,349 --> 00:11:13,598
+on garde les f i, et on remplace x i par le
+centre c i.
+
+221
+00:11:14,048 --> 00:11:17,897
+C'est vrai pour la moyenne, l'écart-moyen et la
+variance.
+
+222
+00:11:17,897 --> 00:11:21,815
+Et avec les n i, on remplace simplement f i par
+n i sur n.
+
+223
+00:11:23,150 --> 00:11:23,994
+Récapitulons.
+
+224
+00:11:23,994 --> 00:11:27,887
+L'étendue est simple, mais elle ne regarde que
+les extrêmes.
+
+225
+00:11:28,337 --> 00:11:31,495
+L'écart-moyen est la moyenne des écarts en
+valeur absolue.
+
+226
+00:11:31,495 --> 00:11:35,523
+La variance est la moyenne des écarts au carré,
+et l'écart-type sa racine.
+
+227
+00:11:35,973 --> 00:11:38,729
+Pour calculer, on utilise la formule pratique :
+
+228
+00:11:38,729 --> 00:11:41,778
+la moyenne des carrés, moins le carré de la
+moyenne.
+
+229
+00:11:42,228 --> 00:11:48,753
+Environ 68, 95 et 99 pour cent des valeurs sont
+à 1, 2 ou 3 écarts-types de la moyenne.
+
+230
+00:11:49,203 --> 00:11:51,147
+Si u i égale a x i plus b :
+
+231
+00:11:51,147 --> 00:11:56,042
+la position subit tout, la dispersion seulement
+valeur absolue de a.
+
+232
+00:11:56,492 --> 00:11:56,907
+Enfin :
+
+233
+00:11:56,907 --> 00:12:02,483
+pondérée pour des importances, géométrique pour
+des taux, harmonique pour des vitesses, et C v
+
+234
+00:12:02,483 --> 00:12:04,084
+pour comparer des échelles.
+

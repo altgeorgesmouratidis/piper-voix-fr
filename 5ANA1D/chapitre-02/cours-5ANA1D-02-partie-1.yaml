@@ -1,0 +1,460 @@
+meta:
+  course: 5ANA1D
+  course_name: Analyse de données
+  chapter: 2
+  part: 1
+  title: Les paramètres statistiques
+  subtitle: Les paramètres de position
+  output: cours-5ANA1D-02-partie-1
+
+scenes:
+  # ================================================================ TITRE
+  - id: s00_titre
+    layout: title
+    notion: 'Introduction'
+    beats:
+      - "Analyse de données, chapitre 2 : les paramètres statistiques. Première partie."
+      - "Dans cette partie, on résume une série de données par une seule valeur : le mode, la médiane, les quartiles et la moyenne."
+    html: |
+      <svg viewBox="0 0 560 560" width="560" height="560">
+        <circle cx="280" cy="280" r="250" fill="var(--paper)" stroke="var(--line)" stroke-width="3"/>
+        <g data-beat="1" data-anim="draw" data-dur="1.4">
+          <line class="stroke muted" x1="100" y1="400" x2="460" y2="400"/>
+          <rect class="stroke" x="130" y="330" width="55" height="70"/>
+          <rect class="stroke" x="185" y="230" width="55" height="170"/>
+          <rect class="stroke accent" x="240" y="170" width="55" height="230"/>
+          <rect class="stroke" x="295" y="250" width="55" height="150"/>
+          <rect class="stroke" x="350" y="310" width="55" height="90"/>
+        </g>
+        <g data-beat="1+1.5" data-anim="pop">
+          <polygon points="267,440 252,468 282,468" fill="var(--accent)"/>
+          <polygon points="290,440 275,468 305,468" fill="var(--gold)" opacity="0.9"/>
+        </g>
+      </svg>
+
+  # ================================================================ INTRO
+  - id: s01_familles
+    notion: 'Introduction'
+    title: 'Trois familles de paramètres'
+    subtitle: 'Résumer une série par quelques nombres'
+    beats:
+      - "Un paramètre statistique, c'est une valeur caractéristique calculée à partir d'une série d'observations."
+      - "Première famille : les paramètres de position. Ils situent les observations sur l'axe des abscisses."
+      - "Par exemple, pour comparer les résultats d'une interro dans deux groupes d'étudiants : lequel a des notes plus élevées ?"
+      - "Deuxième famille : les paramètres de dispersion. Ils mesurent l'étalement des observations autour d'une valeur centrale. Ce sera la partie 2."
+      - "La troisième famille, les paramètres de forme, mesure la dissymétrie. Elle n'est pas au programme de ce cours."
+    html: |
+      <div class="col w50">
+        <div class="def" data-beat="0"><div class="term">Paramètre</div>une valeur qui résume la série</div>
+        <div class="analogy" data-beat="2">
+          <div class="icon">📝</div>
+          <div><b>Interro, deux groupes</b><br><span class="muted">qui a les meilleures notes ?</span></div>
+        </div>
+      </div>
+      <div class="col w50">
+        <div class="card main" data-beat="1"><div class="label">1 · Position</div>où sont les valeurs ?</div>
+        <div class="card" data-beat="3"><div class="label">2 · Dispersion</div>à quel point sont-elles étalées ?</div>
+        <div class="card" data-beat="4" data-dim="4+2.5"><div class="label">3 · Forme</div>hors programme</div>
+      </div>
+
+  # ================================================================ NOTION 1 : MODE
+  - id: s02_mode
+    notion: 'Mode'
+    tag: 'Notion 1 / 7'
+    title: 'Le mode $x_M$'
+    subtitle: 'La valeur la plus fréquente'
+    beats:
+      - "Intuition : au resto universitaire, le plat du jour le plus commandé, c'est le mode des commandes."
+      - "Le mode d'une série, noté x M, c'est l'observation la plus fréquente."
+      - "En discret, ou en qualitatif, c'est la valeur qui a le plus grand n i, ou le plus grand f i."
+      - "Sur un diagramme en bâtonnets, c'est l'abscisse du plus grand bâtonnet. Ici, la valeur 50, avec 6 observations."
+      - "Le mode existe aussi en qualitatif : c'est le seul paramètre de position qui ne demande pas de nombres."
+    html: |
+      <div class="col w50">
+        <div class="analogy" data-beat="0">
+          <div class="icon">🍝</div>
+          <div><b>Plat du jour</b><br><span class="muted">le plus commandé = le mode</span></div>
+        </div>
+        <div class="def" data-beat="1"><div class="term">Mode $x_M$</div>l'observation la plus fréquente</div>
+        <div class="calc" data-beat="2">discret : $x_i$ avec $n_i$ <b>maximum</b></div>
+      </div>
+      <div class="bars-wrap w50" data-beat="3"><div class="bars">
+        <div class="bar"><span>2</span><div class="fill" style="height:140px" data-beat="3" data-anim="grow-y"></div><span class="lbl">30</span></div>
+        <div class="bar"><span>4</span><div class="fill" style="height:280px" data-beat="3+0.2" data-anim="grow-y"></div><span class="lbl">40</span></div>
+        <div class="bar top"><span class="accent">6</span><div class="fill" style="height:420px;background:var(--accent)" data-beat="3+0.4" data-anim="grow-y"></div><span class="lbl accent">50</span></div>
+        <div class="bar"><span>5</span><div class="fill" style="height:350px" data-beat="3+0.6" data-anim="grow-y"></div><span class="lbl">60</span></div>
+        <div class="bar"><span>3</span><div class="fill" style="height:210px" data-beat="3+0.8" data-anim="grow-y"></div><span class="lbl">70</span></div>
+      </div></div>
+
+  - id: s03_mode_pieges
+    notion: 'Mode'
+    tag: 'Notion 1 / 7'
+    title: 'Les limites du mode'
+    subtitle: 'Point surligné : la valeur aberrante'
+    hold: 0.5
+    beats:
+      - "Attention, le mode a des limites. D'abord, il n'est pas toujours unique : deux valeurs peuvent être ex aequo."
+      - "Si toutes les valeurs apparaissent le même nombre de fois, elles sont toutes modales. On peut aussi dire qu'il n'y a pas de mode."
+      - "Surtout, le mode ne regarde qu'une seule valeur. Il peut tomber sur une valeur aberrante."
+      - "Exemple : dix copies d'examen. Trois étudiants ont rendu une feuille blanche, donc 0."
+      - "Les sept autres ont tous une note différente, entre 11 et 17. Le mode vaut donc 0 !"
+      - "Pourtant, la plupart des notes sont au-dessus de 10. Le mode n'est pas un paramètre très représentatif."
+    html: |
+      <div class="col w40">
+        <div class="card" data-beat="0"><div class="label">Ex aequo</div>plusieurs modes possibles</div>
+        <div class="card" data-beat="1"><div class="label">Tout est modal</div>→ pas de mode</div>
+        <div class="card accent" data-beat="2"><div class="label">⚠ Valeur aberrante</div>le mode peut tomber dessus</div>
+      </div>
+      <div class="col grow">
+        <div class="chips" data-beat="3">
+          <span class="chip accent fill">0</span><span class="chip accent fill">0</span><span class="chip accent fill">0</span>
+          <span class="chip" data-beat="4">11</span><span class="chip" data-beat="4">12</span>
+        </div>
+        <div class="chips" data-beat="4">
+          <span class="chip">13</span><span class="chip">14</span><span class="chip">15</span><span class="chip">16</span><span class="chip">17</span>
+        </div>
+        <div class="calc" data-beat="4+2">$x_M = $ <span class="res">0</span> <span class="muted">(3 feuilles blanches)</span></div>
+        <div class="keep" data-beat="5">Le mode ne regarde qu'<b>une</b> valeur</div>
+      </div>
+
+  - id: s04_classe_modale
+    notion: 'Mode'
+    tag: 'Notion 1 / 7'
+    title: 'La classe modale'
+    subtitle: 'En continu : plus forte densité'
+    beats:
+      - "En continu, les données sont groupées en classes. On parle alors de classe modale."
+      - "C'est la classe qui a la plus forte densité de fréquence, d n i ou d f i. Rappel : d f i, c'est f i divisé par la largeur de la classe."
+      - "Reprenons les poids du chapitre 1. La première classe a une densité d'environ 0,017. La deuxième : 0,35 divisé par 10, donc 0,035."
+      - "La plus forte densité est 0,035. La classe modale est donc 65 à 75 kilos."
+      - "Si toutes les classes ont la même largeur, c'est plus simple : il suffit de prendre la classe qui a la plus grande fréquence."
+    html: |
+      <table class="data">
+        <tr><th>Classe (kg)</th><th>$f_i$</th><th>$l_i$</th><th class="hl" data-hl="1">$df_i$</th></tr>
+        <tr><td>[50, 65[</td><td>0,25</td><td>15</td><td data-beat="2">0,017</td></tr>
+        <tr class="hl" data-hl="3"><td>[65, 75[</td><td>0,35</td><td>10</td><td data-beat="2+3" class="ring" data-hl="3">0,035</td></tr>
+        <tr><td>[75, 85[</td><td>0,25</td><td>10</td><td data-beat="2+5">0,025</td></tr>
+        <tr><td>[85, 100[</td><td>0,15</td><td>15</td><td data-beat="2+5.5">0,010</td></tr>
+      </table>
+      <div class="col grow">
+        <div class="def" data-beat="0"><div class="term">Classe modale</div>la plus forte densité <span data-beat="1">$df_i = \dfrac{f_i}{l_i}$</span></div>
+        <div class="calc" data-beat="3">classe modale : <span class="res">[65, 75[</span></div>
+        <div class="card gold" data-beat="4"><div class="label">Classes de même largeur</div>plus grand $f_i$ suffit</div>
+      </div>
+
+  # ================================================================ NOTION 2 : MÉDIANE BRUTE
+  - id: s05_mediane_brute
+    notion: 'Médiane'
+    tag: 'Notion 2 / 7'
+    title: 'La médiane $x_{1/2}$'
+    subtitle: 'L''observation du milieu'
+    beats:
+      - "Intuition : range des élèves par taille. Celui qui est pile au milieu de la file, c'est la médiane."
+      - "La médiane, notée x un demi, partage les observations en deux groupes de même effectif. 50 pour cent en dessous, 50 pour cent au-dessus."
+      - "Il faut pouvoir ranger les valeurs dans l'ordre. La médiane n'existe donc pas en qualitatif."
+      - "Données brutes, n impair : on prend l'observation de rang n plus 1, sur 2. Pour 2, 3, 5, 5, 6, 7, 9, n vaut 7. On prend la quatrième : 5."
+      - "n pair : on fait la moyenne des deux valeurs centrales, de rang n sur 2 et n sur 2 plus 1."
+      - "On ajoute 10 à la série. n vaut 8, on prend les rangs 4 et 5 : 5 et 6. La médiane vaut 5,5."
+    html: |
+      <div class="col w50">
+        <div class="analogy" data-beat="0">
+          <div class="icon">🧍</div>
+          <div><b>File rangée par taille</b><br><span class="muted">celui du milieu</span></div>
+        </div>
+        <div class="def" data-beat="1"><div class="term">Médiane $x_{1/2}$</div>50 % en dessous, 50 % au-dessus</div>
+        <div class="card accent" data-beat="2"><div class="label">⚠ Qualitatif</div>pas de médiane</div>
+      </div>
+      <div class="col w50">
+        <div class="calc" data-beat="3">$n$ impair : $x_{(n+1)/2}$</div>
+        <div class="chips" data-beat="3+3" style="flex-wrap:nowrap;gap:8px">
+          <span class="chip">2</span><span class="chip">3</span><span class="chip">5</span><span class="chip accent fill">5</span><span class="chip">6</span><span class="chip">7</span><span class="chip">9</span>
+        </div>
+        <div class="calc" data-beat="4">$n$ pair : $\frac{1}{2}\left(x_{n/2} + x_{n/2+1}\right)$</div>
+        <div class="chips" data-beat="5" style="flex-wrap:nowrap;gap:8px">
+          <span class="chip">2</span><span class="chip">3</span><span class="chip">5</span><span class="chip accent fill">5</span><span class="chip accent fill">6</span><span class="chip">7</span><span class="chip">9</span><span class="chip">10</span>
+        </div>
+        <div class="calc" data-beat="5+3">$\frac{5 + 6}{2} = $ <span class="res">5,5</span></div>
+      </div>
+
+  # ================================================================ NOTION 3 : MÉDIANE TABLEAU (annoté)
+  - id: s06_mediane_Ni
+    notion: 'Médiane'
+    tag: 'Notion 3 / 7'
+    title: 'Médiane d''un tableau recensé'
+    subtitle: 'Point surligné : le premier $N_i \geq n/2$'
+    hold: 0.6
+    beats:
+      - "Passage important, on va lentement. Les données sont dans un tableau recensé : chaque valeur x i avec son effectif n i."
+      - "La règle : on cherche le premier effectif cumulé grand N i qui est supérieur ou égal à n sur 2."
+      - "Ici, n vaut 20. Donc n sur 2 vaut 10."
+      - "On descend la colonne des N i : 2, c'est trop petit. 6, encore trop petit. 12, c'est le premier qui dépasse 10."
+      - "12 est strictement supérieur à 10. Dans ce cas, la médiane est simplement la valeur x i de cette ligne : 50."
+      - "Pourquoi ? Les observations de rang 7 à 12 valent toutes 50. La dixième et la onzième, celles du milieu, valent donc 50."
+    html: |
+      <table class="data">
+        <tr><th>$x_i$</th><th>$n_i$</th><th class="hl" data-hl="1">$N_i$</th></tr>
+        <tr><td>30</td><td>2</td><td class="hl" data-hl="3" data-hl-off="3+1.2">2</td></tr>
+        <tr><td>40</td><td>4</td><td class="hl" data-hl="3+1.2" data-hl-off="3+2.4">6</td></tr>
+        <tr class="hl" data-hl="4"><td>50</td><td>6</td><td class="ring" data-hl="3+2.4">12</td></tr>
+        <tr><td>60</td><td>5</td><td>17</td></tr>
+        <tr><td>70</td><td>3</td><td>20</td></tr>
+      </table>
+      <div class="col grow">
+        <div class="card main" data-beat="1"><div class="label">Règle</div>premier $N_i \geq \dfrac{n}{2}$</div>
+        <div class="calc" data-beat="2">$n = 20$ → $\dfrac{n}{2} = 10$</div>
+        <div class="calc" data-beat="4">$12 &gt; 10$ → $x_{1/2} = $ <span class="res">50</span></div>
+        <div class="card gold" data-beat="5"><div class="label">Rangs 7 à 12</div>tous égaux à 50</div>
+      </div>
+
+  - id: s07_mediane_egalite
+    notion: 'Médiane'
+    tag: 'Notion 3 / 7'
+    title: 'Le cas de l''égalité'
+    subtitle: 'Quand $F_i$ vaut exactement 0,5'
+    hold: 0.6
+    beats:
+      - "Autre exemple du cours, avec les fréquences relatives : on cherche le premier grand F i supérieur ou égal à 0,5."
+      - "Ici : 0,10, puis 0,25, puis 0,50. On tombe pile sur 0,5."
+      - "C'est le deuxième cas. Il ne peut arriver que si n est pair."
+      - "Exactement la moitié des observations vaut 50 ou moins. L'autre moitié vaut 60 ou plus."
+      - "Il y a donc deux valeurs centrales différentes. La médiane est leur moyenne : 50 plus 60, divisé par 2, égale 55."
+      - "À retenir : supérieur strict, on prend x i. Égalité, on prend la moyenne de x i et de la valeur suivante."
+    html: |
+      <table class="data">
+        <tr><th>$x_i$</th><th>$f_i$</th><th class="hl" data-hl="0">$F_i$</th></tr>
+        <tr><td>30</td><td>0,10</td><td>0,10</td></tr>
+        <tr><td>40</td><td>0,15</td><td>0,25</td></tr>
+        <tr class="hl" data-hl="1+2"><td>50</td><td>0,25</td><td class="ring" data-hl="1+2">0,50</td></tr>
+        <tr class="hl" data-hl="4"><td>60</td><td>0,30</td><td>0,80</td></tr>
+        <tr><td>70</td><td>0,20</td><td>1</td></tr>
+      </table>
+      <div class="col grow">
+        <div class="calc" data-beat="1">$F_3 = 0{,}5$ <b>pile</b></div>
+        <div class="card" data-beat="3"><div class="label">Deux moitiés</div>$\leq 50$ · $\geq 60$</div>
+        <div class="calc" data-beat="4">$x_{1/2} = \dfrac{50 + 60}{2} = $ <span class="res">55</span></div>
+        <div class="keep" data-beat="5">$&gt;$ : $x_i$ · $=$ : $\frac{1}{2}(x_i + x_{i+1})$</div>
+      </div>
+
+  # ================================================================ NOTION 4 : MÉDIANE CONTINUE (annoté)
+  - id: s08_mediane_continue
+    notion: 'Médiane'
+    tag: 'Notion 4 / 7'
+    title: 'Médiane en continu'
+    subtitle: 'Point surligné : résoudre $F(x) = 0{,}5$'
+    hold: 0.5
+    beats:
+      - "Cas quantitatif continu. La médiane, c'est la valeur x telle que 50 pour cent des observations lui sont inférieures."
+      - "Autrement dit, on résout l'équation F de x égale 0,5, avec la fonction de répartition du chapitre 1."
+      - "Reprenons les poids des étudiants. On part de 0,5 sur l'axe vertical, on va jusqu'à la courbe, et on descend."
+      - "0,5 est entre 0,25 et 0,60. La médiane est donc dans la classe 65 à 75, où F de x vaut 0,035 fois x moins 65, plus 0,25."
+      - "On résout : 0,035 fois x moins 65 égale 0,25. Donc x moins 65 égale 0,25 divisé par 0,035, environ 7,14."
+      - "La médiane vaut environ 72,14 kilos."
+    html: |
+      <svg class="w50" viewBox="0 0 820 500" width="760" height="470">
+        <g class="stroke muted" style="stroke-width:3"><line x1="30" y1="440" x2="800" y2="440"/><line x1="60" y1="440" x2="60" y2="50"/></g>
+        <g style="font-size:30px;fill:var(--muted)">
+          <text x="62" y="478">50</text><text x="257" y="478">65</text><text x="387" y="478">75</text><text x="517" y="478">85</text><text x="700" y="478">100</text>
+          <text x="25" y="90">1</text><text x="0" y="270" style="fill:var(--accent)">0,5</text>
+        </g>
+        <polyline points="30,440 80,440 275,350 405,224 535,134 730,80 800,80" fill="none" class="stroke" style="stroke-width:6"/>
+        <g data-beat="2" data-anim="draw" data-dur="1.4">
+          <line x1="60" y1="260" x2="368" y2="260" class="stroke accent" style="stroke-dasharray:10 8;stroke-width:4"/>
+          <line x1="368" y1="260" x2="368" y2="440" class="stroke accent" style="stroke-dasharray:10 8;stroke-width:4"/>
+        </g>
+        <circle cx="368" cy="260" r="11" fill="var(--accent)" data-beat="2+1.4" data-anim="pop"/>
+        <text x="380" y="420" style="font-size:32px;fill:var(--accent);font-weight:700" data-beat="5">72,14</text>
+      </svg>
+      <div class="col grow">
+        <div class="formula sm" data-beat="1">$$F(x_{1/2}) = 0{,}5$$</div>
+        <div class="calc" data-beat="3">classe [65, 75[ : $0{,}035\,(x - 65) + 0{,}25$</div>
+        <div class="calc" data-beat="4">$x - 65 = \dfrac{0{,}25}{0{,}035} \approx 7{,}14$</div>
+        <div class="calc" data-beat="5">$x_{1/2} \approx$ <span class="res">72,14 kg</span></div>
+      </div>
+
+  - id: s09_regle_trois
+    notion: 'Médiane'
+    tag: 'Notion 4 / 7'
+    title: 'Sans équation : la règle de trois'
+    subtitle: 'Abscisses et ordonnées en proportion'
+    beats:
+      - "Tu n'as pas écrit l'équation du segment ? Pas de problème : une règle de trois suffit."
+      - "Sur le segment, les abscisses 65, x un demi et 75 sont en proportion avec les ordonnées 0,25, 0,5 et 0,60."
+      - "On avance de x moins 65 sur une largeur de 10. On monte de 0,25 sur une hauteur de 0,35."
+      - "Donc x moins 65, sur 10, égale 0,25 sur 0,35. On trouve à nouveau x environ égal à 72,14 kilos."
+      - "C'est la même chose : la règle de trois utilise simplement la pente du segment."
+    html: |
+      <svg class="w40" viewBox="0 0 660 500" width="660" height="500">
+        <g class="stroke muted" style="stroke-width:3"><line x1="20" y1="440" x2="640" y2="440"/><line x1="20" y1="440" x2="20" y2="30"/></g>
+        <line x1="110" y1="380" x2="560" y2="90" class="stroke" style="stroke-width:7"/>
+        <g class="stroke muted" style="stroke-dasharray:8 8;stroke-width:2">
+          <line x1="110" y1="380" x2="110" y2="440"/><line x1="560" y1="90" x2="560" y2="440"/>
+        </g>
+        <circle cx="110" cy="380" r="11" fill="var(--main)"/><circle cx="560" cy="90" r="11" fill="var(--main)"/>
+        <line x1="431" y1="173" x2="431" y2="440" class="stroke accent" style="stroke-dasharray:8 8;stroke-width:3" data-beat="1" data-anim="draw"/>
+        <circle cx="431" cy="173" r="12" fill="var(--accent)" data-beat="1" data-anim="pop"/>
+        <g style="font-size:34px;fill:var(--ink)">
+          <text x="80" y="482">65</text><text x="530" y="482">75</text>
+          <text x="40" y="350">0,25</text><text x="470" y="80">0,60</text>
+        </g>
+        <g style="font-size:34px;fill:var(--accent)" data-beat="1">
+          <text x="405" y="482">x½</text><text x="350" y="160">0,5</text>
+        </g>
+        <line x1="110" y1="410" x2="431" y2="410" class="stroke gold" style="stroke-width:6" data-beat="2" data-anim="grow-x"/>
+        <line x1="600" y1="380" x2="600" y2="173" class="stroke accent" style="stroke-width:6" data-beat="2+1.5" data-anim="draw"/>
+      </svg>
+      <div class="col grow">
+        <div class="calc" data-beat="1">65 · $x_{1/2}$ · 75 ↔ 0,25 · 0,5 · 0,60</div>
+        <div class="formula sm" data-beat="3">$$\frac{x - 65}{10} = \frac{0{,}25}{0{,}35}$$</div>
+        <div class="calc" data-beat="3+3">$x_{1/2} = 65 + 10 \times \dfrac{0{,}25}{0{,}35} \approx$ <span class="res">72,14</span></div>
+        <div class="keep" data-beat="4">Règle de trois = pente du segment</div>
+      </div>
+
+  # ================================================================ NOTION 5 : QUARTILES
+  - id: s10_quartiles
+    notion: 'Quartiles'
+    tag: 'Notion 5 / 7'
+    title: 'Quartiles, déciles, centiles'
+    subtitle: 'La médiane, en plus de morceaux'
+    beats:
+      - "La médiane coupe les observations en deux. Les quartiles les coupent en quatre groupes de même effectif."
+      - "Il y en a trois. Le premier quartile, x un quart, résout F de x égale 0,25. Le deuxième, c'est la médiane. Le troisième, x trois quarts, résout F de x égale 0,75."
+      - "Pour les poids, F de 65 vaut exactement 0,25. Le premier quartile est donc 65 kilos."
+      - "Pour 0,75, on est dans la classe 75 à 85. On résout 0,025 fois x moins 75, plus 0,6, égale 0,75. On trouve 81 kilos."
+      - "Même principe pour les déciles, qui coupent en 10 groupes : il y en a 9. Et pour les centiles, qui coupent en 100 : il y en a 99."
+      - "Ces paramètres ont surtout du sens en continu, avec beaucoup d'observations."
+    html: |
+      <svg class="w50" viewBox="0 0 820 500" width="760" height="470">
+        <g class="stroke muted" style="stroke-width:3"><line x1="30" y1="440" x2="800" y2="440"/><line x1="60" y1="440" x2="60" y2="50"/></g>
+        <g style="font-size:30px;fill:var(--muted)">
+          <text x="62" y="478">50</text><text x="387" y="478">75</text><text x="700" y="478">100</text><text x="25" y="90">1</text>
+        </g>
+        <polyline points="30,440 80,440 275,350 405,224 535,134 730,80 800,80" fill="none" class="stroke" style="stroke-width:6"/>
+        <g data-beat="2" data-anim="draw">
+          <line x1="60" y1="350" x2="275" y2="350" class="stroke gold" style="stroke-dasharray:10 8;stroke-width:4"/>
+          <line x1="275" y1="350" x2="275" y2="440" class="stroke gold" style="stroke-dasharray:10 8;stroke-width:4"/>
+        </g>
+        <text x="0" y="360" style="font-size:28px;fill:var(--main-ink)" data-beat="2">0,25</text>
+        <text x="222" y="415" style="font-size:30px;fill:var(--main-ink);font-weight:700" data-beat="2+1">65</text>
+        <g data-beat="3" data-anim="draw">
+          <line x1="60" y1="170" x2="483" y2="170" class="stroke accent" style="stroke-dasharray:10 8;stroke-width:4"/>
+          <line x1="483" y1="170" x2="483" y2="440" class="stroke accent" style="stroke-dasharray:10 8;stroke-width:4"/>
+        </g>
+        <text x="0" y="180" style="font-size:28px;fill:var(--accent)" data-beat="3">0,75</text>
+        <text x="495" y="415" style="font-size:30px;fill:var(--accent);font-weight:700" data-beat="3+2">81</text>
+      </svg>
+      <div class="col grow">
+        <div class="card main" data-beat="1"><div class="label">3 quartiles</div>$F(x_{1/4}) = 0{,}25$ · $x_{1/2}$ · $F(x_{3/4}) = 0{,}75$</div>
+        <div class="calc" data-beat="2">$x_{1/4} = $ <b>65</b> kg</div>
+        <div class="calc" data-beat="3">$0{,}025\,(x - 75) + 0{,}6 = 0{,}75$ → <span class="res">81</span></div>
+        <div class="row" data-beat="4"><span class="chip">9 déciles</span><span class="chip">99 centiles</span></div>
+      </div>
+
+  # ================================================================ NOTION 6 : MOYENNE
+  - id: s11_moyenne
+    notion: 'Moyenne'
+    tag: 'Notion 6 / 7'
+    title: 'La moyenne $\bar{x}$'
+    subtitle: 'Trois écritures selon la présentation'
+    beats:
+      - "La moyenne arithmétique, notée x barre, n'existe que pour des observations quantitatives."
+      - "Sur des données brutes : on additionne toutes les observations et on divise par n. Un sur n, fois la somme des x i, pour i allant de 1 à n."
+      - "Dans un tableau recensé, chaque valeur x i compte n i fois. On fait la somme des n i fois x i, divisée par n."
+      - "Ou, ce qui revient au même, la somme des f i fois x i. Ici, i va de 1 à k, le nombre de valeurs différentes."
+      - "Exemple avec notre tableau : 30 fois 2, plus 40 fois 4, et ainsi de suite. On obtient 1030."
+      - "On divise par 20 : la moyenne vaut 51,5. Proche de la médiane, qui valait 50."
+    html: |
+      <div class="col w50">
+        <div class="card" data-beat="1" style="padding:22px 36px"><div class="label">Données brutes</div><div class="formula sm" style="font-size:44px;margin:0">$$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$$</div></div>
+        <div class="card main" data-beat="2" style="padding:22px 36px"><div class="label">Tableau recensé</div><div class="formula sm" style="font-size:44px;margin:0">$$\bar{x} = \frac{1}{n}\sum_{i=1}^{k} n_i\,x_i \htmlData{beat=3}{\;=\;\sum_{i=1}^{k} f_i\,x_i}$$</div></div>
+      </div>
+      <div class="col w50">
+        <table class="data small" data-beat="4">
+          <tr><th>$x_i$</th><th>$n_i$</th><th>$n_i x_i$</th></tr>
+          <tr><td>30</td><td>2</td><td>60</td></tr>
+          <tr><td>40</td><td>4</td><td>160</td></tr>
+          <tr><td>50</td><td>6</td><td>300</td></tr>
+          <tr><td>60</td><td>5</td><td>300</td></tr>
+          <tr><td>70</td><td>3</td><td>210</td></tr>
+          <tr class="tot"><td>Total</td><td>20</td><td data-beat="4+3" data-anim="count" data-to="1030">1030</td></tr>
+        </table>
+        <div class="calc" data-beat="5">$\bar{x} = \dfrac{1030}{20} = $ <span class="res">51,5</span></div>
+      </div>
+
+  - id: s12_moyenne_classes
+    notion: 'Moyenne'
+    tag: 'Notion 6 / 7'
+    title: 'Moyenne de données en classes'
+    subtitle: 'On remplace chaque classe par son centre'
+    beats:
+      - "En continu, on ne connaît pas les valeurs exactes dans chaque classe. On les remplace par le centre de classe, c i."
+      - "Le centre, c'est la moyenne des deux bornes : x i moins 1, plus x i, divisé par 2. Pour 65 à 75, le centre vaut 70."
+      - "Grâce à l'hypothèse d'uniformité, le centre représente bien la moyenne des observations de la classe."
+      - "La formule devient : la somme des f i fois c i. C'est une moyenne des moyennes de chaque classe."
+      - "Pour les poids : 0,25 fois 57,5, plus 0,35 fois 70, plus 0,25 fois 80, plus 0,15 fois 92,5."
+      - "On obtient 72,75 kilos. Très proche de la médiane, 72,14."
+    html: |
+      <div class="col w40">
+        <table class="data">
+          <tr><th>Classe (kg)</th><th>$f_i$</th><th class="hl" data-hl="0">$c_i$</th></tr>
+          <tr><td>[50, 65[</td><td>0,25</td><td data-beat="1+3">57,5</td></tr>
+          <tr class="hl" data-hl="1"><td>[65, 75[</td><td>0,35</td><td data-beat="1">70</td></tr>
+          <tr><td>[75, 85[</td><td>0,25</td><td data-beat="1+3.3">80</td></tr>
+          <tr><td>[85, 100[</td><td>0,15</td><td data-beat="1+3.6">92,5</td></tr>
+        </table>
+        <div class="calc" data-beat="1">$c_i = \dfrac{x_{i-1} + x_i}{2}$</div>
+      </div>
+      <div class="col grow">
+        <div class="card main" data-beat="3"><div class="formula sm">$$\bar{x} = \sum_{i=1}^{k} f_i\,c_i \quad \text{ou} \quad \frac{1}{n}\sum_{i=1}^{k} n_i\,c_i$$</div></div>
+        <div class="calc" data-beat="4">$14{,}375 + 24{,}5 + 20 + 13{,}875$</div>
+        <div class="calc" data-beat="5">$\bar{x} = $ <span class="res">72,75 kg</span></div>
+      </div>
+
+  # ================================================================ NOTION 7 : RÉUNION
+  - id: s13_reunion
+    notion: 'Moyenne'
+    tag: 'Notion 7 / 7'
+    title: 'Moyenne d''une réunion de groupes'
+    subtitle: 'Sans tout recalculer'
+    hold: 0.5
+    beats:
+      - "Deux groupes passent la même interro. Groupe A : 30 étudiants, moyenne 12. Groupe B : 20 étudiants, moyenne 15."
+      - "Quelle est la moyenne de tous les étudiants ? Le piège, c'est de faire 12 plus 15, divisé par 2, donc 13,5. C'est faux."
+      - "Le groupe A est plus nombreux, il doit peser plus. On multiplie chaque moyenne par l'effectif de son groupe."
+      - "30 fois 12, plus 20 fois 15, ça fait 660. C'est la somme de toutes les notes."
+      - "On divise par l'effectif total, 50. La moyenne globale vaut 13,2."
+      - "La formule se généralise à k groupes : la somme des n i fois x barre i, divisée par la somme des n i."
+    html: |
+      <div class="col w40">
+        <div class="row" data-beat="0">
+          <div class="person"><div class="face">A</div>30 ét. · 12</div>
+          <div class="person b"><div class="face">B</div>20 ét. · 15</div>
+        </div>
+        <div class="card accent" data-beat="1"><div class="label">⚠ Piège</div>$\dfrac{12 + 15}{2} = 13{,}5$ ✗</div>
+      </div>
+      <div class="col grow">
+        <div class="card main" data-beat="2"><div class="formula sm">$$\bar{x} = \frac{n_1\bar{x}_1 + n_2\bar{x}_2}{n_1 + n_2}$$</div></div>
+        <div class="calc" data-beat="3">$30 \times 12 + 20 \times 15 = 660$</div>
+        <div class="calc" data-beat="4">$\bar{x} = \dfrac{660}{50} = $ <span class="res">13,2</span></div>
+        <div class="calc" data-beat="5">$k$ groupes : $\dfrac{n_1\bar{x}_1 + \dots + n_k\bar{x}_k}{n_1 + \dots + n_k}$</div>
+      </div>
+
+  # ================================================================ RÉCAP
+  - id: s14_recap
+    notion: 'Récapitulatif'
+    title: 'Récap de la partie 1'
+    beats:
+      - "Récapitulons. Le mode est la valeur la plus fréquente. En continu, c'est la classe de plus forte densité. Attention aux valeurs aberrantes."
+      - "La médiane coupe les observations en deux moitiés. Données brutes : la valeur du milieu, ou la moyenne des deux valeurs centrales."
+      - "Tableau recensé : le premier N i supérieur ou égal à n sur 2. En cas d'égalité, la moyenne de x i et de la valeur suivante."
+      - "En continu : on résout F de x égale 0,5. Et 0,25 ou 0,75 pour les quartiles."
+      - "La moyenne : la somme des f i fois x i, avec les centres de classe c i en continu. Pour réunir des groupes, on pondère par les effectifs."
+      - "Dans la partie 2 : la dispersion, et d'autres types de moyennes."
+    html: |
+      <div class="recap">
+        <div class="item" data-beat="0"><b>Mode</b> : plus fréquent · classe de plus forte $df_i$</div>
+        <div class="item" data-beat="1"><b>Médiane</b> : $x_{(n+1)/2}$ ou $\frac{1}{2}(x_{n/2} + x_{n/2+1})$</div>
+        <div class="item" data-beat="2">Tableau : 1er $N_i \geq n/2$ · égalité → $\frac{1}{2}(x_i + x_{i+1})$</div>
+        <div class="item" data-beat="3">Continu : $F(x) = 0{,}5$ · quartiles $0{,}25$ et $0{,}75$</div>
+        <div class="item" data-beat="4"><b>Moyenne</b> : <span class="tex">$\bar{x} = \sum f_i x_i$</span> ($c_i$ en continu)</div>
+        <div class="item" data-beat="4+4"><b>Réunion</b> : <span class="tex">$\bar{x} = \frac{\sum n_i \bar{x}_i}{\sum n_i}$</span></div>
+      </div>
