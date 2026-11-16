@@ -195,7 +195,7 @@ def _(c, s):
     c.title("Fréquence absolue", r"Combien de fois chaque valeur apparaît")
     if s == 0:
         raw_ages(c, 400)
-        c.text(960, 560, "1 vote à main levée par âge", size=44, color=MUTED, ha="center")
+        c.text(960, 560, "on compte les mains levées par âge", size=44, color=MUTED, ha="center")
         return
     if s in (1, 2, 3):
         for k, (x) in enumerate(XI):
@@ -291,7 +291,7 @@ def _(c, s):
     "Pense au compteur à l'entrée d'une salle. À chaque groupe qui entre, le total grimpe.",
     "La fréquence absolue cumulée, notée grand N i, compte les observations inférieures ou égales à x i.",
     "Grand N i égale la somme des n j, pour j allant de 1 à i.",
-    "En pratique, on ajoute simplement la ligne suivante : grand N i égale grand N i moins 1, plus n i.",
+    "En pratique, on ajoute la ligne suivante. Grand N i égale grand N i moins 1, plus n i.",
     "Même idée en pourcentage : grand F i, la fréquence relative cumulée. C'est grand N i divisé par n.",
 ])
 def _(c, s):

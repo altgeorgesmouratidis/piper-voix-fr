@@ -262,7 +262,7 @@ def _(c, s):
     "Prenons une classe, de x i moins 1 à x i. En fin de classe, la hauteur est grand F i : la part des observations inférieures à x i.",
     "En début de classe, la hauteur est grand F i moins 1. On relie ces deux points par un segment.",
     "La montée vaut f i. La largeur vaut l i. Donc la pente vaut f i sur l i : c'est exactement la densité d f i.",
-    "L'équation du segment : y égale d f i fois, x moins x i moins 1, plus grand F i moins 1.",
+    "Voici l'équation du segment. y égale d f i fois, x moins x i moins 1, plus grand F i moins 1.",
     "On part de la hauteur grand F i moins 1, celle du début de la classe.",
     "Puis on monte de d f i pour chaque unité parcourue depuis le début de la classe.",
 ])
@@ -322,7 +322,7 @@ def _(c, s):
     "En assemblant tous les segments, on obtient le polygone des fréquences cumulées. C'est le graphique de F de x.",
     "Avant 50, F vaut 0. Après 100, F vaut 1. Entre les deux, un segment par classe.",
     "En continu, inférieur ou inférieur ou égal, c'est pareil : une valeur précise a une fréquence nulle.",
-    "À retenir : sur chaque classe, F de x égale d f i fois, x moins x i moins 1, plus grand F i moins 1.",
+    "À retenir : sur chaque classe, F de x est un segment. On part de grand F i moins 1, et on monte de d f i par unité.",
 ])
 def _(c, s):
     if s == 7:
@@ -552,7 +552,7 @@ def _(c, s):
     "Récapitulons la partie 2.",
     "En continu, on regroupe en classes, fermées à gauche, ouvertes à droite. La règle de Sturges donne un ordre de grandeur du nombre de classes.",
     "Dans un histogramme, la hauteur est une densité, n i sur l i. Comme ça, l'aire égale la fréquence.",
-    "Sur chaque classe, F de x égale d f i fois, x moins x i moins 1, plus grand F i moins 1.",
+    "Sur chaque classe, F de x est un segment. y égale d f i fois, x moins x i moins 1, plus grand F i moins 1.",
     "En dessous de x, F de x. Au-dessus, 1 moins F de x. Entre deux valeurs, la différence.",
     "En qualitatif, pas de cumul, et l'angle d'une part vaut f i fois 360 degrés. Tu as maintenant tout le chapitre 1. Bon courage pour les exercices !",
 ])

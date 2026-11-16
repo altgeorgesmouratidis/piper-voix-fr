@@ -116,7 +116,7 @@ La fréquence absolue cumulée, notée grand N i, compte les observations infér
 
 Grand N i égale la somme des n j, pour j allant de 1 à i.
 
-En pratique, on ajoute simplement la ligne suivante : grand N i égale grand N i moins 1, plus n i.
+En pratique, on ajoute la ligne suivante. Grand N i égale grand N i moins 1, plus n i.
 
 Même idée en pourcentage : grand F i, la fréquence relative cumulée. C'est grand N i divisé par n.
 
@@ -258,7 +258,7 @@ En début de classe, la hauteur est grand F i moins 1. On relie ces deux points 
 
 La montée vaut f i. La largeur vaut l i. Donc la pente vaut f i sur l i : c'est exactement la densité d f i.
 
-L'équation du segment : y égale d f i fois, x moins x i moins 1, plus grand F i moins 1.
+Voici l'équation du segment. y égale d f i fois, x moins x i moins 1, plus grand F i moins 1.
 
 On part de la hauteur grand F i moins 1, celle du début de la classe.
 
@@ -280,7 +280,7 @@ Avant 50, F vaut 0. Après 100, F vaut 1. Entre les deux, un segment par classe.
 
 En continu, inférieur ou inférieur ou égal, c'est pareil : une valeur précise a une fréquence nulle.
 
-À retenir : sur chaque classe, F de x égale d f i fois, x moins x i moins 1, plus grand F i moins 1.
+À retenir : sur chaque classe, F de x est un segment. On part de grand F i moins 1, et on monte de d f i par unité.
 
 ### Scène 9 — Utilité de F(x)  (`p2_08_usages`)
 
@@ -366,7 +366,7 @@ En continu, on regroupe en classes, fermées à gauche, ouvertes à droite. La r
 
 Dans un histogramme, la hauteur est une densité, n i sur l i. Comme ça, l'aire égale la fréquence.
 
-Sur chaque classe, F de x égale d f i fois, x moins x i moins 1, plus grand F i moins 1.
+Sur chaque classe, F de x est un segment. y égale d f i fois, x moins x i moins 1, plus grand F i moins 1.
 
 En dessous de x, F de x. Au-dessus, 1 moins F de x. Entre deux valeurs, la différence.
 

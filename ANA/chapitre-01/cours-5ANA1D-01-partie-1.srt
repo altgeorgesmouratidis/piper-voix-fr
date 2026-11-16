@@ -175,12 +175,12 @@ Revenons aux âges d'Alice.
 Imagine un vote à main levée : on compte combien de mains se lèvent pour chaque âge.
 
 45
-00:02:35,554 --> 00:02:40,650
+00:02:35,554 --> 00:02:40,795
 D'abord, on repère les valeurs différentes, rangées dans l'ordre croissant.
 
 46
-00:02:40,650 --> 00:02:42,961
-On les note x 1, x 2, jusqu'à x k.
+00:02:40,795 --> 00:02:42,961
+On les note x₁, x₂, jusqu'à xₖ.
 
 47
 00:02:43,411 --> 00:02:47,286
@@ -191,16 +191,16 @@ Ici, il y a 5 âges différents, de 17 à 21.
 Donc k vaut 5.
 
 49
-00:02:49,027 --> 00:02:50,419
+00:02:49,027 --> 00:02:50,445
 Ensuite, on compte.
 
 50
-00:02:50,419 --> 00:02:55,986
-Le nombre de fois que la valeur x i apparaît s'appelle sa fréquence absolue.
+00:02:50,445 --> 00:02:56,040
+Le nombre de fois que la valeur xᵢ apparaît s'appelle sa fréquence absolue.
 
 51
-00:02:55,986 --> 00:02:57,085
-On la note n i.
+00:02:56,040 --> 00:02:57,085
+On la note nᵢ.
 
 52
 00:02:57,535 --> 00:02:59,244
@@ -211,32 +211,32 @@ On range tout dans un tableau.
 On l'appelle le tableau des fréquences absolues, ou tableau recensé.
 
 54
-00:03:03,569 --> 00:03:06,832
+00:03:03,569 --> 00:03:06,896
 Par exemple, 19 ans apparaît 6 fois.
 
 55
-00:03:06,832 --> 00:03:08,283
-Donc n 3 vaut 6.
+00:03:06,896 --> 00:03:08,283
+Donc n₃ vaut 6.
 
 56
 00:03:08,733 --> 00:03:13,319
 Si on additionne toutes les fréquences absolues, on retrouve l'effectif total.
 
 57
-00:03:13,769 --> 00:03:19,416
-La formule se lit : la somme des n i, pour i allant de 1 à k, égale n.
+00:03:13,769 --> 00:03:19,383
+La formule se lit : la somme des nᵢ, pour i allant de 1 à k, égale n.
 
 58
-00:03:19,416 --> 00:03:23,207
+00:03:19,383 --> 00:03:23,207
 Ici, 2 plus 4 plus 6 plus 2 plus 2, ça fait 16.
 
 59
-00:03:23,657 --> 00:03:27,688
-À retenir : n i compte combien de fois la valeur x i apparaît.
+00:03:23,657 --> 00:03:27,668
+À retenir : nᵢ compte combien de fois la valeur xᵢ apparaît.
 
 60
-00:03:27,688 --> 00:03:30,809
-Et la somme des n i donne toujours l'effectif n.
+00:03:27,668 --> 00:03:30,809
+Et la somme des nᵢ donne toujours l'effectif n.
 
 61
 00:03:31,950 --> 00:03:33,429
@@ -260,11 +260,11 @@ C'est la fréquence absolue divisée par l'effectif.
 
 66
 00:03:45,284 --> 00:03:48,593
-f i, c'est la fréquence relative de la valeur x i.
+fᵢ, c'est la fréquence relative de la valeur xᵢ.
 
 67
 00:03:49,043 --> 00:03:53,780
-On divise n i, la fréquence absolue, par n, l'effectif total.
+On divise nᵢ, la fréquence absolue, par n, l'effectif total.
 
 68
 00:03:54,230 --> 00:04:00,639
@@ -275,32 +275,32 @@ Pour 19 ans : 6 divisé par 16, ça donne 0,375.
 Soit 37,5 %.
 
 70
-00:04:02,761 --> 00:04:06,754
+00:04:02,761 --> 00:04:06,789
 Une fréquence relative est toujours comprise entre 0 et 1.
 
 71
-00:04:06,754 --> 00:04:10,609
-Et la somme des f i vaut toujours 1, c'est-à-dire 100 %.
+00:04:06,789 --> 00:04:10,609
+Et la somme des fᵢ vaut toujours 1, c'est-à-dire 100 %.
 
 72
-00:04:11,059 --> 00:04:11,820
+00:04:11,059 --> 00:04:11,832
 Pourquoi ?
 
 73
-00:04:11,820 --> 00:04:15,472
-Parce que la somme des n i sur n, c'est n sur n.
+00:04:11,832 --> 00:04:15,464
+Parce que la somme des nᵢ sur n, c'est n sur n.
 
 74
-00:04:15,472 --> 00:04:16,005
+00:04:15,464 --> 00:04:16,005
 Donc 1.
 
 75
-00:04:17,150 --> 00:04:20,370
+00:04:17,150 --> 00:04:20,400
 Pour visualiser, on utilise un diagramme en bâtonnets.
 
 76
-00:04:20,370 --> 00:04:23,710
-Les valeurs x i en abscisse, les fréquences en ordonnée.
+00:04:20,400 --> 00:04:23,710
+Les valeurs xᵢ en abscisse, les fréquences en ordonnée.
 
 77
 00:04:24,160 --> 00:04:26,385
@@ -327,12 +327,12 @@ Petite remarque : si les fréquences sont très éloignées, certains bâtonnets
 On gradue alors l'axe en échelle logarithmique.
 
 83
-00:04:47,824 --> 00:04:50,180
-À retenir : f i égale n i sur n.
+00:04:47,824 --> 00:04:50,110
+À retenir : fᵢ égale nᵢ sur n.
 
 84
-00:04:50,180 --> 00:04:54,302
-C'est une part entre 0 et 1, et la somme des f i vaut 1.
+00:04:50,110 --> 00:04:54,302
+C'est une part entre 0 et 1, et la somme des fᵢ vaut 1.
 
 85
 00:04:55,450 --> 00:04:59,296
@@ -352,193 +352,197 @@ Pense au compteur à l'entrée d'une salle.
 
 89
 00:05:06,903 --> 00:05:12,952
-La fréquence absolue cumulée, notée grand N i, compte les observations inférieures ou égales à x i.
+La fréquence absolue cumulée, notée Nᵢ, compte les observations inférieures ou égales à xᵢ.
 
 90
 00:05:13,402 --> 00:05:17,582
-Grand N i égale la somme des n j, pour j allant de 1 à i.
+Nᵢ égale la somme des nⱼ, pour j allant de 1 à i.
 
 91
-00:05:18,032 --> 00:05:24,023
-En pratique, on ajoute simplement la ligne suivante : grand N i égale grand N i moins 1, plus n i.
+00:05:18,032 --> 00:05:21,661
+En pratique, on ajoute la ligne suivante.
 
 92
-00:05:24,473 --> 00:05:29,332
-Même idée en pourcentage : grand F i, la fréquence relative cumulée.
+00:05:21,661 --> 00:05:23,698
+Nᵢ égale Nᵢ₋₁, plus nᵢ.
 
 93
-00:05:29,332 --> 00:05:31,404
-C'est grand N i divisé par n.
+00:05:24,148 --> 00:05:29,242
+Même idée en pourcentage : Fᵢ, la fréquence relative cumulée.
 
 94
-00:05:32,550 --> 00:05:34,418
-Construisons le tableau.
+00:05:29,242 --> 00:05:31,079
+C'est Nᵢ divisé par n.
 
 95
-00:05:34,418 --> 00:05:39,632
-2, puis 2 plus 4 égale 6, puis 6 plus 6 égale 12, puis 14, puis 16.
+00:05:32,217 --> 00:05:34,084
+Construisons le tableau.
 
 96
-00:05:40,082 --> 00:05:44,540
-Dernière ligne : grand N k vaut toujours n, et grand F k vaut toujours 1.
+00:05:34,084 --> 00:05:39,299
+2, puis 2 plus 4 égale 6, puis 6 plus 6 égale 12, puis 14, puis 16.
 
 97
-00:05:44,990 --> 00:05:46,482
-Que peut-on lire ?
+00:05:39,749 --> 00:05:44,207
+Dernière ligne : Nₖ vaut toujours n, et Fₖ vaut toujours 1.
 
 98
-00:05:46,482 --> 00:05:50,872
-Grand N 3 vaut 12 : 12 étudiants ont 19 ans ou moins.
+00:05:44,657 --> 00:05:46,289
+Que peut-on lire ?
 
 99
-00:05:50,872 --> 00:05:51,701
-Soit 75 %.
+00:05:46,289 --> 00:05:50,461
+N₃ vaut 12 : 12 étudiants ont 19 ans ou moins.
 
 100
-00:05:52,151 --> 00:05:55,697
-Le complément donne le reste : 1 moins 0,75.
+00:05:50,461 --> 00:05:51,368
+Soit 75 %.
 
 101
-00:05:55,697 --> 00:05:59,163
-Donc 25 % des étudiants ont plus de 19 ans.
+00:05:51,818 --> 00:05:55,364
+Le complément donne le reste : 1 moins 0,75.
 
 102
-00:05:59,613 --> 00:06:01,864
-Pour un intervalle, on soustrait.
+00:05:55,364 --> 00:05:58,830
+Donc 25 % des étudiants ont plus de 19 ans.
 
 103
-00:06:01,864 --> 00:06:06,092
-Entre 18 et 20 ans inclus : grand F de 20 moins grand F de 17.
+00:05:59,280 --> 00:06:01,986
+Pour un intervalle, on soustrait.
 
 104
-00:06:06,542 --> 00:06:13,089
-On retire 17, et pas 18, car on veut garder les étudiants de 18 ans.
+00:06:01,986 --> 00:06:05,758
+Entre 18 et 20 ans inclus : F(20) moins F(17).
 
 105
-00:06:13,089 --> 00:06:16,073
-87,5 moins 12,5 : ça fait 75 %.
+00:06:06,208 --> 00:06:12,755
+On retire 17, et pas 18, car on veut garder les étudiants de 18 ans.
 
 106
-00:06:16,523 --> 00:06:21,788
-À retenir : grand F i est la part des observations inférieures ou égales à x i.
+00:06:12,755 --> 00:06:15,740
+87,5 moins 12,5 : ça fait 75 %.
 
 107
-00:06:21,788 --> 00:06:24,453
-Pour un intervalle, on soustrait deux F.
+00:06:16,190 --> 00:06:21,262
+À retenir : Fᵢ est la part des observations inférieures ou égales à xᵢ.
 
 108
-00:06:25,617 --> 00:06:28,558
-Les grands F i ne sont définis que pour les valeurs observées.
+00:06:21,262 --> 00:06:24,120
+Pour un intervalle, on soustrait deux F.
 
 109
-00:06:28,558 --> 00:06:31,689
-Mais quelle est la part des étudiants de 19 ans et demi ou moins ?
+00:06:25,283 --> 00:06:28,224
+Les grands F i ne sont définis que pour les valeurs observées.
 
 110
-00:06:32,139 --> 00:06:37,549
-Pour répondre pour n'importe quel x, on définit la fonction de répartition, F de x.
+00:06:28,224 --> 00:06:31,355
+Mais quelle est la part des étudiants de 19 ans et demi ou moins ?
 
 111
-00:06:37,999 --> 00:06:42,676
-F de x égale la part des observations inférieures ou égales à x.
+00:06:31,805 --> 00:06:37,216
+Pour répondre pour n'importe quel x, on définit la fonction de répartition, F(x).
 
 112
-00:06:42,676 --> 00:06:49,179
-Dans la partie probabilités, tu l'écriras : probabilité que X soit inférieur ou égal à x.
+00:06:37,666 --> 00:06:42,256
+F(x) égale la part des observations inférieures ou égales à x.
 
 113
-00:06:49,629 --> 00:06:51,299
-Son graphique est un escalier.
+00:06:42,256 --> 00:06:48,846
+Dans la partie probabilités, tu l'écriras : probabilité que X soit inférieur ou égal à x.
 
 114
-00:06:51,299 --> 00:06:56,642
-Comme un vrai escalier : tant que tu n'atteins pas la marche suivante, tu restes au même niveau.
+00:06:49,296 --> 00:06:50,966
+Son graphique est un escalier.
 
 115
-00:06:57,092 --> 00:06:59,235
-Avant 17 ans, personne.
+00:06:50,966 --> 00:06:56,308
+Comme un vrai escalier : tant que tu n'atteins pas la marche suivante, tu restes au même niveau.
 
 116
-00:06:59,235 --> 00:07:00,633
-F de 16 vaut 0.
+00:06:56,758 --> 00:06:59,021
+Avant 17 ans, personne.
 
 117
-00:07:01,083 --> 00:07:05,320
-Entre 19 et 20, on reste sur la même marche.
+00:06:59,021 --> 00:07:00,299
+F(16) vaut 0.
 
 118
-00:07:05,320 --> 00:07:09,268
-F de 19 et demi égale F de 19, soit 0,75.
+00:07:00,749 --> 00:07:05,551
+Entre 19 et 20, on reste sur la même marche.
 
 119
-00:07:09,718 --> 00:07:12,862
-Après 21 ans, tout le monde est compté.
+00:07:05,551 --> 00:07:08,935
+F(19,5) égale F(19), soit 0,75.
 
 120
-00:07:12,862 --> 00:07:14,072
-F de 25 vaut 1.
+00:07:09,385 --> 00:07:12,650
+Après 21 ans, tout le monde est compté.
 
 121
-00:07:14,522 --> 00:07:16,468
-Regarde bien le bord des marches.
+00:07:12,650 --> 00:07:13,738
+F(25) vaut 1.
 
 122
-00:07:16,468 --> 00:07:21,186
-Le point plein est à gauche : la marche est fermée à gauche et ouverte à droite.
+00:07:14,188 --> 00:07:16,134
+Regarde bien le bord des marches.
 
 123
-00:07:21,636 --> 00:07:28,073
-Donc en x égale 20, on est déjà sur la nouvelle marche.
+00:07:16,134 --> 00:07:20,852
+Le point plein est à gauche : la marche est fermée à gauche et ouverte à droite.
 
 124
-00:07:28,073 --> 00:07:31,818
-F de 20 vaut 0,875, et pas 0,75.
+00:07:21,302 --> 00:07:27,891
+Donc en x égale 20, on est déjà sur la nouvelle marche.
 
 125
-00:07:32,268 --> 00:07:37,705
-À retenir : F de x est la part des observations inférieures ou égales à x.
+00:07:27,891 --> 00:07:31,484
+F(20) vaut 0,875, et pas 0,75.
 
 126
-00:07:37,705 --> 00:07:42,334
-En discret, c'est un escalier, fermé à gauche, ouvert à droite.
+00:07:31,934 --> 00:07:37,303
+À retenir : F(x) est la part des observations inférieures ou égales à x.
 
 127
-00:07:43,483 --> 00:07:45,318
-Récapitulons la partie 1.
+00:07:37,303 --> 00:07:42,000
+En discret, c'est un escalier, fermé à gauche, ouvert à droite.
 
 128
-00:07:45,768 --> 00:07:51,410
-Une observation est qualitative, quantitative discrète, ou quantitative continue.
+00:07:43,150 --> 00:07:44,984
+Récapitulons la partie 1.
 
 129
-00:07:51,860 --> 00:07:54,686
-La fréquence relative f i vaut n i sur n.
+00:07:45,434 --> 00:07:51,077
+Une observation est qualitative, quantitative discrète, ou quantitative continue.
 
 130
-00:07:54,686 --> 00:07:58,408
-Les n i ont pour somme n, et les f i ont pour somme 1.
+00:07:51,527 --> 00:07:54,333
+La fréquence relative fᵢ vaut nᵢ sur n.
 
 131
-00:07:58,858 --> 00:08:02,682
-La fréquence cumulée grand N i additionne les n j jusqu'à i.
+00:07:54,333 --> 00:07:58,075
+Les nᵢ ont pour somme n, et les fᵢ ont pour somme 1.
 
 132
-00:08:02,682 --> 00:08:04,849
-Et grand F i vaut grand N i sur n.
+00:07:58,525 --> 00:08:02,852
+La fréquence cumulée Nᵢ additionne les nⱼ jusqu'à i.
 
 133
-00:08:05,299 --> 00:08:11,254
-La fonction de répartition F de x donne la part des observations inférieures ou égales à x.
+00:08:02,852 --> 00:08:04,516
+Et Fᵢ vaut Nᵢ sur n.
 
 134
-00:08:11,254 --> 00:08:13,217
-En discret, c'est un escalier.
+00:08:04,966 --> 00:08:10,887
+La fonction de répartition F(x) donne la part des observations inférieures ou égales à x.
 
 135
-00:08:13,667 --> 00:08:16,490
-Pour la part entre deux valeurs, on soustrait deux F.
+00:08:10,887 --> 00:08:12,884
+En discret, c'est un escalier.
 
 136
-00:08:16,490 --> 00:08:19,100
+00:08:13,334 --> 00:08:16,157
+Pour la part entre deux valeurs, on soustrait deux F.
+
+137
+00:08:16,157 --> 00:08:18,767
 Dans la partie 2, on passe aux données continues.
 
