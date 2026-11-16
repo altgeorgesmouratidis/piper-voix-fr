@@ -1,0 +1,618 @@
+meta:
+  course: 5ANA1D
+  course_name: Analyse de données
+  chapter: 4
+  title: Analyse en composantes principales
+  subtitle: Réduire les dimensions sans perdre l'essentiel
+  output: cours-5ANA1D-04
+css: |
+  .katex-display{margin:0.12em 0}
+  .card{padding:28px 44px}
+  .def{padding:30px 44px}
+scenes:
+- id: s00_titre
+  layout: title
+  notion: Introduction
+  beats:
+  - 'Analyse de données, chapitre 4 : l''analyse en composantes principales, qu''on appelle aussi l''ACP.'
+  - 'L''idée : représenter des données à beaucoup de variables sur un simple graphique, en perdant le moins d''information possible.'
+  html: |
+    <svg viewBox="0 0 560 560" width="560" height="560">
+      <circle cx="280" cy="280" r="250" fill="var(--paper)" stroke="var(--line)" stroke-width="3"/>
+      <g data-beat="1" data-anim="pop">
+        <circle cx="150" cy="360" r="12" fill="var(--main)"/><circle cx="185" cy="300" r="12" fill="var(--main)"/>
+        <circle cx="220" cy="350" r="12" fill="var(--main)"/><circle cx="250" cy="280" r="12" fill="var(--main)"/>
+        <circle cx="290" cy="300" r="12" fill="var(--main)"/><circle cx="320" cy="240" r="12" fill="var(--main)"/>
+        <circle cx="350" cy="275" r="12" fill="var(--main)"/><circle cx="385" cy="210" r="12" fill="var(--main)"/>
+        <circle cx="410" cy="250" r="12" fill="var(--main)"/><circle cx="270" cy="230" r="12" fill="var(--main)"/>
+      </g>
+      <g data-beat="1+0.8" data-anim="draw">
+        <line class="stroke accent" x1="110" y1="380" x2="455" y2="185" style="stroke-width:7"/>
+        <line class="stroke gold" x1="235" y1="185" x2="320" y2="335" style="stroke-width:6"/>
+      </g>
+    </svg>
+- id: s01_intro
+  notion: Introduction
+  title: Trop de dimensions
+  subtitle: Au-delà de 3 variables, on ne voit plus rien
+  beats:
+  - Au chapitre 2, on étudiait une seule variable. Ses valeurs tiennent sur une droite.
+  - 'Au chapitre 3, on en étudiait deux. Chaque individu devient un point dans un plan : c''est le nuage de points.'
+  - Avec trois variables, on obtient un nuage de points en trois dimensions. On peut encore l'imaginer.
+  - Mais avec quatre variables ou plus, il faudrait un espace à quatre dimensions. Personne ne peut le dessiner.
+  - L'analyse en composantes principales résout ce problème. Elle ramène les données à deux dimensions, en les déformant le moins possible.
+  html: |
+    <div class="col" style="width:1650px;align-items:center">
+    <div class="row" style="gap:40px">
+      <div class="node" data-beat="0" style="min-width:300px">1 variable<br><span class="muted">une droite</span></div>
+      <div class="node" data-beat="1" style="min-width:300px">2 variables<br><span class="muted">un plan</span></div>
+      <div class="node" data-beat="2" style="min-width:300px">3 variables<br><span class="muted">un nuage 3D</span></div>
+      <div class="node red" data-beat="3" style="min-width:300px">4 variables<br><span class="muted">impossible à voir</span></div>
+    </div>
+    <div class="def" data-beat="4" style="width:1300px"><div class="term">Analyse en composantes principales (ACP)</div>représenter les données en dimension réduite, idéalement 2, en les déformant le moins possible</div>
+    </div>
+- id: s02_cotes
+  notion: Données multidimensionnelles
+  tag: Notion 1 / 9
+  title: Un exemple à 4 variables
+  subtitle: Les cotes de 9 élèves
+  hold: 0.4
+  beats:
+  - 'Prenons les cotes de neuf élèves, dans quatre cours : math, physique, anglais et néerlandais.'
+  - Chaque élève est donc décrit par quatre nombres. C'est un point dans un espace à quatre dimensions.
+  - 'Première idée : ne garder que deux cours sur les quatre. Mais lesquels choisir ?'
+  - Regarde les colonnes. Les cotes de math et de physique se ressemblent beaucoup.
+  - Les cotes d'anglais et de néerlandais aussi. Un élève a un niveau proche dans les branches scientifiques, et proche dans les langues.
+  html: |
+    <table class="data small w50" data-beat="0">
+      <tr><th>élève</th><th class="hl" data-hl="3">math</th><th class="hl" data-hl="3">phys.</th><th class="hl" data-hl="4">angl.</th><th class="hl" data-hl="4">néer.</th></tr>
+      <tr><td>1</td><td>6</td><td>6</td><td>5</td><td>5</td></tr><tr><td>2</td><td>8</td><td>8</td><td>8</td><td>8</td></tr><tr><td>3</td><td>6</td><td>7</td><td>11</td><td>9,5</td></tr><tr><td>4</td><td>14,5</td><td>14,5</td><td>15,5</td><td>15</td></tr><tr><td>5</td><td>14</td><td>14</td><td>12</td><td>12,5</td></tr><tr><td>6</td><td>11</td><td>10</td><td>5,5</td><td>7</td></tr><tr><td>7</td><td>5,5</td><td>7</td><td>14</td><td>11,5</td></tr><tr><td>8</td><td>13</td><td>12,5</td><td>8,5</td><td>9,5</td></tr><tr><td>9</td><td>9</td><td>9,5</td><td>12,5</td><td>12</td></tr>
+    </table>
+    <div class="col w40">
+      <div class="card" data-beat="1"><div class="label">Un élève</div>4 cotes = <b>un point en 4D</b></div>
+      <div class="card gold" data-beat="2"><div class="label">Idée naïve</div>garder <b>2 cours</b> sur 4 : lesquels&nbsp;?</div>
+      <div class="row" data-beat="3"><span class="chip main">math ≈ physique</span></div>
+      <div class="row" data-beat="4"><span class="chip gold">anglais ≈ néerlandais</span></div>
+    </div>
+- id: s03_corr_def
+  notion: Matrice des corrélations
+  tag: Notion 2 / 9
+  title: La matrice des corrélations
+  subtitle: Toutes les corrélations dans un seul tableau
+  beats:
+  - Pour le voir précisément, on range toutes les corrélations dans un tableau. Un peu comme le tableau des distances entre villes, sur une carte routière.
+  - Les variables sont notées X 1, X 2, jusqu'à X n. Ici, n vaut 4.
+  - Dans la matrice des corrélations, la case en ligne i et en colonne j contient le coefficient de corrélation r entre X i et X j. C'est le r du chapitre 3.
+  - 'Cette matrice est forcément symétrique : la corrélation de X i avec X j est la même que celle de X j avec X i.'
+  - 'Et sa diagonale ne contient que des 1 : une variable est parfaitement corrélée avec elle-même.'
+  html: |
+    <div class="col w40">
+      <div class="analogy" data-beat="0">
+        <div class="icon">🗺️</div>
+        <div><b>Tableau des distances</b><br><span class="muted">Bruxelles–Liège = Liège–Bruxelles</span></div>
+      </div>
+      <div class="legend" data-beat="1">
+        <span class="sym">$X_1, \dots, X_n$</span><span>les $n$ variables</span>
+        <span class="sym">$r(X_i, X_j)$</span><span>corrélation de $X_i$ et $X_j$</span>
+      </div>
+    </div>
+    <div class="col w60">
+      <div class="card main" data-beat="2"><div class="formula">$$\text{case } (i, j) = r(X_i, X_j)$$</div></div>
+      <div class="calc" data-beat="3">symétrique : $r(X_i, X_j) = r(X_j, X_i)$</div>
+      <div class="calc" data-beat="4">diagonale : $r(X_i, X_i) = $ <span class="res">1</span></div>
+    </div>
+- id: s04_corr_lecture
+  notion: Matrice des corrélations
+  tag: Notion 2 / 9
+  title: Lire la matrice des corrélations
+  subtitle: Les cotes des 9 élèves
+  hold: 0.4
+  beats:
+  - Voici la matrice des corrélations pour nos neuf élèves.
+  - 'Math et physique : 0,98. C''est presque une corrélation parfaite.'
+  - 'Anglais et néerlandais : 0,95. Très forte aussi.'
+  - 'Par contre, math et anglais : seulement 0,23. Le lien est faible.'
+  - 'On voit donc deux groupes de cours : les sciences d''un côté, les langues de l''autre.'
+  - 'À retenir : garder math et physique n''aurait aucun sens. Ces deux cours disent presque la même chose.'
+  html: |
+    <table class="data w50" data-beat="0">
+      <tr><th></th><th>math</th><th>phys.</th><th>angl.</th><th>néer.</th></tr>
+      <tr><th>math</th><td style="color:var(--muted)">1</td><td class="hl" data-hl="1">0,98</td><td class="ring" data-hl="3">0,23</td><td>0,51</td></tr><tr><th>phys.</th><td class="hl" data-hl="1">0,98</td><td style="color:var(--muted)">1</td><td>0,40</td><td>0,65</td></tr><tr><th>angl.</th><td class="ring" data-hl="3">0,23</td><td>0,40</td><td style="color:var(--muted)">1</td><td class="hl" data-hl="2">0,95</td></tr><tr><th>néer.</th><td>0,51</td><td>0,65</td><td class="hl" data-hl="2">0,95</td><td style="color:var(--muted)">1</td></tr>
+    </table>
+    <div class="col w40">
+      <div class="row" data-beat="4"><span class="chip main">sciences : math, phys.</span></div>
+      <div class="row" data-beat="4+0.6"><span class="chip gold">langues : angl., néer.</span></div>
+      <div class="keep" data-beat="5">Deux variables très corrélées apportent <b>presque la même information</b>.</div>
+    </div>
+- id: s05_combinaison
+  notion: Combinaisons linéaires
+  tag: Notion 3 / 9
+  title: Combiner au lieu de supprimer
+  subtitle: 'Deux nouvelles variables : S et L'
+  beats:
+  - Pour passer à deux dimensions, on pourrait garder un cours scientifique et un cours de langue. Par exemple math et anglais.
+  - 'On peut faire mieux : créer deux nouvelles variables qui résument les quatre.'
+  - 'S est la moyenne de math et de physique : un demi de math, plus un demi de physique.'
+  - 'L est la moyenne d''anglais et de néerlandais : un demi d''anglais, plus un demi de néerlandais.'
+  - Exemple avec l'élève 3. Il a 6 en math et 7 en physique, donc S vaut 6,5.
+  - Il a 11 en anglais et 9,5 en néerlandais, donc L vaut 10,25.
+  - Une telle somme de variables multipliées par des nombres s'appelle une combinaison linéaire.
+  html: |
+    <div class="col w50">
+      <div class="card" data-beat="0"><div class="label">Possible</div>garder <b>math</b> et <b>anglais</b></div>
+      <div class="card main" data-beat="1">
+        <div class="formula sm">$$\htmlData{hl=2}{S = \tfrac12\,\text{math} + \tfrac12\,\text{phys}}$$</div>
+        <div class="formula sm" data-beat="3">$$\htmlData{hl=3}{L = \tfrac12\,\text{angl} + \tfrac12\,\text{néer}}$$</div>
+      </div>
+    </div>
+    <div class="col w50">
+      <div class="card gold" data-beat="4"><div class="label">Élève 3</div>
+        <div class="calc">$S = \tfrac12 \times 6 + \tfrac12 \times 7 = $ <span class="res">6,5</span></div>
+        <div class="calc" data-beat="5">$L = \tfrac12 \times 11 + \tfrac12 \times 9{,}5 = $ <b>10,25</b></div>
+      </div>
+      <div class="def" data-beat="6"><div class="term">Combinaison linéaire</div>somme de variables multipliées par des nombres</div>
+    </div>
+- id: s06_graphe_SL
+  notion: Combinaisons linéaires
+  tag: Notion 3 / 9
+  title: Le graphique S–L
+  subtitle: 9 élèves, 2 dimensions
+  hold: 0.4
+  beats:
+  - Chaque élève n'a plus que deux nombres, S et L. On peut enfin le dessiner dans un plan.
+  - Voici les neuf élèves. Chaque point est un élève.
+  - 'En haut à droite, l''élève 4 : 14,5 en sciences et 15,25 en langues. Il est bon partout.'
+  - 'En bas à gauche, l''élève 1 : 6 et 5. Il est faible partout.'
+  - 'En haut à gauche, l''élève 7 : 6,25 en sciences mais 12,75 en langues. Il est plus à l''aise en langues.'
+  - 'À retenir : réduire le nombre de variables, ce n''est pas en supprimer. On les remplace par des combinaisons linéaires qui gardent l''image représentative.'
+  html: |
+    <svg viewBox="0 0 700 620" width="700" height="620">
+    <line x1="90" y1="540" x2="90" y2="36" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="90" y1="540" x2="630" y2="540" stroke="var(--line)" stroke-width="1.2"/>
+    <text x="90" y="578" text-anchor="middle" style="font-size:28px;fill:var(--muted)">4</text>
+    <text x="76" y="550" text-anchor="end" style="font-size:28px;fill:var(--muted)">4</text>
+    <line x1="180" y1="540" x2="180" y2="36" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="90" y1="456" x2="630" y2="456" stroke="var(--line)" stroke-width="1.2"/>
+    <text x="180" y="578" text-anchor="middle" style="font-size:28px;fill:var(--muted)">6</text>
+    <text x="76" y="466" text-anchor="end" style="font-size:28px;fill:var(--muted)">6</text>
+    <line x1="270" y1="540" x2="270" y2="36" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="90" y1="372" x2="630" y2="372" stroke="var(--line)" stroke-width="1.2"/>
+    <text x="270" y="578" text-anchor="middle" style="font-size:28px;fill:var(--muted)">8</text>
+    <text x="76" y="382" text-anchor="end" style="font-size:28px;fill:var(--muted)">8</text>
+    <line x1="360" y1="540" x2="360" y2="36" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="90" y1="288" x2="630" y2="288" stroke="var(--line)" stroke-width="1.2"/>
+    <text x="360" y="578" text-anchor="middle" style="font-size:28px;fill:var(--muted)">10</text>
+    <text x="76" y="298" text-anchor="end" style="font-size:28px;fill:var(--muted)">10</text>
+    <line x1="450" y1="540" x2="450" y2="36" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="90" y1="204" x2="630" y2="204" stroke="var(--line)" stroke-width="1.2"/>
+    <text x="450" y="578" text-anchor="middle" style="font-size:28px;fill:var(--muted)">12</text>
+    <text x="76" y="214" text-anchor="end" style="font-size:28px;fill:var(--muted)">12</text>
+    <line x1="540" y1="540" x2="540" y2="36" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="90" y1="120" x2="630" y2="120" stroke="var(--line)" stroke-width="1.2"/>
+    <text x="540" y="578" text-anchor="middle" style="font-size:28px;fill:var(--muted)">14</text>
+    <text x="76" y="130" text-anchor="end" style="font-size:28px;fill:var(--muted)">14</text>
+    <line x1="630" y1="540" x2="630" y2="36" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="90" y1="36" x2="630" y2="36" stroke="var(--line)" stroke-width="1.2"/>
+    <text x="630" y="578" text-anchor="middle" style="font-size:28px;fill:var(--muted)">16</text>
+    <text x="76" y="46" text-anchor="end" style="font-size:28px;fill:var(--muted)">16</text>
+    <line class="stroke muted" x1="90" y1="540" x2="647.9999999999999" y2="540" style="stroke-width:3"/>
+    <line class="stroke muted" x1="90" y1="540" x2="90" y2="10.799999999999955" style="stroke-width:3"/>
+    <text x="647.9999999999999" y="616" text-anchor="end" style="font-size:30px;fill:var(--main-ink);font-weight:600">S : sciences</text>
+    <text x="104" y="23.399999999999977" style="font-size:30px;fill:var(--main-ink);font-weight:600">L : langues</text>
+    <circle cx="180.0" cy="498.0" r="12" fill="var(--main)" data-beat="1+0.00" data-anim="pop"/>
+    <circle cx="270.0" cy="372.0" r="12" fill="var(--main)" data-beat="1+0.12" data-anim="pop"/>
+    <circle cx="202.5" cy="277.5" r="12" fill="var(--main)" data-beat="1+0.24" data-anim="pop"/>
+    <circle cx="562.5" cy="67.5" r="12" fill="var(--main)" data-beat="1+0.36" data-anim="pop"/>
+    <circle cx="540.0" cy="193.5" r="12" fill="var(--main)" data-beat="1+0.48" data-anim="pop"/>
+    <circle cx="382.5" cy="445.5" r="12" fill="var(--main)" data-beat="1+0.60" data-anim="pop"/>
+    <circle cx="191.2" cy="172.5" r="12" fill="var(--main)" data-beat="1+0.72" data-anim="pop"/>
+    <circle cx="483.8" cy="330.0" r="12" fill="var(--main)" data-beat="1+0.84" data-anim="pop"/>
+    <circle cx="326.2" cy="193.5" r="12" fill="var(--main)" data-beat="1+0.96" data-anim="pop"/>
+    <circle cx="562.5" cy="67.5" r="24" fill="none" stroke="var(--accent)" stroke-width="5" data-beat="2" data-anim="pop"/>
+    <circle cx="180.0" cy="498.0" r="24" fill="none" stroke="var(--accent)" stroke-width="5" data-beat="3" data-anim="pop"/>
+    <circle cx="191.2" cy="172.5" r="24" fill="none" stroke="var(--accent)" stroke-width="5" data-beat="4" data-anim="pop"/>
+    </svg>
+    <div class="col w40">
+      <div class="chips" data-beat="2"><span class="chip">élève 4 : (14,5 ; 15,25)</span></div>
+      <div class="chips" data-beat="3"><span class="chip">élève 1 : (6 ; 5)</span></div>
+      <div class="chips" data-beat="4"><span class="chip">élève 7 : (6,25 ; 12,75)</span></div>
+      <div class="keep" data-beat="5">Réduire = remplacer par des <b>combinaisons linéaires</b>, pas supprimer.</div>
+    </div>
+- id: s07_idee
+  notion: Idée de l'ACP
+  tag: Notion 4 / 9
+  title: L'idée de l'ACP
+  subtitle: Choisir le meilleur angle de vue
+  beats:
+  - Revenons au principe. Imagine un nuage de points en trois dimensions, et tu veux le photographier.
+  - Tu vas chercher l'angle de vue où les points sont le plus étalés. C'est là que tu les distingues le mieux.
+  - 'Exemple : les sept étoiles de la Grande Ourse. Vues de la Terre, elles dessinent une sorte de casserole.'
+  - Vues depuis une autre galaxie, ces mêmes étoiles auraient sans doute une forme complètement différente.
+  - 'L''ACP fait exactement ça : elle cherche l''angle de vue qui étale le plus les données.'
+  html: |
+    <div class="col w40">
+      <div class="analogy" data-beat="0">
+        <div class="icon">📷</div>
+        <div><b>Photographier un objet 3D</b><br><span class="muted">on perd une dimension</span></div>
+      </div>
+      <div class="card gold" data-beat="1"><div class="label">Le bon angle</div>points <b>le plus étalés</b></div>
+    </div>
+    <div class="col w60">
+      <svg viewBox="0 0 700 420" width="700" height="420">
+    <rect x="0" y="0" width="700" height="420" rx="28" fill="#2B2A3F"/>
+    <polyline points="60,300 190,210 300,220 420,225 480,320 620,270 590,150 420,225" fill="none" stroke="#EBDCC5" stroke-width="2.5" opacity="0.7" data-beat="2+0.6" data-anim="draw"/>
+    <circle cx="60" cy="300" r="9" fill="#FFFDF8" data-beat="2+0.0" data-anim="pop"/>
+    <circle cx="190" cy="210" r="9" fill="#FFFDF8" data-beat="2+0.1" data-anim="pop"/>
+    <circle cx="300" cy="220" r="9" fill="#FFFDF8" data-beat="2+0.2" data-anim="pop"/>
+    <circle cx="420" cy="225" r="9" fill="#FFFDF8" data-beat="2+0.3" data-anim="pop"/>
+    <circle cx="480" cy="320" r="9" fill="#FFFDF8" data-beat="2+0.4" data-anim="pop"/>
+    <circle cx="620" cy="270" r="9" fill="#FFFDF8" data-beat="2+0.5" data-anim="pop"/>
+    <circle cx="590" cy="150" r="9" fill="#FFFDF8" data-beat="2+0.6" data-anim="pop"/>
+    </svg>
+      <div class="calc" data-beat="3">vue d'ailleurs : <b>un tout autre profil</b></div>
+      <div class="keep" data-beat="4">ACP : chercher l'angle de vue de <b>dispersion maximale</b>.</div>
+    </div>
+- id: s08_projection_xy
+  notion: Projeter sur une droite
+  tag: Notion 5 / 9
+  title: Projeter sur une droite
+  subtitle: Passer de 2 dimensions à 1
+  hold: 0.4
+  beats:
+  - 'Pour comprendre, prenons un cas plus simple : passer de deux dimensions à une seule.'
+  - Voici six points, de A à F, dans un plan. Je leur ai donné des coordonnées simples, comme A égale 1, 1, ou B égale 0, 8.
+  - Projeter un point sur l'axe X, c'est le faire descendre verticalement jusqu'à l'axe. On garde seulement son x.
+  - 'Sur l''axe X, l''ordre des points devient : B, A, C, D, E, F. B et A sont collés, alors qu''ils sont très loin dans le plan.'
+  - Projetons maintenant sur l'axe Y. On garde seulement le y de chaque point.
+  - 'L''ordre change complètement : A, D, E, C, B, F. Chaque axe déforme l''image à sa façon.'
+  html: |
+    <div class="col w40">
+      <div class="card" data-beat="1"><div class="label">Points</div>A(1;1) B(0;8) C(2;7)<br>D(4;5) E(8;6) F(9;9)</div>
+      <div class="card main" data-beat="3"><div class="label">Sur l'axe X</div><b>B A C D E F</b></div>
+      <div class="card gold" data-beat="5"><div class="label">Sur l'axe Y</div><b>A D E C B F</b></div>
+    </div>
+    <svg viewBox="0 0 730 600" width="730" height="600" style="flex:none">
+    <line x1="162" y1="540" x2="162" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="488" x2="630" y2="488" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="214" y1="540" x2="214" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="436" x2="630" y2="436" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="266" y1="540" x2="266" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="384" x2="630" y2="384" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="318" y1="540" x2="318" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="332" x2="630" y2="332" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="370" y1="540" x2="370" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="280" x2="630" y2="280" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="422" y1="540" x2="422" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="228" x2="630" y2="228" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="474" y1="540" x2="474" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="176" x2="630" y2="176" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="526" y1="540" x2="526" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="124" x2="630" y2="124" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="578" y1="540" x2="578" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="72" x2="630" y2="72" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="630" y1="540" x2="630" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="20" x2="630" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line class="stroke muted" x1="110" y1="540" x2="661.1999999999999" y2="540" style="stroke-width:3"/>
+    <line class="stroke muted" x1="110" y1="540" x2="110" y2="4.399999999999977" style="stroke-width:3"/>
+    <text x="661.1999999999999" y="580" text-anchor="end" style="font-size:32px;fill:var(--main-ink);font-weight:600">X</text>
+    <text x="88" y="14.800000000000068" text-anchor="end" style="font-size:32px;fill:var(--main-ink);font-weight:600">Y</text>
+    <g data-beat="1+0.00" data-anim="pop"><circle cx="162" cy="488" r="11" fill="var(--main)"/><text x="176" y="522" style="font-size:34px;font-weight:700;fill:var(--ink)">A</text></g>
+    <g data-beat="1+0.10" data-anim="pop"><circle cx="110" cy="124" r="11" fill="var(--main)"/><text x="126" y="110" style="font-size:34px;font-weight:700;fill:var(--ink)">B</text></g>
+    <g data-beat="1+0.20" data-anim="pop"><circle cx="214" cy="176" r="11" fill="var(--main)"/><text x="230" y="162" style="font-size:34px;font-weight:700;fill:var(--ink)">C</text></g>
+    <g data-beat="1+0.30" data-anim="pop"><circle cx="318" cy="280" r="11" fill="var(--main)"/><text x="332" y="314" style="font-size:34px;font-weight:700;fill:var(--ink)">D</text></g>
+    <g data-beat="1+0.40" data-anim="pop"><circle cx="526" cy="228" r="11" fill="var(--main)"/><text x="542" y="262" style="font-size:34px;font-weight:700;fill:var(--ink)">E</text></g>
+    <g data-beat="1+0.50" data-anim="pop"><circle cx="578" cy="72" r="11" fill="var(--main)"/><text x="594" y="58" style="font-size:34px;font-weight:700;fill:var(--ink)">F</text></g>
+    <g data-beat="2" data-anim="draw" data-out="4">
+    <line x1="162" y1="488" x2="162" y2="540" stroke="var(--accent)" stroke-width="4"/>
+    <line x1="110" y1="124" x2="110" y2="540" stroke="var(--accent)" stroke-width="4"/>
+    <line x1="214" y1="176" x2="214" y2="540" stroke="var(--accent)" stroke-width="4"/>
+    <line x1="318" y1="280" x2="318" y2="540" stroke="var(--accent)" stroke-width="4"/>
+    <line x1="526" y1="228" x2="526" y2="540" stroke="var(--accent)" stroke-width="4"/>
+    <line x1="578" y1="72" x2="578" y2="540" stroke="var(--accent)" stroke-width="4"/>
+    </g>
+    <g data-beat="4" data-anim="draw">
+    <line x1="162" y1="488" x2="110" y2="488" stroke="var(--gold)" stroke-width="4"/>
+    <line x1="110" y1="124" x2="110" y2="124" stroke="var(--gold)" stroke-width="4"/>
+    <line x1="214" y1="176" x2="110" y2="176" stroke="var(--gold)" stroke-width="4"/>
+    <line x1="318" y1="280" x2="110" y2="280" stroke="var(--gold)" stroke-width="4"/>
+    <line x1="526" y1="228" x2="110" y2="228" stroke="var(--gold)" stroke-width="4"/>
+    <line x1="578" y1="72" x2="110" y2="72" stroke="var(--gold)" stroke-width="4"/>
+    </g>
+    </svg>
+- id: s09_meilleur_axe
+  notion: Projeter sur une droite
+  tag: Notion 5 / 9
+  title: Le meilleur axe
+  subtitle: Celui où les projections sont le plus étalées
+  hold: 0.4
+  beats:
+  - Et si on projetait sur une droite inclinée ? Voici celle qui passe au milieu du nuage, dans le sens où il s'allonge.
+  - On projette chaque point perpendiculairement sur cette droite.
+  - L'ordre obtenu est A, B, C, D, E, F. C'est l'ordre qui semble le plus naturel quand on regarde le plan.
+  - 'Cette droite a une propriété importante : parmi toutes les inclinaisons possibles, c''est celle où les points projetés sont le plus dispersés.'
+  - 'À retenir : le meilleur axe de projection est celui de dispersion maximale.'
+  html: |
+    <svg viewBox="0 0 730 600" width="730" height="600" style="flex:none">
+    <line x1="162" y1="540" x2="162" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="488" x2="630" y2="488" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="214" y1="540" x2="214" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="436" x2="630" y2="436" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="266" y1="540" x2="266" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="384" x2="630" y2="384" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="318" y1="540" x2="318" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="332" x2="630" y2="332" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="370" y1="540" x2="370" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="280" x2="630" y2="280" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="422" y1="540" x2="422" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="228" x2="630" y2="228" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="474" y1="540" x2="474" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="176" x2="630" y2="176" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="526" y1="540" x2="526" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="124" x2="630" y2="124" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="578" y1="540" x2="578" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="72" x2="630" y2="72" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="630" y1="540" x2="630" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line x1="110" y1="20" x2="630" y2="20" stroke="var(--line)" stroke-width="1.2"/>
+    <line class="stroke muted" x1="110" y1="540" x2="661.1999999999999" y2="540" style="stroke-width:3"/>
+    <line class="stroke muted" x1="110" y1="540" x2="110" y2="4.399999999999977" style="stroke-width:3"/>
+    <text x="661.1999999999999" y="580" text-anchor="end" style="font-size:32px;fill:var(--main-ink);font-weight:600">X</text>
+    <text x="88" y="14.800000000000068" text-anchor="end" style="font-size:32px;fill:var(--main-ink);font-weight:600">Y</text>
+    <g><circle cx="162" cy="488" r="11" fill="var(--main)"/><text x="176" y="522" style="font-size:34px;font-weight:700;fill:var(--ink)">A</text></g>
+    <g><circle cx="110" cy="124" r="11" fill="var(--main)"/><text x="126" y="110" style="font-size:34px;font-weight:700;fill:var(--ink)">B</text></g>
+    <g><circle cx="214" cy="176" r="11" fill="var(--main)"/><text x="230" y="162" style="font-size:34px;font-weight:700;fill:var(--ink)">C</text></g>
+    <g><circle cx="318" cy="280" r="11" fill="var(--main)"/><text x="332" y="314" style="font-size:34px;font-weight:700;fill:var(--ink)">D</text></g>
+    <g><circle cx="526" cy="228" r="11" fill="var(--main)"/><text x="542" y="262" style="font-size:34px;font-weight:700;fill:var(--ink)">E</text></g>
+    <g><circle cx="578" cy="72" r="11" fill="var(--main)"/><text x="594" y="58" style="font-size:34px;font-weight:700;fill:var(--ink)">F</text></g>
+    <line class="stroke accent" x1="66.8" y1="353.6" x2="638.9" y2="67.5" style="stroke-width:6" data-beat="1" data-anim="draw"/>
+    <g data-beat="2" data-anim="draw">
+    <line x1="162" y1="488" x2="89.2" y2="342.4" stroke="var(--gold)" stroke-width="5" stroke-dasharray="10 7"/>
+    <line x1="110" y1="124" x2="193.2" y2="290.4" stroke="var(--gold)" stroke-width="5" stroke-dasharray="10 7"/>
+    <line x1="214" y1="176" x2="255.6" y2="259.2" stroke="var(--gold)" stroke-width="5" stroke-dasharray="10 7"/>
+    <line x1="318" y1="280" x2="297.2" y2="238.4" stroke="var(--gold)" stroke-width="5" stroke-dasharray="10 7"/>
+    <line x1="526" y1="228" x2="484.4" y2="144.8" stroke="var(--gold)" stroke-width="5" stroke-dasharray="10 7"/>
+    <line x1="578" y1="72" x2="588.4" y2="92.8" stroke="var(--gold)" stroke-width="5" stroke-dasharray="10 7"/>
+    </g>
+    <circle cx="318" cy="228" r="9" fill="var(--ink)" data-beat="1"/>
+    </svg>
+    <div class="col w40">
+      <div class="card accent" data-beat="2"><div class="label">Sur l'axe incliné</div><b>A B C D E F</b></div>
+      <div class="card" data-beat="3"><div class="label">Propriété</div>dispersion des projections <b>maximale</b></div>
+      <div class="keep" data-beat="4">Meilleur axe = axe de <b>dispersion maximale</b>.</div>
+    </div>
+- id: s10_min_ecarts
+  notion: Projeter sur une droite
+  tag: Notion 5 / 9
+  title: Étaler au max = coller au plus près
+  subtitle: La somme des écarts au carré
+  hold: 0.4
+  beats:
+  - Il y a une autre façon de voir ce meilleur axe. Mesurons l'écart de chaque point à la droite, perpendiculairement.
+  - Pour chaque droite qui passe par le centre du nuage, on calcule deux sommes. L'étalement des projections, et la somme des écarts au carré.
+  - 'Avec la droite horizontale : étalement 70, écarts 40. Avec la verticale : étalement 40, écarts 70.'
+  - 'Avec le meilleur axe : étalement 80, écarts seulement 30. C''est le minimum.'
+  - 'Remarque : la somme fait toujours 110. C''est Pythagore : chaque point se décompose en projection plus écart.'
+  - Donc étaler les projections au maximum, c'est la même chose que rendre la somme des écarts au carré minimale.
+  - 'Attention : cet axe est proche de la droite de régression du chapitre 3, mais pas identique. La régression mesure les écarts verticaux, l''ACP les écarts perpendiculaires.'
+  html: |
+    <div class="col w60">
+      <table class="data" data-beat="1">
+        <tr><th>droite par le centre</th><th>étalement</th><th>$\sum$ écarts²</th><th>total</th></tr>
+        <tr data-beat="2"><td>horizontale</td><td>70</td><td>40</td><td class="hl" data-hl="4">110</td></tr>
+        <tr data-beat="2+1.8"><td>verticale</td><td>40</td><td>70</td><td class="hl" data-hl="4">110</td></tr>
+        <tr data-beat="3"><td><b>meilleur axe</b></td><td><b>80</b></td><td class="ring" data-hl="3+1"><b>30</b></td><td class="hl" data-hl="4">110</td></tr>
+      </table>
+      <div class="keep" data-beat="5">max étalement $\Leftrightarrow$ <b>min</b> $\sum$ écarts²</div>
+    </div>
+    <div class="col w40">
+      <div class="card" data-beat="0"><div class="label">Écart</div>distance <b>perpendiculaire</b> du point à la droite</div>
+      <div class="calc" data-beat="4">projection² + écart² = distance² au centre</div>
+      <div class="card gold" data-beat="6"><div class="label">≠ régression</div>régression : écarts <b>verticaux</b><br>ACP : écarts <b>perpendiculaires</b></div>
+    </div>
+- id: s11_axe_combinaison
+  notion: L'axe est une combinaison
+  tag: Notion 6 / 9
+  title: Le nouvel axe mélange X et Y
+  subtitle: Une combinaison linéaire des 2 variables
+  hold: 0.4
+  beats:
+  - Sur le meilleur axe, la position d'un point n'est plus x, ni y. C'est un mélange des deux.
+  - 'On place d''abord l''origine au centre du nuage : la moyenne, 4 pour x et 6 pour y. Puis la position vaut deux fois x plus y, le tout divisé par racine de 5.'
+  - 'Pour A : x moins 4 donne moins 3, y moins 6 donne moins 5. Deux fois moins 3, plus moins 5 : moins 11.'
+  - On fait pareil pour les autres points. On obtient moins 6, moins 3, moins 1, 8 et 13.
+  - Ces valeurs sont bien rangées dans l'ordre A, B, C, D, E, F.
+  - 'À retenir : le nouvel axe est une combinaison linéaire de X et de Y. L''ACP sert à choisir au mieux ces axes.'
+  html: |
+    <div class="col w50">
+      <div class="card main" data-beat="1"><div class="formula">$$z = \frac{2\,(x - \htmlData{hl=1}{4}) + (y - \htmlData{hl=1}{6})}{\sqrt{5}}$$</div></div>
+      <div class="calc" data-beat="2">A : $2 \times (-3) + (-5) = $ <b>−11</b></div>
+      <div class="keep" data-beat="5">Nouvel axe = <b>combinaison linéaire</b> de $X$ et $Y$</div>
+    </div>
+    <table class="data small w40">
+      <tr><th>point</th><th>centré</th><th class="hl" data-hl="4">$2x + y$</th></tr>
+      <tr data-beat="2"><td><b>A</b></td><td>(−3 ; −5)</td><td>−11</td></tr><tr data-beat="3"><td><b>B</b></td><td>(−4 ; 2)</td><td>−6</td></tr><tr data-beat="3"><td><b>C</b></td><td>(−2 ; 1)</td><td>−3</td></tr><tr data-beat="3"><td><b>D</b></td><td>(0 ; −1)</td><td>−1</td></tr><tr data-beat="3"><td><b>E</b></td><td>(4 ; 0)</td><td>8</td></tr><tr data-beat="3"><td><b>F</b></td><td>(5 ; 3)</td><td>13</td></tr>
+    </table>
+- id: s12_cov_def
+  notion: Matrice des variances-covariances
+  tag: Notion 7 / 9
+  title: La matrice des variances-covariances
+  subtitle: L'outil de calcul de l'ACP
+  hold: 0.3
+  beats:
+  - 'Comment l''ACP trouve-t-elle ces axes ? Elle part d''un tableau : la matrice des variances-covariances.'
+  - Pour n variables X 1 à X n, la case en ligne i et en colonne j contient la covariance de X i et X j, notée sigma de X i, X j.
+  - 'C''est la covariance s x y du chapitre 3 : la moyenne des produits des écarts à la moyenne.'
+  - 'Sur la diagonale, i égale j : la covariance d''une variable avec elle-même, c''est sa variance.'
+  - Comme la matrice des corrélations, elle est symétrique.
+  html: |
+    <div class="col w60">
+      <div class="card main" data-beat="1"><div class="formula">$$\text{case } (i, j) = \htmlData{hl=2}{\sigma(X_i, X_j)}$$</div></div>
+      <div class="calc" data-beat="3">diagonale : $\sigma(X_i, X_i) = $ <span class="res">variance de $X_i$</span></div>
+      <div class="calc" data-beat="4">symétrique : $\sigma(X_i, X_j) = \sigma(X_j, X_i)$</div>
+    </div>
+    <div class="col w40">
+      <div class="legend" data-beat="1+1.5">
+        <span class="sym">$n$</span><span>nombre de variables</span>
+        <span class="sym">$\sigma(X_i, X_j)$</span><span>covariance de $X_i$ et $X_j$</span>
+      </div>
+      <div class="def" data-beat="2" style="border-top-color:var(--gold)"><div class="term">Rappel chapitre 3</div>$s_{xy} = \frac{1}{n}\sum (x_i - \bar{x})(y_i - \bar{y})$</div>
+    </div>
+- id: s13_cov_exemple
+  notion: Matrice des variances-covariances
+  tag: Notion 7 / 9
+  title: 'Exemple : les points A à F'
+  subtitle: Une matrice 2 × 2
+  hold: 0.4
+  beats:
+  - Calculons-la pour nos six points. Deux variables, donc une matrice deux sur deux.
+  - 'Variance de X : la somme des x moins 4, au carré, vaut 70. Divisée par 6, ça donne 11,67.'
+  - 'Variance de Y : la somme des y moins 6, au carré, vaut 40. Divisée par 6 : 6,67.'
+  - 'Covariance de X et Y : la somme des produits des écarts vaut 20. Divisée par 6 : 3,33.'
+  - 'On range tout ça : les variances sur la diagonale, la covariance dans les deux autres cases.'
+  html: |
+    <div class="col w50">
+      <div class="calc" data-beat="1">$\sigma(X,X) = \frac{70}{6} = $ <b>11,67</b></div>
+      <div class="calc" data-beat="2">$\sigma(Y,Y) = \frac{40}{6} = $ <b>6,67</b></div>
+      <div class="calc" data-beat="3">$\sigma(X,Y) = \frac{20}{6} = $ <b>3,33</b></div>
+    </div>
+    <div class="card main w40" data-beat="4">
+      <div class="formula">$$M = \begin{pmatrix} \htmlData{hl=4}{11{,}67} & 3{,}33 \\ 3{,}33 & \htmlData{hl=4}{6{,}67} \end{pmatrix}$$</div>
+    </div>
+- id: s14_propres_def
+  notion: Valeurs et vecteurs propres
+  tag: Notion 8 / 9
+  title: Valeurs et vecteurs propres
+  subtitle: Ils donnent les nouveaux axes
+  hold: 0.3
+  beats:
+  - Ensuite, on cherche les valeurs propres et les vecteurs propres de cette matrice.
+  - 'Petit rappel d''algèbre : u est un vecteur propre de M si M fois u donne le même vecteur u, multiplié par un nombre lambda.'
+  - Ce nombre lambda est la valeur propre associée à u.
+  - Les vecteurs propres donnent les nouveaux axes sur lesquels on va représenter les données.
+  - 'Et voici la propriété clé : une valeur propre est égale à la variance des données projetées sur l''axe de son vecteur propre.'
+  - Donc la plus grande valeur propre donne l'axe où les données sont le plus dispersées.
+  html: |
+    <div class="col w50">
+      <div class="card main" data-beat="1"><div class="formula lg">$$M\,u = \htmlData{hl=2}{\lambda}\,u$$</div></div>
+      <div class="legend" data-beat="2">
+        <span class="sym">$u$</span><span>vecteur propre : <b>un nouvel axe</b></span>
+        <span class="sym">$\lambda$</span><span>valeur propre associée</span>
+      </div>
+    </div>
+    <div class="col w50">
+      <div class="def" data-beat="3"><div class="term">Vecteurs propres</div>les nouveaux axes de représentation</div>
+      <div class="card accent" data-beat="4"><div class="label">Propriété clé</div>$\lambda$ = <b>variance</b> des projections sur l'axe de $u$</div>
+      <div class="keep" data-beat="5">Plus grande valeur propre = axe le plus <b>dispersé</b></div>
+    </div>
+- id: s15_propres_exemple
+  notion: Valeurs et vecteurs propres
+  tag: Notion 8 / 9
+  title: 'Exemple : vérifions sur A à F'
+  subtitle: Le vecteur (2 ; 1)
+  hold: 0.4
+  beats:
+  - 'Testons le vecteur u 1 égale 2, 1 : c''est la direction de notre meilleur axe.'
+  - 'M fois u 1 : 11,67 fois 2 plus 3,33 donne 26,67. Et 3,33 fois 2 plus 6,67 donne 13,33.'
+  - Or 26,67 et 13,33, c'est exactement 13,33 fois 2, et 13,33 fois 1. Donc lambda 1 vaut 13,33.
+  - Vérifions la propriété. Les positions sur l'axe étaient moins 11, moins 6, moins 3, moins 1, 8 et 13, divisées par racine de 5.
+  - 'Leurs carrés font 400. Divisé par 5, puis par 6 points : 13,33. C''est bien la variance des projections.'
+  - 'L''autre vecteur propre, moins 1, 2, donne lambda 2 égale 5. Et 13,33 plus 5 donne 18,33 : la somme des deux variances.'
+  html: |
+    <div class="col w50">
+      <div class="calc" data-beat="1">$\begin{pmatrix} 11{,}67 & 3{,}33 \\ 3{,}33 & 6{,}67 \end{pmatrix}\begin{pmatrix} 2 \\ 1 \end{pmatrix} = \begin{pmatrix} 26{,}67 \\ 13{,}33 \end{pmatrix}$</div>
+      <div class="calc" data-beat="2">$= 13{,}33 \times \begin{pmatrix} 2 \\ 1 \end{pmatrix}$ &nbsp;⇒ $\lambda_1 = $ <span class="res">13,33</span></div>
+      <div class="calc" data-beat="5">$u_2 = (-1 ; 2)$ ⇒ $\lambda_2 = $ <b>5</b></div>
+    </div>
+    <div class="col w50">
+      <div class="card gold" data-beat="3"><div class="label">Variance des projections</div>
+        <div class="calc">$\frac{121 + 36 + 9 + 1 + 64 + 169}{5 \times 6} = \frac{400}{30} = $ <b>13,33</b></div>
+      </div>
+      <div class="calc" data-beat="5+2.5">$13{,}33 + 5 = 18{,}33 = 11{,}67 + 6{,}67$</div>
+    </div>
+- id: s16_pourcentage
+  notion: Valeurs et vecteurs propres
+  tag: Notion 8 / 9
+  title: Combien d'information garde-t-on ?
+  subtitle: Part de la variance totale
+  hold: 0.4
+  beats:
+  - 'La variance totale, c''est la somme des variances : 18,33. C''est toute l''information du nuage.'
+  - 'Si on projette sur l''axe X, on garde sa variance : 11,67, soit 64 pour cent.'
+  - 'Sur l''axe Y : 6,67, soit 36 pour cent seulement.'
+  - 'Sur l''axe du premier vecteur propre : 13,33, soit 73 pour cent. C''est le meilleur score possible pour une seule droite.'
+  - 'À retenir : la part d''information gardée par un axe, c''est sa valeur propre divisée par la somme des valeurs propres.'
+  html: |
+    <div class="bars-wrap w50"><div class="bars">
+      <div class="bar"><span>64 %</span><div class="fill" style="height:350px" data-beat="1" data-anim="grow-y"></div><span class="lbl">axe X</span></div>
+      <div class="bar"><span>36 %</span><div class="fill" style="height:200px" data-beat="2" data-anim="grow-y"></div><span class="lbl">axe Y</span></div>
+      <div class="bar top"><span>73 %</span><div class="fill" style="height:400px;background:var(--accent)" data-beat="3" data-anim="grow-y"></div><span class="lbl">axe u₁</span></div>
+    </div></div>
+    <div class="col w40">
+      <div class="calc" data-beat="0">variance totale = <b>18,33</b></div>
+      <div class="calc" data-beat="3">$\frac{13{,}33}{18{,}33} = $ <span class="res">73 %</span></div>
+      <div class="keep" data-beat="4">Part gardée = $\dfrac{\lambda}{\text{somme des } \lambda}$</div>
+    </div>
+- id: s17_deux_axes
+  notion: Représenter en 2D
+  tag: Notion 9 / 9
+  title: Passer en 2 dimensions
+  subtitle: Les 2 plus grandes valeurs propres
+  hold: 0.4
+  beats:
+  - Pour représenter les données dans un plan, on prend comme base les deux vecteurs propres des deux plus grandes valeurs propres.
+  - Ce plan est celui où les données sont dispersées au maximum.
+  - Revenons aux neuf élèves. Leur matrice des variances-covariances est une matrice quatre sur quatre. Elle a donc quatre valeurs propres.
+  - 'Les voici : 28,71, puis 12,08, puis 0,04 et 0,01.'
+  - 'Les deux premières gardent 70,3 plus 29,6 pour cent : 99,9 pour cent de l''information.'
+  - 'À retenir : le plan des deux premiers vecteurs propres montre presque tout, en deux dimensions seulement.'
+  html: |
+    <div class="col w40">
+      <div class="card main" data-beat="0"><div class="label">Base du plan</div>vecteurs propres des <b>2 plus grandes</b> $\lambda$</div>
+      <div class="calc" data-beat="1">plan de <b>dispersion maximale</b></div>
+      <div class="calc" data-beat="4">$70{,}3\,\% + 29{,}6\,\% = $ <span class="res">99,9 %</span></div>
+      <div class="keep" data-beat="5">2 axes gardent presque <b>toute</b> l'information</div>
+    </div>
+    <div class="bars-wrap w50" data-beat="2"><div class="bars">
+      <div class="bar top"><span>28,71</span><div class="fill" style="height:400px" data-beat="3" data-anim="grow-y"></div><span class="lbl">λ₁</span></div>
+      <div class="bar top"><span>12,08</span><div class="fill" style="height:168px" data-beat="3+0.4" data-anim="grow-y"></div><span class="lbl">λ₂</span></div>
+      <div class="bar"><span>0,04</span><div class="fill" style="height:4px" data-beat="3+0.8" data-anim="grow-y"></div><span class="lbl">λ₃</span></div>
+      <div class="bar"><span>0,01</span><div class="fill" style="height:3px" data-beat="3+1.2" data-anim="grow-y"></div><span class="lbl">λ₄</span></div>
+    </div></div>
+- id: s18_interpretation
+  notion: Représenter en 2D
+  tag: Notion 9 / 9
+  title: Que représentent ces 2 axes ?
+  subtitle: On retrouve les sciences et les langues
+  hold: 0.4
+  beats:
+  - Regardons les deux vecteurs propres. Chacun donne une combinaison linéaire des quatre cotes.
+  - Le premier donne presque le même poids, environ 0,5, aux quatre cours. Il mesure le niveau général de l'élève.
+  - Le second donne des poids négatifs aux sciences et positifs aux langues. Il oppose les langues aux sciences.
+  - On retrouve l'intuition du début avec S et L. Mais cette fois, c'est le calcul qui a choisi les meilleurs axes.
+  html: |
+    <table class="data" style="white-space:nowrap">
+      <tr><th></th><th>math</th><th>phys.</th><th>angl.</th><th>néer.</th><th>sens</th></tr>
+      <tr data-beat="1"><th>$u_1$</th><td>0,51</td><td>0,50</td><td>0,49</td><td>0,50</td><td class="hl" data-hl="1+1.5">niveau général</td></tr>
+      <tr data-beat="2"><th>$u_2$</th><td>−0,58</td><td>−0,38</td><td>0,65</td><td>0,32</td><td class="hl" data-hl="2+1.5">langues − sciences</td></tr>
+    </table>
+    <div class="col" style="width:460px">
+      <div class="card gold" data-beat="0"><div class="label">Chaque axe</div>une combinaison des 4 cotes</div>
+      <div class="keep" data-beat="3">L'ACP <b>calcule</b> les meilleurs axes.</div>
+    </div>
+- id: s19_recap
+  notion: Récapitulatif
+  title: Récap du chapitre 4
+  beats:
+  - Récapitulons.
+  - Au-delà de trois variables, on ne peut plus dessiner les données. La matrice des corrélations montre déjà quelles variables se ressemblent.
+  - Réduire le nombre de variables, c'est les remplacer par des combinaisons linéaires, pas les supprimer.
+  - L'ACP cherche les axes où les projections sont le plus dispersées. Ça revient à rendre minimale la somme des écarts au carré.
+  - On part de la matrice des variances-covariances. Ses vecteurs propres donnent les axes, et chaque valeur propre est la variance sur son axe.
+  - Pour un plan, on garde les deux vecteurs propres des deux plus grandes valeurs propres.
+  html: |
+    <div class="recap">
+      <div class="item" data-beat="1"><b>Matrice des corrélations</b> : case $(i,j) = r(X_i, X_j)$</div>
+      <div class="item" data-beat="2"><b>Réduire</b> = combinaisons linéaires, ex. $S = \tfrac12\,\text{math} + \tfrac12\,\text{phys}$</div>
+      <div class="item" data-beat="3"><b>Meilleur axe</b> : dispersion max ⇔ min $\sum$ écarts²</div>
+      <div class="item" data-beat="4"><span class="tex">$M u = \lambda u$</span> &nbsp;avec $M_{ij} = \sigma(X_i, X_j)$, $\lambda$ = variance sur l'axe</div>
+      <div class="item" data-beat="5"><b>En 2D</b> : vecteurs propres des 2 plus grandes $\lambda$</div>
+    </div>

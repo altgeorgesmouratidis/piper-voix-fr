@@ -1,0 +1,1073 @@
+1
+00:00:00,450 --> 00:00:02,540
+Analyse de données, chapitre 4 :
+
+2
+00:00:02,540 --> 00:00:06,719
+l'analyse en composantes principales, qu'on
+appelle aussi l'ACP.
+
+3
+00:00:07,169 --> 00:00:07,623
+L'idée :
+
+4
+00:00:07,623 --> 00:00:12,842
+représenter des données à beaucoup de variables
+sur un simple graphique, en perdant le moins
+
+5
+00:00:12,842 --> 00:00:14,147
+d'information possible.
+
+6
+00:00:15,483 --> 00:00:18,297
+Au chapitre 2, on étudiait une seule variable.
+
+7
+00:00:18,297 --> 00:00:20,499
+Ses valeurs tiennent sur une droite.
+
+8
+00:00:20,949 --> 00:00:23,106
+Au chapitre 3, on en étudiait deux.
+
+9
+00:00:23,106 --> 00:00:26,003
+Chaque individu devient un point dans un plan :
+
+10
+00:00:26,003 --> 00:00:27,543
+c'est le nuage de points.
+
+11
+00:00:27,993 --> 00:00:32,105
+Avec trois variables, on obtient un nuage de
+points en trois dimensions.
+
+12
+00:00:32,105 --> 00:00:33,589
+On peut encore l'imaginer.
+
+13
+00:00:34,039 --> 00:00:38,703
+Mais avec quatre variables ou plus, il faudrait
+un espace à quatre dimensions.
+
+14
+00:00:38,703 --> 00:00:40,436
+Personne ne peut le dessiner.
+
+15
+00:00:40,886 --> 00:00:43,982
+L'analyse en composantes principales résout ce
+problème.
+
+16
+00:00:43,982 --> 00:00:48,294
+Elle ramène les données à deux dimensions, en
+les déformant le moins possible.
+
+17
+00:00:49,650 --> 00:00:52,874
+Prenons les cotes de neuf élèves, dans quatre
+cours :
+
+18
+00:00:52,874 --> 00:00:55,246
+math, physique, anglais et néerlandais.
+
+19
+00:00:55,696 --> 00:00:58,636
+Chaque élève est donc décrit par quatre nombres.
+
+20
+00:00:58,636 --> 00:01:01,698
+C'est un point dans un espace à quatre
+dimensions.
+
+21
+00:01:02,148 --> 00:01:03,033
+Première idée :
+
+22
+00:01:03,033 --> 00:01:05,390
+ne garder que deux cours sur les quatre.
+
+23
+00:01:05,390 --> 00:01:06,746
+Mais lesquels choisir ?
+
+24
+00:01:07,196 --> 00:01:08,481
+Regarde les colonnes.
+
+25
+00:01:08,481 --> 00:01:11,968
+Les cotes de math et de physique se ressemblent
+beaucoup.
+
+26
+00:01:12,418 --> 00:01:14,910
+Les cotes d'anglais et de néerlandais aussi.
+
+27
+00:01:14,910 --> 00:01:19,894
+Un élève a un niveau proche dans les branches
+scientifiques, et proche dans les langues.
+
+28
+00:01:21,650 --> 00:01:25,510
+Pour le voir précisément, on range toutes les
+corrélations dans un tableau.
+
+29
+00:01:25,510 --> 00:01:29,371
+Un peu comme le tableau des distances entre
+villes, sur une carte routière.
+
+30
+00:01:29,821 --> 00:01:34,728
+Les variables sont notées X 1, X 2, jusqu'à X n.
+
+31
+00:01:34,728 --> 00:01:36,160
+Ici, n vaut 4.
+
+32
+00:01:36,610 --> 00:01:42,679
+Dans la matrice des corrélations, la case en
+ligne i et en colonne j contient le coefficient
+
+33
+00:01:42,679 --> 00:01:44,922
+de corrélation r entre X i et X j.
+
+34
+00:01:44,922 --> 00:01:46,571
+C'est le r du chapitre 3.
+
+35
+00:01:47,021 --> 00:01:49,986
+Cette matrice est forcément symétrique :
+
+36
+00:01:49,986 --> 00:01:55,102
+la corrélation de X i avec X j est la même que
+celle de X j avec X i.
+
+37
+00:01:55,552 --> 00:01:57,928
+Et sa diagonale ne contient que des 1 :
+
+38
+00:01:57,928 --> 00:02:01,217
+une variable est parfaitement corrélée avec
+elle-même.
+
+39
+00:02:02,583 --> 00:02:05,451
+Voici la matrice des corrélations pour nos neuf
+élèves.
+
+40
+00:02:05,901 --> 00:02:07,451
+Math et physique :
+
+41
+00:02:07,451 --> 00:02:07,882
+0,98.
+
+42
+00:02:07,882 --> 00:02:11,242
+C'est presque une corrélation parfaite.
+
+43
+00:02:11,692 --> 00:02:14,369
+Anglais et néerlandais :
+
+44
+00:02:14,369 --> 00:02:14,927
+0,95.
+
+45
+00:02:14,927 --> 00:02:16,823
+Très forte aussi.
+
+46
+00:02:17,273 --> 00:02:19,956
+Par contre, math et anglais :
+
+47
+00:02:19,956 --> 00:02:21,344
+seulement 0,23.
+
+48
+00:02:21,344 --> 00:02:23,101
+Le lien est faible.
+
+49
+00:02:23,551 --> 00:02:25,606
+On voit donc deux groupes de cours :
+
+50
+00:02:25,606 --> 00:02:28,288
+les sciences d'un côté, les langues de l'autre.
+
+51
+00:02:28,738 --> 00:02:29,441
+À retenir :
+
+52
+00:02:29,441 --> 00:02:32,254
+garder math et physique n'aurait aucun sens.
+
+53
+00:02:32,254 --> 00:02:35,066
+Ces deux cours disent presque la même chose.
+
+54
+00:02:36,817 --> 00:02:41,619
+Pour passer à deux dimensions, on pourrait
+garder un cours scientifique et un cours de
+
+55
+00:02:41,619 --> 00:02:42,010
+langue.
+
+56
+00:02:42,010 --> 00:02:43,574
+Par exemple math et anglais.
+
+57
+00:02:44,024 --> 00:02:45,079
+On peut faire mieux :
+
+58
+00:02:45,079 --> 00:02:47,843
+créer deux nouvelles variables qui résument les
+quatre.
+
+59
+00:02:48,293 --> 00:02:50,714
+S est la moyenne de math et de physique :
+
+60
+00:02:50,714 --> 00:02:53,193
+un demi de math, plus un demi de physique.
+
+61
+00:02:53,643 --> 00:02:56,359
+L est la moyenne d'anglais et de néerlandais :
+
+62
+00:02:56,359 --> 00:02:59,134
+un demi d'anglais, plus un demi de néerlandais.
+
+63
+00:02:59,584 --> 00:03:01,565
+Exemple avec l'élève 3.
+
+64
+00:03:01,565 --> 00:03:05,784
+Il a 6 en math et 7 en physique, donc S vaut
+6,5.
+
+65
+00:03:06,234 --> 00:03:11,366
+Il a 11 en anglais et 9,5 en néerlandais, donc L
+vaut 10,25.
+
+66
+00:03:11,816 --> 00:03:16,367
+Une telle somme de variables multipliées par des
+nombres s'appelle une combinaison linéaire.
+
+67
+00:03:17,717 --> 00:03:20,559
+Chaque élève n'a plus que deux nombres, S et L.
+
+68
+00:03:20,559 --> 00:03:22,918
+On peut enfin le dessiner dans un plan.
+
+69
+00:03:23,368 --> 00:03:24,853
+Voici les neuf élèves.
+
+70
+00:03:24,853 --> 00:03:26,607
+Chaque point est un élève.
+
+71
+00:03:27,057 --> 00:03:29,774
+En haut à droite, l'élève 4 :
+
+72
+00:03:29,774 --> 00:03:33,241
+14,5 en sciences et 15,25 en langues.
+
+73
+00:03:33,241 --> 00:03:35,022
+Il est bon partout.
+
+74
+00:03:35,472 --> 00:03:37,736
+En bas à gauche, l'élève 1 :
+
+75
+00:03:37,736 --> 00:03:38,302
+6 et 5.
+
+76
+00:03:38,302 --> 00:03:40,081
+Il est faible partout.
+
+77
+00:03:40,531 --> 00:03:42,978
+En haut à gauche, l'élève 7 :
+
+78
+00:03:42,978 --> 00:03:46,270
+6,25 en sciences mais 12,75 en langues.
+
+79
+00:03:46,270 --> 00:03:48,971
+Il est plus à l'aise en langues.
+
+80
+00:03:49,421 --> 00:03:50,084
+À retenir :
+
+81
+00:03:50,084 --> 00:03:53,580
+réduire le nombre de variables, ce n'est pas en
+supprimer.
+
+82
+00:03:53,580 --> 00:03:58,523
+On les remplace par des combinaisons linéaires
+qui gardent l'image représentative.
+
+83
+00:04:00,283 --> 00:04:01,450
+Revenons au principe.
+
+84
+00:04:01,450 --> 00:04:05,670
+Imagine un nuage de points en trois dimensions,
+et tu veux le photographier.
+
+85
+00:04:06,120 --> 00:04:09,254
+Tu vas chercher l'angle de vue où les points
+sont le plus étalés.
+
+86
+00:04:09,254 --> 00:04:11,182
+C'est là que tu les distingues le mieux.
+
+87
+00:04:11,632 --> 00:04:12,196
+Exemple :
+
+88
+00:04:12,196 --> 00:04:14,449
+les sept étoiles de la Grande Ourse.
+
+89
+00:04:14,449 --> 00:04:18,018
+Vues de la Terre, elles dessinent une sorte de
+casserole.
+
+90
+00:04:18,468 --> 00:04:23,471
+Vues depuis une autre galaxie, ces mêmes étoiles
+auraient sans doute une forme complètement
+
+91
+00:04:23,471 --> 00:04:24,075
+différente.
+
+92
+00:04:24,525 --> 00:04:25,963
+L'ACP fait exactement ça :
+
+93
+00:04:25,963 --> 00:04:29,169
+elle cherche l'angle de vue qui étale le plus
+les données.
+
+94
+00:04:30,517 --> 00:04:33,154
+Pour comprendre, prenons un cas plus simple :
+
+95
+00:04:33,154 --> 00:04:35,381
+passer de deux dimensions à une seule.
+
+96
+00:04:35,831 --> 00:04:38,503
+Voici six points, de A à F, dans un plan.
+
+97
+00:04:38,503 --> 00:04:43,587
+Je leur ai donné des coordonnées simples, comme
+A égale 1, 1, ou B égale 0, 8.
+
+98
+00:04:44,037 --> 00:04:49,208
+Projeter un point sur l'axe X, c'est le faire
+descendre verticalement jusqu'à l'axe.
+
+99
+00:04:49,208 --> 00:04:50,747
+On garde seulement son x.
+
+100
+00:04:51,197 --> 00:04:54,073
+Sur l'axe X, l'ordre des points devient :
+
+101
+00:04:54,073 --> 00:04:55,266
+B, A, C, D, E, F.
+
+102
+00:04:55,266 --> 00:04:59,545
+B et A sont collés, alors qu'ils sont très loin
+dans le plan.
+
+103
+00:04:59,995 --> 00:05:02,036
+Projetons maintenant sur l'axe Y.
+
+104
+00:05:02,036 --> 00:05:04,511
+On garde seulement le y de chaque point.
+
+105
+00:05:04,961 --> 00:05:07,081
+L'ordre change complètement :
+
+106
+00:05:07,081 --> 00:05:08,324
+A, D, E, C, B, F.
+
+107
+00:05:08,324 --> 00:05:11,103
+Chaque axe déforme l'image à sa façon.
+
+108
+00:05:12,850 --> 00:05:15,182
+Et si on projetait sur une droite inclinée ?
+
+109
+00:05:15,182 --> 00:05:18,945
+Voici celle qui passe au milieu du nuage, dans
+le sens où il s'allonge.
+
+110
+00:05:19,395 --> 00:05:22,240
+On projette chaque point perpendiculairement sur
+cette droite.
+
+111
+00:05:22,690 --> 00:05:25,038
+L'ordre obtenu est A, B, C, D, E, F.
+
+112
+00:05:25,038 --> 00:05:29,342
+C'est l'ordre qui semble le plus naturel quand
+on regarde le plan.
+
+113
+00:05:29,792 --> 00:05:32,073
+Cette droite a une propriété importante :
+
+114
+00:05:32,073 --> 00:05:36,968
+parmi toutes les inclinaisons possibles, c'est
+celle où les points projetés sont le plus
+
+115
+00:05:36,968 --> 00:05:37,524
+dispersés.
+
+116
+00:05:37,974 --> 00:05:38,706
+À retenir :
+
+117
+00:05:38,706 --> 00:05:42,897
+le meilleur axe de projection est celui de
+dispersion maximale.
+
+118
+00:05:44,650 --> 00:05:47,195
+Il y a une autre façon de voir ce meilleur axe.
+
+119
+00:05:47,195 --> 00:05:50,768
+Mesurons l'écart de chaque point à la droite,
+perpendiculairement.
+
+120
+00:05:51,218 --> 00:05:55,830
+Pour chaque droite qui passe par le centre du
+nuage, on calcule deux sommes.
+
+121
+00:05:55,830 --> 00:05:59,531
+L'étalement des projections, et la somme des
+écarts au carré.
+
+122
+00:05:59,981 --> 00:06:02,400
+Avec la droite horizontale :
+
+123
+00:06:02,400 --> 00:06:04,474
+étalement 70, écarts 40.
+
+124
+00:06:04,474 --> 00:06:06,116
+Avec la verticale :
+
+125
+00:06:06,116 --> 00:06:08,189
+étalement 40, écarts 70.
+
+126
+00:06:08,639 --> 00:06:10,231
+Avec le meilleur axe :
+
+127
+00:06:10,231 --> 00:06:12,692
+étalement 80, écarts seulement 30.
+
+128
+00:06:12,692 --> 00:06:13,922
+C'est le minimum.
+
+129
+00:06:14,372 --> 00:06:15,056
+Remarque :
+
+130
+00:06:15,056 --> 00:06:16,904
+la somme fait toujours 110.
+
+131
+00:06:16,904 --> 00:06:18,068
+C'est Pythagore :
+
+132
+00:06:18,068 --> 00:06:21,559
+chaque point se décompose en projection plus
+écart.
+
+133
+00:06:22,009 --> 00:06:27,177
+Donc étaler les projections au maximum, c'est la
+même chose que rendre la somme des écarts au
+
+134
+00:06:27,177 --> 00:06:28,011
+carré minimale.
+
+135
+00:06:28,461 --> 00:06:29,122
+Attention :
+
+136
+00:06:29,122 --> 00:06:33,932
+cet axe est proche de la droite de régression du
+chapitre 3, mais pas identique.
+
+137
+00:06:33,932 --> 00:06:38,562
+La régression mesure les écarts verticaux, l'ACP
+les écarts perpendiculaires.
+
+138
+00:06:40,317 --> 00:06:44,311
+Sur le meilleur axe, la position d'un point
+n'est plus x, ni y.
+
+139
+00:06:44,311 --> 00:06:45,959
+C'est un mélange des deux.
+
+140
+00:06:46,409 --> 00:06:49,776
+On place d'abord l'origine au centre du nuage :
+
+141
+00:06:49,776 --> 00:06:52,140
+la moyenne, 4 pour x et 6 pour y.
+
+142
+00:06:52,140 --> 00:06:57,369
+Puis la position vaut deux fois x plus y, le
+tout divisé par racine de 5.
+
+143
+00:06:57,819 --> 00:06:58,438
+Pour A :
+
+144
+00:06:58,438 --> 00:07:02,231
+x moins 4 donne moins 3, y moins 6 donne moins
+5.
+
+145
+00:07:02,231 --> 00:07:04,785
+Deux fois moins 3, plus moins 5 :
+
+146
+00:07:04,785 --> 00:07:05,482
+moins 11.
+
+147
+00:07:05,932 --> 00:07:08,626
+On fait pareil pour les autres points.
+
+148
+00:07:08,626 --> 00:07:11,887
+On obtient moins 6, moins 3, moins 1, 8 et 13.
+
+149
+00:07:12,337 --> 00:07:16,598
+Ces valeurs sont bien rangées dans l'ordre A, B,
+C, D, E, F.
+
+150
+00:07:17,048 --> 00:07:17,886
+À retenir :
+
+151
+00:07:17,886 --> 00:07:22,148
+le nouvel axe est une combinaison linéaire de X
+et de Y.
+
+152
+00:07:22,148 --> 00:07:25,117
+L'ACP sert à choisir au mieux ces axes.
+
+153
+00:07:26,883 --> 00:07:29,022
+Comment l'ACP trouve-t-elle ces axes ?
+
+154
+00:07:29,022 --> 00:07:30,373
+Elle part d'un tableau :
+
+155
+00:07:30,373 --> 00:07:32,456
+la matrice des variances-covariances.
+
+156
+00:07:32,906 --> 00:07:41,107
+Pour n variables X 1 à X n, la case en ligne i
+et en colonne j contient la covariance de X i et
+
+157
+00:07:41,107 --> 00:07:43,611
+X j, notée sigma de X i, X j.
+
+158
+00:07:44,061 --> 00:07:46,735
+C'est la covariance s x y du chapitre 3 :
+
+159
+00:07:46,735 --> 00:07:49,866
+la moyenne des produits des écarts à la moyenne.
+
+160
+00:07:50,316 --> 00:07:52,376
+Sur la diagonale, i égale j :
+
+161
+00:07:52,376 --> 00:07:56,852
+la covariance d'une variable avec elle-même,
+c'est sa variance.
+
+162
+00:07:57,302 --> 00:08:00,123
+Comme la matrice des corrélations, elle est
+symétrique.
+
+163
+00:08:01,783 --> 00:08:03,670
+Calculons-la pour nos six points.
+
+164
+00:08:03,670 --> 00:08:06,358
+Deux variables, donc une matrice deux sur deux.
+
+165
+00:08:06,808 --> 00:08:08,267
+Variance de X :
+
+166
+00:08:08,267 --> 00:08:12,353
+la somme des x moins 4, au carré, vaut 70.
+
+167
+00:08:12,353 --> 00:08:15,271
+Divisée par 6, ça donne 11,67.
+
+168
+00:08:15,721 --> 00:08:17,325
+Variance de Y :
+
+169
+00:08:17,325 --> 00:08:21,815
+la somme des y moins 6, au carré, vaut 40.
+
+170
+00:08:21,815 --> 00:08:23,418
+Divisée par 6 :
+
+171
+00:08:23,418 --> 00:08:23,953
+6,67.
+
+172
+00:08:24,403 --> 00:08:26,517
+Covariance de X et Y :
+
+173
+00:08:26,517 --> 00:08:30,457
+la somme des produits des écarts vaut 20.
+
+174
+00:08:30,457 --> 00:08:31,898
+Divisée par 6 :
+
+175
+00:08:31,898 --> 00:08:32,379
+3,33.
+
+176
+00:08:32,829 --> 00:08:33,911
+On range tout ça :
+
+177
+00:08:33,911 --> 00:08:38,297
+les variances sur la diagonale, la covariance
+dans les deux autres cases.
+
+178
+00:08:40,050 --> 00:08:44,810
+Ensuite, on cherche les valeurs propres et les
+vecteurs propres de cette matrice.
+
+179
+00:08:45,260 --> 00:08:46,800
+Petit rappel d'algèbre :
+
+180
+00:08:46,800 --> 00:08:52,508
+u est un vecteur propre de M si M fois u donne
+le même vecteur u, multiplié par un nombre
+
+181
+00:08:52,508 --> 00:08:52,958
+lambda.
+
+182
+00:08:53,408 --> 00:08:56,147
+Ce nombre lambda est la valeur propre associée à
+u.
+
+183
+00:08:56,597 --> 00:09:00,487
+Les vecteurs propres donnent les nouveaux axes
+sur lesquels on va représenter les données.
+
+184
+00:09:00,937 --> 00:09:02,527
+Et voici la propriété clé :
+
+185
+00:09:02,527 --> 00:09:07,711
+une valeur propre est égale à la variance des
+données projetées sur l'axe de son vecteur
+
+186
+00:09:07,711 --> 00:09:08,123
+propre.
+
+187
+00:09:08,573 --> 00:09:12,939
+Donc la plus grande valeur propre donne l'axe où
+les données sont le plus dispersées.
+
+188
+00:09:14,583 --> 00:09:16,957
+Testons le vecteur u 1 égale 2, 1 :
+
+189
+00:09:16,957 --> 00:09:19,738
+c'est la direction de notre meilleur axe.
+
+190
+00:09:20,188 --> 00:09:21,863
+M fois u 1 :
+
+191
+00:09:21,863 --> 00:09:26,749
+11,67 fois 2 plus 3,33 donne 26,67.
+
+192
+00:09:26,749 --> 00:09:31,914
+Et 3,33 fois 2 plus 6,67 donne 13,33.
+
+193
+00:09:32,364 --> 00:09:40,650
+Or 26,67 et 13,33, c'est exactement 13,33 fois
+2, et 13,33 fois 1.
+
+194
+00:09:40,650 --> 00:09:43,788
+Donc lambda 1 vaut 13,33.
+
+195
+00:09:44,238 --> 00:09:45,999
+Vérifions la propriété.
+
+196
+00:09:45,999 --> 00:09:52,887
+Les positions sur l'axe étaient moins 11, moins
+6, moins 3, moins 1, 8 et 13, divisées par
+
+197
+00:09:52,887 --> 00:09:53,805
+racine de 5.
+
+198
+00:09:54,255 --> 00:09:56,043
+Leurs carrés font 400.
+
+199
+00:09:56,043 --> 00:09:58,725
+Divisé par 5, puis par 6 points :
+
+200
+00:09:58,725 --> 00:09:59,213
+13,33.
+
+201
+00:09:59,213 --> 00:10:02,382
+C'est bien la variance des projections.
+
+202
+00:10:02,832 --> 00:10:08,135
+L'autre vecteur propre, moins 1, 2, donne lambda
+2 égale 5.
+
+203
+00:10:08,135 --> 00:10:10,741
+Et 13,33 plus 5 donne 18,33 :
+
+204
+00:10:10,741 --> 00:10:13,258
+la somme des deux variances.
+
+205
+00:10:15,017 --> 00:10:18,895
+La variance totale, c'est la somme des variances
+:
+
+206
+00:10:18,895 --> 00:10:19,361
+18,33.
+
+207
+00:10:19,361 --> 00:10:22,076
+C'est toute l'information du nuage.
+
+208
+00:10:22,526 --> 00:10:27,061
+Si on projette sur l'axe X, on garde sa variance
+:
+
+209
+00:10:27,061 --> 00:10:29,329
+11,67, soit 64 pour cent.
+
+210
+00:10:29,779 --> 00:10:31,076
+Sur l'axe Y :
+
+211
+00:10:31,076 --> 00:10:34,469
+6,67, soit 36 pour cent seulement.
+
+212
+00:10:34,919 --> 00:10:37,530
+Sur l'axe du premier vecteur propre :
+
+213
+00:10:37,530 --> 00:10:39,294
+13,33, soit 73 pour cent.
+
+214
+00:10:39,294 --> 00:10:43,174
+C'est le meilleur score possible pour une seule
+droite.
+
+215
+00:10:43,624 --> 00:10:44,270
+À retenir :
+
+216
+00:10:44,270 --> 00:10:49,441
+la part d'information gardée par un axe, c'est
+sa valeur propre divisée par la somme des
+
+217
+00:10:49,441 --> 00:10:50,381
+valeurs propres.
+
+218
+00:10:52,117 --> 00:10:56,686
+Pour représenter les données dans un plan, on
+prend comme base les deux vecteurs propres des
+
+219
+00:10:56,686 --> 00:10:58,374
+deux plus grandes valeurs propres.
+
+220
+00:10:58,824 --> 00:11:02,215
+Ce plan est celui où les données sont dispersées
+au maximum.
+
+221
+00:11:02,665 --> 00:11:04,214
+Revenons aux neuf élèves.
+
+222
+00:11:04,214 --> 00:11:08,738
+Leur matrice des variances-covariances est une
+matrice quatre sur quatre.
+
+223
+00:11:08,738 --> 00:11:10,908
+Elle a donc quatre valeurs propres.
+
+224
+00:11:11,358 --> 00:11:13,292
+Les voici :
+
+225
+00:11:13,292 --> 00:11:19,798
+28,71, puis 12,08, puis 0,04 et 0,01.
+
+226
+00:11:20,248 --> 00:11:24,548
+Les deux premières gardent 70,3 plus 29,6 pour
+cent :
+
+227
+00:11:24,548 --> 00:11:27,144
+99,9 pour cent de l'information.
+
+228
+00:11:27,594 --> 00:11:28,197
+À retenir :
+
+229
+00:11:28,197 --> 00:11:32,689
+le plan des deux premiers vecteurs propres
+montre presque tout, en deux dimensions
+
+230
+00:11:32,689 --> 00:11:33,237
+seulement.
+
+231
+00:11:34,983 --> 00:11:36,926
+Regardons les deux vecteurs propres.
+
+232
+00:11:36,926 --> 00:11:39,894
+Chacun donne une combinaison linéaire des quatre
+cotes.
+
+233
+00:11:40,344 --> 00:11:45,191
+Le premier donne presque le même poids, environ
+0,5, aux quatre cours.
+
+234
+00:11:45,191 --> 00:11:47,891
+Il mesure le niveau général de l'élève.
+
+235
+00:11:48,341 --> 00:11:52,653
+Le second donne des poids négatifs aux sciences
+et positifs aux langues.
+
+236
+00:11:52,653 --> 00:11:54,750
+Il oppose les langues aux sciences.
+
+237
+00:11:55,200 --> 00:11:57,703
+On retrouve l'intuition du début avec S et L.
+
+238
+00:11:57,703 --> 00:12:01,318
+Mais cette fois, c'est le calcul qui a choisi
+les meilleurs axes.
+
+239
+00:12:03,083 --> 00:12:04,302
+Récapitulons.
+
+240
+00:12:04,752 --> 00:12:08,001
+Au-delà de trois variables, on ne peut plus
+dessiner les données.
+
+241
+00:12:08,001 --> 00:12:11,649
+La matrice des corrélations montre déjà quelles
+variables se ressemblent.
+
+242
+00:12:12,099 --> 00:12:16,879
+Réduire le nombre de variables, c'est les
+remplacer par des combinaisons linéaires, pas
+
+243
+00:12:16,879 --> 00:12:17,648
+les supprimer.
+
+244
+00:12:18,098 --> 00:12:22,183
+L'ACP cherche les axes où les projections sont
+le plus dispersées.
+
+245
+00:12:22,183 --> 00:12:25,772
+Ça revient à rendre minimale la somme des écarts
+au carré.
+
+246
+00:12:26,222 --> 00:12:29,081
+On part de la matrice des variances-covariances.
+
+247
+00:12:29,081 --> 00:12:34,500
+Ses vecteurs propres donnent les axes, et chaque
+valeur propre est la variance sur son axe.
+
+248
+00:12:34,950 --> 00:12:39,571
+Pour un plan, on garde les deux vecteurs propres
+des deux plus grandes valeurs propres.
+
