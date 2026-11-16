@@ -1,5 +1,6 @@
 """Partie 1 : vocabulaire + données discrètes. Each scene: id, notion, beats (narration), draw(c, s)."""
 from style import *
+NAME = "cours-5ANA1D-01"
 
 AGES = [18, 19, 20, 18, 17, 21, 19, 19, 18, 20, 17, 19, 21, 19, 18, 19]
 XI = [17, 18, 19, 20, 21]

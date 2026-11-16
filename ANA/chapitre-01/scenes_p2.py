@@ -1,5 +1,6 @@
 """Partie 2 : données continues + qualitatives."""
 from style import *
+NAME = "cours-5ANA1D-01"
 from matplotlib.patches import Rectangle as R
 
 CL = [(50, 65), (65, 75), (75, 85), (85, 100)]
