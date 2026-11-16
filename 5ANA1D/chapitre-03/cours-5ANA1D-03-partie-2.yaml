@@ -1,0 +1,291 @@
+meta:
+  course: 5ANA1D
+  course_name: Analyse de données
+  chapter: 3
+  part: 2
+  title: Distributions à deux dimensions
+  subtitle: Données continues et indépendance
+  output: cours-5ANA1D-03-partie-2
+
+css: |
+  .katex-display{margin:0.12em 0}
+  .card{padding:28px 44px}
+  .def{padding:30px 44px}
+  table.data.small td, table.data.small th{padding:10px 18px;white-space:nowrap}
+
+scenes:
+  # ================================================================ TITRE
+  - id: s00_titre
+    layout: title
+    notion: 'Introduction'
+    beats:
+      - "Analyse de données, chapitre 3, deuxième partie."
+      - "On passe aux données continues, rangées dans un tableau à deux dimensions. Puis on voit quand deux variables sont indépendantes."
+    html: |
+      <svg viewBox="0 0 560 560" width="560" height="560">
+        <circle cx="280" cy="280" r="250" fill="var(--paper)" stroke="var(--line)" stroke-width="3"/>
+        <g data-beat="1" data-anim="draw" data-dur="1.2">
+          <rect class="stroke muted" x="130" y="130" width="300" height="300" rx="10"/>
+          <line class="stroke muted" x1="205" y1="130" x2="205" y2="430"/>
+          <line class="stroke muted" x1="280" y1="130" x2="280" y2="430"/>
+          <line class="stroke muted" x1="355" y1="130" x2="355" y2="430"/>
+          <line class="stroke muted" x1="130" y1="205" x2="430" y2="205"/>
+          <line class="stroke muted" x1="130" y1="280" x2="430" y2="280"/>
+          <line class="stroke muted" x1="130" y1="355" x2="430" y2="355"/>
+        </g>
+        <rect x="282" y="282" width="71" height="71" fill="var(--gold)" opacity="0.8" data-beat="1+1.2" data-anim="pop"/>
+        <rect x="132" y="207" width="71" height="71" fill="var(--main)" opacity="0.7" data-beat="1+1.5" data-anim="pop"/>
+        <rect x="207" y="357" width="71" height="71" fill="var(--accent)" opacity="0.6" data-beat="1+1.8" data-anim="pop"/>
+      </svg>
+
+  # ================================================================ INTRO
+  - id: s01_intro
+    notion: 'Introduction'
+    title: 'Des données continues'
+    subtitle: 'On regroupe en classes'
+    beats:
+      - "Dans la première partie, chaque étudiant donnait un couple de cotes bien précis."
+      - "Avec des données continues, comme la taille en centimètres et le poids en kilos, presque toutes les valeurs sont différentes."
+      - "On regroupe donc chaque variable en classes, comme au chapitre 1."
+      - "Puis on range les individus dans une grille, un peu comme au jeu de la bataille navale : une ligne pour la classe de taille, une colonne pour la classe de poids."
+    html: |
+      <div class="col w50">
+        <div class="card" data-beat="0"><div class="label">Partie 1</div>des couples précis : $(12 ; 14)$</div>
+        <div class="card accent" data-beat="1"><div class="label">Continu</div>$172{,}4$ cm · $78{,}9$ kg : toutes différentes</div>
+        <div class="calc" data-beat="2">→ des <b>classes</b> : $[170 ; 180[$, $[75 ; 85[$…</div>
+      </div>
+      <div class="col w50">
+        <div class="analogy" data-beat="3">
+          <div class="icon">🚢</div>
+          <div><b>La bataille navale</b><br><span class="muted">une ligne + une colonne = une case</span></div>
+        </div>
+        <div class="row" data-beat="3+2.5">
+          <div class="node">ligne : taille</div>
+          <div class="node alt">colonne : poids</div>
+        </div>
+      </div>
+
+  # ================================================================ NOTION 1 : TABLEAU
+  - id: s02_tableau
+    notion: 'Tableau à deux dimensions'
+    tag: 'Notion 1 / 4'
+    title: 'Le tableau à deux dimensions'
+    subtitle: 'Une fréquence $f_{ij}$ par case'
+    hold: 0.5
+    beats:
+      - "Voici l'exemple du cours : la taille X, en lignes, et le poids Y, en colonnes."
+      - "Chaque case contient une fréquence, notée f i j : la proportion d'individus qui sont dans la classe i de X, et dans la classe j de Y."
+      - "Par exemple, cette case vaut 0,17. Donc 17 % des individus mesurent entre 170 et 180 centimètres, et pèsent entre 75 et 85 kilos."
+      - "Pour que la distribution soit correcte, la somme de toutes les cases doit valoir 1."
+    html: |
+      <table class="data small" data-beat="0">
+        <tr><th>$X \backslash Y$</th><th>[50 ; 65[</th><th>[65 ; 75[</th><th class="hl" data-hl="2">[75 ; 85[</th><th>[85 ; 100[</th></tr>
+        <tr><td><b>[140 ; 160[</b></td><td>0,05</td><td>0,10</td><td>0,05</td><td>0</td></tr>
+        <tr><td><b>[160 ; 170[</b></td><td>0,05</td><td>0,12</td><td>0,08</td><td>0,05</td></tr>
+        <tr><td class="hl" data-hl="2"><b>[170 ; 180[</b></td><td>0</td><td>0,08</td><td class="ring" data-hl="2+0.5">0,17</td><td>0,08</td></tr>
+        <tr><td><b>[180 ; 200[</b></td><td>0</td><td>0,05</td><td>0,10</td><td>0,02</td></tr>
+      </table>
+      <div class="col" style="width:560px">
+        <div class="def" data-beat="1"><div class="term">$f_{ij}$</div>proportion dans la classe $i$ de $X$ <b>et</b> la classe $j$ de $Y$</div>
+        <div class="calc" data-beat="2">$f_{33} = 0{,}17$ → <span class="res">17 %</span></div>
+        <div class="keep" data-beat="3">$\sum\sum f_{ij} = 1$</div>
+      </div>
+
+  # ================================================================ NOTION 2 : MARGINALES
+  - id: s03_marginales
+    notion: 'Fréquences marginales'
+    tag: 'Notion 2 / 4'
+    title: 'Les fréquences marginales'
+    subtitle: 'Les totaux dans la marge'
+    hold: 0.5
+    beats:
+      - "Ce tableau contient aussi la distribution de chaque variable prise seule."
+      - "En additionnant une ligne, on obtient f i point : la fréquence de la classe i de X, tous poids confondus."
+      - "Pour la ligne 140 à 160 : 0,05 plus 0,10 plus 0,05 plus 0, ça fait 0,20. Donc 20 % des individus mesurent entre 140 et 160 centimètres."
+      - "En additionnant une colonne, on obtient f point j : la fréquence de la classe j de Y."
+      - "Pour la colonne 50 à 65 kilos : 0,05 plus 0,05 plus 0 plus 0, ça fait 0,10."
+      - "On les appelle fréquences marginales, parce qu'elles sont écrites dans la marge. Le point remplace l'indice sur lequel on a additionné."
+    html: |
+      <table class="data small" data-beat="0">
+        <tr><th>$X \backslash Y$</th><th>[50 ; 65[</th><th>[65 ; 75[</th><th>[75 ; 85[</th><th>[85 ; 100[</th><th>$f_{i.}$</th></tr>
+        <tr class="hl" data-hl="2"><td><b>[140 ; 160[</b></td><td class="hl" data-hl="4">0,05</td><td>0,10</td><td>0,05</td><td>0</td><td class="ring" data-hl="2+1.5"><b>0,20</b></td></tr>
+        <tr><td><b>[160 ; 170[</b></td><td class="hl" data-hl="4">0,05</td><td>0,12</td><td>0,08</td><td>0,05</td><td data-beat="1"><b>0,30</b></td></tr>
+        <tr><td><b>[170 ; 180[</b></td><td class="hl" data-hl="4">0</td><td>0,08</td><td>0,17</td><td>0,08</td><td data-beat="1"><b>0,33</b></td></tr>
+        <tr><td><b>[180 ; 200[</b></td><td class="hl" data-hl="4">0</td><td>0,05</td><td>0,10</td><td>0,02</td><td data-beat="1"><b>0,17</b></td></tr>
+        <tr class="tot"><td>$f_{.j}$</td><td class="ring" data-hl="4+1.5">0,10</td><td data-beat="3">0,35</td><td data-beat="3">0,40</td><td data-beat="3">0,15</td><td data-beat="3">1</td></tr>
+      </table>
+      <div class="col" style="width:520px">
+        <div class="legend" data-beat="1">
+          <span class="sym">$f_{i.}$</span><span>total d'une <b>ligne</b> ($X$)</span>
+          <span class="sym" data-beat="3">$f_{.j}$</span><span data-beat="3">total d'une <b>colonne</b> ($Y$)</span>
+        </div>
+        <div class="calc" data-beat="2">$f_{1.} = $ <span class="res">0,20</span></div>
+        <div class="calc" data-beat="4">$f_{.1} = $ <span class="res">0,10</span></div>
+        <div class="keep" data-beat="5">le <b>point</b> = l'indice additionné</div>
+      </div>
+
+  # ================================================================ NOTION 3 : PARAMÈTRES PAR CLASSES
+  - id: s04_moyennes
+    notion: 'Paramètres par classes'
+    tag: 'Notion 3 / 4'
+    title: 'Moyennes et variances par classes'
+    subtitle: 'Chaque classe est représentée par son centre'
+    hold: 0.5
+    beats:
+      - "Pour calculer les paramètres, chaque classe est représentée par son centre. Pour 140 à 160 centimètres, le centre vaut 150. Pour 50 à 65 kilos, il vaut 57,5."
+      - "La moyenne de X, c'est la somme des f i point fois x i, où x i est le centre de la classe i."
+      - "Tu l'avais noté : on peut aussi écrire une double somme avec les f i j. C'est pareil, car additionner une ligne redonne f i point."
+      - "Calculons : 150 fois 0,2, plus 165 fois 0,3, plus 175 fois 0,33, plus 190 fois 0,17. On obtient 169,55 centimètres."
+      - "De la même façon, avec les centres des colonnes, la moyenne de Y vaut 76,125 kilos."
+      - "La variance suit la formule pratique du chapitre 2 : la somme des f i point fois x i carré, moins x barre carré."
+      - "On trouve un écart-type de 12,789 centimètres pour X, et de 9,698 kilos pour Y."
+    html: |
+      <div class="col w50">
+        <div class="chips" data-beat="0"><span class="chip">$[140 ; 160[$ → <b>150</b></span><span class="chip gold">$[50 ; 65[$ → <b>57,5</b></span></div>
+        <div class="card main" data-beat="1">
+          <div class="formula sm">$$\bar{x} = \sum_{i=1}^{m} f_{i.}\, x_i$$</div>
+          <div class="calc" data-beat="2">$= \sum_i \sum_j f_{ij}\, x_i$ <span class="muted">(ta note)</span></div>
+        </div>
+        <div class="card gold" data-beat="5"><div class="formula sm">$$s_x^2 = \sum_{i=1}^{m} f_{i.}\, x_i^2 - \bar{x}^2$$</div></div>
+      </div>
+      <div class="col w50">
+        <div class="calc" data-beat="3">$150 \times 0{,}2 + 165 \times 0{,}3$<br>$+\ 175 \times 0{,}33 + 190 \times 0{,}17$</div>
+        <div class="calc" data-beat="3+4">$\bar{x} = $ <span class="res">169,55 cm</span></div>
+        <div class="calc" data-beat="4">$\bar{y} = 76{,}125$ kg</div>
+        <div class="calc" data-beat="6">$s_x = 12{,}789$ cm · $s_y = 9{,}698$ kg</div>
+      </div>
+
+  - id: s05_covariance
+    notion: 'Paramètres par classes'
+    tag: 'Notion 3 / 4'
+    title: 'Covariance et corrélation par classes'
+    subtitle: 'Une double somme sur toutes les cases'
+    hold: 0.5
+    beats:
+      - "Pour la covariance, il faut parcourir toutes les cases du tableau. On utilise donc une double somme."
+      - "La formule pratique : la somme, sur toutes les lignes i et toutes les colonnes j, de f i j fois x i fois y j. Moins x barre fois y barre."
+      - "Concrètement : pour chaque case, on multiplie sa fréquence par le centre de sa ligne et par le centre de sa colonne. Puis on additionne les seize résultats."
+      - "Par exemple, la case 0,17 donne 0,17 fois 175 fois 80, soit 2380."
+      - "Le total vaut 12952,25. On retire 169,55 fois 76,125, et la covariance vaut 45,256."
+      - "Le coefficient de corrélation garde la même formule : 45,256 divisé par 12,789 fois 9,698. On trouve r égale 0,365."
+      - "Le lien entre taille et poids est positif, mais plutôt faible. Et la droite de régression se calcule avec les mêmes formules qu'en partie 1."
+    html: |
+      <div class="col w50">
+        <div class="card main" data-beat="1"><div class="formula sm">$$s_{xy} = \sum_{i=1}^{m}\sum_{j=1}^{n} \htmlData{hl=2}{f_{ij}\, x_i\, y_j} - \bar{x}\,\bar{y}$$</div></div>
+        <div class="card" data-beat="5"><div class="formula sm">$$r = \frac{s_{xy}}{s_x\, s_y}$$</div></div>
+      </div>
+      <div class="col w50">
+        <div class="calc" data-beat="3">case 0,17 : $0{,}17 \times 175 \times 80 = 2380$</div>
+        <div class="calc" data-beat="4">$s_{xy} = 12\,952{,}25 - 169{,}55 \times 76{,}125$</div>
+        <div class="calc" data-beat="4+3">$s_{xy} \approx $ <span class="res">45,256</span></div>
+        <div class="calc" data-beat="5+2">$r = \dfrac{45{,}256}{12{,}789 \times 9{,}698} \approx $ <b>0,365</b></div>
+        <div class="keep" data-beat="6">lien positif, plutôt <b>faible</b></div>
+      </div>
+
+  # ================================================================ NOTION 4 : INDÉPENDANCE
+  - id: s06_independance
+    notion: 'Indépendance'
+    tag: 'Notion 4 / 4'
+    title: 'Deux variables indépendantes'
+    subtitle: '$f_{ij} = f_{i.} \cdot f_{.j}$ dans chaque case'
+    hold: 0.5
+    beats:
+      - "Deux variables sont indépendantes quand l'une n'a aucune influence sur l'autre. Par exemple, la cote d'une interro de maths, et la taille de l'élève."
+      - "Dans chaque tranche de taille, on retrouverait alors la même proportion de réussites et d'échecs."
+      - "Dans le tableau, ça se traduit par une propriété simple : chaque f i j est égal au produit des fréquences marginales, f i point fois f point j."
+      - "Testons sur notre tableau. Première case : f 1 point vaut 0,20, et f point 1 vaut 0,10. Leur produit vaut 0,02."
+      - "Mais la case contient 0,05, pas 0,02. Une seule case suffit : la taille et le poids ne sont pas indépendants."
+    html: |
+      <div class="col w50">
+        <div class="row" data-beat="0">
+          <div class="node">cote de maths</div>
+          <div class="node ghost">aucun lien</div>
+          <div class="node alt">taille</div>
+        </div>
+        <div class="card" data-beat="1">même proportion de <b>réussites</b> dans chaque tranche de taille</div>
+        <div class="card main" data-beat="2"><div class="formula">$$f_{ij} = f_{i.} \cdot f_{.j}$$</div></div>
+      </div>
+      <div class="col w50">
+        <div class="label muted" data-beat="3" style="font-size:36px">Test sur la case (1 ; 1)</div>
+        <div class="calc" data-beat="3">$f_{1.} \cdot f_{.1} = 0{,}20 \times 0{,}10 = 0{,}02$</div>
+        <div class="calc" data-beat="4">$f_{11} = 0{,}05 \neq 0{,}02$</div>
+        <div class="keep" data-beat="4+2">taille et poids : <b>pas indépendants</b></div>
+      </div>
+
+  - id: s07_cov_nulle
+    notion: 'Indépendance'
+    tag: 'Notion 4 / 4'
+    title: 'Indépendance ⇒ $r = 0$'
+    subtitle: 'La covariance s''annule'
+    hold: 0.8
+    beats:
+      - "Si X et Y sont indépendants, leur covariance est nulle. Voyons pourquoi."
+      - "Dans la double somme, on remplace f i j par f i point fois f point j."
+      - "La double somme se sépare alors en deux sommes simples : une qui ne parle que de X, une qui ne parle que de Y."
+      - "La première vaut x barre. La deuxième vaut y barre. Il reste x barre y barre, moins x barre y barre : zéro."
+      - "Donc deux variables indépendantes ont toujours une covariance nulle, et un coefficient de corrélation nul."
+    html: |
+      <div class="steps">
+        <div class="step" data-beat="0">$s_{xy} = \sum_i \sum_j f_{ij}\, x_i\, y_j - \bar{x}\,\bar{y}$</div>
+        <div class="step" data-beat="1">$= \sum_i \sum_j \htmlData{hl=1}{f_{i.}\, f_{.j}}\, x_i\, y_j - \bar{x}\,\bar{y}$</div>
+        <div class="step" data-beat="2">$= \Big(\htmlData{hl=3}{\sum_i f_{i.}\, x_i}\Big)\Big(\htmlData{hl=3+1.5}{\sum_j f_{.j}\, y_j}\Big) - \bar{x}\,\bar{y}$</div>
+        <div class="step done" data-beat="3">$= \bar{x}\,\bar{y} - \bar{x}\,\bar{y} = 0$</div>
+      </div>
+      <div class="keep" data-beat="4" style="width:520px">indépendants ⇒ $s_{xy} = 0$ ⇒ $r = 0$</div>
+
+  - id: s08_reciproque
+    notion: 'Indépendance'
+    tag: 'Notion 4 / 4'
+    title: 'Attention : la réciproque est fausse'
+    subtitle: '$r = 0$ ne prouve pas l''indépendance'
+    hold: 0.8
+    beats:
+      - "Attention, la réciproque est fausse. Au début de ce paragraphe, le cours dit que deux variables sont indépendantes lorsque r est nul. C'est inexact."
+      - "Contre-exemple : x vaut moins 1, 0 et 1, et y égale x au carré. Donc y vaut 1, 0 et 1."
+      - "La moyenne de x vaut 0. La moyenne des produits x i y i vaut moins 1 plus 0 plus 1, sur 3 : zéro aussi."
+      - "La covariance vaut donc 0 moins 0 fois deux tiers, c'est-à-dire 0. Et r vaut 0."
+      - "Pourtant, y dépend complètement de x ! Le coefficient r ne détecte que les liens en ligne droite."
+      - "À retenir : l'indépendance entraîne r égale 0. Mais r égale 0 n'entraîne pas l'indépendance."
+    html: |
+      <div class="col w50">
+        <table class="data" data-beat="1">
+          <tr><th>$x_i$</th><td>−1</td><td>0</td><td>1</td></tr>
+          <tr><th>$y_i = x_i^2$</th><td>1</td><td>0</td><td>1</td></tr>
+        </table>
+        <div class="calc" data-beat="2">$\bar{x} = 0$ · $\frac{1}{n}\sum x_i y_i = \frac{-1 + 0 + 1}{3} = 0$</div>
+        <div class="calc" data-beat="3">$s_{xy} = 0 - 0 \times \tfrac{2}{3} = $ <span class="res">0</span></div>
+        <div class="keep" data-beat="5">indépendance ⇒ $r = 0$<br>mais $r = 0$ ⇏ indépendance</div>
+      </div>
+      <svg viewBox="0 0 600 440" width="600" height="440" data-beat="1" data-anim="fade">
+        <line class="stroke muted" x1="40" y1="360" x2="570" y2="360" style="stroke-width:3"/>
+        <line class="stroke muted" x1="300" y1="400" x2="300" y2="20" style="stroke-width:3"/>
+        <g style="font-size:30px;fill:var(--muted)">
+          <text x="100" y="400" text-anchor="middle">−1</text>
+          <text x="500" y="400" text-anchor="middle">1</text>
+          <text x="285" y="108" text-anchor="end">1</text>
+        </g>
+        <path class="stroke" d="M80,45 Q300,675 520,45" fill="none" data-beat="4" data-anim="draw" style="stroke-width:5"/>
+        <line class="stroke gold" x1="60" y1="187" x2="540" y2="187" style="stroke-dasharray:12 9;stroke-width:4" data-beat="3+2" data-anim="draw"/>
+        <text x="540" y="172" text-anchor="end" style="font-size:30px;font-weight:700;fill:var(--ink)" data-beat="3+2">pente 0</text>
+        <circle cx="100" cy="100" r="15" fill="var(--accent)" data-beat="1+1" data-anim="pop"/>
+        <circle cx="300" cy="360" r="15" fill="var(--accent)" data-beat="1+1.4" data-anim="pop"/>
+        <circle cx="500" cy="100" r="15" fill="var(--accent)" data-beat="1+1.8" data-anim="pop"/>
+      </svg>
+
+  # ================================================================ RÉCAP
+  - id: s09_recap
+    notion: 'Récapitulatif'
+    title: 'Récap de la partie 2'
+    beats:
+      - "Récapitulons."
+      - "Pour des données continues, on construit un tableau à deux dimensions. Chaque case contient une fréquence f i j, et le total vaut 1."
+      - "Les totaux des lignes et des colonnes sont les fréquences marginales : f i point pour X, f point j pour Y."
+      - "Les paramètres utilisent les centres des classes. La covariance devient une double somme. r et la droite de régression gardent les mêmes formules."
+      - "Enfin, si X et Y sont indépendants, chaque f i j vaut f i point fois f point j, et r vaut 0. Mais un r nul ne prouve pas l'indépendance."
+    html: |
+      <div class="recap">
+        <div class="item" data-beat="1"><b>Tableau</b> : $f_{ij}$ par case, $\sum\sum f_{ij} = 1$</div>
+        <div class="item" data-beat="2"><b>Marginales</b> : $f_{i.}$ (lignes, $X$) · $f_{.j}$ (colonnes, $Y$)</div>
+        <div class="item" data-beat="3"><span class="tex">$s_{xy} = \sum_i\sum_j f_{ij}\, x_i\, y_j - \bar{x}\,\bar{y}$</span></div>
+        <div class="item" data-beat="4"><span class="tex">$f_{ij} = f_{i.}\, f_{.j}$</span> &nbsp;⇒ $r = 0$ <span class="muted">(pas l'inverse)</span></div>
+      </div>

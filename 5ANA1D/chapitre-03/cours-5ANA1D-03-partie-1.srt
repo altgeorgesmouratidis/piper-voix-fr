@@ -1,0 +1,817 @@
+1
+00:00:00,450 --> 00:00:02,690
+Analyse de données, chapitre 3 :
+
+2
+00:00:02,690 --> 00:00:05,210
+les distributions à deux dimensions.
+
+3
+00:00:05,660 --> 00:00:09,892
+Dans cette première partie, on étudie des
+couples de données discrètes :
+
+4
+00:00:09,892 --> 00:00:13,241
+la covariance, la corrélation et la droite de
+régression.
+
+5
+00:00:14,583 --> 00:00:18,343
+Jusqu'ici, on étudiait une seule caractéristique
+à la fois :
+
+6
+00:00:18,343 --> 00:00:19,785
+le poids, ou la taille.
+
+7
+00:00:20,235 --> 00:00:24,547
+Dans ce chapitre, on mesure deux choses sur
+chaque individu.
+
+8
+00:00:24,547 --> 00:00:27,421
+Par exemple, sa taille X et son poids Y.
+
+9
+00:00:27,871 --> 00:00:28,972
+La grande question :
+
+10
+00:00:28,972 --> 00:00:30,788
+y a-t-il un lien entre les deux ?
+
+11
+00:00:30,788 --> 00:00:33,595
+Si je connais la taille, puis-je estimer le
+poids ?
+
+12
+00:00:34,045 --> 00:00:36,998
+Pour mesurer ce lien, on va construire un nombre
+:
+
+13
+00:00:36,998 --> 00:00:38,770
+le coefficient de corrélation.
+
+14
+00:00:39,220 --> 00:00:42,802
+Ensuite, on tracera la droite qui résume le
+mieux ce lien :
+
+15
+00:00:42,802 --> 00:00:44,259
+la droite de régression.
+
+16
+00:00:45,617 --> 00:00:47,166
+Prenons dix étudiants.
+
+17
+00:00:47,166 --> 00:00:51,956
+Pour chacun, on note sa cote de maths, x i, et
+sa cote de stat, y i.
+
+18
+00:00:52,406 --> 00:00:54,894
+Chaque couple devient un point dans un plan :
+
+19
+00:00:54,894 --> 00:00:58,489
+la cote de maths à l'horizontale, la cote de
+stat à la verticale.
+
+20
+00:00:58,939 --> 00:01:01,521
+Par exemple, le couple 12, 14 :
+
+21
+00:01:01,521 --> 00:01:03,686
+12 en maths et 14 en stat.
+
+22
+00:01:03,686 --> 00:01:05,186
+C'est ce point-ci.
+
+23
+00:01:05,636 --> 00:01:08,190
+L'ensemble de ces points s'appelle un nuage de
+points.
+
+24
+00:01:08,640 --> 00:01:10,160
+On voit déjà une tendance :
+
+25
+00:01:10,160 --> 00:01:13,934
+en gros, quand la cote de maths monte, la cote
+de stat monte aussi.
+
+26
+00:01:15,283 --> 00:01:19,927
+Chaque variable garde ses propres paramètres,
+calculés comme au chapitre 2.
+
+27
+00:01:20,377 --> 00:01:21,467
+Les moyennes :
+
+28
+00:01:21,467 --> 00:01:25,904
+x barre vaut 11,8 en maths, et y barre vaut 11,1
+en stat.
+
+29
+00:01:25,904 --> 00:01:28,005
+On les trace en pointillés.
+
+30
+00:01:28,455 --> 00:01:30,004
+Les écarts-types :
+
+31
+00:01:30,004 --> 00:01:32,758
+s x vaut 2,75, et s y vaut 1,97.
+
+32
+00:01:32,758 --> 00:01:36,803
+Les cotes de maths sont un peu plus dispersées.
+
+33
+00:01:37,253 --> 00:01:40,409
+Mais ces quatre nombres décrivent chaque
+variable séparément.
+
+34
+00:01:40,409 --> 00:01:42,582
+Ils ne disent rien du lien entre les deux.
+
+35
+00:01:43,917 --> 00:01:47,786
+Pour mesurer le lien, on découpe le nuage avec
+les deux moyennes.
+
+36
+00:01:47,786 --> 00:01:49,037
+Ça fait quatre zones.
+
+37
+00:01:49,487 --> 00:01:52,477
+Pour chaque point, on calcule deux écarts :
+
+38
+00:01:52,477 --> 00:01:55,259
+x i moins x barre, et y i moins y barre.
+
+39
+00:01:55,259 --> 00:01:56,789
+Puis on les multiplie.
+
+40
+00:01:57,239 --> 00:02:00,354
+En haut à droite, les deux écarts sont positifs
+:
+
+41
+00:02:00,354 --> 00:02:01,816
+le produit est positif.
+
+42
+00:02:01,816 --> 00:02:04,423
+En bas à gauche, les deux sont négatifs :
+
+43
+00:02:04,423 --> 00:02:06,330
+le produit est encore positif.
+
+44
+00:02:06,780 --> 00:02:11,421
+Dans les deux autres zones, un écart est positif
+et l'autre négatif :
+
+45
+00:02:11,421 --> 00:02:12,968
+le produit est négatif.
+
+46
+00:02:13,418 --> 00:02:16,286
+Par exemple, le point 16, 14.
+
+47
+00:02:16,286 --> 00:02:19,153
+Ses écarts valent 4,2 et 2,9.
+
+48
+00:02:19,153 --> 00:02:22,021
+Leur produit vaut plus 12,18.
+
+49
+00:02:22,471 --> 00:02:27,208
+Si la plupart des points sont dans les zones
+positives, X et Y montent ensemble.
+
+50
+00:02:28,550 --> 00:02:33,298
+La covariance, notée s x y, est la moyenne de
+ces produits.
+
+51
+00:02:33,748 --> 00:02:40,784
+Un sur n, fois la somme, pour i allant de 1 à n,
+de x i moins x barre, fois y i moins y barre.
+
+52
+00:02:41,234 --> 00:02:45,692
+Pour calculer à la main, le cours donne une
+formule équivalente, plus rapide.
+
+53
+00:02:46,142 --> 00:02:51,680
+La moyenne des produits x i fois y i, moins le
+produit des moyennes, x barre fois y barre.
+
+54
+00:02:52,130 --> 00:02:57,843
+Dans notre exemple, la somme des produits x i
+fois y i vaut 1340.
+
+55
+00:02:57,843 --> 00:03:00,304
+Divisée par 10, ça fait 134.
+
+56
+00:03:00,754 --> 00:03:05,123
+On retire 11,8 fois 11,1, soit 130,98.
+
+57
+00:03:05,123 --> 00:03:07,882
+La covariance vaut 3,02.
+
+58
+00:03:08,332 --> 00:03:11,670
+Avec la définition, on trouve exactement la même
+valeur.
+
+59
+00:03:11,670 --> 00:03:14,114
+Les deux formules sont bien équivalentes.
+
+60
+00:03:14,564 --> 00:03:15,297
+À retenir :
+
+61
+00:03:15,297 --> 00:03:20,891
+une covariance positive signifie que X et Y ont
+tendance à varier dans le même sens.
+
+62
+00:03:22,750 --> 00:03:24,479
+La covariance a un défaut :
+
+63
+00:03:24,479 --> 00:03:26,273
+sa valeur dépend des unités.
+
+64
+00:03:26,273 --> 00:03:30,180
+En centimètres ou en mètres, on n'obtient pas le
+même nombre.
+
+65
+00:03:30,630 --> 00:03:33,661
+On la divise donc par les deux écarts-types.
+
+66
+00:03:33,661 --> 00:03:36,692
+On obtient le coefficient de corrélation r :
+
+67
+00:03:36,692 --> 00:03:38,827
+s x y, divisé par s x fois s y.
+
+68
+00:03:39,277 --> 00:03:42,284
+Ce nombre est toujours compris entre moins 1 et
+1.
+
+69
+00:03:42,734 --> 00:03:46,533
+Plus sa valeur absolue est proche de 1, plus le
+lien est fort.
+
+70
+00:03:46,533 --> 00:03:49,352
+Plus elle est proche de 0, plus il est faible.
+
+71
+00:03:49,802 --> 00:03:52,285
+Dans notre exemple :
+
+72
+00:03:52,285 --> 00:03:56,133
+3,02 divisé par 2,75 fois 1,97.
+
+73
+00:03:56,133 --> 00:03:59,113
+On trouve r égale 0,557.
+
+74
+00:03:59,563 --> 00:04:02,329
+C'est une corrélation positive, d'intensité
+moyenne :
+
+75
+00:04:02,329 --> 00:04:06,088
+les bons en maths ont plutôt de bonnes cotes en
+stat, mais pas toujours.
+
+76
+00:04:07,950 --> 00:04:11,201
+Voyons à quoi ressemble un nuage selon la valeur
+de r.
+
+77
+00:04:11,651 --> 00:04:15,447
+Quand r vaut 1, tous les points sont
+parfaitement alignés sur une droite qui monte.
+
+78
+00:04:15,897 --> 00:04:19,797
+Entre 0 et 1, les points forment un nuage
+allongé qui monte.
+
+79
+00:04:19,797 --> 00:04:22,527
+Plus r est proche de 1, plus il est serré.
+
+80
+00:04:22,977 --> 00:04:26,109
+Quand r vaut 0, le nuage n'a aucune direction :
+
+81
+00:04:26,109 --> 00:04:28,108
+il n'y a pas de lien linéaire.
+
+82
+00:04:28,558 --> 00:04:30,758
+Si r est négatif, c'est l'inverse :
+
+83
+00:04:30,758 --> 00:04:32,519
+quand X augmente, Y diminue.
+
+84
+00:04:32,519 --> 00:04:37,045
+Pour r égal moins 1, les points sont alignés sur
+une droite qui descend.
+
+85
+00:04:37,495 --> 00:04:38,279
+À retenir :
+
+86
+00:04:38,279 --> 00:04:40,844
+le signe de r donne le sens du lien.
+
+87
+00:04:40,844 --> 00:04:43,196
+Sa valeur absolue donne sa force.
+
+88
+00:04:44,550 --> 00:04:45,211
+Attention :
+
+89
+00:04:45,211 --> 00:04:48,033
+r mesure l'alignement des points, pas la pente.
+
+90
+00:04:48,483 --> 00:04:51,279
+Ces trois nuages ont la même corrélation.
+
+91
+00:04:51,279 --> 00:04:54,348
+Dans le premier, s x est plus grand que s y :
+
+92
+00:04:54,348 --> 00:04:57,144
+le nuage est écrasé, la pente est faible.
+
+93
+00:04:57,594 --> 00:05:01,495
+Si s x égale s y, le nuage suit la diagonale.
+
+94
+00:05:01,945 --> 00:05:06,448
+Si s x est plus petit que s y, le nuage est
+étiré vers le haut :
+
+95
+00:05:06,448 --> 00:05:07,785
+la pente est forte.
+
+96
+00:05:08,235 --> 00:05:10,746
+La forme dépend donc des écarts-types.
+
+97
+00:05:10,746 --> 00:05:13,587
+La force du lien, elle, ne dépend que de r.
+
+98
+00:05:14,950 --> 00:05:18,795
+Quand la corrélation est forte, le nuage
+ressemble à une droite.
+
+99
+00:05:18,795 --> 00:05:19,275
+L'idée :
+
+100
+00:05:19,275 --> 00:05:22,880
+trouver la droite qui passe au plus près de tous
+les points.
+
+101
+00:05:23,330 --> 00:05:25,609
+Imagine que tu poses une règle sur le nuage.
+
+102
+00:05:25,609 --> 00:05:29,495
+Tu la fais glisser et tourner jusqu'à ce qu'elle
+colle au mieux aux points.
+
+103
+00:05:29,945 --> 00:05:33,905
+Pour chaque point, on mesure l'écart vertical
+entre le point et la droite.
+
+104
+00:05:33,905 --> 00:05:35,297
+Ce sont les traits jaunes.
+
+105
+00:05:35,747 --> 00:05:40,216
+La droite de régression est celle qui rend la
+somme des carrés de ces écarts la plus petite
+
+106
+00:05:40,216 --> 00:05:40,658
+possible.
+
+107
+00:05:41,108 --> 00:05:43,824
+C'est pour ça qu'on l'appelle aussi la droite
+des moindres carrés.
+
+108
+00:05:44,274 --> 00:05:45,398
+Pourquoi des carrés ?
+
+109
+00:05:45,398 --> 00:05:49,302
+Sans eux, les écarts au-dessus et en dessous de
+la droite s'annuleraient.
+
+110
+00:05:51,150 --> 00:05:53,746
+La droite a pour équation y égale a x plus b.
+
+111
+00:05:53,746 --> 00:05:56,572
+Le cours donne directement les deux
+coefficients.
+
+112
+00:05:57,022 --> 00:06:01,726
+La pente a vaut la covariance, divisée par la
+variance de X :
+
+113
+00:06:01,726 --> 00:06:03,500
+s x y sur s x au carré.
+
+114
+00:06:03,950 --> 00:06:07,979
+L'ordonnée à l'origine b vaut y barre, moins a
+fois x barre.
+
+115
+00:06:08,429 --> 00:06:10,649
+Dans notre exemple :
+
+116
+00:06:10,649 --> 00:06:14,979
+a égale 3,02, divisé par 2,75 au carré.
+
+117
+00:06:14,979 --> 00:06:20,085
+On obtient environ 0,399, donc à peu près 0,4.
+
+118
+00:06:20,535 --> 00:06:25,854
+Et b égale 11,1, moins 0,399 fois 11,8.
+
+119
+00:06:25,854 --> 00:06:29,127
+On obtient environ 6,39.
+
+120
+00:06:29,577 --> 00:06:32,959
+La droite de régression est donc :
+
+121
+00:06:32,959 --> 00:06:35,347
+y égale 0,4 x, plus 6,4.
+
+122
+00:06:37,183 --> 00:06:38,681
+Comment lire cette droite ?
+
+123
+00:06:39,131 --> 00:06:42,434
+La pente a, c'est delta y sur delta x.
+
+124
+00:06:42,434 --> 00:06:43,304
+Ici, 0,4 :
+
+125
+00:06:43,304 --> 00:06:49,476
+un point de plus en maths donne, en moyenne, 0,4
+point de plus en stat.
+
+126
+00:06:49,926 --> 00:06:53,703
+Le nombre 6,4, c'est la valeur de y quand x vaut
+0.
+
+127
+00:06:53,703 --> 00:06:56,961
+C'est là que la droite coupe l'axe vertical.
+
+128
+00:06:57,411 --> 00:07:00,651
+Surtout, la droite sert à prédire.
+
+129
+00:07:00,651 --> 00:07:03,224
+Un étudiant a 14 en maths :
+
+130
+00:07:03,224 --> 00:07:06,560
+0,4 fois 14, plus 6,4, ça donne 12.
+
+131
+00:07:07,010 --> 00:07:10,008
+On estime donc sa cote de stat à environ 12.
+
+132
+00:07:10,008 --> 00:07:12,734
+C'est une estimation, pas une certitude.
+
+133
+00:07:14,583 --> 00:07:15,794
+Pourquoi ces formules ?
+
+134
+00:07:15,794 --> 00:07:20,005
+Tu as annoté cette démonstration, alors on la
+refait pas à pas, sans se presser.
+
+135
+00:07:20,455 --> 00:07:24,440
+On cherche a et b qui rendent la somme S la plus
+petite possible.
+
+136
+00:07:24,440 --> 00:07:26,156
+S dépend de deux variables :
+
+137
+00:07:26,156 --> 00:07:26,585
+a et b.
+
+138
+00:07:27,035 --> 00:07:29,994
+Au minimum, les dérivées partielles s'annulent.
+
+139
+00:07:29,994 --> 00:07:33,835
+Dériver par rapport à a, c'est traiter b comme
+une constante.
+
+140
+00:07:33,835 --> 00:07:34,779
+Et inversement.
+
+141
+00:07:35,229 --> 00:07:38,633
+On utilise la règle de dérivation d'une
+puissance :
+
+142
+00:07:38,633 --> 00:07:43,704
+la dérivée de u exposant n, c'est n fois u
+prime, fois u exposant n moins 1.
+
+143
+00:07:44,154 --> 00:07:47,850
+Ici, u vaut a x i plus b moins y i, et n vaut 2.
+
+144
+00:07:47,850 --> 00:07:50,468
+Par rapport à a, u prime vaut x i.
+
+145
+00:07:50,468 --> 00:07:52,932
+Par rapport à b, u prime vaut 1.
+
+146
+00:07:53,382 --> 00:07:55,533
+On obtient deux équations.
+
+147
+00:07:55,533 --> 00:07:56,609
+La première :
+
+148
+00:07:56,609 --> 00:07:59,340
+la somme de 2 u fois x i égale 0.
+
+149
+00:07:59,340 --> 00:08:00,416
+La deuxième :
+
+150
+00:08:00,416 --> 00:08:02,402
+la somme de 2 u égale 0.
+
+151
+00:08:04,550 --> 00:08:06,505
+Commençons par l'équation 2.
+
+152
+00:08:06,505 --> 00:08:09,438
+On simplifie par 2 et on sépare la somme :
+
+153
+00:08:09,438 --> 00:08:14,465
+a fois la somme des x i, plus n fois b, moins la
+somme des y i, égale 0.
+
+154
+00:08:14,915 --> 00:08:16,669
+On divise tout par n.
+
+155
+00:08:16,669 --> 00:08:20,510
+La somme des x i divisée par n, c'est x barre.
+
+156
+00:08:20,510 --> 00:08:21,345
+Il reste :
+
+157
+00:08:21,345 --> 00:08:24,853
+a x barre, plus b, moins y barre, égale 0.
+
+158
+00:08:25,303 --> 00:08:27,853
+D'où b égale y barre moins a x barre.
+
+159
+00:08:27,853 --> 00:08:29,645
+Voilà la deuxième formule.
+
+160
+00:08:30,095 --> 00:08:33,834
+On remplace ce b dans l'équation 1, puis on
+divise encore par n.
+
+161
+00:08:34,284 --> 00:08:39,218
+On reconnaît la formule pratique de la variance
+de X d'un côté, et celle de la covariance de
+
+162
+00:08:39,218 --> 00:08:39,647
+l'autre.
+
+163
+00:08:40,097 --> 00:08:45,300
+Donc a fois s x carré égale s x y, et a égale s
+x y sur s x carré.
+
+164
+00:08:45,300 --> 00:08:46,483
+C'est démontré.
+
+165
+00:08:48,617 --> 00:08:49,989
+Dernière remarque.
+
+166
+00:08:49,989 --> 00:08:54,868
+Dans a égale s x y sur s x carré, le
+dénominateur est un carré :
+
+167
+00:08:54,868 --> 00:08:56,697
+il est toujours positif.
+
+168
+00:08:57,147 --> 00:09:00,770
+Donc a a toujours le même signe que la
+covariance.
+
+169
+00:09:00,770 --> 00:09:02,292
+Covariance positive :
+
+170
+00:09:02,292 --> 00:09:03,451
+la droite monte.
+
+171
+00:09:03,901 --> 00:09:05,452
+Covariance négative :
+
+172
+00:09:05,452 --> 00:09:06,781
+la droite descend.
+
+173
+00:09:07,231 --> 00:09:09,863
+Et si la covariance est nulle, a vaut 0 :
+
+174
+00:09:09,863 --> 00:09:11,532
+la droite est horizontale.
+
+175
+00:09:11,532 --> 00:09:13,651
+Son équation est y égale y barre.
+
+176
+00:09:14,101 --> 00:09:14,846
+À retenir :
+
+177
+00:09:14,846 --> 00:09:19,314
+la pente de la droite et la covariance ont
+toujours le même signe.
+
+178
+00:09:21,150 --> 00:09:23,309
+Récapitulons cette première partie.
+
+179
+00:09:23,759 --> 00:09:26,674
+Un couple de données se représente par un nuage
+de points.
+
+180
+00:09:27,124 --> 00:09:30,414
+La covariance mesure si X et Y varient ensemble.
+
+181
+00:09:30,414 --> 00:09:31,306
+En pratique :
+
+182
+00:09:31,306 --> 00:09:35,076
+la moyenne des produits, moins le produit des
+moyennes.
+
+183
+00:09:35,526 --> 00:09:39,714
+Le coefficient de corrélation r divise la
+covariance par les deux écarts-types.
+
+184
+00:09:39,714 --> 00:09:41,993
+Il est toujours compris entre moins 1 et 1.
+
+185
+00:09:42,443 --> 00:09:46,823
+La droite de régression minimise la somme des
+carrés des écarts verticaux.
+
+186
+00:09:46,823 --> 00:09:50,907
+Sa pente vaut s x y sur s x carré, et b vaut y
+barre moins a x barre.
+
+187
+00:09:51,357 --> 00:09:56,292
+Dans la deuxième partie, on passe aux données
+continues, regroupées en classes, et à
+
+188
+00:09:56,292 --> 00:09:57,173
+l'indépendance.
+
