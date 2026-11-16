@@ -1,0 +1,498 @@
+meta:
+  course: 5ANA1D
+  course_name: Analyse de données
+  chapter: 1
+  part: 2
+  title: Statistique descriptive
+  subtitle: Observations continues et qualitatives
+  output: cours-5ANA1D-01-partie-2
+
+scenes:
+  # ================================================================ TITRE
+  - id: s00_titre
+    layout: title
+    notion: 'Introduction'
+    beats:
+      - "Analyse de données, chapitre 1, deuxième partie."
+      - "On passe aux observations continues : classes, histogrammes, polygone et fonction de répartition. Puis on termine par le qualitatif."
+    html: |
+      <svg viewBox="0 0 560 560" width="560" height="560">
+        <circle cx="280" cy="280" r="250" fill="var(--paper)" stroke="var(--line)" stroke-width="3"/>
+        <g data-beat="1" data-anim="draw" data-dur="1.6">
+          <line class="stroke muted" x1="110" y1="420" x2="460" y2="420"/>
+          <rect class="stroke" x="130" y="320" width="80" height="100"/>
+          <rect class="stroke accent" x="210" y="200" width="70" height="220"/>
+          <rect class="stroke" x="280" y="260" width="70" height="160"/>
+          <rect class="stroke" x="350" y="350" width="90" height="70"/>
+          <polyline class="stroke gold" points="130,420 210,370 280,260 350,190 440,160" fill="none"/>
+        </g>
+      </svg>
+
+  # ================================================================ NOTION 1 : CLASSES
+  - id: s01_pourquoi_classes
+    notion: 'Classes'
+    tag: 'Notion 1 / 6'
+    title: 'Pourquoi regrouper en classes ?'
+    subtitle: 'Quand chaque valeur est unique'
+    beats:
+      - "Imagine que tu pèses 80 étudiants avec une balance précise au dixième de gramme."
+      - "Il y a peu de chances que deux mesures soient identiques. Un tableau recensé aurait 80 lignes."
+      - "Et sa colonne des n i ne contiendrait que des 1. Ça ne nous apprend rien."
+      - "La solution : grouper les données en classes. Ce sont des intervalles contigus, collés les uns aux autres, qui couvrent toutes les observations."
+    html: |
+      <div class="col w50">
+        <div class="analogy" data-beat="0">
+          <div class="icon">⚖️</div>
+          <div><b>80 pesées</b><br><span class="muted">précises au dixième de gramme</span></div>
+        </div>
+        <table class="data small" data-beat="1">
+          <tr><th>$x_i$ (kg)</th><th>$n_i$</th></tr>
+          <tr><td>52,3417</td><td data-beat="2" class="accent">1</td></tr>
+          <tr><td>53,0081</td><td data-beat="2" class="accent">1</td></tr>
+          <tr><td>… 78 lignes …</td><td data-beat="2" class="accent">1</td></tr>
+        </table>
+      </div>
+      <div class="col w50">
+        <div class="def" data-beat="3"><div class="term">Classe</div>un intervalle $[x_{i-1}, x_i[$</div>
+        <div class="row" data-beat="3+2" style="gap:12px;white-space:nowrap">
+          <span class="chip main">[50, 65[</span><span class="chip main">[65, 75[</span><span class="chip main">[75, 85[</span><span class="chip main">[85, 100[</span>
+        </div>
+      </div>
+
+  - id: s02_tableau_classes
+    notion: 'Classes'
+    tag: 'Notion 1 / 6'
+    title: 'Le tableau par classes'
+    subtitle: 'Mêmes colonnes qu''en discret'
+    beats:
+      - "Voici le tableau des poids, groupés en quatre classes."
+      - "n i, c'est maintenant le nombre d'observations dans la classe. Par exemple, 28 étudiants pèsent entre 65 et 75 kilos."
+      - "f i, c'est ce nombre en pourcentage de l'effectif. 28 sur 80, ça fait 0,35."
+      - "Grand N i, c'est le nombre d'observations inférieures à x i, le bord droit de la classe. 48 étudiants pèsent moins de 75 kilos."
+      - "Et grand F i, c'est ce même nombre en pourcentage : 48 sur 80, donc 0,60."
+    html: |
+      <table class="data">
+        <tr><th>Classe (kg)</th><th>$n_i$</th><th>$N_i$</th><th>$f_i$</th><th>$F_i$</th></tr>
+        <tr><td>[50, 65[</td><td>20</td><td>20</td><td>0,25</td><td>0,25</td></tr>
+        <tr class="hl" data-hl="1"><td>[65, 75[</td><td>28</td><td class="ring" data-hl="3">48</td><td class="ring" data-hl="2">0,35</td><td class="ring" data-hl="4">0,60</td></tr>
+        <tr><td>[75, 85[</td><td>20</td><td>68</td><td>0,25</td><td>0,85</td></tr>
+        <tr><td>[85, 100[</td><td>12</td><td>80</td><td>0,15</td><td>1</td></tr>
+      </table>
+      <div class="col grow">
+        <div class="card" data-beat="1"><div class="label">Effectif de la classe</div>$n_i$ : nombre dans la classe</div>
+        <div class="card" data-beat="3"><div class="label">Effectif cumulé</div>$N_i$ : nombre <b>&lt; $x_i$</b> (bord droit)</div>
+        <div class="calc" data-beat="4">$F_2 = \dfrac{48}{80} = $ <span class="res">0,60</span></div>
+      </div>
+
+  - id: s03_remarques
+    notion: 'Classes'
+    tag: 'Notion 1 / 6'
+    title: 'Comment choisir les classes ?'
+    subtitle: 'Un peu de bon sens… et une règle'
+    beats:
+      - "Le choix des classes est arbitraire. Il dépend du bon sens du statisticien."
+      - "Pas trop peu de classes, sinon on n'apprend rien. Pas trop, sinon c'est indigeste."
+      - "La règle de Sturge donne un ordre de grandeur : 1 plus dix tiers fois le logarithme en base 10 de n."
+      - "Pour 80 étudiants, ça donne environ 7 classes. C'est une indication, pas une obligation : le cours en prend 4."
+      - "Les classes peuvent avoir des largeurs différentes. Et elles sont fermées à gauche, ouvertes à droite : 65 kilos pile tombe dans une seule classe."
+    html: |
+      <div class="col w50">
+        <div class="card" data-beat="0"><div class="label">Choix</div>arbitraire, au bon sens</div>
+        <div class="row" data-beat="1"><span class="chip">trop peu → rien appris</span><span class="chip">trop → indigeste</span></div>
+        <div class="card gold" data-beat="4"><div class="label">Bornes</div>$65 \in [65, 75[$, pas dans $[50, 65[$</div>
+      </div>
+      <div class="col w50">
+        <div class="card main" data-beat="2">
+          <div class="label">Règle de Sturge</div>
+          <div class="formula sm">$$k \approx 1 + \frac{10}{3}\log_{10} n$$</div>
+        </div>
+        <div class="calc" data-beat="3">$n = 80$ : $1 + \frac{10}{3} \times 1{,}90 \approx$ <span class="res">7,3</span></div>
+      </div>
+
+  - id: s04_uniformite
+    notion: 'Classes'
+    tag: 'Notion 1 / 6'
+    title: 'Hypothèse d''uniformité'
+    subtitle: 'Ce qu''on suppose dans une classe'
+    beats:
+      - "Grouper en classes fait perdre de l'information. Des étudiants de 68, 72 et 74 kilos tombent tous dans la classe 65 à 75."
+      - "On ne sait plus où ils sont exactement dans la classe. Alors on fait une hypothèse."
+      - "On suppose que les observations sont réparties uniformément dans chaque classe."
+      - "Autrement dit, il y a le même nombre d'étudiants par tranche d'un kilo. Ici, 28 étudiants sur 10 kilos, donc 2,8 par kilo."
+      - "Cette hypothèse est la clé de toute la suite : densité, polygone et fonction de répartition."
+    html: |
+      <svg class="w60" viewBox="0 0 900 360" width="900" height="360">
+        <line class="stroke muted" x1="40" y1="250" x2="860" y2="250" style="stroke-width:3"/>
+        <line class="stroke" x1="100" y1="230" x2="100" y2="270" style="stroke-width:5"/>
+        <line class="stroke" x1="800" y1="230" x2="800" y2="270" style="stroke-width:5"/>
+        <text x="75" y="315" style="font-size:36px;fill:var(--ink)">65</text>
+        <text x="780" y="315" style="font-size:36px;fill:var(--ink)">75</text>
+        <g data-beat="0" data-anim="pop">
+          <circle cx="310" cy="250" r="16" fill="var(--accent)"/><text x="285" y="210" style="font-size:36px;fill:var(--accent)">68</text>
+          <circle cx="590" cy="250" r="16" fill="var(--accent)"/><text x="565" y="210" style="font-size:36px;fill:var(--accent)">72</text>
+          <circle cx="730" cy="250" r="16" fill="var(--accent)"/><text x="705" y="210" style="font-size:36px;fill:var(--accent)">74</text>
+        </g>
+        <g data-beat="3" data-anim="fade">
+          <line x1="170" y1="240" x2="170" y2="260" class="stroke gold"/><line x1="240" y1="240" x2="240" y2="260" class="stroke gold"/>
+          <line x1="380" y1="240" x2="380" y2="260" class="stroke gold"/><line x1="450" y1="240" x2="450" y2="260" class="stroke gold"/>
+          <line x1="520" y1="240" x2="520" y2="260" class="stroke gold"/><line x1="660" y1="240" x2="660" y2="260" class="stroke gold"/>
+        </g>
+        <rect x="100" y="120" width="700" height="40" rx="10" fill="var(--gold)" opacity="0.45" data-beat="2" data-anim="grow-x"/>
+      </svg>
+      <div class="col grow">
+        <div class="def" data-beat="2"><div class="term">Uniformité</div>répartition régulière dans la classe</div>
+        <div class="calc" data-beat="3">$\dfrac{28}{10} = $ <span class="res">2,8</span> par kilo</div>
+        <div class="keep" data-beat="4">Clé de la densité et du polygone</div>
+      </div>
+
+  # ================================================================ NOTION 2 : DÉFAUT DE L'HISTOGRAMME
+  - id: s05_defaut
+    notion: 'Densité'
+    tag: 'Notion 2 / 6'
+    title: 'Le piège des rectangles'
+    subtitle: 'L''œil compare les aires, pas les hauteurs'
+    beats:
+      - "Premier réflexe pour dessiner le tableau : des rectangles posés sur chaque classe, de hauteur n i."
+      - "Problème : ton œil ne compare pas les hauteurs. Il compare les surfaces. Et l'aire d'un rectangle, c'est n i fois la largeur l i."
+      - "Les classes 1 et 3 ont le même effectif, 20. Mais la première est plus large : 300 contre 200. Elle paraît 50 pour cent plus importante."
+      - "Pire : les deux dernières classes ont des aires proches, 200 et 180. Pourtant la dernière ne compte que 12 étudiants, contre 20."
+      - "C'est un défaut visuel majeur. Il faut des rectangles dont l'aire, et pas la hauteur, représente l'effectif."
+    html: |
+      <svg class="w50" viewBox="0 0 820 520" width="760" height="480">
+        <g class="stroke muted" style="stroke-width:3">
+          <line x1="60" y1="440" x2="790" y2="440"/><line x1="60" y1="440" x2="60" y2="60"/>
+        </g>
+        <g style="font-size:30px;fill:var(--muted)">
+          <text x="62" y="480">50</text><text x="257" y="480">65</text><text x="387" y="480">75</text><text x="517" y="480">85</text><text x="700" y="480">100</text>
+          <text x="10" y="210">20</text><text x="22" y="330">10</text>
+        </g>
+        <g data-beat="0" data-anim="grow-y">
+          <rect x="80" y="200" width="195" height="240" fill="var(--main)" opacity="0.85"/>
+          <rect x="275" y="104" width="130" height="336" fill="var(--main)" opacity="0.85"/>
+          <rect x="405" y="200" width="130" height="240" fill="var(--main)" opacity="0.85"/>
+          <rect x="535" y="296" width="195" height="144" fill="var(--main)" opacity="0.85"/>
+        </g>
+        <g style="font-size:36px;fill:var(--paper);font-weight:700">
+          <text x="140" y="330" data-beat="2">300</text><text x="440" y="330" data-beat="2+0.6">200</text>
+          <text x="602" y="380" data-beat="3">180</text>
+        </g>
+      </svg>
+      <div class="col grow">
+        <div class="formula sm" data-beat="1">$$\text{aire} = n_i \times l_i$$</div>
+        <div class="calc" data-beat="2">cl. 1 et 3 : $n_i$ égaux, aires <b>300/200</b></div>
+        <div class="calc" data-beat="3">cl. 3 et 4 : 20 vs 12, aires <b>200/180</b></div>
+        <div class="keep" data-beat="4">L'œil lit les <b>aires</b></div>
+      </div>
+
+  # ================================================================ NOTION 3 : DENSITÉS
+  - id: s06_dni
+    notion: 'Densité'
+    tag: 'Notion 3 / 6'
+    title: 'Densité de fréquence absolue $dn_i$'
+    subtitle: 'Hauteur = nombre moyen par unité'
+    beats:
+      - "La solution : prendre comme hauteur la densité de fréquence absolue, d n i. C'est n i divisé par l i, la largeur de la classe."
+      - "d n i, c'est le nombre moyen d'observations par unité. Ici, par kilo. Pour la classe 65 à 75 : 28 divisé par 10, donc 2,8 étudiants par kilo."
+      - "Pour la première classe : 20 divisé par 15, environ 1,3. C'est une valeur arrondie."
+      - "Et maintenant, l'aire de chaque rectangle vaut d n i fois l i, donc exactement n i. L'aire totale vaut l'effectif, 80."
+      - "Ce graphique s'appelle l'histogramme des densités de fréquence absolue."
+    html: |
+      <svg class="w50" viewBox="0 0 820 520" width="760" height="480">
+        <g class="stroke muted" style="stroke-width:3">
+          <line x1="60" y1="440" x2="790" y2="440"/><line x1="60" y1="440" x2="60" y2="60"/>
+        </g>
+        <g style="font-size:30px;fill:var(--muted)">
+          <text x="62" y="480">50</text><text x="257" y="480">65</text><text x="387" y="480">75</text><text x="517" y="480">85</text><text x="700" y="480">100</text>
+          <text x="22" y="330">1</text><text x="22" y="210">2</text>
+        </g>
+        <g data-beat="0+1.5" data-anim="grow-y">
+          <rect x="80" y="280" width="195" height="160" fill="var(--main)" opacity="0.85"/>
+          <rect x="275" y="104" width="130" height="336" fill="var(--accent)" opacity="0.9"/>
+          <rect x="405" y="200" width="130" height="240" fill="var(--main)" opacity="0.85"/>
+          <rect x="535" y="344" width="195" height="96" fill="var(--main)" opacity="0.85"/>
+        </g>
+        <g style="font-size:36px;fill:var(--paper);font-weight:700" data-beat="3" data-anim="fade">
+          <text x="155" y="375">20</text><text x="318" y="290">28</text><text x="448" y="340">20</text><text x="612" y="405">12</text>
+        </g>
+      </svg>
+      <div class="col grow">
+        <div class="formula" data-beat="0">$$dn_i = \frac{n_i}{l_i}$$</div>
+        <div class="calc" data-beat="1">$\dfrac{28}{10} = $ <span class="res">2,8</span> / kg</div>
+        <div class="calc" data-beat="2">$\dfrac{20}{15} \approx 1{,}3$ <span class="muted">(arrondi)</span></div>
+        <div class="keep" data-beat="3">$dn_i \times l_i = n_i$ = aire</div>
+      </div>
+
+  - id: s07_dfi
+    notion: 'Densité'
+    tag: 'Notion 3 / 6'
+    title: 'Densité de fréquence relative $df_i$'
+    subtitle: 'Le même histogramme, en pourcentage'
+    beats:
+      - "Même idée avec les fréquences relatives. La densité de fréquence relative, d f i, c'est f i divisé par l i."
+      - "C'est le pourcentage moyen d'observations par unité. Pour la classe 65 à 75 : 0,35 divisé par 10, donc 0,035."
+      - "Pour la première classe : 0,25 divisé par 15, environ 0,017. Encore une valeur arrondie."
+      - "Cette fois, l'aire de chaque rectangle vaut f i, et l'aire totale vaut 1."
+      - "L'histogramme a exactement la même forme que le précédent. Seule l'échelle verticale change."
+    html: |
+      <table class="data">
+        <tr><th>Classe</th><th>$f_i$</th><th>$l_i$</th><th class="hl" data-hl="0">$df_i$</th></tr>
+        <tr><td>[50, 65[</td><td>0,25</td><td>15</td><td class="ring" data-hl="2">0,017</td></tr>
+        <tr class="hl" data-hl="1"><td>[65, 75[</td><td>0,35</td><td>10</td><td>0,035</td></tr>
+        <tr><td>[75, 85[</td><td>0,25</td><td>10</td><td>0,025</td></tr>
+        <tr><td>[85, 100[</td><td>0,15</td><td>15</td><td>0,010</td></tr>
+      </table>
+      <div class="col grow">
+        <div class="formula" data-beat="0">$$df_i = \frac{f_i}{l_i}$$</div>
+        <div class="keep" data-beat="3">$df_i \times l_i = f_i$ et aire totale $= 1$</div>
+        <div class="calc" data-beat="4">même forme, autre échelle</div>
+      </div>
+
+  # ================================================================ NOTION 4 : POLYGONE (points « attention »)
+  - id: s08_polygone_principe
+    notion: 'Polygone'
+    tag: 'Notion 4 / 6'
+    title: 'Le polygone des fréquences cumulées'
+    subtitle: 'Point important : où placer les points ?'
+    hold: 0.6
+    beats:
+      - "On passe à un point très important. En discret, on dessinait un escalier. En continu, on dessine un polygone."
+      - "Prends une classe, de x i moins 1 à x i. Grand F i, c'est le pourcentage d'observations inférieures à x i."
+      - "Donc le point de hauteur grand F i se place en fin de classe, au-dessus de x i."
+      - "En début de classe, au-dessus de x i moins 1, la hauteur est grand F i moins 1 : le pourcentage des observations avant la classe."
+      - "Entre les deux, on trace un segment oblique. Pourquoi ? Grâce à l'hypothèse d'uniformité."
+      - "Les observations sont réparties régulièrement dans la classe. Donc le pourcentage cumulé augmente à vitesse constante, de façon linéaire."
+    html: |
+      <svg class="w50" viewBox="0 0 760 500" width="760" height="500">
+        <g class="stroke muted" style="stroke-width:3">
+          <line x1="80" y1="440" x2="730" y2="440"/><line x1="80" y1="440" x2="80" y2="40"/>
+        </g>
+        <g style="font-size:46px;fill:var(--ink)">
+          <text x="165" y="490" data-beat="1">xᵢ₋₁</text><text x="535" y="482" data-beat="1">xᵢ</text>
+          <text x="10" y="128" data-beat="2" style="fill:var(--accent)">Fᵢ</text>
+          <text x="-10" y="345" data-beat="3">Fᵢ₋₁</text>
+        </g>
+        <line x1="200" y1="440" x2="200" y2="330" class="stroke muted" style="stroke-dasharray:8 8;stroke-width:2" data-beat="3" data-anim="fade"/>
+        <line x1="80" y1="330" x2="200" y2="330" class="stroke muted" style="stroke-dasharray:8 8;stroke-width:2" data-beat="3" data-anim="fade"/>
+        <line x1="545" y1="440" x2="545" y2="120" class="stroke muted" style="stroke-dasharray:8 8;stroke-width:2" data-beat="2" data-anim="fade"/>
+        <line x1="80" y1="120" x2="545" y2="120" class="stroke muted" style="stroke-dasharray:8 8;stroke-width:2" data-beat="2" data-anim="fade"/>
+        <circle cx="545" cy="120" r="14" fill="var(--accent)" data-beat="2" data-anim="pop"/>
+        <circle cx="200" cy="330" r="14" fill="var(--main)" data-beat="3" data-anim="pop"/>
+        <line x1="200" y1="330" x2="545" y2="120" class="stroke" style="stroke-width:7" data-beat="4" data-anim="draw"/>
+      </svg>
+      <div class="col grow">
+        <div class="card accent" data-beat="0"><div class="label">⚠ Attention</div>escalier en discret → <b>polygone</b> en continu</div>
+        <div class="calc" data-beat="2">fin de classe : $(x_i\,;\,F_i)$</div>
+        <div class="calc" data-beat="3">début de classe : $(x_{i-1}\,;\,F_{i-1})$</div>
+        <div class="keep" data-beat="5">uniformité → segment <b>linéaire</b></div>
+      </div>
+
+  - id: s09_equation
+    notion: 'Polygone'
+    tag: 'Notion 4 / 6'
+    title: 'L''équation d''un segment'
+    subtitle: 'Point important : la pente vaut $df_i$'
+    hold: 0.6
+    beats:
+      - "Autre point très important : l'équation de ce segment."
+      - "Sa pente, c'est la montée divisée par l'avancée. La montée, c'est grand F i moins grand F i moins 1, donc f i. L'avancée, c'est la largeur l i."
+      - "La pente vaut donc f i sur l i. C'est exactement la densité d f i !"
+      - "L'équation se lit : y égale d f i, fois x moins x i moins 1, plus grand F i moins 1."
+      - "On part de la hauteur de début de classe, et on monte de d f i par unité parcourue."
+      - "Pour la classe 65 à 75 : y égale 0,035 fois x moins 65, plus 0,25. En 75, on retrouve bien 0,60."
+    html: |
+      <svg class="w40" viewBox="0 0 620 460" width="620" height="460">
+        <g class="stroke muted" style="stroke-width:3"><line x1="40" y1="420" x2="600" y2="420"/><line x1="40" y1="420" x2="40" y2="20"/></g>
+        <line x1="120" y1="320" x2="520" y2="90" class="stroke" style="stroke-width:7"/>
+        <line x1="120" y1="320" x2="520" y2="320" class="stroke gold" style="stroke-width:4" data-beat="1+2" data-anim="grow-x"/>
+        <line x1="520" y1="320" x2="520" y2="90" class="stroke accent" style="stroke-width:4" data-beat="1" data-anim="draw"/>
+        <g style="font-size:52px">
+          <text x="540" y="220" style="fill:var(--accent)" data-beat="1">fᵢ</text>
+          <text x="300" y="380" style="fill:var(--main-ink)" data-beat="1+2">lᵢ</text>
+        </g>
+        <circle cx="120" cy="320" r="12" fill="var(--main)"/><circle cx="520" cy="90" r="12" fill="var(--accent)"/>
+      </svg>
+      <div class="col grow">
+        <div class="calc" data-beat="2">pente $= \dfrac{f_i}{l_i} = df_i$</div>
+        <div class="card main" data-beat="3">
+          <div class="formula">$$y = \htmlData{hl=4}{df_i\,(x - x_{i-1})} + \htmlData{hl=4}{F_{i-1}}$$</div>
+        </div>
+        <div class="calc" data-beat="5">$y = 0{,}035\,(x - 65) + 0{,}25$ ; en 75 : <span class="res">0,60</span></div>
+      </div>
+
+  - id: s10_F_morceaux
+    notion: 'Fonction de répartition'
+    tag: 'Notion 5 / 6'
+    title: '$F(x)$ par morceaux'
+    subtitle: 'Un segment par classe'
+    beats:
+      - "En mettant les segments bout à bout, on obtient le polygone des fréquences cumulées. C'est le graphe de la fonction de répartition F de x."
+      - "On écrit F de x par morceaux, une ligne par classe. Avant 50, F vaut 0. Après 100, F vaut 1."
+      - "Les pentes sont les densités arrondies : 0,017, 0,035, 0,025, et 0,01."
+      - "La définition reste : le pourcentage des observations inférieures, ou égales, à x."
+      - "En continu, strictement inférieur ou inférieur ou égal, c'est pareil. La fréquence d'une valeur ponctuelle est toujours 0."
+    html: |
+      <div class="card w50" data-beat="1">
+        <div class="formula sm" style="font-size:37px">$$F(x)=\begin{cases}0 & x<50\\ \htmlData{hl=2}{0{,}017}(x-50) & 50\le x<65\\ \htmlData{hl=2}{0{,}035}(x-65)+0{,}25 & 65\le x<75\\ \htmlData{hl=2}{0{,}025}(x-75)+0{,}6 & 75\le x<85\\ \htmlData{hl=2}{0{,}01}(x-85)+0{,}85 & 85\le x<100\\ 1 & x\ge 100\end{cases}$$</div>
+      </div>
+      <svg class="w50" viewBox="0 0 820 500" width="780" height="475">
+        <g class="stroke muted" style="stroke-width:3"><line x1="30" y1="440" x2="800" y2="440"/><line x1="60" y1="440" x2="60" y2="50"/></g>
+        <g style="font-size:34px;fill:var(--muted)">
+          <text x="62" y="478">50</text><text x="257" y="478">65</text><text x="387" y="478">75</text><text x="517" y="478">85</text><text x="700" y="478">100</text>
+          <text x="25" y="90">1</text>
+        </g>
+        <polyline points="30,440 80,440 275,350 405,224 535,134 730,80 800,80" fill="none" class="stroke" style="stroke-width:6" data-beat="0" data-anim="draw" data-dur="1.6"/>
+        <g data-beat="0+1.2" data-anim="fade">
+          <circle cx="275" cy="350" r="9" fill="var(--main)"/><circle cx="405" cy="224" r="9" fill="var(--main)"/>
+          <circle cx="535" cy="134" r="9" fill="var(--main)"/><circle cx="730" cy="80" r="9" fill="var(--main)"/>
+        </g>
+      </svg>
+
+  # ================================================================ NOTION 5 : UTILITÉ DE F(x)
+  - id: s11_usages
+    notion: 'Fonction de répartition'
+    tag: 'Notion 5 / 6'
+    title: 'À quoi sert $F(x)$ ?'
+    subtitle: 'Trois cas, plus la lecture inverse'
+    beats:
+      - "Avec F, tu trouves le pourcentage d'observations dans n'importe quel intervalle. Il y a trois cas."
+      - "Inférieures à x : F de x."
+      - "Supérieures à x : le complément, 1 moins F de x."
+      - "Entre x 1 et x 2 : F de x 2 moins F de x 1."
+      - "Pour un effectif, multiplie le pourcentage par n. Et dans l'autre sens, on peut chercher le x qui correspond à un pourcentage donné."
+    html: |
+      <div class="col w50">
+        <div class="row" data-beat="1"><span class="chip main">$&lt; x$</span><span class="big">$F(x)$</span></div>
+        <div class="row" data-beat="2"><span class="chip main">$&gt; x$</span><span class="big">$1 - F(x)$</span></div>
+        <div class="row" data-beat="3"><span class="chip main">entre $x_1$ et $x_2$</span><span class="big">$F(x_2) - F(x_1)$</span></div>
+      </div>
+      <div class="col w50">
+        <div class="card" data-beat="4"><div class="label">Effectif</div>pourcentage $\times\, n$</div>
+        <div class="card gold" data-beat="4+3"><div class="label">Lecture inverse</div>on résout $F(x) = $ pourcentage</div>
+      </div>
+
+  - id: s12_ex_73
+    notion: 'Fonction de répartition'
+    tag: 'Notion 5 / 6'
+    title: 'Exemple : moins de 73 kilos'
+    subtitle: 'Exemples a, b et c du cours'
+    beats:
+      - "Quel pourcentage d'étudiants pèse moins de 73 kilos ? 73 est dans la classe 65 à 75, donc on prend la troisième ligne de F."
+      - "F de 73 égale 0,035 fois 73 moins 65, plus 0,25. 0,035 fois 8, ça fait 0,28. Plus 0,25 : 0,53. Donc 53 pour cent."
+      - "Plus de 73 kilos ? Le complément : 1 moins 0,53, donc 47 pour cent."
+      - "Et combien d'étudiants pèsent moins de 73 kilos ? 80 fois 0,53, ça fait 42,4. Donc environ 42 étudiants."
+    html: |
+      <svg class="w40" viewBox="0 0 820 500" width="640" height="400">
+        <g class="stroke muted" style="stroke-width:3"><line x1="30" y1="440" x2="800" y2="440"/><line x1="60" y1="440" x2="60" y2="50"/></g>
+        <g style="font-size:30px;fill:var(--muted)"><text x="257" y="478">65</text><text x="360" y="478" style="fill:var(--accent)">73</text><text x="700" y="478">100</text></g>
+        <polyline points="30,440 80,440 275,350 405,224 535,134 730,80 800,80" fill="none" class="stroke" style="stroke-width:6"/>
+        <g data-beat="0+2" data-anim="draw">
+          <line x1="379" y1="440" x2="379" y2="249" class="stroke accent" style="stroke-dasharray:10 8;stroke-width:4"/>
+          <line x1="379" y1="249" x2="60" y2="249" class="stroke accent" style="stroke-dasharray:10 8;stroke-width:4"/>
+        </g>
+        <circle cx="379" cy="249" r="11" fill="var(--accent)" data-beat="1" data-anim="pop"/>
+        <text x="72" y="238" style="font-size:32px;fill:var(--accent)" data-beat="1+2">0,53</text>
+      </svg>
+      <div class="col grow">
+        <div class="calc" data-beat="1">a) $F(73) = 0{,}035 \times 8 + 0{,}25 = $ <span class="res">0,53</span></div>
+        <div class="calc" data-beat="2">b) $1 - 0{,}53 = 0{,}47$ → <b>47 %</b></div>
+        <div class="calc" data-beat="3">c) $80 \times 0{,}53 = 42{,}4$ → <b>≈ 42</b> étudiants</div>
+      </div>
+
+  - id: s13_ex_inverse
+    notion: 'Fonction de répartition'
+    tag: 'Notion 5 / 6'
+    title: 'Exemple : un intervalle et la lecture inverse'
+    subtitle: 'Exemples d et e du cours'
+    beats:
+      - "Entre 73 et 81 kilos ? On soustrait : F de 81 moins F de 73."
+      - "81 est dans la classe 75 à 85. F de 81 égale 0,025 fois 6, plus 0,6, donc 0,75. Moins 0,53, ça fait 0,22. Soit 22 pour cent."
+      - "Maintenant, à l'envers. Quel poids sépare les 30 pour cent d'étudiants les plus légers ? On cherche x tel que F de x égale 0,3."
+      - "Sur le graphique, 0,3 est entre 0,25 et 0,60. La solution est donc dans la deuxième classe."
+      - "On résout : 0,035 fois x moins 65, plus 0,25, égale 0,3. On trouve x environ égal à 66,4 kilos."
+    html: |
+      <div class="col w50">
+        <div class="card" data-beat="0"><div class="label">d) entre 73 et 81 kg</div>$F(81) - F(73)$</div>
+        <div class="calc" data-beat="1">$0{,}75 - 0{,}53 = $ <span class="res">22 %</span></div>
+      </div>
+      <div class="col w50">
+        <div class="card gold" data-beat="2"><div class="label">e) les 30 % les plus légers</div>$F(x) = 0{,}3$</div>
+        <div class="row" data-beat="3"><span class="chip">$0{,}25 &lt; 0{,}3 &lt; 0{,}60$</span><span>→ classe 2</span></div>
+        <div class="steps" data-beat="4">
+          <div class="step">$0{,}035\,(x - 65) + 0{,}25 = 0{,}3$</div>
+          <div class="step done" data-beat="4+3">$x = 65 + \dfrac{0{,}05}{0{,}035} \approx 66{,}4$ kg</div>
+        </div>
+      </div>
+
+  # ================================================================ NOTION 6 : QUALITATIF
+  - id: s14_qualitatif
+    notion: 'Qualitatif'
+    tag: 'Notion 6 / 6'
+    title: 'Observations qualitatives'
+    subtitle: 'Fréquences oui, cumul non'
+    beats:
+      - "Dernier cas : les observations qualitatives. On définit n i et f i exactement comme en discret."
+      - "Par contre, pas de fréquences cumulées. Les valeurs ne sont pas des nombres : les ordonner sur un axe n'a pas de sens mathématique."
+      - "On choisit quand même un ordre de présentation. Parfois, le contexte l'impose : des avis vont du plus positif au moins positif."
+      - "Sinon, on classe par fréquences décroissantes, comme les voitures les plus vendues. Ou par ordre alphabétique, pour éviter un classement arbitraire."
+    html: |
+      <table class="data">
+        <tr><th>Avis</th><th>$n_i$</th></tr>
+        <tr><td>Très satisfait</td><td>13</td></tr>
+        <tr><td>Satisfait</td><td>42</td></tr>
+        <tr><td>Moyennement satisfait</td><td>17</td></tr>
+        <tr><td>Peu satisfait</td><td>6</td></tr>
+        <tr><td>Pas satisfait du tout</td><td>2</td></tr>
+      </table>
+      <div class="col grow">
+        <div class="row" data-beat="0"><span class="chip" style="border-color:var(--olive);color:var(--olive)">$n_i$, $f_i$ ✓</span></div>
+        <div class="row" data-beat="1"><span class="chip accent">$N_i$, $F_i$ ✗</span><span class="muted">pas d'ordre numérique</span></div>
+        <div class="card" data-beat="2"><div class="label">Ordre</div>contexte <span data-beat="3">· fréquences · alphabétique</span></div>
+      </div>
+
+  - id: s15_fromage
+    notion: 'Qualitatif'
+    tag: 'Notion 6 / 6'
+    title: 'Le diagramme en fromage'
+    subtitle: 'Une part par valeur'
+    beats:
+      - "Pour le qualitatif, on utilise souvent un diagramme en tarte, ou en fromage."
+      - "Chaque part a une surface proportionnelle à sa fréquence. Avec nos avis, 80 réponses au total."
+      - "Satisfait : 42 sur 80, donc 52,5 pour cent. C'est plus de la moitié du disque."
+      - "Pour l'angle d'une part, on multiplie la fréquence par 360 degrés. 0,525 fois 360, ça donne 189 degrés."
+    html: |
+      <svg class="w50" viewBox="0 0 460 460" width="460" height="460" data-beat="1" data-anim="pop">
+        <path d="M230,230 L230.0,30.0 A200,200 0 0 1 400.5,125.5 Z" fill="var(--gold)"/>
+        <path d="M230,230 L400.5,125.5 A200,200 0 1 1 45.2,306.5 Z" fill="var(--accent)"/>
+        <path d="M230,230 L45.2,306.5 A200,200 0 0 1 112.4,68.2 Z" fill="var(--main)"/>
+        <path d="M230,230 L112.4,68.2 A200,200 0 0 1 198.7,32.5 Z" fill="var(--olive)"/>
+        <path d="M230,230 L198.7,32.5 A200,200 0 0 1 230.0,30.0 Z" fill="var(--muted)"/>
+        <g style="font-size:26px;fill:var(--paper);font-weight:700">
+          <text x="255" y="122">16,25 %</text><text x="240" y="355">52,5 %</text><text x="55" y="200">21,25 %</text>
+        </g>
+      </svg>
+      <div class="col grow">
+        <div class="calc" data-beat="2">Satisfait : $\dfrac{42}{80} = $ <span class="res">52,5 %</span></div>
+        <div class="calc" data-beat="3">angle $= f_i \times 360° = 189°$</div>
+        <div class="chips" data-beat="1+1.5">
+          <span class="chip gold">Très sat.</span><span class="chip accent">Satisfait</span><span class="chip main">Moyen</span><span class="chip">Peu / Pas</span>
+        </div>
+      </div>
+
+  # ================================================================ RÉCAP
+  - id: s16_recap
+    notion: 'Récapitulatif'
+    title: 'Récap de la partie 2'
+    beats:
+      - "Récapitulons. En continu, on groupe en classes et on suppose les observations uniformes dans chaque classe."
+      - "L'histogramme se dessine avec les densités d n i ou d f i, pour que l'aire représente l'effectif."
+      - "Le polygone relie les points x i, grand F i. Chaque segment a pour pente d f i."
+      - "F de x donne les pourcentages : F de x, 1 moins F de x, ou une différence. Et on peut la lire à l'envers."
+      - "Enfin, en qualitatif, on garde n i et f i, sans cumul, et on dessine un fromage."
+    html: |
+      <div class="recap">
+        <div class="item" data-beat="0">Classes $[x_{i-1}, x_i[$ + <b>uniformité</b></div>
+        <div class="item" data-beat="1"><span class="tex">$dn_i = \frac{n_i}{l_i}$</span>, <span class="tex">$df_i = \frac{f_i}{l_i}$</span> : aire = fréquence</div>
+        <div class="item" data-beat="2"><span class="tex">$y = df_i(x - x_{i-1}) + F_{i-1}$</span></div>
+        <div class="item" data-beat="3">$F(x)$, $1 - F(x)$, $F(x_2) - F(x_1)$</div>
+        <div class="item" data-beat="4">Qualitatif : $n_i$, $f_i$, fromage</div>
+      </div>

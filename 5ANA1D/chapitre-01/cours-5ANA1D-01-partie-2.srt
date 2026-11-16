@@ -1,0 +1,804 @@
+1
+00:00:00,450 --> 00:00:03,852
+Analyse de données, chapitre 1, deuxième partie.
+
+2
+00:00:04,302 --> 00:00:06,483
+On passe aux observations continues :
+
+3
+00:00:06,483 --> 00:00:09,960
+classes, histogrammes, polygone et fonction de
+répartition.
+
+4
+00:00:09,960 --> 00:00:11,964
+Puis on termine par le qualitatif.
+
+5
+00:00:13,317 --> 00:00:18,286
+Imagine que tu pèses 80 étudiants avec une
+balance précise au dixième de gramme.
+
+6
+00:00:18,736 --> 00:00:22,151
+Il y a peu de chances que deux mesures soient
+identiques.
+
+7
+00:00:22,151 --> 00:00:24,309
+Un tableau recensé aurait 80 lignes.
+
+8
+00:00:24,759 --> 00:00:27,615
+Et sa colonne des n i ne contiendrait que des 1.
+
+9
+00:00:27,615 --> 00:00:29,043
+Ça ne nous apprend rien.
+
+10
+00:00:29,493 --> 00:00:30,207
+La solution :
+
+11
+00:00:30,207 --> 00:00:31,909
+grouper les données en classes.
+
+12
+00:00:31,909 --> 00:00:36,522
+Ce sont des intervalles contigus, collés les uns
+aux autres, qui couvrent toutes les
+
+13
+00:00:36,522 --> 00:00:37,236
+observations.
+
+14
+00:00:38,583 --> 00:00:41,811
+Voici le tableau des poids, groupés en quatre
+classes.
+
+15
+00:00:42,261 --> 00:00:46,785
+n i, c'est maintenant le nombre d'observations
+dans la classe.
+
+16
+00:00:46,785 --> 00:00:50,725
+Par exemple, 28 étudiants pèsent entre 65 et 75
+kilos.
+
+17
+00:00:51,175 --> 00:00:55,568
+f i, c'est ce nombre en pourcentage de
+l'effectif.
+
+18
+00:00:55,568 --> 00:00:57,676
+28 sur 80, ça fait 0,35.
+
+19
+00:00:58,126 --> 00:01:03,632
+Grand N i, c'est le nombre d'observations
+inférieures à x i, le bord droit de la classe.
+
+20
+00:01:03,632 --> 00:01:06,009
+48 étudiants pèsent moins de 75 kilos.
+
+21
+00:01:06,459 --> 00:01:10,933
+Et grand F i, c'est ce même nombre en
+pourcentage :
+
+22
+00:01:10,933 --> 00:01:12,775
+48 sur 80, donc 0,60.
+
+23
+00:01:14,117 --> 00:01:16,404
+Le choix des classes est arbitraire.
+
+24
+00:01:16,404 --> 00:01:18,819
+Il dépend du bon sens du statisticien.
+
+25
+00:01:19,269 --> 00:01:22,422
+Pas trop peu de classes, sinon on n'apprend
+rien.
+
+26
+00:01:22,422 --> 00:01:24,482
+Pas trop, sinon c'est indigeste.
+
+27
+00:01:24,932 --> 00:01:27,721
+La règle de Sturge donne un ordre de grandeur :
+
+28
+00:01:27,721 --> 00:01:30,806
+1 plus dix tiers fois le logarithme en base 10
+de n.
+
+29
+00:01:31,256 --> 00:01:34,377
+Pour 80 étudiants, ça donne environ 7 classes.
+
+30
+00:01:34,377 --> 00:01:37,225
+C'est une indication, pas une obligation :
+
+31
+00:01:37,225 --> 00:01:38,582
+le cours en prend 4.
+
+32
+00:01:39,032 --> 00:01:42,038
+Les classes peuvent avoir des largeurs
+différentes.
+
+33
+00:01:42,038 --> 00:01:45,044
+Et elles sont fermées à gauche, ouvertes à
+droite :
+
+34
+00:01:45,044 --> 00:01:47,519
+65 kilos pile tombe dans une seule classe.
+
+35
+00:01:48,883 --> 00:01:52,510
+Grouper en classes fait perdre de l'information.
+
+36
+00:01:52,510 --> 00:01:57,951
+Des étudiants de 68, 72 et 74 kilos tombent tous
+dans la classe 65 à 75.
+
+37
+00:01:58,401 --> 00:02:01,344
+On ne sait plus où ils sont exactement dans la
+classe.
+
+38
+00:02:01,344 --> 00:02:02,871
+Alors on fait une hypothèse.
+
+39
+00:02:03,321 --> 00:02:07,802
+On suppose que les observations sont réparties
+uniformément dans chaque classe.
+
+40
+00:02:08,252 --> 00:02:13,164
+Autrement dit, il y a le même nombre d'étudiants
+par tranche d'un kilo.
+
+41
+00:02:13,164 --> 00:02:16,623
+Ici, 28 étudiants sur 10 kilos, donc 2,8 par
+kilo.
+
+42
+00:02:17,073 --> 00:02:19,802
+Cette hypothèse est la clé de toute la suite :
+
+43
+00:02:19,802 --> 00:02:22,471
+densité, polygone et fonction de répartition.
+
+44
+00:02:23,817 --> 00:02:26,270
+Premier réflexe pour dessiner le tableau :
+
+45
+00:02:26,270 --> 00:02:29,482
+des rectangles posés sur chaque classe, de
+hauteur n i.
+
+46
+00:02:29,932 --> 00:02:30,579
+Problème :
+
+47
+00:02:30,579 --> 00:02:32,908
+ton œil ne compare pas les hauteurs.
+
+48
+00:02:32,908 --> 00:02:34,460
+Il compare les surfaces.
+
+49
+00:02:34,460 --> 00:02:38,083
+Et l'aire d'un rectangle, c'est n i fois la
+largeur l i.
+
+50
+00:02:38,533 --> 00:02:41,505
+Les classes 1 et 3 ont le même effectif, 20.
+
+51
+00:02:41,505 --> 00:02:43,735
+Mais la première est plus large :
+
+52
+00:02:43,735 --> 00:02:44,749
+300 contre 200.
+
+53
+00:02:44,749 --> 00:02:47,519
+Elle paraît 50 pour cent plus importante.
+
+54
+00:02:47,969 --> 00:02:48,342
+Pire :
+
+55
+00:02:48,342 --> 00:02:52,136
+les deux dernières classes ont des aires
+proches, 200 et 180.
+
+56
+00:02:52,136 --> 00:02:55,805
+Pourtant la dernière ne compte que 12 étudiants,
+contre 20.
+
+57
+00:02:56,255 --> 00:02:58,055
+C'est un défaut visuel majeur.
+
+58
+00:02:58,055 --> 00:03:02,676
+Il faut des rectangles dont l'aire, et pas la
+hauteur, représente l'effectif.
+
+59
+00:03:04,017 --> 00:03:04,885
+La solution :
+
+60
+00:03:04,885 --> 00:03:08,957
+prendre comme hauteur la densité de fréquence
+absolue, d n i.
+
+61
+00:03:08,957 --> 00:03:12,295
+C'est n i divisé par l i, la largeur de la
+classe.
+
+62
+00:03:12,745 --> 00:03:17,015
+d n i, c'est le nombre moyen d'observations par
+unité.
+
+63
+00:03:17,015 --> 00:03:18,122
+Ici, par kilo.
+
+64
+00:03:18,122 --> 00:03:20,020
+Pour la classe 65 à 75 :
+
+65
+00:03:20,020 --> 00:03:23,658
+28 divisé par 10, donc 2,8 étudiants par kilo.
+
+66
+00:03:24,108 --> 00:03:25,978
+Pour la première classe :
+
+67
+00:03:25,978 --> 00:03:28,223
+20 divisé par 15, environ 1,3.
+
+68
+00:03:28,223 --> 00:03:30,168
+C'est une valeur arrondie.
+
+69
+00:03:30,618 --> 00:03:36,614
+Et maintenant, l'aire de chaque rectangle vaut d
+n i fois l i, donc exactement n i.
+
+70
+00:03:36,614 --> 00:03:39,070
+L'aire totale vaut l'effectif, 80.
+
+71
+00:03:39,520 --> 00:03:43,352
+Ce graphique s'appelle l'histogramme des
+densités de fréquence absolue.
+
+72
+00:03:44,717 --> 00:03:47,595
+Même idée avec les fréquences relatives.
+
+73
+00:03:47,595 --> 00:03:52,344
+La densité de fréquence relative, d f i, c'est f
+i divisé par l i.
+
+74
+00:03:52,794 --> 00:03:57,985
+C'est le pourcentage moyen d'observations par
+unité.
+
+75
+00:03:57,985 --> 00:04:00,381
+Pour la classe 65 à 75 :
+
+76
+00:04:00,381 --> 00:04:03,476
+0,35 divisé par 10, donc 0,035.
+
+77
+00:04:03,926 --> 00:04:06,197
+Pour la première classe :
+
+78
+00:04:06,197 --> 00:04:09,286
+0,25 divisé par 15, environ 0,017.
+
+79
+00:04:09,286 --> 00:04:11,739
+Encore une valeur arrondie.
+
+80
+00:04:12,189 --> 00:04:16,752
+Cette fois, l'aire de chaque rectangle vaut f i,
+et l'aire totale vaut 1.
+
+81
+00:04:17,202 --> 00:04:21,094
+L'histogramme a exactement la même forme que le
+précédent.
+
+82
+00:04:21,094 --> 00:04:23,309
+Seule l'échelle verticale change.
+
+83
+00:04:24,650 --> 00:04:26,986
+On passe à un point très important.
+
+84
+00:04:26,986 --> 00:04:29,455
+En discret, on dessinait un escalier.
+
+85
+00:04:29,455 --> 00:04:31,790
+En continu, on dessine un polygone.
+
+86
+00:04:32,240 --> 00:04:34,920
+Prends une classe, de x i moins 1 à x i.
+
+87
+00:04:34,920 --> 00:04:39,276
+Grand F i, c'est le pourcentage d'observations
+inférieures à x i.
+
+88
+00:04:39,726 --> 00:04:44,718
+Donc le point de hauteur grand F i se place en
+fin de classe, au-dessus de x i.
+
+89
+00:04:45,168 --> 00:04:49,972
+En début de classe, au-dessus de x i moins 1, la
+hauteur est grand F i moins 1 :
+
+90
+00:04:49,972 --> 00:04:52,854
+le pourcentage des observations avant la classe.
+
+91
+00:04:53,304 --> 00:04:56,122
+Entre les deux, on trace un segment oblique.
+
+92
+00:04:56,122 --> 00:04:56,763
+Pourquoi ?
+
+93
+00:04:56,763 --> 00:04:58,877
+Grâce à l'hypothèse d'uniformité.
+
+94
+00:04:59,327 --> 00:05:02,831
+Les observations sont réparties régulièrement
+dans la classe.
+
+95
+00:05:02,831 --> 00:05:07,140
+Donc le pourcentage cumulé augmente à vitesse
+constante, de façon linéaire.
+
+96
+00:05:09,083 --> 00:05:10,991
+Autre point très important :
+
+97
+00:05:10,991 --> 00:05:12,694
+l'équation de ce segment.
+
+98
+00:05:13,144 --> 00:05:16,397
+Sa pente, c'est la montée divisée par l'avancée.
+
+99
+00:05:16,397 --> 00:05:20,531
+La montée, c'est grand F i moins grand F i moins
+1, donc f i.
+
+100
+00:05:20,531 --> 00:05:22,699
+L'avancée, c'est la largeur l i.
+
+101
+00:05:23,149 --> 00:05:25,439
+La pente vaut donc f i sur l i.
+
+102
+00:05:25,439 --> 00:05:28,025
+C'est exactement la densité d f i !
+
+103
+00:05:28,475 --> 00:05:29,926
+L'équation se lit :
+
+104
+00:05:29,926 --> 00:05:34,814
+y égale d f i, fois x moins x i moins 1, plus
+grand F i moins 1.
+
+105
+00:05:35,264 --> 00:05:40,291
+On part de la hauteur de début de classe, et on
+monte de d f i par unité parcourue.
+
+106
+00:05:40,741 --> 00:05:43,732
+Pour la classe 65 à 75 :
+
+107
+00:05:43,732 --> 00:05:48,842
+y égale 0,035 fois x moins 65, plus 0,25.
+
+108
+00:05:48,842 --> 00:05:52,456
+En 75, on retrouve bien 0,60.
+
+109
+00:05:54,417 --> 00:05:58,880
+En mettant les segments bout à bout, on obtient
+le polygone des fréquences cumulées.
+
+110
+00:05:58,880 --> 00:06:01,696
+C'est le graphe de la fonction de répartition F
+de x.
+
+111
+00:06:02,146 --> 00:06:06,580
+On écrit F de x par morceaux, une ligne par
+classe.
+
+112
+00:06:06,580 --> 00:06:08,232
+Avant 50, F vaut 0.
+
+113
+00:06:08,232 --> 00:06:09,971
+Après 100, F vaut 1.
+
+114
+00:06:10,421 --> 00:06:16,257
+Les pentes sont les densités arrondies :
+
+115
+00:06:16,257 --> 00:06:20,487
+0,017, 0,035, 0,025, et 0,01.
+
+116
+00:06:20,937 --> 00:06:22,460
+La définition reste :
+
+117
+00:06:22,460 --> 00:06:26,812
+le pourcentage des observations inférieures, ou
+égales, à x.
+
+118
+00:06:27,262 --> 00:06:31,817
+En continu, strictement inférieur ou inférieur
+ou égal, c'est pareil.
+
+119
+00:06:31,817 --> 00:06:35,249
+La fréquence d'une valeur ponctuelle est
+toujours 0.
+
+120
+00:06:36,583 --> 00:06:41,457
+Avec F, tu trouves le pourcentage d'observations
+dans n'importe quel intervalle.
+
+121
+00:06:41,457 --> 00:06:42,493
+Il y a trois cas.
+
+122
+00:06:42,943 --> 00:06:44,851
+Inférieures à x :
+
+123
+00:06:44,851 --> 00:06:45,636
+F de x.
+
+124
+00:06:46,086 --> 00:06:47,585
+Supérieures à x :
+
+125
+00:06:47,585 --> 00:06:50,231
+le complément, 1 moins F de x.
+
+126
+00:06:50,681 --> 00:06:52,711
+Entre x 1 et x 2 :
+
+127
+00:06:52,711 --> 00:06:55,418
+F de x 2 moins F de x 1.
+
+128
+00:06:55,868 --> 00:06:58,917
+Pour un effectif, multiplie le pourcentage par
+n.
+
+129
+00:06:58,917 --> 00:07:04,018
+Et dans l'autre sens, on peut chercher le x qui
+correspond à un pourcentage donné.
+
+130
+00:07:05,383 --> 00:07:09,010
+Quel pourcentage d'étudiants pèse moins de 73
+kilos ?
+
+131
+00:07:09,010 --> 00:07:13,731
+73 est dans la classe 65 à 75, donc on prend la
+troisième ligne de F.
+
+132
+00:07:14,181 --> 00:07:21,671
+F de 73 égale 0,035 fois 73 moins 65, plus 0,25.
+
+133
+00:07:21,671 --> 00:07:25,884
+0,035 fois 8, ça fait 0,28.
+
+134
+00:07:25,884 --> 00:07:27,601
+Plus 0,25 :
+
+135
+00:07:27,601 --> 00:07:28,381
+0,53.
+
+136
+00:07:28,381 --> 00:07:31,190
+Donc 53 pour cent.
+
+137
+00:07:31,640 --> 00:07:33,389
+Plus de 73 kilos ?
+
+138
+00:07:33,389 --> 00:07:34,846
+Le complément :
+
+139
+00:07:34,846 --> 00:07:37,955
+1 moins 0,53, donc 47 pour cent.
+
+140
+00:07:38,405 --> 00:07:42,968
+Et combien d'étudiants pèsent moins de 73 kilos
+?
+
+141
+00:07:42,968 --> 00:07:45,482
+80 fois 0,53, ça fait 42,4.
+
+142
+00:07:45,482 --> 00:07:47,902
+Donc environ 42 étudiants.
+
+143
+00:07:49,250 --> 00:07:51,496
+Entre 73 et 81 kilos ?
+
+144
+00:07:51,496 --> 00:07:52,925
+On soustrait :
+
+145
+00:07:52,925 --> 00:07:55,171
+F de 81 moins F de 73.
+
+146
+00:07:55,621 --> 00:07:59,709
+81 est dans la classe 75 à 85.
+
+147
+00:07:59,709 --> 00:08:06,249
+F de 81 égale 0,025 fois 6, plus 0,6, donc 0,75.
+
+148
+00:08:06,249 --> 00:08:09,655
+Moins 0,53, ça fait 0,22.
+
+149
+00:08:09,655 --> 00:08:12,107
+Soit 22 pour cent.
+
+150
+00:08:12,557 --> 00:08:14,102
+Maintenant, à l'envers.
+
+151
+00:08:14,102 --> 00:08:18,399
+Quel poids sépare les 30 pour cent d'étudiants
+les plus légers ?
+
+152
+00:08:18,399 --> 00:08:20,951
+On cherche x tel que F de x égale 0,3.
+
+153
+00:08:21,401 --> 00:08:25,743
+Sur le graphique, 0,3 est entre 0,25 et 0,60.
+
+154
+00:08:25,743 --> 00:08:30,086
+La solution est donc dans la deuxième classe.
+
+155
+00:08:30,536 --> 00:08:31,943
+On résout :
+
+156
+00:08:31,943 --> 00:08:37,573
+0,035 fois x moins 65, plus 0,25, égale 0,3.
+
+157
+00:08:37,573 --> 00:08:42,436
+On trouve x environ égal à 66,4 kilos.
+
+158
+00:08:43,783 --> 00:08:44,678
+Dernier cas :
+
+159
+00:08:44,678 --> 00:08:46,741
+les observations qualitatives.
+
+160
+00:08:46,741 --> 00:08:50,180
+On définit n i et f i exactement comme en
+discret.
+
+161
+00:08:50,630 --> 00:08:52,877
+Par contre, pas de fréquences cumulées.
+
+162
+00:08:52,877 --> 00:08:55,008
+Les valeurs ne sont pas des nombres :
+
+163
+00:08:55,008 --> 00:08:58,061
+les ordonner sur un axe n'a pas de sens
+mathématique.
+
+164
+00:08:58,511 --> 00:09:01,357
+On choisit quand même un ordre de présentation.
+
+165
+00:09:01,357 --> 00:09:03,234
+Parfois, le contexte l'impose :
+
+166
+00:09:03,234 --> 00:09:06,081
+des avis vont du plus positif au moins positif.
+
+167
+00:09:06,531 --> 00:09:11,041
+Sinon, on classe par fréquences décroissantes,
+comme les voitures les plus vendues.
+
+168
+00:09:11,041 --> 00:09:14,518
+Ou par ordre alphabétique, pour éviter un
+classement arbitraire.
+
+169
+00:09:15,883 --> 00:09:21,085
+Pour le qualitatif, on utilise souvent un
+diagramme en tarte, ou en fromage.
+
+170
+00:09:21,535 --> 00:09:25,391
+Chaque part a une surface proportionnelle à sa
+fréquence.
+
+171
+00:09:25,391 --> 00:09:27,827
+Avec nos avis, 80 réponses au total.
+
+172
+00:09:28,277 --> 00:09:29,247
+Satisfait :
+
+173
+00:09:29,247 --> 00:09:31,979
+42 sur 80, donc 52,5 pour cent.
+
+174
+00:09:31,979 --> 00:09:34,976
+C'est plus de la moitié du disque.
+
+175
+00:09:35,426 --> 00:09:41,421
+Pour l'angle d'une part, on multiplie la
+fréquence par 360 degrés.
+
+176
+00:09:41,421 --> 00:09:44,691
+0,525 fois 360, ça donne 189 degrés.
+
+177
+00:09:46,050 --> 00:09:46,854
+Récapitulons.
+
+178
+00:09:46,854 --> 00:09:52,610
+En continu, on groupe en classes et on suppose
+les observations uniformes dans chaque classe.
+
+179
+00:09:53,060 --> 00:09:58,702
+L'histogramme se dessine avec les densités d n i
+ou d f i, pour que l'aire représente l'effectif.
+
+180
+00:09:59,152 --> 00:10:02,400
+Le polygone relie les points x i, grand F i.
+
+181
+00:10:02,400 --> 00:10:04,911
+Chaque segment a pour pente d f i.
+
+182
+00:10:05,361 --> 00:10:07,754
+F de x donne les pourcentages :
+
+183
+00:10:07,754 --> 00:10:10,997
+F de x, 1 moins F de x, ou une différence.
+
+184
+00:10:10,997 --> 00:10:13,313
+Et on peut la lire à l'envers.
+
+185
+00:10:13,763 --> 00:10:20,091
+Enfin, en qualitatif, on garde n i et f i, sans
+cumul, et on dessine un fromage.
+
