@@ -1,0 +1,534 @@
+meta:
+  course: 5ANA1D
+  course_name: Analyse de données
+  chapter: 1
+  part: 1
+  title: 'Statistique descriptive'
+  subtitle: 'Vocabulaire et observations discrètes'
+  output: cours-5ANA1D-01-partie-1
+
+scenes:
+  # ================================================================ TITRE
+  - id: s00_titre
+    layout: title
+    notion: 'Introduction'
+    beats:
+      - "Analyse de données, chapitre 1 : la statistique descriptive."
+      - "Dans cette première partie, on pose le vocabulaire, puis on range des données discrètes."
+    html: |
+      <svg viewBox="0 0 560 560" width="560" height="560">
+        <circle cx="280" cy="280" r="250" fill="var(--paper)" stroke="var(--line)" stroke-width="3"/>
+        <g data-beat="1" data-anim="draw" data-dur="1.4">
+          <line class="stroke muted" x1="110" y1="430" x2="460" y2="430"/>
+          <line class="stroke" x1="150" y1="430" x2="150" y2="350" style="stroke-width:16"/>
+          <line class="stroke" x1="220" y1="430" x2="220" y2="270" style="stroke-width:16"/>
+          <line class="stroke accent" x1="290" y1="430" x2="290" y2="190" style="stroke-width:16"/>
+          <line class="stroke" x1="360" y1="430" x2="360" y2="350" style="stroke-width:16"/>
+          <line class="stroke" x1="430" y1="430" x2="430" y2="350" style="stroke-width:16"/>
+        </g>
+      </svg>
+
+  # ================================================================ INTRO
+  - id: s01_intro
+    notion: 'Introduction'
+    title: 'Des données en vrac'
+    subtitle: 'Comment les rendre lisibles ?'
+    beats:
+      - "Tu demandes leur âge aux étudiants d'une classe, un par un. Tu obtiens ces seize nombres."
+      - "Comme ça, en vrac, c'est indigeste. Quel est l'âge le plus courant ? Combien ont moins de vingt ans ?"
+      - "La statistique descriptive sert à ça : trier, compter, puis présenter les données en tableaux et en graphiques."
+      - "On va voir le vocabulaire, les fréquences, les fréquences cumulées et la fonction de répartition."
+    html: |
+      <div class="col w50">
+        <div class="card" data-beat="0">
+          <div class="label">Âges récoltés</div>
+          <div class="chips">
+            <span class="chip">18</span><span class="chip">19</span><span class="chip">20</span><span class="chip">18</span>
+            <span class="chip">17</span><span class="chip">21</span><span class="chip">19</span><span class="chip">19</span>
+            <span class="chip">18</span><span class="chip">20</span><span class="chip">17</span><span class="chip">19</span>
+            <span class="chip">21</span><span class="chip">19</span><span class="chip">18</span><span class="chip">19</span>
+          </div>
+        </div>
+        <div class="bubble" data-beat="1">Âge le plus courant ? Combien ont moins de 20 ans ?</div>
+      </div>
+      <div class="col w50">
+        <div class="steps">
+          <div class="step" data-beat="2">Trier et compter</div>
+          <div class="step" data-beat="2+1.2">Présenter : tableaux et graphiques</div>
+          <div class="step" data-beat="3">Fréquences et fréquences cumulées</div>
+          <div class="step" data-beat="3+1.5">Fonction de répartition</div>
+        </div>
+      </div>
+
+  # ================================================================ NOTION 1 : VOCABULAIRE
+  - id: s02_population
+    notion: 'Vocabulaire'
+    tag: 'Notion 1 / 7'
+    title: 'Population et échantillon'
+    subtitle: 'Goûter la soupe sans boire la marmite'
+    beats:
+      - "Pense à un cuisinier qui goûte sa soupe. Une cuillère suffit, pas besoin de boire toute la marmite."
+      - "La marmite, c'est la population : l'ensemble des individus qu'on veut étudier."
+      - "Attention, un individu, ce n'est pas forcément une personne. Ça peut être une voiture, un oiseau ou une commune."
+      - "Souvent, on ne peut pas interroger tout le monde. On prend un échantillon assez grand pour être représentatif. C'est la cuillère."
+      - "Le nombre d'individus de l'échantillon s'appelle l'effectif. On le note n."
+    html: |
+      <div class="analogy w40" data-beat="0">
+        <div class="icon">🍲</div>
+        <div><b>Le cuisinier</b><br><span class="muted">goûte une cuillère,<br>pas toute la marmite</span></div>
+      </div>
+      <div class="col grow">
+        <div class="def" data-beat="1">
+          <div class="term">Population</div>
+          tous les individus étudiés <span class="muted">= la marmite</span>
+        </div>
+        <div class="row" data-beat="2">
+          <span class="chip">personne</span><span class="chip">voiture</span><span class="chip">oiseau</span><span class="chip">commune</span>
+        </div>
+        <div class="def" data-beat="3" style="border-top-color:var(--gold)">
+          <div class="term">Échantillon</div>
+          la partie interrogée <span class="muted">= la cuillère</span>
+        </div>
+        <div class="row" data-beat="4">
+          <span class="chip fill">Effectif</span> <span class="big">taille de l'échantillon : $n$</span>
+        </div>
+      </div>
+
+  # ================================================================ NOTION 2 : TYPES D'OBSERVATIONS
+  - id: s03_types
+    notion: 'Types d''observations'
+    tag: 'Notion 2 / 7'
+    title: 'Trois familles d''observations'
+    subtitle: 'Le type décide du tableau et du graphique'
+    beats:
+      - "Les informations récoltées s'appellent des observations. Il en existe deux grandes familles."
+      - "Si ce n'est pas un nombre, l'observation est qualitative. Par exemple, la marque de ton GSM."
+      - "Si c'est un nombre, elle est quantitative. Et là, il y a encore deux cas."
+      - "Discrète : des valeurs isolées, qu'on peut compter. Le nombre d'enfants d'une famille : 0, 1, 2, 3."
+      - "Continue : toutes les valeurs réelles d'un intervalle. Le poids d'un œuf peut valoir 52,375 grammes."
+    html: |
+      <div class="col w100 center">
+        <div class="node" data-beat="0">Observation</div>
+        <div class="row" style="gap:220px">
+          <div class="col center">
+            <div class="arrow-d" data-beat="1" data-anim="grow-x"></div>
+            <div class="node alt" data-beat="1">Qualitative</div>
+            <span class="muted" data-beat="1+0.8">marque de GSM</span>
+          </div>
+          <div class="col center">
+            <div class="arrow-d" data-beat="2" data-anim="grow-x"></div>
+            <div class="node" data-beat="2">Quantitative</div>
+            <div class="row" style="gap:40px">
+              <div class="col center" data-beat="3">
+                <div class="node ghost">Discrète</div>
+                <span class="muted">nb d'enfants</span>
+              </div>
+              <div class="col center" data-beat="4">
+                <div class="node ghost">Continue</div>
+                <span class="muted">poids d'un œuf</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  - id: s04_pieges
+    notion: 'Types d''observations'
+    tag: 'Notion 2 / 7'
+    title: 'Deux pièges'
+    subtitle: 'Discret ne veut pas dire entier'
+    beats:
+      - "Premier piège : une observation discrète n'est pas forcément un nombre entier."
+      - "Une interro sur 20 avec des demi-points : 0, 0,5, 1, et ainsi de suite jusqu'à 20. Ça fait 41 valeurs isolées. C'est discret."
+      - "Deuxième piège : le poids d'un œuf est continu. Mais si tu l'arrondis au gramme près, il redevient discret."
+      - "On parle alors de continu discrétisé."
+      - "Dernier mot de vocabulaire. Des mesures prises chaque jour à la même heure forment une série chronologique. Des mesures prises toutes au même moment forment une série statistique."
+    html: |
+      <div class="card w50" data-beat="0">
+        <div class="label">Piège 1</div>
+        <div class="big">Interro sur 20, avec des demis</div>
+        <div class="chips mt" data-beat="1">
+          <span class="chip">0</span><span class="chip">0,5</span><span class="chip">1</span><span class="chip">…</span><span class="chip">20</span>
+        </div>
+        <div class="mt" data-beat="1+2">41 valeurs isolées → <b class="main">discret</b></div>
+      </div>
+      <div class="col w50">
+        <div class="card" data-beat="2">
+          <div class="label">Piège 2</div>
+          52,375 g → arrondi → <b>52 g</b>
+          <div class="mt" data-beat="3"><span class="chip accent">continu discrétisé</span></div>
+        </div>
+        <div class="def" data-beat="4" style="border-top-color:var(--gold)">
+          <div class="term">Série chronologique</div>
+          une mesure par jour <span class="muted">≠ série statistique : même moment</span>
+        </div>
+      </div>
+
+  # ================================================================ NOTION 3 : FRÉQUENCE ABSOLUE
+  - id: s05_brutes
+    notion: 'Données brutes'
+    tag: 'Notion 3 / 7'
+    title: 'Effectif et valeurs observées'
+    subtitle: 'Premier réflexe : compter'
+    beats:
+      - "Revenons aux âges. Ce sont des données brutes : non triées, telles qu'on les a récoltées."
+      - "Premier réflexe : les compter. Il y en a seize, donc l'effectif n vaut 16."
+      - "Ensuite, on relève les valeurs différentes, toujours dans l'ordre croissant. On les note x 1, x 2, jusqu'à x k."
+      - "Ici, il y a cinq âges différents, de 17 à 21. Donc k vaut 5."
+      - "x 1 vaut 17, x 2 vaut 18, et ainsi de suite jusqu'à x 5, qui vaut 21."
+    html: |
+      <div class="col w50">
+        <div class="card" data-beat="0">
+          <div class="label">Données brutes</div>
+          <div class="chips">
+            <span class="chip">18</span><span class="chip">19</span><span class="chip">20</span><span class="chip">18</span>
+            <span class="chip">17</span><span class="chip">21</span><span class="chip">19</span><span class="chip">19</span>
+            <span class="chip">18</span><span class="chip">20</span><span class="chip">17</span><span class="chip">19</span>
+            <span class="chip">21</span><span class="chip">19</span><span class="chip">18</span><span class="chip">19</span>
+          </div>
+        </div>
+        <div class="row" data-beat="1"><span class="chip fill">Effectif</span><span class="big">$n = 16$</span></div>
+      </div>
+      <div class="col w50">
+        <div class="def" data-beat="2"><div class="term">Valeurs observées</div>$x_1 < x_2 < \dots < x_k$, triées</div>
+        <div class="row" data-beat="3"><span class="chip accent">$k = 5$</span><span>âges différents</span></div>
+        <div class="chips" data-beat="4">
+          <span class="chip main">$x_1=17$</span><span class="chip main">$x_2=18$</span><span class="chip main">$x_3=19$</span>
+          <span class="chip main">$x_4=20$</span><span class="chip main">$x_5=21$</span>
+        </div>
+      </div>
+
+  - id: s06_freq_abs
+    notion: 'Fréquence absolue'
+    tag: 'Notion 3 / 7'
+    title: 'Fréquence absolue $n_i$'
+    subtitle: 'Le tableau recensé'
+    beats:
+      - "Pour chaque valeur x i, on compte combien de fois elle apparaît. C'est sa fréquence absolue, notée n i."
+      - "Par exemple, 19 ans apparaît 6 fois. Donc n 3 vaut 6."
+      - "On range tout dans un tableau à deux colonnes. On l'appelle le tableau des fréquences absolues, ou tableau recensé."
+      - "Propriété fondamentale : si on additionne tous les n i, on retrouve l'effectif total."
+      - "La formule se lit : la somme des n i, pour i allant de 1 à k, égale n."
+      - "Ici, 2 plus 4 plus 6 plus 2 plus 2, ça fait bien 16."
+    html: |
+      <table class="data" data-beat="0">
+        <tr><th>$x_i$</th><th class="hl" data-hl="0">$n_i$</th></tr>
+        <tr><td>17</td><td>2</td></tr>
+        <tr><td>18</td><td>4</td></tr>
+        <tr class="hl" data-hl="1"><td>19</td><td>6</td></tr>
+        <tr><td>20</td><td>2</td></tr>
+        <tr><td>21</td><td>2</td></tr>
+        <tr class="tot"><td>Total</td><td data-beat="5+0.8" data-anim="count" data-to="16">16</td></tr>
+      </table>
+      <div class="col grow">
+        <div class="def" data-beat="2"><div class="term">Tableau recensé</div>chaque valeur $x_i$ et son $n_i$</div>
+        <div class="card" data-beat="3">
+          <div class="formula">$$\htmlData{hl=4}{\sum_{i=1}^{k}}\; n_i \;=\; n$$</div>
+          <div class="calc" data-beat="5">2 + 4 + <b>6</b> + 2 + 2 = <span class="res">16</span></div>
+        </div>
+      </div>
+
+  # ================================================================ NOTION 4 : FRÉQUENCE RELATIVE
+  - id: s07_freq_rel
+    notion: 'Fréquence relative'
+    tag: 'Notion 4 / 7'
+    title: 'Fréquence relative $f_i$'
+    subtitle: 'La même info, en pourcentage'
+    beats:
+      - "Dire 6 étudiants sur 16, c'est bien. Mais pour comparer deux classes de tailles différentes, un pourcentage est plus parlant."
+      - "La fréquence relative f i, c'est la fréquence absolue divisée par l'effectif."
+      - "Au numérateur, n i : le nombre d'apparitions. Au dénominateur, n : l'effectif total."
+      - "Pour 19 ans : 6 divisé par 16, ça donne 0,375. Soit 37,5 pour cent."
+      - "Une fréquence relative est donc toujours un réel entre 0 et 1. On la retrouvera dans la partie probabilités du cours."
+    html: |
+      <div class="col w50">
+        <div class="card main" data-beat="1">
+          <div class="formula lg">$$f_i = \frac{\htmlData{hl=2}{n_i}}{\htmlData{hl=2}{n}}$$</div>
+        </div>
+        <div class="legend" data-beat="2">
+          <span class="sym">$n_i$</span><span>apparitions de $x_i$</span>
+          <span class="sym">$n$</span><span>effectif total</span>
+        </div>
+      </div>
+      <div class="col w50">
+        <div class="bubble" data-beat="0">6 sur 16… et en pourcentage ?</div>
+        <div class="card" data-beat="3">
+          <div class="label">Exemple : 19 ans</div>
+          <div class="calc">$f_3 = \dfrac{6}{16} = 0{,}375$ = <span class="res">37,5 %</span></div>
+        </div>
+        <div class="keep" data-beat="4">$0 \le f_i \le 1$</div>
+      </div>
+
+  - id: s08_somme_fi
+    notion: 'Fréquence relative'
+    tag: 'Notion 4 / 7'
+    title: 'La somme des $f_i$ vaut 1'
+    subtitle: 'Démonstration en trois lignes'
+    beats:
+      - "Voici le tableau avec les fréquences relatives. Le total fait cent pour cent."
+      - "Ce n'est pas un hasard. On le démontre. La somme des f i, c'est la somme des n i divisés par n."
+      - "n est le même pour toutes les valeurs. On peut donc le sortir de la somme : un sur n, fois la somme des n i."
+      - "Or la somme des n i, c'est n. Il reste n divisé par n, donc 1."
+      - "Ce tableau a un avantage : on compare facilement. Son inconvénient : on ne voit plus l'effectif, 16 étudiants."
+    html: |
+      <table class="data">
+        <tr><th>$x_i$</th><th>$f_i$</th></tr>
+        <tr><td>17</td><td>12,5 %</td></tr>
+        <tr><td>18</td><td>25 %</td></tr>
+        <tr><td>19</td><td>37,5 %</td></tr>
+        <tr><td>20</td><td>12,5 %</td></tr>
+        <tr><td>21</td><td>12,5 %</td></tr>
+        <tr class="tot"><td>Total</td><td class="accent">100 %</td></tr>
+      </table>
+      <div class="col grow">
+        <div class="steps">
+          <div class="step" data-beat="1">$\sum f_i = \sum \dfrac{n_i}{n}$</div>
+          <div class="step" data-beat="2">$= \dfrac{1}{n}\sum n_i$</div>
+          <div class="step done" data-beat="3">$= \dfrac{n}{n} = 1$</div>
+        </div>
+        <div class="row" data-beat="4"><span class="chip gold">+ comparable</span><span class="chip">− effectif perdu</span></div>
+      </div>
+
+  # ================================================================ NOTION 5 : BÂTONNETS
+  - id: s09_batons
+    notion: 'Diagramme en bâtonnets'
+    tag: 'Notion 5 / 7'
+    title: 'Diagramme en bâtonnets'
+    subtitle: 'Le tableau, en image'
+    beats:
+      - "On peut dessiner ce tableau. En abscisse, les valeurs x i. En hauteur, les n i."
+      - "Le bâton de 19 ans est le plus haut : c'est l'âge le plus fréquent."
+      - "Avec les f i en hauteur, l'allure est exactement la même. Seule la graduation de l'axe vertical change."
+      - "Petite remarque. Si les valeurs sont très différentes, par exemple 90 656 contre 8, on utilise une échelle logarithmique."
+    html: |
+      <div class="bars-wrap w50" data-beat="0" data-anim="fade">
+        <div class="bars">
+          <div class="bar"><span>2</span><div class="fill" style="height:120px" data-beat="0+0.3" data-anim="grow-y"></div><span class="lbl">17</span></div>
+          <div class="bar"><span>4</span><div class="fill" style="height:240px" data-beat="0+0.45" data-anim="grow-y"></div><span class="lbl">18</span></div>
+          <div class="bar top"><span>6</span><div class="fill" style="height:360px" data-beat="0+0.6" data-anim="grow-y"></div><span class="lbl">19</span></div>
+          <div class="bar"><span>2</span><div class="fill" style="height:120px" data-beat="0+0.75" data-anim="grow-y"></div><span class="lbl">20</span></div>
+          <div class="bar"><span>2</span><div class="fill" style="height:120px" data-beat="0+0.9" data-anim="grow-y"></div><span class="lbl">21</span></div>
+        </div>
+      </div>
+      <div class="col w50">
+        <div class="bubble" data-beat="1"><b class="accent">19 ans</b> : l'âge le plus fréquent</div>
+        <div class="card" data-beat="2">
+          <div class="label">Avec $f_i$</div>
+          même allure, axe gradué en %
+        </div>
+        <div class="card gold" data-beat="3">
+          <div class="label">Valeurs très inégales</div>
+          échelle $\log_{10} n_i$
+        </div>
+      </div>
+
+  # ================================================================ NOTION 6 : FRÉQUENCES CUMULÉES
+  - id: s10_cumul_intuition
+    notion: 'Fréquences cumulées'
+    tag: 'Notion 6 / 7'
+    title: 'Cumuler, c''est additionner au fur et à mesure'
+    subtitle: 'Combien ont 19 ans ou moins ?'
+    beats:
+      - "Imagine que tu ranges les étudiants par âge, du plus jeune au plus vieux, et que tu comptes en avançant."
+      - "Arrivé au bout des 17 ans, tu en as compté 2. Après les 18 ans, 2 plus 4, donc 6."
+      - "Après les 19 ans, 6 plus 6, donc 12. Ce compteur qui ne fait que monter, c'est la fréquence cumulée."
+      - "Elle répond directement à la question : combien d'observations sont inférieures ou égales à une valeur ?"
+    html: |
+      <div class="analogy w40" data-beat="0">
+        <div class="icon">🧮</div>
+        <div><b>Le compteur</b><br><span class="muted">on range par âge<br>et on compte en avançant</span></div>
+      </div>
+      <div class="col grow">
+        <div class="row" data-beat="1"><span class="chip main">17</span><span class="big">2</span></div>
+        <div class="row" data-beat="1+1.8"><span class="chip main">18</span><span class="big">2 + 4 = 6</span></div>
+        <div class="row" data-beat="2"><span class="chip main">19</span><span class="big">6 + 6 = <b class="accent">12</b></span></div>
+        <div class="keep" data-beat="3">nombre d'observations <b>$\le x_i$</b></div>
+      </div>
+
+  - id: s11_Ni
+    notion: 'Fréquences cumulées'
+    tag: 'Notion 6 / 7'
+    title: 'Fréquence absolue cumulée $N_i$'
+    subtitle: 'Nombre d''observations $\le x_i$'
+    beats:
+      - say: "La fréquence absolue cumulée se note N i, avec un grand N. C'est le nombre d'observations inférieures ou égales à x i."
+        speak: "La fréquence absolue cumulée se note grand N i. C'est le nombre d'observations inférieures ou égales à x i."
+      - "La formule : grand N i égale la somme des petits n j, pour j allant de 1 à i. On additionne les fréquences de toutes les valeurs jusqu'à x i."
+      - "En pratique, on calcule ligne par ligne. Grand N i, c'est le précédent, plus le n i de la ligne."
+      - "La première ligne recopie n 1, ici 2. La dernière donne toujours l'effectif total, ici 16."
+    html: |
+      <table class="data">
+        <tr><th>$x_i$</th><th>$n_i$</th><th class="hl" data-hl="0">$N_i$</th></tr>
+        <tr><td>17</td><td>2</td><td class="ring" data-hl="3">2</td></tr>
+        <tr><td>18</td><td>4</td><td data-beat="2">6</td></tr>
+        <tr><td>19</td><td>6</td><td data-beat="2+0.6">12</td></tr>
+        <tr><td>20</td><td>2</td><td data-beat="2+1.2">14</td></tr>
+        <tr><td>21</td><td>2</td><td class="ring" data-hl="3+2" data-beat="2+1.8">16</td></tr>
+      </table>
+      <div class="col grow">
+        <div class="card">
+          <div class="formula" data-beat="1">$$N_i = \sum_{j=1}^{i} n_j$$</div>
+          <div class="calc" data-beat="2">en pratique : $N_i = N_{i-1} + n_i$</div>
+        </div>
+        <div class="row" data-beat="3"><span class="chip">$N_1 = n_1$</span><span class="chip accent">$N_k = n$</span></div>
+      </div>
+
+  - id: s12_Fi
+    notion: 'Fréquences cumulées'
+    tag: 'Notion 6 / 7'
+    title: 'Fréquence relative cumulée $F_i$'
+    subtitle: 'Pourcentage d''observations $\le x_i$'
+    beats:
+      - "Même idée en pourcentage. La fréquence relative cumulée, grand F i, c'est la somme des f j jusqu'à i."
+      - "Autre façon de la calculer : grand N i divisé par l'effectif n."
+      - "Pour 19 ans : 12 divisé par 16, ça donne 0,75. Donc 75 pour cent."
+      - "La première ligne recopie f 1. La dernière vaut toujours 1, c'est-à-dire cent pour cent."
+    html: |
+      <table class="data">
+        <tr><th>$x_i$</th><th>$N_i$</th><th>$f_i$</th><th class="hl" data-hl="0">$F_i$</th></tr>
+        <tr><td>17</td><td>2</td><td>12,5 %</td><td>12,5 %</td></tr>
+        <tr><td>18</td><td>6</td><td>25 %</td><td>37,5 %</td></tr>
+        <tr class="hl" data-hl="2"><td>19</td><td>12</td><td>37,5 %</td><td>75 %</td></tr>
+        <tr><td>20</td><td>14</td><td>12,5 %</td><td>87,5 %</td></tr>
+        <tr><td>21</td><td>16</td><td>12,5 %</td><td class="ring" data-hl="3">100 %</td></tr>
+      </table>
+      <div class="col grow">
+        <div class="card" data-beat="0"><div class="formula sm">$$F_i = \sum_{j=1}^{i} f_j \htmlData{beat=1}{\;=\; \frac{N_i}{n}}$$</div></div>
+        <div class="calc" data-beat="2">$\dfrac{12}{16} = 0{,}75$ = <span class="res">75 %</span></div>
+      </div>
+
+  - id: s13_lire_tableau
+    notion: 'Fréquences cumulées'
+    tag: 'Notion 6 / 7'
+    title: 'Lire le tableau complet'
+    subtitle: 'Trois questions, trois réponses'
+    beats:
+      - "Avec ce tableau complet, on répond à trois types de questions."
+      - "Combien ont 19 ans ou moins ? On lit grand N i : 12 étudiants. Ou grand F i : 75 pour cent."
+      - "Combien ont plus de 19 ans ? On prend le complément : 100 moins 75, donc 25 pour cent. Autrement dit, 20 ans ou plus."
+      - "Combien ont entre 18 et 20 ans ? On prend grand F de 20, moins grand F de 17. Attention : de 17, pas de 18 !"
+      - "87,5 moins 12,5, ça fait 75 pour cent. On soustrait la valeur juste avant 18, sinon on enlève les 18 ans du compte."
+    html: |
+      <table class="data small">
+        <tr><th>$x_i$</th><th>$n_i$</th><th>$N_i$</th><th>$f_i$</th><th>$F_i$</th></tr>
+        <tr><td>17</td><td>2</td><td>2</td><td>12,5 %</td><td class="ring" data-hl="3+2">12,5 %</td></tr>
+        <tr class="hl" data-hl="4"><td>18</td><td>4</td><td>6</td><td>25 %</td><td>37,5 %</td></tr>
+        <tr class="hl" data-hl="1"><td>19</td><td>6</td><td>12</td><td>37,5 %</td><td>75 %</td></tr>
+        <tr class="hl" data-hl="4"><td>20</td><td>2</td><td>14</td><td>12,5 %</td><td class="ring" data-hl="3+1">87,5 %</td></tr>
+        <tr><td>21</td><td>2</td><td>16</td><td>12,5 %</td><td>100 %</td></tr>
+      </table>
+      <div class="col grow">
+        <div class="card" data-beat="1"><div class="label">$\le 19$ ans</div>$N_3 = 12$ → <b>75 %</b></div>
+        <div class="card" data-beat="2"><div class="label">$&gt; 19$ ans</div>$1 - 0{,}75$ → <b>25 %</b></div>
+        <div class="card accent" data-beat="3"><div class="label">entre 18 et 20</div>$F(20) - F(17)$<span data-beat="4"> = 87,5 − 12,5 = <span class="res">75 %</span></span></div>
+      </div>
+
+  # ================================================================ NOTION 7 : FONCTION DE RÉPARTITION
+  - id: s14_repartition_def
+    notion: 'Fonction de répartition'
+    tag: 'Notion 7 / 7'
+    title: 'La fonction de répartition $F(x)$'
+    subtitle: 'Le graphique en escalier'
+    beats:
+      - "Pour représenter les fréquences relatives cumulées, on dessine un graphique en escalier."
+      - "C'est le graphe de la fonction de répartition. F de x, c'est le pourcentage des observations inférieures ou égales à x."
+      - "Tu peux déjà l'écrire comme une probabilité : F de x égale P de X inférieur ou égal à x. Tu verras ça dans la partie probabilités."
+      - "Chaque palier commence à une valeur observée et monte d'une marche. Le point plein, à gauche, appartient au palier."
+      - "Le palier est fermé à gauche et ouvert à droite. Au bout, le point est exclu : à 20 pile, on est déjà sur la marche suivante."
+    html: |
+      <svg class="w60" viewBox="0 0 780 470" width="780" height="470">
+        <g class="stroke muted" style="stroke-width:3">
+          <line x1="80" y1="400" x2="740" y2="400"/>
+          <line x1="80" y1="400" x2="80" y2="20"/>
+        </g>
+        <g style="font-size:30px;fill:var(--muted)">
+          <text x="174" y="440">17</text><text x="281" y="440">18</text><text x="388" y="440">19</text>
+          <text x="494" y="440">20</text><text x="601" y="440">21</text>
+          <text x="30" y="50">1</text><text x="10" y="141">0,75</text>
+        </g>
+        <line x1="80" y1="130" x2="400" y2="130" class="stroke muted" style="stroke-dasharray:8 8;stroke-width:2" data-beat="1" data-anim="fade"/>
+        <g data-beat="0" data-anim="draw" data-dur="1.6">
+          <line class="stroke" x1="80" y1="400" x2="186.7" y2="400" style="stroke-width:7"/>
+          <line class="stroke" x1="186.7" y1="355" x2="293.3" y2="355" style="stroke-width:7"/>
+          <line class="stroke" x1="293.3" y1="265" x2="400" y2="265" style="stroke-width:7"/>
+          <line class="stroke accent" x1="400" y1="130" x2="506.7" y2="130" style="stroke-width:7"/>
+          <line class="stroke" x1="506.7" y1="85" x2="613.3" y2="85" style="stroke-width:7"/>
+          <line class="stroke" x1="613.3" y1="40" x2="740" y2="40" style="stroke-width:7"/>
+        </g>
+        <g data-beat="3" data-anim="fade">
+          <circle cx="186.7" cy="355" r="10" fill="var(--main)"/>
+          <circle cx="293.3" cy="265" r="10" fill="var(--main)"/>
+          <circle cx="400" cy="130" r="12" fill="var(--accent)"/>
+          <circle cx="506.7" cy="85" r="10" fill="var(--main)"/>
+          <circle cx="613.3" cy="40" r="10" fill="var(--main)"/>
+        </g>
+        <circle cx="506.7" cy="130" r="11" fill="var(--paper)" stroke="var(--accent)" stroke-width="4" data-beat="4" data-anim="pop"/>
+      </svg>
+      <div class="col grow">
+        <div class="card main" data-beat="1">
+          <div class="big">$F(x)$ = % des observations <b>$\le x$</b></div>
+        </div>
+        <div class="card gold" data-beat="2">
+          <div class="formula sm">$$F(x) = P(X \le x)$$</div>
+        </div>
+        <div class="row" data-beat="4"><span class="chip accent">fermé à gauche [</span><span class="chip">ouvert à droite [</span></div>
+      </div>
+
+  - id: s15_repartition_ex
+    notion: 'Fonction de répartition'
+    tag: 'Notion 7 / 7'
+    title: '$F(x)$ existe pour tout réel $x$'
+    subtitle: 'Même entre deux valeurs observées'
+    beats:
+      - "Contrairement aux bâtonnets, F a une valeur pour n'importe quel x, pas seulement pour les âges observés."
+      - "F de 16 vaut 0. Personne n'a 16 ans, mais il est vrai que zéro pour cent ont 16 ans ou moins."
+      - "F de 19,5 égale F de 19, donc 0,75. Les âges sont entiers : 75 pour cent ont au plus dix-neuf ans et demi."
+      - "Et F de 25 vaut 1. Tout le monde a 25 ans ou moins. Au-delà de 21, F vaut toujours 1."
+      - "À retenir : F de x monte de 0 à 1, par marches, et ne redescend jamais."
+    html: |
+      <svg class="w50" viewBox="0 0 780 470" width="700" height="420">
+        <g class="stroke muted" style="stroke-width:3">
+          <line x1="80" y1="400" x2="740" y2="400"/>
+          <line x1="80" y1="400" x2="80" y2="20"/>
+        </g>
+        <g style="font-size:30px;fill:var(--muted)">
+          <text x="174" y="440">17</text><text x="281" y="440">18</text><text x="388" y="440">19</text>
+          <text x="494" y="440">20</text><text x="601" y="440">21</text>
+        </g>
+        <g>
+          <line class="stroke" x1="80" y1="400" x2="186.7" y2="400" style="stroke-width:7"/>
+          <line class="stroke" x1="186.7" y1="355" x2="293.3" y2="355" style="stroke-width:7"/>
+          <line class="stroke" x1="293.3" y1="265" x2="400" y2="265" style="stroke-width:7"/>
+          <line class="stroke" x1="400" y1="130" x2="506.7" y2="130" style="stroke-width:7"/>
+          <line class="stroke" x1="506.7" y1="85" x2="613.3" y2="85" style="stroke-width:7"/>
+          <line class="stroke" x1="613.3" y1="40" x2="740" y2="40" style="stroke-width:7"/>
+        </g>
+        <circle cx="133" cy="400" r="13" fill="var(--gold)" data-beat="1" data-anim="pop"/>
+        <circle cx="453" cy="130" r="13" fill="var(--accent)" data-beat="2" data-anim="pop"/>
+        <circle cx="720" cy="40" r="13" fill="var(--gold)" data-beat="3" data-anim="pop"/>
+      </svg>
+      <div class="col grow">
+        <div class="calc" data-beat="1">$F(16) = 0$</div>
+        <div class="calc" data-beat="2">$F(19{,}5) = F(19) = $ <span class="res">0,75</span></div>
+        <div class="calc" data-beat="3">$F(25) = 1$</div>
+        <div class="keep" data-beat="4">$F$ monte de 0 à 1, par marches, sans jamais redescendre.</div>
+      </div>
+
+  # ================================================================ RÉCAP
+  - id: s16_recap
+    notion: 'Récapitulatif'
+    title: 'Récap de la partie 1'
+    beats:
+      - "Récapitulons. L'effectif n, c'est le nombre d'observations. n i compte les apparitions de x i, et leur somme fait n."
+      - "La fréquence relative f i, c'est n i sur n. Leur somme fait 1."
+      - "Grand N i et grand F i cumulent : ils comptent les observations inférieures ou égales à x i."
+      - "Pour un intervalle, on soustrait : grand F de la borne haute, moins grand F de la valeur juste avant la borne basse."
+      - "Et la fonction de répartition F de x est un escalier qui monte de 0 à 1. Dans la partie 2, on passe aux données continues."
+    html: |
+      <div class="recap">
+        <div class="item" data-beat="0"><span class="tex">$\sum n_i = n$</span> : les $n_i$ comptent les $x_i$</div>
+        <div class="item" data-beat="1"><span class="tex">$f_i = \frac{n_i}{n}$</span> et $\sum f_i = 1$</div>
+        <div class="item" data-beat="2"><span class="tex">$N_i$, $F_i = \frac{N_i}{n}$</span> : observations $\le x_i$</div>
+        <div class="item" data-beat="3">Entre $a$ et $b$ : $F(b) - F(\text{valeur avant } a)$</div>
+        <div class="item" data-beat="4"><span class="tex">$F(x) = P(X \le x)$</span> : escalier de 0 à 1</div>
+      </div>
