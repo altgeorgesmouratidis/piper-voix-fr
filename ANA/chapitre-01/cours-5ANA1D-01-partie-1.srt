@@ -1,0 +1,544 @@
+1
+00:00:00,350 --> 00:00:03,946
+Analyse de données, chapitre 1 : la statistique descriptive.
+
+2
+00:00:03,946 --> 00:00:08,500
+Dans cette première partie, on voit le vocabulaire et les données discrètes.
+
+3
+00:00:09,650 --> 00:00:10,606
+Imagine Alice.
+
+4
+00:00:10,606 --> 00:00:14,155
+Elle demande leur âge aux 16 étudiants de sa classe.
+
+5
+00:00:14,605 --> 00:00:16,121
+Elle obtient cette liste.
+
+6
+00:00:16,121 --> 00:00:19,214
+En vrac, comme ça, elle ne raconte pas grand-chose.
+
+7
+00:00:19,664 --> 00:00:24,343
+Le but de ce chapitre : ranger ces données dans des tableaux et des graphiques qui parlent.
+
+8
+00:00:24,793 --> 00:00:31,097
+Au programme : le vocabulaire, les fréquences, les fréquences cumulées, et la fonction de répartition.
+
+9
+00:00:32,250 --> 00:00:33,972
+Commençons par le vocabulaire.
+
+10
+00:00:33,972 --> 00:00:36,267
+Pense à un cuisinier qui goûte sa soupe.
+
+11
+00:00:36,717 --> 00:00:38,584
+Il ne boit pas toute la marmite.
+
+12
+00:00:38,584 --> 00:00:41,558
+Une cuillère suffit, si la soupe est bien mélangée.
+
+13
+00:00:42,008 --> 00:00:43,799
+En statistique, c'est pareil.
+
+14
+00:00:43,799 --> 00:00:47,999
+La marmite, c'est la population : tout le groupe qu'on veut étudier.
+
+15
+00:00:48,449 --> 00:00:51,721
+Chaque élément de ce groupe s'appelle un individu.
+
+16
+00:00:51,721 --> 00:00:54,928
+Ça peut être une personne, un animal ou un objet.
+
+17
+00:00:55,378 --> 00:00:59,975
+La cuillère, c'est l'échantillon : la partie du groupe qu'on interroge vraiment.
+
+18
+00:01:00,425 --> 00:01:04,034
+Le nombre d'observations récoltées s'appelle l'effectif.
+
+19
+00:01:04,034 --> 00:01:04,872
+On le note n.
+
+20
+00:01:06,017 --> 00:01:09,103
+Les informations récoltées s'appellent des observations.
+
+21
+00:01:09,103 --> 00:01:11,032
+Il en existe deux grandes familles.
+
+22
+00:01:11,482 --> 00:01:14,890
+Si ce ne sont pas des nombres, elles sont qualitatives.
+
+23
+00:01:14,890 --> 00:01:18,111
+Par exemple, une couleur ou une marque de téléphone.
+
+24
+00:01:18,561 --> 00:01:21,528
+Si ce sont des nombres, elles sont quantitatives.
+
+25
+00:01:21,528 --> 00:01:23,345
+Et là, il y a encore deux cas.
+
+26
+00:01:23,795 --> 00:01:28,672
+Discrètes : les valeurs sont isolées, on peut les compter une à une.
+
+27
+00:01:28,672 --> 00:01:31,469
+Comme le nombre d'enfants : 0, 1, 2, 3.
+
+28
+00:01:31,919 --> 00:01:37,053
+Continues : toutes les valeurs réelles d'un intervalle sont possibles.
+
+29
+00:01:37,053 --> 00:01:41,161
+Comme le poids d'un œuf : 52 grammes, ou 52,375 grammes.
+
+30
+00:01:42,317 --> 00:01:44,264
+Classons le questionnaire d'Alice.
+
+31
+00:01:44,264 --> 00:01:48,215
+Elle demande l'âge, la taille et le langage de programmation préféré.
+
+32
+00:01:48,665 --> 00:01:52,275
+L'âge, en années entières, est quantitatif discret.
+
+33
+00:01:52,725 --> 00:01:57,323
+La taille peut prendre n'importe quelle valeur réelle : c'est quantitatif continu.
+
+34
+00:01:57,773 --> 00:02:03,171
+Le langage préféré, Python ou Java, n'est pas un nombre : c'est qualitatif.
+
+35
+00:02:03,621 --> 00:02:04,738
+Attention au piège.
+
+36
+00:02:04,738 --> 00:02:09,203
+Si Alice arrondit la taille au centimètre, les valeurs redeviennent isolées.
+
+37
+00:02:09,203 --> 00:02:11,377
+On parle alors de continu discrétisé.
+
+38
+00:02:11,827 --> 00:02:12,480
+Dernier mot.
+
+39
+00:02:12,480 --> 00:02:16,124
+Des mesures répétées dans le temps forment une série chronologique.
+
+40
+00:02:16,124 --> 00:02:19,606
+Des mesures prises au même moment forment une série statistique.
+
+41
+00:02:20,056 --> 00:02:22,948
+À retenir : qualitatif, discret ou continu.
+
+42
+00:02:22,948 --> 00:02:27,521
+Le type de données décide des tableaux et des graphiques à utiliser.
+
+43
+00:02:28,683 --> 00:02:30,201
+Revenons aux âges d'Alice.
+
+44
+00:02:30,201 --> 00:02:35,104
+Imagine un vote à main levée : on compte combien de mains se lèvent pour chaque âge.
+
+45
+00:02:35,554 --> 00:02:40,650
+D'abord, on repère les valeurs différentes, rangées dans l'ordre croissant.
+
+46
+00:02:40,650 --> 00:02:42,961
+On les note x 1, x 2, jusqu'à x k.
+
+47
+00:02:43,411 --> 00:02:47,286
+Ici, il y a 5 âges différents, de 17 à 21.
+
+48
+00:02:47,286 --> 00:02:48,577
+Donc k vaut 5.
+
+49
+00:02:49,027 --> 00:02:50,419
+Ensuite, on compte.
+
+50
+00:02:50,419 --> 00:02:55,986
+Le nombre de fois que la valeur x i apparaît s'appelle sa fréquence absolue.
+
+51
+00:02:55,986 --> 00:02:57,085
+On la note n i.
+
+52
+00:02:57,535 --> 00:02:59,244
+On range tout dans un tableau.
+
+53
+00:02:59,244 --> 00:03:03,119
+On l'appelle le tableau des fréquences absolues, ou tableau recensé.
+
+54
+00:03:03,569 --> 00:03:06,832
+Par exemple, 19 ans apparaît 6 fois.
+
+55
+00:03:06,832 --> 00:03:08,283
+Donc n 3 vaut 6.
+
+56
+00:03:08,733 --> 00:03:13,319
+Si on additionne toutes les fréquences absolues, on retrouve l'effectif total.
+
+57
+00:03:13,769 --> 00:03:19,416
+La formule se lit : la somme des n i, pour i allant de 1 à k, égale n.
+
+58
+00:03:19,416 --> 00:03:23,207
+Ici, 2 plus 4 plus 6 plus 2 plus 2, ça fait 16.
+
+59
+00:03:23,657 --> 00:03:27,688
+À retenir : n i compte combien de fois la valeur x i apparaît.
+
+60
+00:03:27,688 --> 00:03:30,809
+Et la somme des n i donne toujours l'effectif n.
+
+61
+00:03:31,950 --> 00:03:33,429
+6 étudiants ont 19 ans.
+
+62
+00:03:33,429 --> 00:03:34,716
+Mais 6 sur combien ?
+
+63
+00:03:34,716 --> 00:03:39,218
+C'est comme une note : 18 points, ça ne veut rien dire sans le sur 20.
+
+64
+00:03:39,668 --> 00:03:41,759
+La fréquence relative répond à ça.
+
+65
+00:03:41,759 --> 00:03:44,834
+C'est la fréquence absolue divisée par l'effectif.
+
+66
+00:03:45,284 --> 00:03:48,593
+f i, c'est la fréquence relative de la valeur x i.
+
+67
+00:03:49,043 --> 00:03:53,780
+On divise n i, la fréquence absolue, par n, l'effectif total.
+
+68
+00:03:54,230 --> 00:04:00,639
+Pour 19 ans : 6 divisé par 16, ça donne 0,375.
+
+69
+00:04:00,639 --> 00:04:02,311
+Soit 37,5 %.
+
+70
+00:04:02,761 --> 00:04:06,754
+Une fréquence relative est toujours comprise entre 0 et 1.
+
+71
+00:04:06,754 --> 00:04:10,609
+Et la somme des f i vaut toujours 1, c'est-à-dire 100 %.
+
+72
+00:04:11,059 --> 00:04:11,820
+Pourquoi ?
+
+73
+00:04:11,820 --> 00:04:15,472
+Parce que la somme des n i sur n, c'est n sur n.
+
+74
+00:04:15,472 --> 00:04:16,005
+Donc 1.
+
+75
+00:04:17,150 --> 00:04:20,370
+Pour visualiser, on utilise un diagramme en bâtonnets.
+
+76
+00:04:20,370 --> 00:04:23,710
+Les valeurs x i en abscisse, les fréquences en ordonnée.
+
+77
+00:04:24,160 --> 00:04:26,385
+À gauche, les fréquences absolues.
+
+78
+00:04:26,385 --> 00:04:28,677
+À droite, les fréquences relatives.
+
+79
+00:04:28,677 --> 00:04:31,950
+Les deux diagrammes ont exactement la même allure.
+
+80
+00:04:32,400 --> 00:04:38,913
+Seule la graduation de l'axe vertical change : un nombre d'étudiants d'un côté, un pourcentage de l'autre.
+
+81
+00:04:39,363 --> 00:04:44,777
+Petite remarque : si les fréquences sont très éloignées, certains bâtonnets deviennent invisibles.
+
+82
+00:04:44,777 --> 00:04:47,374
+On gradue alors l'axe en échelle logarithmique.
+
+83
+00:04:47,824 --> 00:04:50,180
+À retenir : f i égale n i sur n.
+
+84
+00:04:50,180 --> 00:04:54,302
+C'est une part entre 0 et 1, et la somme des f i vaut 1.
+
+85
+00:04:55,450 --> 00:04:59,296
+Nouvelle question : combien d'étudiants ont 19 ans ou moins ?
+
+86
+00:04:59,296 --> 00:05:00,872
+Pour répondre, on cumule.
+
+87
+00:05:01,322 --> 00:05:03,827
+Pense au compteur à l'entrée d'une salle.
+
+88
+00:05:03,827 --> 00:05:06,453
+À chaque groupe qui entre, le total grimpe.
+
+89
+00:05:06,903 --> 00:05:12,952
+La fréquence absolue cumulée, notée grand N i, compte les observations inférieures ou égales à x i.
+
+90
+00:05:13,402 --> 00:05:17,582
+Grand N i égale la somme des n j, pour j allant de 1 à i.
+
+91
+00:05:18,032 --> 00:05:24,023
+En pratique, on ajoute simplement la ligne suivante : grand N i égale grand N i moins 1, plus n i.
+
+92
+00:05:24,473 --> 00:05:29,332
+Même idée en pourcentage : grand F i, la fréquence relative cumulée.
+
+93
+00:05:29,332 --> 00:05:31,404
+C'est grand N i divisé par n.
+
+94
+00:05:32,550 --> 00:05:34,418
+Construisons le tableau.
+
+95
+00:05:34,418 --> 00:05:39,632
+2, puis 2 plus 4 égale 6, puis 6 plus 6 égale 12, puis 14, puis 16.
+
+96
+00:05:40,082 --> 00:05:44,540
+Dernière ligne : grand N k vaut toujours n, et grand F k vaut toujours 1.
+
+97
+00:05:44,990 --> 00:05:46,482
+Que peut-on lire ?
+
+98
+00:05:46,482 --> 00:05:50,872
+Grand N 3 vaut 12 : 12 étudiants ont 19 ans ou moins.
+
+99
+00:05:50,872 --> 00:05:51,701
+Soit 75 %.
+
+100
+00:05:52,151 --> 00:05:55,697
+Le complément donne le reste : 1 moins 0,75.
+
+101
+00:05:55,697 --> 00:05:59,163
+Donc 25 % des étudiants ont plus de 19 ans.
+
+102
+00:05:59,613 --> 00:06:01,864
+Pour un intervalle, on soustrait.
+
+103
+00:06:01,864 --> 00:06:06,092
+Entre 18 et 20 ans inclus : grand F de 20 moins grand F de 17.
+
+104
+00:06:06,542 --> 00:06:13,089
+On retire 17, et pas 18, car on veut garder les étudiants de 18 ans.
+
+105
+00:06:13,089 --> 00:06:16,073
+87,5 moins 12,5 : ça fait 75 %.
+
+106
+00:06:16,523 --> 00:06:21,788
+À retenir : grand F i est la part des observations inférieures ou égales à x i.
+
+107
+00:06:21,788 --> 00:06:24,453
+Pour un intervalle, on soustrait deux F.
+
+108
+00:06:25,617 --> 00:06:28,558
+Les grands F i ne sont définis que pour les valeurs observées.
+
+109
+00:06:28,558 --> 00:06:31,689
+Mais quelle est la part des étudiants de 19 ans et demi ou moins ?
+
+110
+00:06:32,139 --> 00:06:37,549
+Pour répondre pour n'importe quel x, on définit la fonction de répartition, F de x.
+
+111
+00:06:37,999 --> 00:06:42,676
+F de x égale la part des observations inférieures ou égales à x.
+
+112
+00:06:42,676 --> 00:06:49,179
+Dans la partie probabilités, tu l'écriras : probabilité que X soit inférieur ou égal à x.
+
+113
+00:06:49,629 --> 00:06:51,299
+Son graphique est un escalier.
+
+114
+00:06:51,299 --> 00:06:56,642
+Comme un vrai escalier : tant que tu n'atteins pas la marche suivante, tu restes au même niveau.
+
+115
+00:06:57,092 --> 00:06:59,235
+Avant 17 ans, personne.
+
+116
+00:06:59,235 --> 00:07:00,633
+F de 16 vaut 0.
+
+117
+00:07:01,083 --> 00:07:05,320
+Entre 19 et 20, on reste sur la même marche.
+
+118
+00:07:05,320 --> 00:07:09,268
+F de 19 et demi égale F de 19, soit 0,75.
+
+119
+00:07:09,718 --> 00:07:12,862
+Après 21 ans, tout le monde est compté.
+
+120
+00:07:12,862 --> 00:07:14,072
+F de 25 vaut 1.
+
+121
+00:07:14,522 --> 00:07:16,468
+Regarde bien le bord des marches.
+
+122
+00:07:16,468 --> 00:07:21,186
+Le point plein est à gauche : la marche est fermée à gauche et ouverte à droite.
+
+123
+00:07:21,636 --> 00:07:28,073
+Donc en x égale 20, on est déjà sur la nouvelle marche.
+
+124
+00:07:28,073 --> 00:07:31,818
+F de 20 vaut 0,875, et pas 0,75.
+
+125
+00:07:32,268 --> 00:07:37,705
+À retenir : F de x est la part des observations inférieures ou égales à x.
+
+126
+00:07:37,705 --> 00:07:42,334
+En discret, c'est un escalier, fermé à gauche, ouvert à droite.
+
+127
+00:07:43,483 --> 00:07:45,318
+Récapitulons la partie 1.
+
+128
+00:07:45,768 --> 00:07:51,410
+Une observation est qualitative, quantitative discrète, ou quantitative continue.
+
+129
+00:07:51,860 --> 00:07:54,686
+La fréquence relative f i vaut n i sur n.
+
+130
+00:07:54,686 --> 00:07:58,408
+Les n i ont pour somme n, et les f i ont pour somme 1.
+
+131
+00:07:58,858 --> 00:08:02,682
+La fréquence cumulée grand N i additionne les n j jusqu'à i.
+
+132
+00:08:02,682 --> 00:08:04,849
+Et grand F i vaut grand N i sur n.
+
+133
+00:08:05,299 --> 00:08:11,254
+La fonction de répartition F de x donne la part des observations inférieures ou égales à x.
+
+134
+00:08:11,254 --> 00:08:13,217
+En discret, c'est un escalier.
+
+135
+00:08:13,667 --> 00:08:16,490
+Pour la part entre deux valeurs, on soustrait deux F.
+
+136
+00:08:16,490 --> 00:08:19,100
+Dans la partie 2, on passe aux données continues.
+
