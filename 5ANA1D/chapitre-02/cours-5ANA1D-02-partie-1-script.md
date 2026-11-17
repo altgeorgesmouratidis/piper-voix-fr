@@ -6,7 +6,7 @@ Analyse de données, chapitre 2 : les paramètres statistiques. Première partie
 
 Dans cette partie, on résume une série de données par une seule valeur : le mode, la médiane, les quartiles et la moyenne.
 
-## Trois familles de paramètres  ·  00:00:14
+## Trois familles de paramètres  ·  00:00:15
 
 Un paramètre statistique, c'est une valeur caractéristique calculée à partir d'une série d'observations.
 
@@ -18,7 +18,7 @@ Deuxième famille : les paramètres de dispersion. Ils mesurent l'étalement des
 
 La troisième famille, les paramètres de forme, mesure la dissymétrie. Elle n'est pas au programme de ce cours.
 
-## Le mode $x_M$  ·  00:00:50
+## Le mode $x_M$  ·  00:00:55
 
 Intuition : au resto universitaire, le plat du jour le plus commandé, c'est le mode des commandes.
 
@@ -30,7 +30,7 @@ Sur un diagramme en bâtonnets, c'est l'abscisse du plus grand bâtonnet. Ici, l
 
 Le mode existe aussi en qualitatif : c'est le seul paramètre de position qui ne demande pas de nombres.
 
-## Les limites du mode  ·  00:01:23
+## Les limites du mode  ·  00:01:32
 
 Attention, le mode a des limites. D'abord, il n'est pas toujours unique : deux valeurs peuvent être ex aequo.
 
@@ -44,7 +44,7 @@ Les sept autres ont tous une note différente, entre 11 et 17. Le mode vaut donc
 
 Pourtant, la plupart des notes sont au-dessus de 10. Le mode n'est pas un paramètre très représentatif.
 
-## La classe modale  ·  00:02:02
+## La classe modale  ·  00:02:17
 
 En continu, les données sont groupées en classes. On parle alors de classe modale.
 
@@ -56,7 +56,7 @@ La plus forte densité est 0,035. La classe modale est donc 65 à 75 kilos.
 
 Si toutes les classes ont la même largeur, c'est plus simple : il suffit de prendre la classe qui a la plus grande fréquence.
 
-## La médiane $x_{1/2}$  ·  00:02:44
+## La médiane $x_{1/2}$  ·  00:03:06
 
 Intuition : range des élèves par taille. Celui qui est pile au milieu de la file, c'est la médiane.
 
@@ -70,7 +70,7 @@ n pair : on fait la moyenne des deux valeurs centrales, de rang n sur 2 et n sur
 
 On ajoute 10 à la série. n vaut 8, on prend les rangs 4 et 5 : 5 et 6. La médiane vaut 5,5.
 
-## Médiane d'un tableau recensé  ·  00:03:31
+## Médiane d'un tableau recensé  ·  00:04:06
 
 Passage important, on va lentement. Les données sont dans un tableau recensé : chaque valeur x i avec son effectif n i.
 
@@ -84,7 +84,7 @@ On descend la colonne des N i : 2, c'est trop petit. 6, encore trop petit. 12, c
 
 Pourquoi ? Les observations de rang 7 à 12 valent toutes 50. La dixième et la onzième, celles du milieu, valent donc 50.
 
-## Le cas de l'égalité  ·  00:04:16
+## Le cas de l'égalité  ·  00:05:01
 
 Autre exemple du cours, avec les fréquences relatives : on cherche le premier grand F i supérieur ou égal à 0,5.
 
@@ -98,7 +98,7 @@ Il y a donc deux valeurs centrales différentes. La médiane est leur moyenne : 
 
 À retenir : supérieur strict, on prend x i. Égalité, on prend la moyenne de x i et de la valeur suivante.
 
-## Médiane en continu  ·  00:05:00
+## Médiane en continu  ·  00:05:54
 
 Cas quantitatif continu. La médiane, c'est la valeur x telle que 50 pour cent des observations lui sont inférieures.
 
@@ -112,7 +112,7 @@ On résout : 0,035 fois x moins 65 égale 0,25. Donc x moins 65 égale 0,25 divi
 
 La médiane vaut environ 72,14 kilos.
 
-## Sans équation : la règle de trois  ·  00:05:59
+## Sans équation : la règle de trois  ·  00:07:01
 
 Tu n'as pas écrit l'équation du segment ? Pas de problème : une règle de trois suffit.
 
@@ -124,7 +124,7 @@ Donc x moins 65, sur 10, égale 0,25 sur 0,35. On trouve à nouveau x environ é
 
 C'est la même chose : la règle de trois utilise simplement la pente du segment.
 
-## Quartiles, déciles, centiles  ·  00:06:41
+## Quartiles, déciles, centiles  ·  00:07:48
 
 La médiane coupe les observations en deux. Les quartiles les coupent en quatre groupes de même effectif.
 
@@ -138,7 +138,7 @@ Même principe pour les déciles, qui coupent en 10 groupes : il y en a 9. Et po
 
 Ces paramètres ont surtout du sens en continu, avec beaucoup d'observations.
 
-## La moyenne $\bar{x}$  ·  00:07:38
+## La moyenne $\bar{x}$  ·  00:08:56
 
 La moyenne arithmétique, notée x barre, n'existe que pour des observations quantitatives.
 
@@ -152,7 +152,7 @@ Exemple avec notre tableau : 30 fois 2, plus 40 fois 4, et ainsi de suite. On ob
 
 On divise par 20 : la moyenne vaut 51,5. Proche de la médiane, qui valait 50.
 
-## Moyenne de données en classes  ·  00:08:26
+## Moyenne de données en classes  ·  00:09:52
 
 En continu, on ne connaît pas les valeurs exactes dans chaque classe. On les remplace par le centre de classe, c i.
 
@@ -166,7 +166,7 @@ Pour les poids : 0,25 fois 57,5, plus 0,35 fois 70, plus 0,25 fois 80, plus 0,15
 
 On obtient 72,75 kilos. Très proche de la médiane, 72,14.
 
-## Moyenne d'une réunion de groupes  ·  00:09:16
+## Moyenne d'une réunion de groupes  ·  00:10:51
 
 Deux groupes passent la même interro. Groupe A : 30 étudiants, moyenne 12. Groupe B : 20 étudiants, moyenne 15.
 
@@ -180,7 +180,7 @@ On divise par l'effectif total, 50. La moyenne globale vaut 13,2.
 
 La formule se généralise à k groupes : la somme des n i fois x barre i, divisée par la somme des n i.
 
-## Récap de la partie 1  ·  00:10:01
+## Récap de la partie 1  ·  00:11:42
 
 Récapitulons. Le mode est la valeur la plus fréquente. En continu, c'est la classe de plus forte densité. Attention aux valeurs aberrantes.
 

@@ -6,7 +6,7 @@ Analyse de données, chapitre 2, deuxième partie.
 
 On mesure maintenant l'étalement des données : étendue, écart-moyen, écart-type. Puis on voit les changements d'unité, et d'autres moyennes.
 
-## La moyenne ne suffit pas  ·  00:00:12
+## La moyenne ne suffit pas  ·  00:00:15
 
 Une interro donne une moyenne de 11 dans un groupe, et de 15 dans un autre. Le second groupe semble meilleur.
 
@@ -18,7 +18,7 @@ Et 0, 5, 15 et 20 aussi ! Pourtant, la deuxième série est beaucoup plus étal�
 
 Les paramètres de dispersion mesurent cet étalement autour de la moyenne. Ils n'ont de sens que pour des données quantitatives.
 
-## L'étendue $E_t$  ·  00:00:48
+## L'étendue $E_t$  ·  00:00:56
 
 Le paramètre le plus naturel : l'étendue, notée E t. C'est la plus grande valeur moins la plus petite.
 
@@ -30,7 +30,7 @@ Mais l'étendue est assez pauvre. Elle ne regarde que les deux valeurs extrêmes
 
 Les paramètres suivants, eux, utilisent toutes les observations.
 
-## L'écart-moyen $E_m$  ·  00:01:26
+## L'écart-moyen $E_m$  ·  00:01:42
 
 Intuition : des amis attendent le bus. En moyenne, à quelle distance de l'arrêt se trouvent-ils ? C'est l'idée de l'écart-moyen.
 
@@ -42,7 +42,7 @@ Exemple : 4, 6, 8, 10, 12. La moyenne vaut 8. Les écarts, en valeur absolue : 4
 
 Leur somme vaut 12. On divise par 5 : l'écart-moyen vaut 2,4. En moyenne, une valeur est à 2,4 de la moyenne.
 
-## Variance $s^2$ et écart-type $s$  ·  00:02:12
+## Variance $s^2$ et écart-type $s$  ·  00:02:36
 
 Les statisticiens préfèrent l'écart-type, noté s. On définit d'abord son carré, la variance, s carré.
 
@@ -56,7 +56,7 @@ La variance vaut 40 sur 5, donc 8. L'écart-type vaut racine de 8, environ 2,83.
 
 Compare avec l'écart-moyen, 2,4 : même ordre de grandeur, et s est un peu plus grand. C'est toujours le cas.
 
-## Pourquoi préférer l'écart-type ?  ·  00:03:02
+## Pourquoi préférer l'écart-type ?  ·  00:03:36
 
 Pourquoi cette préférence ? D'abord, la formule est plus maniable. Les valeurs absolues de l'écart-moyen sont peu pratiques en calcul.
 
@@ -66,7 +66,7 @@ Attention aux unités. La variance est en unités au carré : des kilos carrés,
 
 L'écart-type, grâce à la racine, revient dans l'unité des données. C'est lui qu'on interprète.
 
-## La formule de calcul pratique  ·  00:03:30
+## La formule de calcul pratique  ·  00:04:06
 
 Pour calculer s carré, on retiendra une deuxième formule, équivalente mais plus rapide.
 
@@ -80,7 +80,7 @@ On retire x barre au carré : 8 au carré, 64. 72 moins 64, égale 8. On retrouv
 
 Le cours démontre l'égalité en développant le carré. Ici, on l'a vérifiée sur un exemple.
 
-## Écart-type de données en classes  ·  00:04:15
+## Écart-type de données en classes  ·  00:05:00
 
 Comme pour la moyenne, la formule s'adapte. Avec un tableau, on pondère par f i. En continu, on remplace x i par le centre de classe c i.
 
@@ -92,7 +92,7 @@ La moyenne vaut 72,75. Au carré, environ 5292,56.
 
 s carré égale 5425 moins 5292,56, environ 132,44. L'écart-type vaut environ 11,51 kilos.
 
-## La règle 68 – 95 – 99  ·  00:05:04
+## La règle 68 – 95 – 99  ·  00:05:59
 
 Avec la moyenne et l'écart-type, on peut estimer où se trouvent les observations.
 
@@ -106,7 +106,7 @@ Et à 3 écarts-types, entre 15 et 45 minutes : environ 99 pour cent.
 
 Attention : ce sont des approximations. Elles supposent une distribution à peu près symétrique, et beaucoup d'observations. On y reviendra avec la loi normale.
 
-## Changement d'origine et d'unité  ·  00:05:47
+## Changement d'origine et d'unité  ·  00:06:50
 
 Un changement d'origine ajoute la même quantité b à chaque observation. Par exemple, le patron augmente tous les salaires de 50 euros.
 
@@ -118,7 +118,7 @@ Ou une interro sur 30 ramenée sur 20 : on multiplie par 2 tiers. Chaque x i dev
 
 Les deux ensemble, c'est une transformation linéaire : u i égale a fois x i, plus b. Question : faut-il tout recalculer ? Non !
 
-## Ce que deviennent les paramètres  ·  00:06:30
+## Ce que deviennent les paramètres  ·  00:07:40
 
 Intuition : déplace tout un nuage de points vers la droite. Son centre bouge, mais son étalement ne change pas. Par contre, si tu l'étires, l'étalement change.
 
@@ -130,7 +130,7 @@ Attention, le cours écrit s u égale a fois s x. C'est une erreur : c'est vrai 
 
 Un écart-type est toujours positif. La formule exacte est donc : s u égale valeur absolue de a, fois s x. Pareil pour l'étendue et l'écart-moyen.
 
-## Exemple : une interro ramenée sur 20  ·  00:07:14
+## Exemple : une interro ramenée sur 20  ·  00:08:34
 
 Une interro est notée sur 30. La moyenne vaut 18, l'écart-type 6.
 
@@ -140,7 +140,7 @@ Puis il ajoute 1 point de bonus à tout le monde. C'est un changement d'origine,
 
 La moyenne monte à 13. Mais l'écart-type reste 4 : les notes sont décalées, pas plus étalées.
 
-## La moyenne pondérée  ·  00:07:45
+## La moyenne pondérée  ·  00:09:09
 
 Quand on parle de moyenne sans préciser, c'est la moyenne arithmétique. Mais il en existe d'autres. D'abord, la moyenne pondérée.
 
@@ -154,7 +154,7 @@ Avec 12 en maths, 14 en logique et 17 en stat : 8 fois 12, plus 8 fois 14, plus 
 
 C'est la même formule que la moyenne avec les n i, ou que la réunion de groupes. En physique, elle donne le centre de gravité.
 
-## La moyenne géométrique $\bar{x}_G$  ·  00:08:35
+## La moyenne géométrique $\bar{x}_G$  ·  00:10:07
 
 En finance, on utilise la moyenne géométrique pour trouver le taux moyen d'un placement.
 
@@ -168,7 +168,7 @@ Piège : la moyenne arithmétique donnerait 20 pour cent. Mais 1,20 au carré, �
 
 Enfin, le log de la moyenne géométrique, c'est la moyenne des log des valeurs.
 
-## La moyenne harmonique $\bar{x}_H$  ·  00:09:30
+## La moyenne harmonique $\bar{x}_H$  ·  00:11:08
 
 La moyenne harmonique sert en physique. Par exemple, pour la vitesse moyenne sur plusieurs trajets de même distance.
 
@@ -180,7 +180,7 @@ L'aller prend 2 heures, le retour 3 heures. Au total, 240 kilomètres en 5 heure
 
 C'est exactement la moyenne harmonique de 60 et 40. Et pas 50, car tu passes plus de temps à rouler lentement.
 
-## Le coefficient de variation $C_v$  ·  00:10:09
+## Le coefficient de variation $C_v$  ·  00:11:54
 
 Dernier paramètre, surligné dans ton cours : le coefficient de variation, C v.
 
@@ -194,7 +194,7 @@ L'action B vaut 20 euros en moyenne, avec un écart-type de 4. Son C v vaut 4 su
 
 B a le plus petit écart-type, mais elle est 4 fois plus volatile par rapport à son prix.
 
-## Le tableau récapitulatif  ·  00:10:54
+## Le tableau récapitulatif  ·  00:12:48
 
 Le cours termine par un grand tableau. Retiens la logique, pas chaque case.
 
@@ -206,7 +206,7 @@ Données en classes : on garde les f i, et on remplace x i par le centre c i.
 
 C'est vrai pour la moyenne, l'écart-moyen et la variance. Et avec les n i, on remplace simplement f i par n i sur n.
 
-## Récap de la partie 2  ·  00:11:22
+## Récap de la partie 2  ·  00:13:19
 
 Récapitulons. L'étendue est simple, mais elle ne regarde que les extrêmes.
 
