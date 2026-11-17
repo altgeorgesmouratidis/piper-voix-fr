@@ -1,0 +1,1011 @@
+1
+00:00:00,450 --> 00:00:02,832
+Analyse de données, chapitre 5 :
+
+2
+00:00:02,832 --> 00:00:05,810
+introduction au calcul des probabilités.
+
+3
+00:00:06,260 --> 00:00:11,279
+Dans cette première partie, on apprend le
+vocabulaire, deux façons de calculer une
+
+4
+00:00:11,279 --> 00:00:14,340
+probabilité, et les opérations sur les
+événements.
+
+5
+00:00:15,683 --> 00:00:20,734
+Calculer une probabilité, c'est chiffrer la
+chance qu'un événement soumis au hasard se
+
+6
+00:00:20,734 --> 00:00:21,203
+réalise.
+
+7
+00:00:21,653 --> 00:00:23,863
+Tout a commencé avec les jeux de hasard :
+
+8
+00:00:23,863 --> 00:00:26,773
+les joueurs voulaient estimer leurs chances de
+gagner.
+
+9
+00:00:27,223 --> 00:00:29,686
+L'exemple type, c'est le pile ou face.
+
+10
+00:00:29,686 --> 00:00:33,703
+Tout le monde sait qu'on a une chance sur deux
+d'obtenir pile.
+
+11
+00:00:34,153 --> 00:00:35,875
+Mais le hasard est partout :
+
+12
+00:00:35,875 --> 00:00:40,793
+un tirage au sort, croiser quelqu'un dans la
+rue, la météo du week-end prochain.
+
+13
+00:00:41,243 --> 00:00:43,180
+Un dicton résume bien l'enjeu :
+
+14
+00:00:43,180 --> 00:00:47,803
+la loterie est une taxe sur ceux qui ne
+comprennent rien aux probabilités.
+
+15
+00:00:49,150 --> 00:00:54,230
+Une expérience aléatoire, c'est un processus
+dont on ne peut pas connaître le résultat à
+
+16
+00:00:54,230 --> 00:00:54,750
+l'avance.
+
+17
+00:00:55,200 --> 00:01:00,080
+Pour être complète, elle décrit une action, et
+ce qu'on note comme résultat.
+
+18
+00:01:00,530 --> 00:01:05,217
+Par exemple, jeter un dé et noter le point.
+
+19
+00:01:05,217 --> 00:01:10,450
+Les résultats possibles sont 1, 2, 3, 4, 5 et 6.
+
+20
+00:01:10,900 --> 00:01:14,396
+Avec la même action, on peut noter autre chose :
+
+21
+00:01:14,396 --> 00:01:15,780
+la parité du point.
+
+22
+00:01:15,780 --> 00:01:18,693
+Les résultats deviennent pair ou impair.
+
+23
+00:01:18,693 --> 00:01:20,660
+C'est une autre expérience.
+
+24
+00:01:21,110 --> 00:01:26,995
+L'ensemble de tous les résultats possibles
+s'appelle l'ensemble des possibilités.
+
+25
+00:01:26,995 --> 00:01:28,230
+On le note oméga.
+
+26
+00:01:28,680 --> 00:01:35,389
+Il peut être discret, comme pour le dé, continu,
+comme la longueur d'un saut entre 0 et 10
+
+27
+00:01:35,389 --> 00:01:38,520
+mètres, ou qualitatif, comme pile ou face.
+
+28
+00:01:40,383 --> 00:01:44,543
+Un événement aléatoire, c'est une des issues
+possibles de l'expérience.
+
+29
+00:01:44,993 --> 00:01:47,991
+Techniquement, c'est un sous-ensemble de oméga :
+
+30
+00:01:47,991 --> 00:01:52,113
+on y met tous les résultats pour lesquels
+l'événement est réalisé.
+
+31
+00:01:52,563 --> 00:01:54,286
+Exemple avec le dé :
+
+32
+00:01:54,286 --> 00:02:00,403
+l'événement, le point est au moins 5, correspond
+au sous-ensemble 5, 6.
+
+33
+00:02:00,853 --> 00:02:06,773
+Et l'événement, le point est pair, correspond au
+sous-ensemble 2, 4, 6.
+
+34
+00:02:07,223 --> 00:02:11,661
+On note les événements avec des lettres
+majuscules :
+
+35
+00:02:11,661 --> 00:02:12,343
+A, B, C.
+
+36
+00:02:14,183 --> 00:02:17,829
+La probabilité d'un événement A se note P de A.
+
+37
+00:02:17,829 --> 00:02:21,863
+C'est un nombre réel entre 0 et 1, bornes
+comprises.
+
+38
+00:02:22,313 --> 00:02:27,258
+Plus elle est proche de 1, plus l'événement a de
+chances de se réaliser.
+
+39
+00:02:27,258 --> 00:02:30,073
+Plus elle est proche de 0, moins il en a.
+
+40
+00:02:30,523 --> 00:02:32,032
+Deux cas extrêmes.
+
+41
+00:02:32,032 --> 00:02:33,960
+Une probabilité nulle :
+
+42
+00:02:33,960 --> 00:02:36,222
+l'événement est impossible.
+
+43
+00:02:36,222 --> 00:02:38,066
+Une probabilité de 1 :
+
+44
+00:02:38,066 --> 00:02:39,323
+il est certain.
+
+45
+00:02:39,773 --> 00:02:41,242
+Avec la pièce :
+
+46
+00:02:41,242 --> 00:02:45,453
+P de pile vaut 1 sur 2, et P de face aussi.
+
+47
+00:02:45,903 --> 00:02:50,590
+P de, la pièce tombe sur pile ou sur face, vaut
+1 :
+
+48
+00:02:50,590 --> 00:02:51,877
+c'est certain.
+
+49
+00:02:51,877 --> 00:02:55,461
+P de, la pièce ne retombe pas, vaut 0 :
+
+50
+00:02:55,461 --> 00:02:57,023
+c'est impossible.
+
+51
+00:02:57,473 --> 00:03:04,207
+Une probabilité, c'est donc une fonction qui
+associe à chaque événement un nombre entre 0 et
+
+52
+00:03:04,207 --> 00:03:04,353
+1.
+
+53
+00:03:06,217 --> 00:03:10,857
+Deux événements sont équiprobables s'ils ont la
+même probabilité de se réaliser.
+
+54
+00:03:11,307 --> 00:03:16,182
+Avec une pièce bien équilibrée, pile et face
+sont équiprobables :
+
+55
+00:03:16,182 --> 00:03:17,307
+1 sur 2 chacun.
+
+56
+00:03:17,757 --> 00:03:22,296
+Avec un dé normal, chaque point a la même
+probabilité :
+
+57
+00:03:22,296 --> 00:03:22,957
+1 sur 6.
+
+58
+00:03:23,407 --> 00:03:27,815
+Mais avec un dé pipé, le 6 sort plus souvent que
+les autres.
+
+59
+00:03:27,815 --> 00:03:30,607
+Les points ne sont plus équiprobables.
+
+60
+00:03:31,057 --> 00:03:32,704
+Retiens bien cette notion :
+
+61
+00:03:32,704 --> 00:03:34,657
+elle est cruciale pour la suite.
+
+62
+00:03:36,517 --> 00:03:40,065
+Il existe deux façons de calculer une
+probabilité.
+
+63
+00:03:40,065 --> 00:03:44,039
+La première, la probabilité a priori, est
+mathématique :
+
+64
+00:03:44,039 --> 00:03:45,317
+on compte des cas.
+
+65
+00:03:45,767 --> 00:03:47,861
+C'est la formule bien connue :
+
+66
+00:03:47,861 --> 00:03:53,447
+P de A égale le nombre de cas favorables, divisé
+par le nombre de cas possibles.
+
+67
+00:03:53,897 --> 00:04:00,217
+Un cas favorable, c'est un cas où l'événement A
+se réalise, parmi les cas possibles envisagés.
+
+68
+00:04:00,667 --> 00:04:01,617
+La pièce :
+
+69
+00:04:01,617 --> 00:04:04,469
+2 cas possibles, pile ou face.
+
+70
+00:04:04,469 --> 00:04:06,560
+Un seul est favorable.
+
+71
+00:04:06,560 --> 00:04:08,747
+P de pile vaut 1 sur 2.
+
+72
+00:04:09,197 --> 00:04:12,890
+Le dé, avec l'événement, au moins 5 :
+
+73
+00:04:12,890 --> 00:04:17,582
+6 cas possibles, et 2 favorables, le 5 et le 6.
+
+74
+00:04:17,582 --> 00:04:20,477
+P vaut 2 sur 6, donc 1 sur 3.
+
+75
+00:04:22,317 --> 00:04:24,709
+Attention, voici le piège du cours.
+
+76
+00:04:24,709 --> 00:04:29,837
+On jette deux dés, et on veut la probabilité que
+la somme soit au moins 10.
+
+77
+00:04:30,287 --> 00:04:33,688
+Oméga contient les sommes de 2 à 12 :
+
+78
+00:04:33,688 --> 00:04:35,618
+ça fait 11 résultats.
+
+79
+00:04:35,618 --> 00:04:37,732
+Trois sont favorables :
+
+80
+00:04:37,732 --> 00:04:38,927
+10, 11 et 12.
+
+81
+00:04:39,377 --> 00:04:42,244
+On serait tenté de répondre 3 sur 11.
+
+82
+00:04:42,244 --> 00:04:44,337
+Mais ce résultat est faux !
+
+83
+00:04:44,787 --> 00:04:45,507
+Pourquoi ?
+
+84
+00:04:45,507 --> 00:04:49,107
+Parce que ces 11 sommes ne sont pas
+équiprobables.
+
+85
+00:04:49,557 --> 00:04:53,523
+Pour faire 12, il faut que les deux dés tombent
+sur 6 :
+
+86
+00:04:53,523 --> 00:04:54,677
+une seule façon.
+
+87
+00:04:55,127 --> 00:04:58,603
+Pour faire 7, il y a six façons :
+
+88
+00:04:58,603 --> 00:05:05,767
+1 plus 6, 2 plus 5, 3 plus 4, et aussi 4 plus 3,
+5 plus 2, 6 plus 1.
+
+89
+00:05:07,617 --> 00:05:12,832
+La solution, c'est de remonter plus loin dans
+l'expérience, jusqu'à des cas qui sont vraiment
+
+90
+00:05:12,832 --> 00:05:13,617
+équiprobables.
+
+91
+00:05:14,067 --> 00:05:17,232
+Ici, ce sont les couples dé 1, dé 2.
+
+92
+00:05:17,232 --> 00:05:23,827
+Chaque dé a 6 valeurs, donc il y a 6 fois 6,
+soit 36 couples équiprobables.
+
+93
+00:05:24,277 --> 00:05:27,594
+Le tableau donne la somme pour chaque couple.
+
+94
+00:05:27,594 --> 00:05:30,837
+On repère les cases qui valent 10, 11 ou 12.
+
+95
+00:05:31,287 --> 00:05:32,403
+Il y en a 6.
+
+96
+00:05:32,403 --> 00:05:36,870
+La probabilité vaut donc 6 sur 36, soit 1 sur 6.
+
+97
+00:05:36,870 --> 00:05:40,407
+C'est exactement ce que tu avais noté.
+
+98
+00:05:40,857 --> 00:05:42,777
+D'où la formule améliorée :
+
+99
+00:05:42,777 --> 00:05:48,537
+le nombre de cas favorables, divisé par le
+nombre de cas possibles équiprobables.
+
+100
+00:05:48,987 --> 00:05:51,384
+Et cette formule suppose un dé parfait.
+
+101
+00:05:51,384 --> 00:05:54,027
+Avec un dé truqué, elle ne s'applique plus.
+
+102
+00:05:55,983 --> 00:05:58,407
+Mais souvent, on ne peut pas compter de cas.
+
+103
+00:05:58,407 --> 00:06:02,703
+Quelle est la probabilité de réussir un examen,
+ou que ton ordinateur plante ?
+
+104
+00:06:03,153 --> 00:06:09,244
+La seconde méthode, la probabilité a posteriori,
+se base sur l'expérience.
+
+105
+00:06:09,244 --> 00:06:11,713
+On répète l'expérience n fois.
+
+106
+00:06:12,163 --> 00:06:15,786
+On calcule la fréquence relative f n de A :
+
+107
+00:06:15,786 --> 00:06:20,083
+le nombre de fois où A s'est réalisé, divisé par
+n.
+
+108
+00:06:20,533 --> 00:06:24,435
+Plus n est grand, plus cette fréquence est
+fiable.
+
+109
+00:06:24,435 --> 00:06:30,053
+La probabilité, c'est la limite de f n de A,
+quand n tend vers l'infini.
+
+110
+00:06:30,503 --> 00:06:31,332
+Attention :
+
+111
+00:06:31,332 --> 00:06:35,925
+la fréquence est expérimentale, la probabilité
+est théorique.
+
+112
+00:06:35,925 --> 00:06:38,183
+On ne fait que s'en approcher.
+
+113
+00:06:38,633 --> 00:06:42,393
+Le chapitre 7 le justifiera avec la loi des
+grands nombres.
+
+114
+00:06:44,250 --> 00:06:45,367
+Exemple du cours :
+
+115
+00:06:45,367 --> 00:06:50,330
+on lance une pièce 20 fois, et on suit la
+fréquence de pile après chaque lancer.
+
+116
+00:06:50,780 --> 00:06:54,303
+Au début, ça varie beaucoup :
+
+117
+00:06:54,303 --> 00:07:00,620
+1, puis 0,5, puis 0,67, puis 0,8 après cinq
+lancers.
+
+118
+00:07:01,070 --> 00:07:04,496
+Ensuite, les variations diminuent.
+
+119
+00:07:04,496 --> 00:07:07,721
+Après 20 lancers, on a 9 piles :
+
+120
+00:07:07,721 --> 00:07:11,550
+la fréquence vaut 9 sur 20, soit 0,45.
+
+121
+00:07:12,000 --> 00:07:18,255
+En continuant, la fréquence devrait se
+stabiliser autour de 0,5, ou d'une autre valeur
+
+122
+00:07:18,255 --> 00:07:20,000
+si la pièce est truquée.
+
+123
+00:07:20,450 --> 00:07:21,337
+Remarque :
+
+124
+00:07:21,337 --> 00:07:25,952
+aux lancers 2, 14 et 16, la fréquence vaut pile
+0,5.
+
+125
+00:07:25,952 --> 00:07:27,372
+C'est un hasard.
+
+126
+00:07:27,372 --> 00:07:31,010
+Seul le comportement à long terme compte.
+
+127
+00:07:32,950 --> 00:07:35,572
+Deuxième exemple, plus surprenant :
+
+128
+00:07:35,572 --> 00:07:37,670
+calculer pi grâce au hasard.
+
+129
+00:07:38,120 --> 00:07:43,800
+On dessine un cercle de rayon 1 dans un carré de
+côté 2, centré sur l'origine.
+
+130
+00:07:44,250 --> 00:07:47,516
+On lance des points au hasard dans le carré :
+
+131
+00:07:47,516 --> 00:07:51,072
+x et y sont choisis au hasard entre moins 1 et
+1.
+
+132
+00:07:51,072 --> 00:07:54,410
+Certains tombent dans le cercle, d'autres non.
+
+133
+00:07:54,860 --> 00:07:59,620
+La probabilité de tomber dans le cercle, c'est
+le rapport des surfaces :
+
+134
+00:07:59,620 --> 00:08:02,860
+la surface du cercle, divisée par celle du
+carré.
+
+135
+00:08:03,310 --> 00:08:05,327
+Comme tu l'avais écrit :
+
+136
+00:08:05,327 --> 00:08:09,950
+pi r carré, divisé par 2 r au carré, ça donne pi
+sur 4.
+
+137
+00:08:10,400 --> 00:08:14,688
+Donc la fréquence des points dans le cercle tend
+vers pi sur 4.
+
+138
+00:08:14,688 --> 00:08:18,160
+Il suffit de la multiplier par 4 pour approcher
+pi.
+
+139
+00:08:20,017 --> 00:08:22,064
+Voici l'algorithme du cours.
+
+140
+00:08:22,064 --> 00:08:24,257
+On initialise un compteur à 0.
+
+141
+00:08:24,707 --> 00:08:31,166
+Pour chacun des n points, on tire x et y au
+hasard entre moins 1 et 1.
+
+142
+00:08:31,166 --> 00:08:39,747
+Rnd renvoie un réel aléatoire entre 0 et 1, donc
+2 fois Rnd moins 1 tombe entre moins 1 et 1.
+
+143
+00:08:40,197 --> 00:08:46,104
+Si x carré plus y carré est inférieur ou égal à
+1, le point est dans le cercle :
+
+144
+00:08:46,104 --> 00:08:47,877
+on augmente le compteur.
+
+145
+00:08:48,327 --> 00:08:52,727
+À la fin, on renvoie 4 fois le compteur, divisé
+par n.
+
+146
+00:08:53,177 --> 00:08:55,851
+J'ai exécuté cet algorithme.
+
+147
+00:08:55,851 --> 00:08:59,003
+Avec 100 points, on obtient 3,12.
+
+148
+00:08:59,003 --> 00:09:02,537
+Avec 100 000 points, on obtient 3,14.
+
+149
+00:09:02,987 --> 00:09:06,495
+Ce n'est pas la méthode la plus rapide pour
+calculer pi.
+
+150
+00:09:06,495 --> 00:09:07,811
+Mais c'est étonnant :
+
+151
+00:09:07,811 --> 00:09:11,947
+le hasard construit une suite qui converge vers
+une valeur exacte.
+
+152
+00:09:13,883 --> 00:09:19,757
+Plus précisément, un événement est une
+proposition booléenne, comme, le dé tombe sur un
+
+153
+00:09:19,757 --> 00:09:20,500
+point pair.
+
+154
+00:09:20,500 --> 00:09:23,403
+Elle est vraie ou fausse selon le résultat.
+
+155
+00:09:23,853 --> 00:09:26,701
+Comme en logique, c'est un prédicat.
+
+156
+00:09:26,701 --> 00:09:30,813
+Et le sous-ensemble 2, 4, 6 est sa classe de
+vérité.
+
+157
+00:09:31,263 --> 00:09:34,382
+C'est pourquoi on confond événements et
+ensembles.
+
+158
+00:09:34,382 --> 00:09:38,623
+Les opérateurs logiques deviennent des
+opérations sur les ensembles.
+
+159
+00:09:39,073 --> 00:09:41,173
+ET devient l'intersection.
+
+160
+00:09:41,173 --> 00:09:42,707
+OU devient l'union.
+
+161
+00:09:42,707 --> 00:09:47,633
+NON devient le complémentaire, noté avec une
+barre au-dessus.
+
+162
+00:09:48,083 --> 00:09:51,874
+Et l'événement certain correspond à oméga tout
+entier.
+
+163
+00:09:51,874 --> 00:09:55,523
+L'événement impossible correspond à l'ensemble
+vide.
+
+164
+00:09:57,383 --> 00:10:04,365
+Le théorème d'addition donne la probabilité de A
+union B, c'est-à-dire A ou B, au sens non
+
+165
+00:10:04,365 --> 00:10:05,063
+exclusif.
+
+166
+00:10:05,513 --> 00:10:12,233
+P de A union B égale P de A, plus P de B, moins
+P de A inter B.
+
+167
+00:10:12,683 --> 00:10:14,574
+Pourquoi la soustraction ?
+
+168
+00:10:14,574 --> 00:10:15,883
+Regarde le dessin.
+
+169
+00:10:15,883 --> 00:10:20,683
+Quand on additionne A et B, la zone commune est
+comptée deux fois.
+
+170
+00:10:21,133 --> 00:10:22,948
+On la retire donc une fois.
+
+171
+00:10:22,948 --> 00:10:24,493
+C'est tout le théorème.
+
+172
+00:10:26,350 --> 00:10:28,346
+Exemple avec un dé.
+
+173
+00:10:28,346 --> 00:10:28,662
+A :
+
+174
+00:10:28,662 --> 00:10:30,553
+le point est pair.
+
+175
+00:10:30,553 --> 00:10:30,868
+B :
+
+176
+00:10:30,868 --> 00:10:33,390
+le point est au moins 5.
+
+177
+00:10:33,840 --> 00:10:38,765
+P de A vaut 3 sur 6, avec 2, 4 et 6.
+
+178
+00:10:38,765 --> 00:10:43,280
+P de B vaut 2 sur 6, avec 5 et 6.
+
+179
+00:10:43,730 --> 00:10:47,700
+A inter B, c'est pair et au moins 5 :
+
+180
+00:10:47,700 --> 00:10:49,309
+seulement le 6.
+
+181
+00:10:49,309 --> 00:10:52,850
+Donc P de A inter B vaut 1 sur 6.
+
+182
+00:10:53,300 --> 00:10:54,847
+On applique :
+
+183
+00:10:54,847 --> 00:10:59,250
+3 sur 6, plus 2 sur 6, moins 1 sur 6.
+
+184
+00:10:59,250 --> 00:11:02,820
+Ça fait 4 sur 6, donc 2 sur 3.
+
+185
+00:11:03,270 --> 00:11:06,929
+Vérifions en comptant directement :
+
+186
+00:11:06,929 --> 00:11:09,857
+A union B, c'est 2, 4, 5, 6.
+
+187
+00:11:09,857 --> 00:11:11,843
+Quatre cas sur six.
+
+188
+00:11:11,843 --> 00:11:13,830
+C'est bien 2 sur 3.
+
+189
+00:11:15,783 --> 00:11:19,863
+Deux événements sont incompatibles s'ils ne
+peuvent pas se produire en même temps.
+
+190
+00:11:20,313 --> 00:11:23,307
+En ensembles, leur intersection est vide.
+
+191
+00:11:23,307 --> 00:11:27,833
+On dit aussi qu'ils sont mutuellement exclusifs,
+ou disjoints.
+
+192
+00:11:28,283 --> 00:11:31,808
+Dans ce cas, P de A inter B vaut 0.
+
+193
+00:11:31,808 --> 00:11:35,535
+Le théorème d'addition se simplifie :
+
+194
+00:11:35,535 --> 00:11:39,563
+P de A union B égale P de A plus P de B.
+
+195
+00:11:40,013 --> 00:11:41,853
+Exemple avec le dé.
+
+196
+00:11:41,853 --> 00:11:42,143
+A :
+
+197
+00:11:42,143 --> 00:11:43,595
+le point est 1.
+
+198
+00:11:43,595 --> 00:11:43,885
+B :
+
+199
+00:11:43,885 --> 00:11:46,209
+le point est au moins 5.
+
+200
+00:11:46,209 --> 00:11:49,693
+Ils ne peuvent pas arriver ensemble.
+
+201
+00:11:50,143 --> 00:11:59,743
+Donc P de A union B vaut 1 sur 6, plus 2 sur 6,
+c'est-à-dire 3 sur 6, soit 1 sur 2.
+
+202
+00:12:01,583 --> 00:12:04,668
+Le complémentaire de A, c'est sa négation.
+
+203
+00:12:04,668 --> 00:12:06,063
+On le note A barre.
+
+204
+00:12:06,513 --> 00:12:14,513
+Par exemple, le complémentaire de, le point est
+au moins 5, c'est, le point est au plus 4.
+
+205
+00:12:14,963 --> 00:12:19,043
+En ensembles, c'est tout ce qui est dans oméga,
+mais pas dans A.
+
+206
+00:12:19,493 --> 00:12:20,745
+Propriété :
+
+207
+00:12:20,745 --> 00:12:24,613
+P de A barre égale 1 moins P de A.
+
+208
+00:12:25,063 --> 00:12:25,887
+Pourquoi ?
+
+209
+00:12:25,887 --> 00:12:33,136
+A et A barre sont incompatibles, et leur union,
+c'est oméga, dont la probabilité vaut 1.
+
+210
+00:12:33,136 --> 00:12:36,183
+Donc P de A plus P de A barre vaut 1.
+
+211
+00:12:38,017 --> 00:12:39,778
+Premier exemple :
+
+212
+00:12:39,778 --> 00:12:42,990
+P de, au moins 5, vaut 1 sur 3.
+
+213
+00:12:42,990 --> 00:12:48,897
+Donc P de, au plus 4, vaut 1 moins 1 sur 3, soit
+2 sur 3.
+
+214
+00:12:49,347 --> 00:12:51,944
+Deuxième exemple, avec nos deux dés :
+
+215
+00:12:51,944 --> 00:12:56,227
+quelle est la probabilité que la somme soit
+inférieure à 10 ?
+
+216
+00:12:56,677 --> 00:12:59,164
+Compter les 30 cases serait long.
+
+217
+00:12:59,164 --> 00:13:04,517
+Mais c'est le contraire de, la somme est au
+moins 10, qui vaut 1 sur 6.
+
+218
+00:13:04,967 --> 00:13:10,167
+Donc la réponse est 1 moins 1 sur 6, soit 5 sur
+6.
+
+219
+00:13:10,617 --> 00:13:11,371
+À retenir :
+
+220
+00:13:11,371 --> 00:13:15,897
+quand un événement est compliqué à compter,
+calcule son contraire.
+
+221
+00:13:17,850 --> 00:13:18,869
+Récapitulons.
+
+222
+00:13:18,869 --> 00:13:23,649
+Une expérience aléatoire a un ensemble de
+possibilités oméga.
+
+223
+00:13:23,649 --> 00:13:29,370
+Un événement est une partie de oméga, et sa
+probabilité est entre 0 et 1.
+
+224
+00:13:29,820 --> 00:13:35,597
+La probabilité a priori compte les cas
+favorables, sur les cas possibles, à condition
+
+225
+00:13:35,597 --> 00:13:37,500
+qu'ils soient équiprobables.
+
+226
+00:13:37,950 --> 00:13:43,552
+La probabilité a posteriori est la limite de la
+fréquence relative, quand on répète
+
+227
+00:13:43,552 --> 00:13:44,430
+l'expérience.
+
+228
+00:13:44,880 --> 00:13:47,326
+Le théorème d'addition donne le OU.
+
+229
+00:13:47,326 --> 00:13:51,520
+Pour des événements incompatibles, on additionne
+simplement.
+
+230
+00:13:51,970 --> 00:13:55,682
+Et la probabilité du contraire vaut 1 moins P de
+A.
+
+231
+00:13:55,682 --> 00:14:00,050
+Dans la partie 2, on verra les probabilités
+conditionnelles.
+
