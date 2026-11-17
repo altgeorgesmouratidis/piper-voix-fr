@@ -6,7 +6,7 @@ Analyse de données, chapitre 4 : l'analyse en composantes principales, qu'on ap
 
 L'idée : représenter des données à beaucoup de variables sur un simple graphique, en perdant le moins d'information possible.
 
-## Trop de dimensions  ·  00:00:15
+## Trop de dimensions  ·  00:00:16
 
 Au chapitre 2, on étudiait une seule variable. Ses valeurs tiennent sur une droite.
 
@@ -18,7 +18,7 @@ Mais avec quatre variables ou plus, il faudrait un espace à quatre dimensions. 
 
 L'analyse en composantes principales résout ce problème. Elle ramène les données à deux dimensions, en les déformant le moins possible.
 
-## Un exemple à 4 variables  ·  00:00:49
+## Un exemple à 4 variables  ·  00:00:54
 
 Prenons les cotes de neuf élèves, dans quatre cours : math, physique, anglais et néerlandais.
 
@@ -30,7 +30,7 @@ Regarde les colonnes. Les cotes de math et de physique se ressemblent beaucoup.
 
 Les cotes d'anglais et de néerlandais aussi. Un élève a un niveau proche dans les branches scientifiques, et proche dans les langues.
 
-## La matrice des corrélations  ·  00:01:21
+## La matrice des corrélations  ·  00:01:28
 
 Pour le voir précisément, on range toutes les corrélations dans un tableau. Un peu comme le tableau des distances entre villes, sur une carte routière.
 
@@ -42,7 +42,7 @@ Cette matrice est forcément symétrique : la corrélation de X i avec X j est l
 
 Et sa diagonale ne contient que des 1 : une variable est parfaitement corrélée avec elle-même.
 
-## Lire la matrice des corrélations  ·  00:02:02
+## Lire la matrice des corrélations  ·  00:02:13
 
 Voici la matrice des corrélations pour nos neuf élèves.
 
@@ -56,7 +56,7 @@ On voit donc deux groupes de cours : les sciences d'un côté, les langues de l'
 
 À retenir : garder math et physique n'aurait aucun sens. Ces deux cours disent presque la même chose.
 
-## Combiner au lieu de supprimer  ·  00:02:36
+## Combiner au lieu de supprimer  ·  00:02:48
 
 Pour passer à deux dimensions, on pourrait garder un cours scientifique et un cours de langue. Par exemple math et anglais.
 
@@ -72,7 +72,7 @@ Il a 11 en anglais et 9,5 en néerlandais, donc L vaut 10,25.
 
 Une telle somme de variables multipliées par des nombres s'appelle une combinaison linéaire.
 
-## Le graphique S–L  ·  00:03:17
+## Le graphique S–L  ·  00:03:38
 
 Chaque élève n'a plus que deux nombres, S et L. On peut enfin le dessiner dans un plan.
 
@@ -86,7 +86,7 @@ En haut à gauche, l'élève 7 : 6,25 en sciences mais 12,75 en langues. Il est 
 
 À retenir : réduire le nombre de variables, ce n'est pas en supprimer. On les remplace par des combinaisons linéaires qui gardent l'image représentative.
 
-## L'idée de l'ACP  ·  00:03:59
+## L'idée de l'ACP  ·  00:04:26
 
 Revenons au principe. Imagine un nuage de points en trois dimensions, et tu veux le photographier.
 
@@ -98,7 +98,7 @@ Vues depuis une autre galaxie, ces mêmes étoiles auraient sans doute une forme
 
 L'ACP fait exactement ça : elle cherche l'angle de vue qui étale le plus les données.
 
-## Projeter sur une droite  ·  00:04:30
+## Projeter sur une droite  ·  00:04:59
 
 Pour comprendre, prenons un cas plus simple : passer de deux dimensions à une seule.
 
@@ -112,7 +112,7 @@ Projetons maintenant sur l'axe Y. On garde seulement le y de chaque point.
 
 L'ordre change complètement : A, D, E, C, B, F. Chaque axe déforme l'image à sa façon.
 
-## Le meilleur axe  ·  00:05:12
+## Le meilleur axe  ·  00:05:56
 
 Et si on projetait sur une droite inclinée ? Voici celle qui passe au milieu du nuage, dans le sens où il s'allonge.
 
@@ -124,7 +124,7 @@ Cette droite a une propriété importante : parmi toutes les inclinaisons possib
 
 À retenir : le meilleur axe de projection est celui de dispersion maximale.
 
-## Étaler au max = coller au plus près  ·  00:05:44
+## Étaler au max = coller au plus près  ·  00:06:34
 
 Il y a une autre façon de voir ce meilleur axe. Mesurons l'écart de chaque point à la droite, perpendiculairement.
 
@@ -140,7 +140,7 @@ Donc étaler les projections au maximum, c'est la même chose que rendre la somm
 
 Attention : cet axe est proche de la droite de régression du chapitre 3, mais pas identique. La régression mesure les écarts verticaux, l'ACP les écarts perpendiculaires.
 
-## Le nouvel axe mélange X et Y  ·  00:06:39
+## Le nouvel axe mélange X et Y  ·  00:07:38
 
 Sur le meilleur axe, la position d'un point n'est plus x, ni y. C'est un mélange des deux.
 
@@ -154,7 +154,7 @@ Ces valeurs sont bien rangées dans l'ordre A, B, C, D, E, F.
 
 À retenir : le nouvel axe est une combinaison linéaire de X et de Y. L'ACP sert à choisir au mieux ces axes.
 
-## La matrice des variances-covariances  ·  00:07:26
+## La matrice des variances-covariances  ·  00:08:34
 
 Comment l'ACP trouve-t-elle ces axes ? Elle part d'un tableau : la matrice des variances-covariances.
 
@@ -166,7 +166,7 @@ Sur la diagonale, i égale j : la covariance d'une variable avec elle-même, c'e
 
 Comme la matrice des corrélations, elle est symétrique.
 
-## Exemple : les points A à F  ·  00:08:01
+## Exemple : les points A à F  ·  00:09:12
 
 Calculons-la pour nos six points. Deux variables, donc une matrice deux sur deux.
 
@@ -178,7 +178,7 @@ Covariance de X et Y : la somme des produits des écarts vaut 20. Divisée par 6
 
 On range tout ça : les variances sur la diagonale, la covariance dans les deux autres cases.
 
-## Valeurs et vecteurs propres  ·  00:08:39
+## Valeurs et vecteurs propres  ·  00:09:55
 
 Ensuite, on cherche les valeurs propres et les vecteurs propres de cette matrice.
 
@@ -192,7 +192,7 @@ Et voici la propriété clé : une valeur propre est égale à la variance des d
 
 Donc la plus grande valeur propre donne l'axe où les données sont le plus dispersées.
 
-## Exemple : vérifions sur A à F  ·  00:09:14
+## Exemple : vérifions sur A à F  ·  00:10:36
 
 Testons le vecteur u 1 égale 2, 1 : c'est la direction de notre meilleur axe.
 
@@ -206,7 +206,7 @@ Leurs carrés font 400. Divisé par 5, puis par 6 points : 13,33. C'est bien la 
 
 L'autre vecteur propre, moins 1, 2, donne lambda 2 égale 5. Et 13,33 plus 5 donne 18,33 : la somme des deux variances.
 
-## Combien d'information garde-t-on ?  ·  00:10:14
+## Combien d'information garde-t-on ?  ·  00:11:49
 
 La variance totale, c'est la somme des variances : 18,33. C'est toute l'information du nuage.
 
@@ -218,7 +218,7 @@ Sur l'axe du premier vecteur propre : 13,33, soit 73 pour cent. C'est le meilleu
 
 À retenir : la part d'information gardée par un axe, c'est sa valeur propre divisée par la somme des valeurs propres.
 
-## Passer en 2 dimensions  ·  00:10:51
+## Passer en 2 dimensions  ·  00:12:29
 
 Pour représenter les données dans un plan, on prend comme base les deux vecteurs propres des deux plus grandes valeurs propres.
 
@@ -232,7 +232,7 @@ Les deux premières gardent 70,3 plus 29,6 pour cent : 99,9 pour cent de l'infor
 
 À retenir : le plan des deux premiers vecteurs propres montre presque tout, en deux dimensions seulement.
 
-## Que représentent ces 2 axes ?  ·  00:11:34
+## Que représentent ces 2 axes ?  ·  00:13:19
 
 Regardons les deux vecteurs propres. Chacun donne une combinaison linéaire des quatre cotes.
 
@@ -242,7 +242,7 @@ Le second donne des poids négatifs aux sciences et positifs aux langues. Il opp
 
 On retrouve l'intuition du début avec S et L. Mais cette fois, c'est le calcul qui a choisi les meilleurs axes.
 
-## Récap du chapitre 4  ·  00:12:02
+## Récap du chapitre 4  ·  00:13:50
 
 Récapitulons.
 
