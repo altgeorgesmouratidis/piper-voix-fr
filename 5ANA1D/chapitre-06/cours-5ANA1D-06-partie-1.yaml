@@ -1,0 +1,529 @@
+meta:
+  course: 5ANA1D
+  course_name: Analyse de données
+  chapter: 6
+  part: 1
+  title: Variables aléatoires
+  subtitle: Le cas discret
+  output: cours-5ANA1D-06-partie-1
+
+css: |
+  .katex-display{margin:0.12em 0}
+  .card{padding:28px 44px}
+  .def{padding:30px 44px}
+  table.data.small td, table.data.small th{padding:8px 20px;white-space:nowrap}
+  .recap{grid-template-columns:1fr !important}
+  .recap .item{padding-top:14px;padding-bottom:14px}
+
+scenes:
+  # ================================================================ TITRE
+  - id: s00_titre
+    layout: title
+    notion: 'Introduction'
+    beats:
+      - "Analyse de données, chapitre 6 : les variables aléatoires."
+      - "Dans cette première partie, on étudie les variables aléatoires discrètes : leur distribution, leur fonction de répartition, leur espérance et leur écart-type."
+    html: |
+      <svg viewBox="0 0 560 560" width="560" height="560">
+        <circle cx="280" cy="280" r="250" fill="var(--paper)" stroke="var(--line)" stroke-width="3"/>
+        <line class="stroke muted" x1="110" y1="410" x2="460" y2="410" data-beat="1" data-anim="draw"/>
+        <g data-beat="1+0.6" data-anim="grow-y">
+          <rect x="150" y="290" width="26" height="120" rx="6" fill="var(--main)"/>
+          <rect x="268" y="230" width="26" height="180" rx="6" fill="var(--main)"/>
+          <rect x="386" y="350" width="26" height="60" rx="6" fill="var(--accent)"/>
+        </g>
+        <text x="280" y="180" font-size="96" font-weight="700" text-anchor="middle" fill="var(--ink)" data-beat="0" data-anim="pop">X</text>
+      </svg>
+
+  # ================================================================ INTRO
+  - id: s01_intro
+    notion: 'Introduction'
+    title: 'Mettre un nombre sur le hasard'
+    subtitle: 'Ce jeu de dé est-il rentable ?'
+    hold: 0.5
+    beats:
+      - "On te propose un jeu : tu lances un dé. Si tu fais 6, tu gagnes 3 euros. Si tu fais 2 ou 4, tu perds 2 euros. Sinon, il ne se passe rien."
+      - "Question : est-ce que tu as intérêt à jouer ?"
+      - "Pour répondre, on va transformer chaque résultat du dé en un nombre : ton gain. Ce nombre, c'est une variable aléatoire."
+      - "On verra ensuite comment décrire ses valeurs avec leurs probabilités, puis comment calculer le gain moyen et la dispersion."
+    html: |
+      <div class="col w50">
+        <div class="card" data-beat="0"><div class="label">Le jeu de dé</div>
+          🎲 6 → <b>+3 €</b><br>🎲 2 ou 4 → <b>−2 €</b><br>🎲 1, 3, 5 → <b>0 €</b></div>
+        <div class="calc" data-beat="1">Jouer ou pas ? <span class="res">?</span></div>
+      </div>
+      <div class="col w50">
+        <div class="def" data-beat="2"><div class="term">Variable aléatoire</div>le résultat → un nombre</div>
+        <div class="chips" data-beat="3"><span class="chip">distribution</span><span class="chip">répartition</span><span class="chip main">gain moyen</span><span class="chip">dispersion</span></div>
+      </div>
+
+  # ================================================================ NOTION 1 : DÉFINITION
+  - id: s02_definition
+    notion: 'Variable aléatoire'
+    tag: 'Notion 1 / 8'
+    title: 'Une variable aléatoire'
+    subtitle: 'Une fonction de Ω dans ℝ'
+    hold: 0.5
+    beats:
+      - "Une variable aléatoire associe une valeur numérique au résultat d'une expérience aléatoire."
+      - "On la note en général avec une majuscule : X."
+      - "Reprenons le jeu. L'ensemble des résultats, oméga, contient les six faces du dé."
+      - "X envoie chaque face sur ton gain : le 6 vers 3, le 2 et le 4 vers moins 2, et les faces 1, 3 et 5 vers 0."
+      - "X est donc une fonction de oméga dans l'ensemble des réels. Elle prend ici trois valeurs possibles : moins 2, 0 et 3."
+    html: |
+      <div class="col w40">
+        <div class="def" data-beat="0"><div class="term">Variable aléatoire $X$</div>résultat → valeur réelle</div>
+        <div class="formula" data-beat="4">$$X : \Omega \to \mathbb{R}$$</div>
+      </div>
+      <svg class="grow" viewBox="0 0 900 600" width="900" height="600">
+        <g data-beat="2" data-anim="fade">
+          <rect class="stroke muted" x="40" y="20" width="230" height="560" rx="40"/>
+          <text x="70" y="75" font-size="44" fill="var(--muted)">Ω</text>
+          <g font-size="44" font-weight="700" fill="var(--ink)" text-anchor="middle">
+            <text x="155" y="125">1</text><text x="155" y="200">2</text><text x="155" y="275">3</text>
+            <text x="155" y="350">4</text><text x="155" y="425">5</text><text x="155" y="500">6</text>
+          </g>
+          <rect class="stroke muted" x="620" y="80" width="240" height="440" rx="40"/>
+          <text x="650" y="135" font-size="44" fill="var(--muted)">ℝ</text>
+          <g font-size="44" font-weight="700" text-anchor="middle">
+            <text x="740" y="220" fill="var(--ink)">−2</text>
+            <text x="740" y="330" fill="var(--ink)">0</text>
+            <text x="740" y="440" fill="var(--accent)">3</text>
+          </g>
+        </g>
+        <g data-beat="3" data-anim="draw" data-dur="1.4">
+          <path class="stroke accent" d="M190 487 L690 427"/>
+          <path class="stroke" d="M190 187 L690 207"/>
+          <path class="stroke" d="M190 337 L690 217"/>
+          <path class="stroke gold" d="M190 112 L690 317"/>
+          <path class="stroke gold" d="M190 262 L690 320"/>
+          <path class="stroke gold" d="M190 412 L690 323"/>
+        </g>
+      </svg>
+
+  - id: s03_exemples
+    notion: 'Variable aléatoire'
+    tag: 'Notion 1 / 8'
+    title: 'Cinq exemples du cours'
+    subtitle: 'Quelles valeurs possibles ?'
+    hold: 0.5
+    beats:
+      - "Le cours donne cinq exemples. Regarde à chaque fois les valeurs que X peut prendre."
+      - "a : on jette un dé et on note le point. X vaut 1, 2, 3, 4, 5 ou 6."
+      - "b : notre jeu de dé. X vaut moins 2, 0 ou 3."
+      - "c : on jette trois fois un dé et on compte les 6. X vaut 0, 1, 2 ou 3."
+      - "d : on lance un dé jusqu'à obtenir un 6, et on compte les lancers. X peut valoir 1, 2, 3, et ainsi de suite, sans limite."
+      - "e : on mesure la taille d'une personne prise au hasard dans la rue. X peut prendre n'importe quelle valeur entre 0 et 2 mètres 50."
+    html: |
+      <table class="data w100">
+        <tr><th>expérience</th><th>valeurs de $X$</th></tr>
+        <tr data-beat="1"><td>a) point d'un dé</td><td>$1, 2, 3, 4, 5, 6$</td></tr>
+        <tr data-beat="2"><td>b) le jeu de dé</td><td>$-2,\ 0,\ 3$</td></tr>
+        <tr data-beat="3"><td>c) nombre de 6 en 3 lancers</td><td>$0, 1, 2, 3$</td></tr>
+        <tr data-beat="4"><td>d) lancers jusqu'au premier 6</td><td>$1, 2, 3, \dots$</td></tr>
+        <tr data-beat="5"><td>e) taille d'un passant</td><td>$]\,0\text{ m} ;\ 2{,}5\text{ m}\,]$</td></tr>
+      </table>
+
+  # ================================================================ NOTION 2 : DISCRÈTE / CONTINUE
+  - id: s04_discret_continu
+    notion: 'Discrète ou continue'
+    tag: 'Notion 2 / 8'
+    title: 'Discrète ou continue ?'
+    subtitle: 'On peut compter les valeurs… ou pas'
+    hold: 0.5
+    beats:
+      - "Ces exemples se rangent en deux familles."
+      - "Une variable est discrète si ses valeurs forment un ensemble fini, comme dans les exemples a, b et c."
+      - "Elle est aussi discrète si l'ensemble est infini mais dénombrable, c'est-à-dire qu'on peut numéroter les valeurs une par une. C'est l'exemple d."
+      - "Une variable est continue si ses valeurs remplissent tout un intervalle de réels. C'est l'exemple e, la taille."
+      - "Pense à un escalier et à une rampe. Sur l'escalier, tu poses le pied sur des marches précises. Sur la rampe, tu peux t'arrêter n'importe où."
+      - "Cette partie traite les variables discrètes. Les continues viennent dans la partie 2."
+    html: |
+      <div class="col w50">
+        <div class="def" data-beat="1"><div class="term">Discrète</div>ensemble <b>fini</b> : a, b, c</div>
+        <div class="def" data-beat="2"><div class="term">Discrète aussi</div><b>infini dénombrable</b> : d</div>
+        <div class="def" data-beat="3" style="border-top-color:var(--gold)"><div class="term">Continue</div>un <b>intervalle</b> de réels : e</div>
+      </div>
+      <div class="col w50">
+        <div class="analogy" data-beat="4">
+          <div class="icon">🪜</div>
+          <div><b>Escalier ou rampe</b><br><span class="muted">des marches précises, ou n'importe où</span></div>
+        </div>
+        <div class="keep" data-beat="5">Partie 1 : <b>discrète</b> · partie 2 : continue</div>
+      </div>
+
+  # ================================================================ NOTION 3 : DISTRIBUTION
+  - id: s05_distribution
+    notion: 'Distribution de probabilité'
+    tag: 'Notion 3 / 8'
+    title: 'La distribution de probabilité'
+    subtitle: 'Chaque valeur avec sa probabilité'
+    hold: 0.5
+    beats:
+      - "Pour décrire une variable aléatoire discrète, on donne sa distribution de probabilité."
+      - "C'est la liste des valeurs possibles, notées x i, avec leur probabilité, notée p i."
+      - "Par définition, p i est la probabilité que X prenne la valeur x i."
+      - "Dans le jeu : X vaut moins 2 quand on fait 2 ou 4, donc 2 faces sur 6. Ça fait 1 sur 3."
+      - "X vaut 0 pour les faces 1, 3 et 5 : 3 faces sur 6, soit 1 sur 2. Et X vaut 3 seulement pour le 6 : 1 sur 6."
+      - "Comme en statistique descriptive, on dessine cette distribution avec un diagramme en bâtonnets."
+    html: |
+      <div class="col w50">
+        <div class="formula sm" data-beat="2">$$p_i = P[X = x_i]$$</div>
+        <table class="data" data-beat="1">
+          <tr><th>$x_i$</th><td>$-2$</td><td>$0$</td><td>$3$</td></tr>
+          <tr><th>$p_i$</th><td data-beat="3">$\dfrac13$</td><td data-beat="4">$\dfrac12$</td><td data-beat="4+3.5">$\dfrac16$</td></tr>
+        </table>
+      </div>
+      <svg class="w50" viewBox="0 0 760 520" width="760" height="520">
+        <line class="stroke muted" x1="60" y1="440" x2="740" y2="440" data-beat="5" data-anim="draw"/>
+        <line class="stroke muted" x1="90" y1="460" x2="90" y2="60" data-beat="5" data-anim="draw"/>
+        <text x="110" y="70" font-size="36" fill="var(--muted)" data-beat="5">$p_i$</text>
+        <text x="715" y="490" font-size="36" fill="var(--muted)" data-beat="5">$x_i$</text>
+        <rect x="186" y="240" width="28" height="200" rx="6" fill="var(--main)" data-beat="5+0.5" data-anim="grow-y"/>
+        <rect x="406" y="140" width="28" height="300" rx="6" fill="var(--main)" data-beat="5+0.8" data-anim="grow-y"/>
+        <rect x="636" y="340" width="28" height="100" rx="6" fill="var(--main)" data-beat="5+1.1" data-anim="grow-y"/>
+        <g font-size="38" text-anchor="middle" fill="var(--ink)">
+          <text x="200" y="490">−2</text><text x="420" y="490">0</text><text x="650" y="490">3</text>
+          <text x="200" y="225" data-beat="5+0.5">1/3</text><text x="420" y="125" data-beat="5+0.8">1/2</text><text x="650" y="325" data-beat="5+1.1">1/6</text>
+        </g>
+      </svg>
+
+  - id: s06_somme_un
+    notion: 'Distribution de probabilité'
+    tag: 'Notion 3 / 8'
+    title: 'La somme des pᵢ vaut 1'
+    subtitle: 'Toujours'
+    hold: 0.5
+    beats:
+      - "Une propriété à retenir : la somme des probabilités de toutes les valeurs vaut toujours 1."
+      - "La lettre sigma veut dire : on additionne les p i, pour i allant de 1 à n. Et n est le nombre de valeurs possibles."
+      - "C'est logique : X prend forcément une de ses valeurs. L'événement, X prend une valeur, est certain."
+      - "Vérifions sur le jeu. 1 sur 3 plus 1 sur 2 plus 1 sur 6. En sixièmes, ça fait 2 plus 3 plus 1, donc 6 sixièmes."
+      - "On trouve bien 1. Si tu ne trouves pas 1, il y a une erreur dans ta distribution."
+    html: |
+      <div class="col w50">
+        <div class="card">
+          <div class="formula lg" data-beat="0">$$\htmlData{hl=1}{\sum_{i=1}^{n}} p_i = 1$$</div>
+        </div>
+        <div class="legend" data-beat="1">
+          <span class="sym">$n$</span><span>nombre de valeurs possibles</span>
+        </div>
+        <div class="calc" data-beat="2">$X$ prend forcément une valeur : <b>certain</b></div>
+      </div>
+      <div class="col w50">
+        <div class="steps">
+          <div class="step" data-beat="3">$\dfrac13 + \dfrac12 + \dfrac16$</div>
+          <div class="step" data-beat="3+3.5">$= \dfrac26 + \dfrac36 + \dfrac16$</div>
+          <div class="step done" data-beat="4">$= \dfrac66 = 1$</div>
+        </div>
+        <div class="keep" data-beat="4+2">pas 1 ? → <b>erreur</b> dans la distribution</div>
+      </div>
+
+  # ================================================================ NOTION 4 : RÉPARTITION
+  - id: s07_repartition_def
+    notion: 'Fonction de répartition'
+    tag: 'Notion 4 / 8 · attention'
+    title: 'La fonction de répartition'
+    subtitle: 'Inférieur OU égal'
+    hold: 0.6
+    beats:
+      - "Deuxième outil : la fonction de répartition, notée F."
+      - "F de x, c'est la probabilité que X soit inférieure ou égale à x."
+      - "Attention au signe : c'est inférieur ou égal. La valeur x elle-même est comptée."
+      - "Pour une valeur x i, F de x i est donc la somme des probabilités de toutes les valeurs inférieures ou égales à x i. On cumule."
+      - "Dans le jeu : F de moins 2 vaut 1 sur 3. C'est la seule valeur jusque-là."
+      - "F de 0 vaut 1 sur 3 plus 1 sur 2, donc 5 sur 6."
+      - "Et F de 3 vaut 5 sur 6 plus 1 sur 6, donc 1."
+    html: |
+      <div class="col w50">
+        <div class="card">
+          <div class="formula lg" data-beat="1">$$F(x) = P[X \htmlData{hl=2}{\le} x]$$</div>
+        </div>
+        <div class="card accent" data-beat="2"><div class="label">Piège</div>$\le$ : la valeur $x$ est <b>comprise</b></div>
+        <div class="calc" data-beat="3">on <b>cumule</b> les $p_i$</div>
+      </div>
+      <div class="col w50">
+        <table class="data">
+          <tr><th>$x_i$</th><th>$p_i$</th><th class="hl" data-hl="3">$F(x_i)$</th></tr>
+          <tr><td>$-2$</td><td>$\dfrac13$</td><td data-beat="4">$\dfrac13$</td></tr>
+          <tr><td>$0$</td><td>$\dfrac12$</td><td data-beat="5">$\dfrac13 + \dfrac12 = \dfrac56$</td></tr>
+          <tr><td>$3$</td><td>$\dfrac16$</td><td data-beat="6"><span class="res">$\dfrac56 + \dfrac16 = 1$</span></td></tr>
+        </table>
+      </div>
+
+  - id: s08_escalier
+    notion: 'Fonction de répartition'
+    tag: 'Notion 4 / 8'
+    title: 'Un graphe en escalier'
+    subtitle: 'F est définie pour tout réel x'
+    hold: 0.6
+    beats:
+      - "Le graphe de F a la forme d'un escalier. Il monte d'une marche à chaque valeur x i, et la hauteur de la marche vaut p i."
+      - "Tout à gauche, F vaut 0 : X ne peut pas être plus petite que moins 2. Tout à droite, F vaut 1."
+      - "Important : F existe pour tout réel x, pas seulement pour les valeurs de X. Par exemple, F de 1 vaut 5 sur 6."
+      - "Pourtant, la probabilité de gagner exactement 1 euro est nulle : 1 n'est pas une valeur du jeu."
+      - "F de 1, c'est la probabilité de gagner au plus 1 euro, donc 1 euro ou moins. Et ça, c'est 5 sur 6."
+    html: |
+      <svg class="w60" viewBox="0 0 980 600" width="980" height="600">
+        <g data-beat="0" data-anim="fade">
+          <line class="stroke muted" x1="40" y1="520" x2="960" y2="520"/>
+          <line class="stroke muted" x1="90" y1="560" x2="90" y2="60"/>
+          <text x="105" y="70" font-size="36" fill="var(--muted)">F(x)</text>
+          <g font-size="36" text-anchor="middle" fill="var(--ink)">
+            <text x="230" y="570">−2</text><text x="450" y="570">0</text><text x="560" y="570" fill="var(--accent)">1</text><text x="780" y="570">3</text>
+          </g>
+          <g font-size="34" text-anchor="end" fill="var(--ink)">
+            <text x="75" y="404">1/3</text><text x="75" y="212">5/6</text><text x="75" y="152">1</text>
+          </g>
+          <line class="stroke muted" x1="90" y1="392" x2="230" y2="392" stroke-dasharray="6 8"/>
+          <line class="stroke muted" x1="90" y1="200" x2="450" y2="200" stroke-dasharray="6 8"/>
+          <line class="stroke muted" x1="90" y1="140" x2="780" y2="140" stroke-dasharray="6 8"/>
+        </g>
+        <g data-beat="0+1" data-anim="draw" data-dur="1.6">
+          <line class="stroke" x1="40" y1="520" x2="230" y2="520"/>
+          <line class="stroke" x1="230" y1="392" x2="450" y2="392"/>
+          <line class="stroke" x1="450" y1="200" x2="780" y2="200"/>
+          <line class="stroke" x1="780" y1="140" x2="950" y2="140"/>
+        </g>
+        <g data-beat="0+1.8" data-anim="pop">
+          <circle cx="230" cy="392" r="11" fill="var(--main)"/>
+          <circle cx="450" cy="200" r="11" fill="var(--main)"/>
+          <circle cx="780" cy="140" r="11" fill="var(--main)"/>
+        </g>
+        <g data-beat="1" data-anim="fade" font-size="36" font-weight="700">
+          <text x="60" y="490" fill="var(--main-ink)">0</text>
+          <text x="900" y="115" fill="var(--main-ink)">1</text>
+        </g>
+        <g data-beat="2" data-anim="pop">
+          <line class="stroke accent" x1="560" y1="520" x2="560" y2="200" stroke-dasharray="8 8"/>
+          <circle cx="560" cy="200" r="13" fill="var(--accent)"/>
+          <text x="580" y="260" font-size="38" font-weight="700" fill="var(--accent)">F(1) = 5/6</text>
+        </g>
+      </svg>
+      <div class="col w40">
+        <div class="calc" data-beat="0">marche en $x_i$ de hauteur $p_i$</div>
+        <div class="calc" data-beat="3">$P[X = 1] = 0$</div>
+        <div class="keep" data-beat="4">$F(1) = P[X \le 1] = \dfrac56$ : gagner <b>au plus</b> 1 €</div>
+      </div>
+
+  # ================================================================ NOTION 5 : LIEN STAT
+  - id: s09_lien_stat
+    notion: 'Lien avec la statistique'
+    tag: 'Notion 5 / 8'
+    title: 'Un air de déjà-vu'
+    subtitle: 'Statistique descriptive ↔ probabilités'
+    hold: 0.5
+    beats:
+      - "Tout ça doit te rappeler la statistique descriptive. Les deux mondes se correspondent."
+      - "Les fréquences relatives f i deviennent les probabilités p i."
+      - "Les fréquences relatives cumulées, grand F i, deviennent la fonction de répartition, F de x i."
+      - "Les graphiques sont les mêmes : bâtonnets et escalier."
+      - "La vraie différence est le sens des valeurs. En statistique, elles viennent d'observations qui existent déjà."
+      - "Ici, ce sont des probabilités : des valeurs théoriques, pour une expérience dont on ne connaît pas encore le résultat."
+    html: |
+      <table class="data w100">
+        <tr><th></th><th>statistique descriptive</th><th>variable aléatoire</th></tr>
+        <tr data-beat="1"><td><b>valeur</b></td><td>$f_i$ fréquence relative</td><td>$p_i$ probabilité</td></tr>
+        <tr data-beat="2"><td><b>cumul</b></td><td>$F_i$</td><td>$F(x_i)$</td></tr>
+        <tr data-beat="3"><td><b>graphiques</b></td><td>bâtonnets, escalier</td><td>bâtonnets, escalier</td></tr>
+        <tr data-beat="4"><td><b>sens</b></td><td>observations <b>existantes</b></td><td class="hl" data-hl="5">valeurs <b>théoriques</b></td></tr>
+      </table>
+
+  # ================================================================ NOTION 6 : ESPÉRANCE
+  - id: s10_esperance_def
+    notion: 'Espérance mathématique'
+    tag: 'Notion 6 / 8'
+    title: 'L''espérance mathématique'
+    subtitle: 'La moyenne d''une variable aléatoire'
+    hold: 0.5
+    beats:
+      - "Le parallèle continue : à la moyenne de la statistique correspond l'espérance mathématique."
+      - "L'espérance de X se note E de X, ou plus simplement mu. C'est la valeur moyenne que prend X."
+      - "Si X est le gain d'un jeu, E de X est le gain moyen par partie : ce que tu peux espérer gagner en jouant."
+      - "La formule ressemble à celle de la moyenne : on additionne chaque valeur x i multipliée par sa probabilité p i."
+      - "Chaque valeur pèse donc selon sa probabilité. Une valeur rare compte peu, une valeur fréquente compte beaucoup."
+    html: |
+      <div class="col w50">
+        <div class="analogy" data-beat="0">
+          <div class="icon">⚖️</div>
+          <div><b>Moyenne pondérée</b><br><span class="muted">chaque valeur pèse selon $p_i$</span></div>
+        </div>
+        <div class="def" data-beat="2"><div class="term">$E[X]$</div>le gain <b>moyen</b> par partie</div>
+      </div>
+      <div class="col w50">
+        <div class="card">
+          <div class="formula lg" data-beat="1">$$\mu = E[X] = \htmlData{beat=3}{\sum_{i=1}^{n} \htmlData{hl=4}{p_i}\, x_i}$$</div>
+        </div>
+        <div class="legend" data-beat="3">
+          <span class="sym">$x_i$</span><span>une valeur possible</span>
+          <span class="sym">$p_i$</span><span>sa probabilité</span>
+        </div>
+      </div>
+
+  - id: s11_esperance_ex
+    notion: 'Espérance mathématique'
+    tag: 'Notion 6 / 8'
+    title: 'Le jeu est-il rentable ?'
+    subtitle: 'Calcul de E[X]'
+    hold: 0.6
+    beats:
+      - "Calculons l'espérance du jeu de dé."
+      - "Moins 2 fois 1 sur 3, ça fait moins 2 sur 3. 0 fois 1 sur 2, ça fait 0. Et 3 fois 1 sur 6, ça fait 1 sur 2."
+      - "On additionne : moins 4 sixièmes plus 3 sixièmes, donc moins 1 sur 6 euro."
+      - "En moyenne, tu perds environ 0,17 euro par partie. Le jeu n'est pas rentable pour toi."
+      - "Vérifions avec 600 parties. Tu perds 2 euros environ 200 fois, et tu gagnes 3 euros environ 100 fois."
+      - "Bilan : moins 400 plus 300, donc moins 100 euros. Divisé par 600 parties, on retrouve bien moins 1 sur 6."
+    html: |
+      <div class="col w50">
+        <div class="steps">
+          <div class="step" data-beat="1">$(-2)\cdot\dfrac13 + 0\cdot\dfrac12 + 3\cdot\dfrac16$</div>
+          <div class="step" data-beat="2">$= -\dfrac46 + 0 + \dfrac36$</div>
+          <div class="step done" data-beat="2+2.5">$= -\dfrac16$ €</div>
+        </div>
+        <div class="keep" data-beat="3">$E[X] \approx -0{,}17$ € par partie : <b>pas rentable</b></div>
+      </div>
+      <div class="col w50">
+        <div class="card gold" data-beat="4"><div class="label">600 parties</div>
+          ≈ 200 fois $-2$ € · ≈ 300 fois $0$ € · ≈ 100 fois $+3$ €</div>
+        <div class="calc" data-beat="5">$\dfrac{-400 + 300}{600} = \dfrac{-100}{600} =$ <span class="res">$-\dfrac16$</span></div>
+      </div>
+
+  # ================================================================ NOTION 7 : VARIANCE
+  - id: s12_variance_def
+    notion: 'Variance et écart-type'
+    tag: 'Notion 7 / 8'
+    title: 'Variance et écart-type'
+    subtitle: 'La dispersion autour de μ'
+    hold: 0.5
+    beats:
+      - "L'espérance ne dit pas tout. Deux jeux peuvent avoir le même gain moyen, mais des gains très différents d'une partie à l'autre."
+      - "Comme en statistique, l'écart-type, noté sigma, mesure la dispersion des valeurs autour de la moyenne mu."
+      - "Sa formule donne d'abord sigma au carré : la somme des p i fois x i moins mu, au carré."
+      - "x i moins mu, c'est l'écart d'une valeur à la moyenne. On le met au carré, puis on le pondère par sa probabilité."
+      - "Sigma au carré s'appelle la variance. L'écart-type est sa racine carrée."
+    html: |
+      <div class="col w40">
+        <div class="def" data-beat="1"><div class="term">Écart-type $\sigma$</div>dispersion autour de $\mu$</div>
+        <div class="def" data-beat="4" style="border-top-color:var(--gold)"><div class="term">Variance $\sigma^2$</div>$\sigma = \sqrt{\text{variance}}$</div>
+      </div>
+      <div class="col grow">
+        <div class="card">
+          <div class="formula" data-beat="2">$$\sigma^2 = \sum_{i=1}^{n} p_i\,\htmlData{hl=3}{(x_i - \mu)^2}$$</div>
+        </div>
+        <div class="legend" data-beat="3">
+          <span class="sym">$x_i - \mu$</span><span>écart d'une valeur à la moyenne</span>
+          <span class="sym">$p_i$</span><span>son poids</span>
+        </div>
+      </div>
+
+  - id: s13_variance_ex
+    notion: 'Variance et écart-type'
+    tag: 'Notion 7 / 8'
+    title: 'La variance du jeu'
+    subtitle: 'Avec la formule de définition'
+    hold: 0.6
+    beats:
+      - "Appliquons la définition au jeu, avec mu égal à moins 1 sur 6."
+      - "Pour moins 2 : l'écart vaut moins 11 sixièmes. Au carré, 121 sur 36, multiplié par 1 sur 3."
+      - "Pour 0 : l'écart vaut 1 sixième. Au carré, 1 sur 36, multiplié par 1 sur 2."
+      - "Pour 3 : l'écart vaut 19 sixièmes. Au carré, 361 sur 36, multiplié par 1 sur 6."
+      - "On additionne les trois termes : la variance vaut 101 sur 36, environ 2,81."
+      - "Ça marche, mais il faut calculer tous les écarts, et les fractions deviennent vite pénibles."
+    html: |
+      <table class="data">
+        <tr><th>$x_i$</th><th>$p_i$</th><th>$x_i - \mu$</th><th>$(x_i - \mu)^2$</th><th>$p_i (x_i - \mu)^2$</th></tr>
+        <tr data-beat="1"><td>$-2$</td><td>$\dfrac13$</td><td>$-\dfrac{11}{6}$</td><td>$\dfrac{121}{36}$</td><td>$\dfrac{121}{108}$</td></tr>
+        <tr data-beat="2"><td>$0$</td><td>$\dfrac12$</td><td>$\dfrac16$</td><td>$\dfrac{1}{36}$</td><td>$\dfrac{1}{72}$</td></tr>
+        <tr data-beat="3"><td>$3$</td><td>$\dfrac16$</td><td>$\dfrac{19}{6}$</td><td>$\dfrac{361}{36}$</td><td>$\dfrac{361}{216}$</td></tr>
+        <tr class="tot" data-beat="4"><td colspan="4">$\sigma^2$</td><td><span class="res">$\dfrac{101}{36} \approx 2{,}81$</span></td></tr>
+      </table>
+      <div class="calc w30" data-beat="5">beaucoup d'écarts à calculer…</div>
+
+  - id: s14_formule_pratique
+    notion: 'Variance et écart-type'
+    tag: 'Notion 7 / 8'
+    title: 'La formule pratique'
+    subtitle: 'Moins d''opérations, même résultat'
+    hold: 0.6
+    beats:
+      - "Le cours donne une formule de calcul plus rapide, à retenir : sigma au carré égale la somme des p i fois x i au carré, moins mu au carré."
+      - "On ne calcule plus aucun écart : on met juste chaque valeur au carré."
+      - "Pour le jeu : 1 sur 3 fois 4, plus 1 sur 2 fois 0, plus 1 sur 6 fois 9. Ça fait 17 sur 6."
+      - "On retire mu au carré, c'est-à-dire 1 sur 36. 17 sur 6, c'est 102 sur 36. Il reste 101 sur 36."
+      - "C'est exactement le résultat de la définition. Le cours le démontre, ici on l'a vérifié sur l'exemple."
+      - "L'écart-type vaut la racine de 101 sur 36 : environ 1,67 euro."
+    html: |
+      <div class="col w50">
+        <div class="card">
+          <div class="formula" data-beat="0">$$\sigma^2 = \sum_{i=1}^{n} p_i\,\htmlData{hl=1}{x_i^2} - \mu^2$$</div>
+        </div>
+        <div class="keep" data-beat="4">même résultat que la définition</div>
+      </div>
+      <div class="col w50">
+        <div class="steps">
+          <div class="step" data-beat="2">$\dfrac13\cdot 4 + \dfrac12\cdot 0 + \dfrac16\cdot 9 = \dfrac{17}{6}$</div>
+          <div class="step" data-beat="3">$\dfrac{102}{36} - \dfrac{1}{36} = \dfrac{101}{36}$</div>
+          <div class="step done" data-beat="5">$\sigma = \sqrt{\dfrac{101}{36}} \approx 1{,}67$ €</div>
+        </div>
+      </div>
+
+  # ================================================================ NOTION 8 : SIGNIFICATION
+  - id: s15_signification
+    notion: 'Sens de l''écart-type'
+    tag: 'Notion 8 / 8'
+    title: 'Que veut dire σ ?'
+    subtitle: '68 %, 95 %, à peine 1 %'
+    hold: 0.6
+    beats:
+      - "Comment interpréter l'écart-type ? Le cours rappelle une propriété déjà vue en statistique."
+      - "Environ 68 % des valeurs de X se trouvent à au plus un écart-type de la moyenne : entre mu moins sigma et mu plus sigma."
+      - "Environ 95 % se trouvent à au plus deux écarts-types."
+      - "Et à peine 1 % des valeurs s'écartent de plus de trois écarts-types."
+      - "Exemple inventé : un examen avec une moyenne de 12 sur 20 et un écart-type de 3. Environ deux tiers des notes seraient entre 9 et 15, et 95 % entre 6 et 18."
+      - "Garde ces pourcentages comme un ordre de grandeur : selon la forme de la distribution, la vraie proportion peut s'en écarter."
+    html: |
+      <div class="col w100">
+      <svg viewBox="0 0 1600 330" width="1600" height="330">
+        <line class="stroke muted" x1="60" y1="250" x2="1540" y2="250" data-beat="0" data-anim="draw"/>
+        <g font-size="36" text-anchor="middle" fill="var(--ink)" data-beat="0">
+          <text x="800" y="305" font-weight="700">μ</text>
+          <text x="600" y="305">μ−σ</text><text x="1000" y="305">μ+σ</text>
+          <text x="400" y="305">μ−2σ</text><text x="1200" y="305">μ+2σ</text>
+          <text x="200" y="305">μ−3σ</text><text x="1400" y="305">μ+3σ</text>
+        </g>
+        <rect x="600" y="170" width="400" height="60" rx="14" fill="var(--main)" data-beat="1" data-anim="grow-x"/>
+        <text x="800" y="212" font-size="38" font-weight="700" text-anchor="middle" fill="#fff" data-beat="1">≈ 68 %</text>
+        <rect x="400" y="95" width="800" height="60" rx="14" fill="var(--gold)" data-beat="2" data-anim="grow-x"/>
+        <text x="800" y="137" font-size="38" font-weight="700" text-anchor="middle" fill="var(--ink)" data-beat="2">≈ 95 %</text>
+        <g data-beat="3" data-anim="fade">
+          <rect x="200" y="20" width="1200" height="60" rx="14" fill="none" stroke="var(--accent)" stroke-width="4" stroke-dasharray="12 10"/>
+          <text x="800" y="62" font-size="36" font-weight="700" text-anchor="middle" fill="var(--accent)">au-delà de 3σ : à peine 1 %</text>
+        </g>
+      </svg>
+      <div class="row w100">
+        <div class="calc" data-beat="4">examen : $\mu = 12$, $\sigma = 3$ → ≈ ⅔ entre 9 et 15</div>
+        <div class="keep" data-beat="5">un <b>ordre de grandeur</b>, pas une valeur exacte</div>
+      </div>
+      </div>
+
+  # ================================================================ RÉCAP
+  - id: s16_recap
+    notion: 'Récapitulatif'
+    title: 'À retenir'
+    subtitle: 'Variables aléatoires discrètes'
+    hold: 1.2
+    beats:
+      - "Récapitulons. Une variable aléatoire X associe un nombre à chaque résultat d'une expérience. Elle est discrète si on peut compter ses valeurs."
+      - "Sa distribution donne chaque valeur x i avec sa probabilité p i, et la somme des p i vaut toujours 1."
+      - "La fonction de répartition, F de x, est la probabilité que X soit inférieure ou égale à x. Son graphe est un escalier."
+      - "L'espérance, c'est la somme des p i fois x i : le gain moyen."
+      - "La variance se calcule plus vite avec la somme des p i fois x i au carré, moins mu au carré. L'écart-type est sa racine."
+      - "Dans la partie 2, on passe aux variables continues."
+    html: |
+      <div class="recap w100">
+        <div class="item" data-beat="0"><b>Variable aléatoire</b> : $X : \Omega \to \mathbb{R}$ · discrète = valeurs dénombrables</div>
+        <div class="item" data-beat="1"><span class="tex">$p_i = P[X = x_i]$ · $\sum p_i = 1$</span></div>
+        <div class="item" data-beat="2"><span class="tex">$F(x) = P[X \le x]$</span> · en escalier</div>
+        <div class="item" data-beat="3"><span class="tex">$\mu = E[X] = \sum p_i x_i$</span> · jeu : $-\dfrac16$ €</div>
+        <div class="item" data-beat="4"><span class="tex">$\sigma^2 = \sum p_i x_i^2 - \mu^2$</span> · jeu : $\sigma \approx 1{,}67$ €</div>
+      </div>

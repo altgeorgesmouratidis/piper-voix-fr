@@ -1,0 +1,881 @@
+1
+00:00:00,450 --> 00:00:03,010
+Analyse de données, chapitre 6 :
+
+2
+00:00:03,010 --> 00:00:05,010
+les variables aléatoires.
+
+3
+00:00:05,460 --> 00:00:10,437
+Dans cette première partie, on étudie les
+variables aléatoires discrètes :
+
+4
+00:00:10,437 --> 00:00:16,020
+leur distribution, leur fonction de répartition,
+leur espérance et leur écart-type.
+
+5
+00:00:17,383 --> 00:00:19,090
+On te propose un jeu :
+
+6
+00:00:19,090 --> 00:00:20,332
+tu lances un dé.
+
+7
+00:00:20,332 --> 00:00:22,815
+Si tu fais 6, tu gagnes 3 euros.
+
+8
+00:00:22,815 --> 00:00:25,608
+Si tu fais 2 ou 4, tu perds 2 euros.
+
+9
+00:00:25,608 --> 00:00:27,703
+Sinon, il ne se passe rien.
+
+10
+00:00:28,153 --> 00:00:28,899
+Question :
+
+11
+00:00:28,899 --> 00:00:31,433
+est-ce que tu as intérêt à jouer ?
+
+12
+00:00:31,883 --> 00:00:36,748
+Pour répondre, on va transformer chaque résultat
+du dé en un nombre :
+
+13
+00:00:36,748 --> 00:00:37,383
+ton gain.
+
+14
+00:00:37,383 --> 00:00:40,203
+Ce nombre, c'est une variable aléatoire.
+
+15
+00:00:40,653 --> 00:00:46,263
+On verra ensuite comment décrire ses valeurs
+avec leurs probabilités, puis comment calculer
+
+16
+00:00:46,263 --> 00:00:48,173
+le gain moyen et la dispersion.
+
+17
+00:00:50,017 --> 00:00:54,852
+Une variable aléatoire associe une valeur
+numérique au résultat d'une expérience
+
+18
+00:00:54,852 --> 00:00:55,457
+aléatoire.
+
+19
+00:00:55,907 --> 00:00:59,572
+On la note en général avec une majuscule :
+
+20
+00:00:59,572 --> 00:00:59,747
+X.
+
+21
+00:01:00,197 --> 00:01:01,539
+Reprenons le jeu.
+
+22
+00:01:01,539 --> 00:01:06,437
+L'ensemble des résultats, oméga, contient les
+six faces du dé.
+
+23
+00:01:06,887 --> 00:01:10,247
+X envoie chaque face sur ton gain :
+
+24
+00:01:10,247 --> 00:01:16,967
+le 6 vers 3, le 2 et le 4 vers moins 2, et les
+faces 1, 3 et 5 vers 0.
+
+25
+00:01:17,417 --> 00:01:21,931
+X est donc une fonction de oméga dans l'ensemble
+des réels.
+
+26
+00:01:21,931 --> 00:01:24,992
+Elle prend ici trois valeurs possibles :
+
+27
+00:01:24,992 --> 00:01:26,217
+moins 2, 0 et 3.
+
+28
+00:01:28,083 --> 00:01:29,866
+Le cours donne cinq exemples.
+
+29
+00:01:29,866 --> 00:01:33,123
+Regarde à chaque fois les valeurs que X peut
+prendre.
+
+30
+00:01:33,573 --> 00:01:33,960
+a :
+
+31
+00:01:33,960 --> 00:01:38,466
+on jette un dé et on note le point.
+
+32
+00:01:38,466 --> 00:01:41,813
+X vaut 1, 2, 3, 4, 5 ou 6.
+
+33
+00:01:42,263 --> 00:01:42,686
+b :
+
+34
+00:01:42,686 --> 00:01:44,941
+notre jeu de dé.
+
+35
+00:01:44,941 --> 00:01:48,183
+X vaut moins 2, 0 ou 3.
+
+36
+00:01:48,633 --> 00:01:49,000
+c :
+
+37
+00:01:49,000 --> 00:01:54,506
+on jette trois fois un dé et on compte les 6.
+
+38
+00:01:54,506 --> 00:01:56,953
+X vaut 0, 1, 2 ou 3.
+
+39
+00:01:57,403 --> 00:01:57,680
+d :
+
+40
+00:01:57,680 --> 00:02:03,390
+on lance un dé jusqu'à obtenir un 6, et on
+compte les lancers.
+
+41
+00:02:03,390 --> 00:02:08,363
+X peut valoir 1, 2, 3, et ainsi de suite, sans
+limite.
+
+42
+00:02:08,813 --> 00:02:09,029
+e :
+
+43
+00:02:09,029 --> 00:02:13,557
+on mesure la taille d'une personne prise au
+hasard dans la rue.
+
+44
+00:02:13,557 --> 00:02:18,013
+X peut prendre n'importe quelle valeur entre 0
+et 2 mètres 50.
+
+45
+00:02:19,850 --> 00:02:22,170
+Ces exemples se rangent en deux familles.
+
+46
+00:02:22,620 --> 00:02:29,764
+Une variable est discrète si ses valeurs forment
+un ensemble fini, comme dans les exemples a, b
+
+47
+00:02:29,764 --> 00:02:30,140
+et c.
+
+48
+00:02:30,590 --> 00:02:36,269
+Elle est aussi discrète si l'ensemble est infini
+mais dénombrable, c'est-à-dire qu'on peut
+
+49
+00:02:36,269 --> 00:02:38,414
+numéroter les valeurs une par une.
+
+50
+00:02:38,414 --> 00:02:39,550
+C'est l'exemple d.
+
+51
+00:02:40,000 --> 00:02:45,891
+Une variable est continue si ses valeurs
+remplissent tout un intervalle de réels.
+
+52
+00:02:45,891 --> 00:02:48,000
+C'est l'exemple e, la taille.
+
+53
+00:02:48,450 --> 00:02:50,743
+Pense à un escalier et à une rampe.
+
+54
+00:02:50,743 --> 00:02:54,542
+Sur l'escalier, tu poses le pied sur des marches
+précises.
+
+55
+00:02:54,542 --> 00:02:57,490
+Sur la rampe, tu peux t'arrêter n'importe où.
+
+56
+00:02:57,940 --> 00:03:00,706
+Cette partie traite les variables discrètes.
+
+57
+00:03:00,706 --> 00:03:03,220
+Les continues viennent dans la partie 2.
+
+58
+00:03:05,083 --> 00:03:10,203
+Pour décrire une variable aléatoire discrète, on
+donne sa distribution de probabilité.
+
+59
+00:03:10,653 --> 00:03:17,293
+C'est la liste des valeurs possibles, notées x
+i, avec leur probabilité, notée p i.
+
+60
+00:03:17,743 --> 00:03:23,423
+Par définition, p i est la probabilité que X
+prenne la valeur x i.
+
+61
+00:03:23,873 --> 00:03:25,146
+Dans le jeu :
+
+62
+00:03:25,146 --> 00:03:30,627
+X vaut moins 2 quand on fait 2 ou 4, donc 2
+faces sur 6.
+
+63
+00:03:30,627 --> 00:03:32,193
+Ça fait 1 sur 3.
+
+64
+00:03:32,643 --> 00:03:36,359
+X vaut 0 pour les faces 1, 3 et 5 :
+
+65
+00:03:36,359 --> 00:03:39,331
+3 faces sur 6, soit 1 sur 2.
+
+66
+00:03:39,331 --> 00:03:42,834
+Et X vaut 3 seulement pour le 6 :
+
+67
+00:03:42,834 --> 00:03:43,683
+1 sur 6.
+
+68
+00:03:44,133 --> 00:03:49,138
+Comme en statistique descriptive, on dessine
+cette distribution avec un diagramme en
+
+69
+00:03:49,138 --> 00:03:49,733
+bâtonnets.
+
+70
+00:03:51,583 --> 00:03:53,246
+Une propriété à retenir :
+
+71
+00:03:53,246 --> 00:03:57,503
+la somme des probabilités de toutes les valeurs
+vaut toujours 1.
+
+72
+00:03:57,953 --> 00:04:00,209
+La lettre sigma veut dire :
+
+73
+00:04:00,209 --> 00:04:04,052
+on additionne les p i, pour i allant de 1 à n.
+
+74
+00:04:04,052 --> 00:04:07,393
+Et n est le nombre de valeurs possibles.
+
+75
+00:04:07,843 --> 00:04:08,957
+C'est logique :
+
+76
+00:04:08,957 --> 00:04:11,703
+X prend forcément une de ses valeurs.
+
+77
+00:04:11,703 --> 00:04:15,043
+L'événement, X prend une valeur, est certain.
+
+78
+00:04:15,493 --> 00:04:17,682
+Vérifions sur le jeu.
+
+79
+00:04:17,682 --> 00:04:21,225
+1 sur 3 plus 1 sur 2 plus 1 sur 6.
+
+80
+00:04:21,225 --> 00:04:26,853
+En sixièmes, ça fait 2 plus 3 plus 1, donc 6
+sixièmes.
+
+81
+00:04:27,303 --> 00:04:28,391
+On trouve bien 1.
+
+82
+00:04:28,391 --> 00:04:32,423
+Si tu ne trouves pas 1, il y a une erreur dans
+ta distribution.
+
+83
+00:04:34,283 --> 00:04:35,588
+Deuxième outil :
+
+84
+00:04:35,588 --> 00:04:38,523
+la fonction de répartition, notée F.
+
+85
+00:04:38,973 --> 00:04:44,333
+F de x, c'est la probabilité que X soit
+inférieure ou égale à x.
+
+86
+00:04:44,783 --> 00:04:46,424
+Attention au signe :
+
+87
+00:04:46,424 --> 00:04:48,394
+c'est inférieur ou égal.
+
+88
+00:04:48,394 --> 00:04:51,183
+La valeur x elle-même est comptée.
+
+89
+00:04:51,633 --> 00:04:58,902
+Pour une valeur x i, F de x i est donc la somme
+des probabilités de toutes les valeurs
+
+90
+00:04:58,902 --> 00:05:01,268
+inférieures ou égales à x i.
+
+91
+00:05:01,268 --> 00:05:02,113
+On cumule.
+
+92
+00:05:02,563 --> 00:05:03,647
+Dans le jeu :
+
+93
+00:05:03,647 --> 00:05:05,815
+F de moins 2 vaut 1 sur 3.
+
+94
+00:05:05,815 --> 00:05:08,483
+C'est la seule valeur jusque-là.
+
+95
+00:05:08,933 --> 00:05:14,373
+F de 0 vaut 1 sur 3 plus 1 sur 2, donc 5 sur 6.
+
+96
+00:05:14,823 --> 00:05:19,863
+Et F de 3 vaut 5 sur 6 plus 1 sur 6, donc 1.
+
+97
+00:05:21,817 --> 00:05:24,640
+Le graphe de F a la forme d'un escalier.
+
+98
+00:05:24,640 --> 00:05:30,217
+Il monte d'une marche à chaque valeur x i, et la
+hauteur de la marche vaut p i.
+
+99
+00:05:30,667 --> 00:05:32,754
+Tout à gauche, F vaut 0 :
+
+100
+00:05:32,754 --> 00:05:36,343
+X ne peut pas être plus petite que moins 2.
+
+101
+00:05:36,343 --> 00:05:38,347
+Tout à droite, F vaut 1.
+
+102
+00:05:38,797 --> 00:05:39,825
+Important :
+
+103
+00:05:39,825 --> 00:05:45,713
+F existe pour tout réel x, pas seulement pour
+les valeurs de X.
+
+104
+00:05:45,713 --> 00:05:48,797
+Par exemple, F de 1 vaut 5 sur 6.
+
+105
+00:05:49,247 --> 00:05:54,094
+Pourtant, la probabilité de gagner exactement 1
+euro est nulle :
+
+106
+00:05:54,094 --> 00:05:56,367
+1 n'est pas une valeur du jeu.
+
+107
+00:05:56,817 --> 00:06:03,398
+F de 1, c'est la probabilité de gagner au plus 1
+euro, donc 1 euro ou moins.
+
+108
+00:06:03,398 --> 00:06:05,217
+Et ça, c'est 5 sur 6.
+
+109
+00:06:07,150 --> 00:06:10,086
+Tout ça doit te rappeler la statistique
+descriptive.
+
+110
+00:06:10,086 --> 00:06:11,950
+Les deux mondes se correspondent.
+
+111
+00:06:12,400 --> 00:06:17,440
+Les fréquences relatives f i deviennent les
+probabilités p i.
+
+112
+00:06:17,890 --> 00:06:24,770
+Les fréquences relatives cumulées, grand F i,
+deviennent la fonction de répartition, F de x i.
+
+113
+00:06:25,220 --> 00:06:27,419
+Les graphiques sont les mêmes :
+
+114
+00:06:27,419 --> 00:06:28,980
+bâtonnets et escalier.
+
+115
+00:06:29,430 --> 00:06:32,233
+La vraie différence est le sens des valeurs.
+
+116
+00:06:32,233 --> 00:06:36,310
+En statistique, elles viennent d'observations
+qui existent déjà.
+
+117
+00:06:36,760 --> 00:06:38,646
+Ici, ce sont des probabilités :
+
+118
+00:06:38,646 --> 00:06:43,880
+des valeurs théoriques, pour une expérience dont
+on ne connaît pas encore le résultat.
+
+119
+00:06:45,717 --> 00:06:47,148
+Le parallèle continue :
+
+120
+00:06:47,148 --> 00:06:51,317
+à la moyenne de la statistique correspond
+l'espérance mathématique.
+
+121
+00:06:51,767 --> 00:06:56,360
+L'espérance de X se note E de X, ou plus
+simplement mu.
+
+122
+00:06:56,360 --> 00:06:59,367
+C'est la valeur moyenne que prend X.
+
+123
+00:06:59,817 --> 00:07:04,641
+Si X est le gain d'un jeu, E de X est le gain
+moyen par partie :
+
+124
+00:07:04,641 --> 00:07:07,657
+ce que tu peux espérer gagner en jouant.
+
+125
+00:07:08,107 --> 00:07:11,339
+La formule ressemble à celle de la moyenne :
+
+126
+00:07:11,339 --> 00:07:16,187
+on additionne chaque valeur x i multipliée par
+sa probabilité p i.
+
+127
+00:07:16,637 --> 00:07:19,648
+Chaque valeur pèse donc selon sa probabilité.
+
+128
+00:07:19,648 --> 00:07:23,997
+Une valeur rare compte peu, une valeur fréquente
+compte beaucoup.
+
+129
+00:07:25,850 --> 00:07:27,930
+Calculons l'espérance du jeu de dé.
+
+130
+00:07:28,380 --> 00:07:33,174
+Moins 2 fois 1 sur 3, ça fait moins 2 sur 3.
+
+131
+00:07:33,174 --> 00:07:36,007
+0 fois 1 sur 2, ça fait 0.
+
+132
+00:07:36,007 --> 00:07:39,820
+Et 3 fois 1 sur 6, ça fait 1 sur 2.
+
+133
+00:07:40,270 --> 00:07:41,667
+On additionne :
+
+134
+00:07:41,667 --> 00:07:47,070
+moins 4 sixièmes plus 3 sixièmes, donc moins 1
+sur 6 euro.
+
+135
+00:07:47,520 --> 00:07:51,708
+En moyenne, tu perds environ 0,17 euro par
+partie.
+
+136
+00:07:51,708 --> 00:07:54,640
+Le jeu n'est pas rentable pour toi.
+
+137
+00:07:55,090 --> 00:07:57,358
+Vérifions avec 600 parties.
+
+138
+00:07:57,358 --> 00:08:03,490
+Tu perds 2 euros environ 200 fois, et tu gagnes
+3 euros environ 100 fois.
+
+139
+00:08:03,940 --> 00:08:04,576
+Bilan :
+
+140
+00:08:04,576 --> 00:08:08,302
+moins 400 plus 300, donc moins 100 euros.
+
+141
+00:08:08,302 --> 00:08:13,300
+Divisé par 600 parties, on retrouve bien moins 1
+sur 6.
+
+142
+00:08:15,250 --> 00:08:16,863
+L'espérance ne dit pas tout.
+
+143
+00:08:16,863 --> 00:08:21,989
+Deux jeux peuvent avoir le même gain moyen, mais
+des gains très différents d'une partie à
+
+144
+00:08:21,989 --> 00:08:22,450
+l'autre.
+
+145
+00:08:22,900 --> 00:08:29,482
+Comme en statistique, l'écart-type, noté sigma,
+mesure la dispersion des valeurs autour de la
+
+146
+00:08:29,482 --> 00:08:30,260
+moyenne mu.
+
+147
+00:08:30,710 --> 00:08:33,990
+Sa formule donne d'abord sigma au carré :
+
+148
+00:08:33,990 --> 00:08:37,590
+la somme des p i fois x i moins mu, au carré.
+
+149
+00:08:38,040 --> 00:08:41,820
+x i moins mu, c'est l'écart d'une valeur à la
+moyenne.
+
+150
+00:08:41,820 --> 00:08:45,880
+On le met au carré, puis on le pondère par sa
+probabilité.
+
+151
+00:08:46,330 --> 00:08:49,040
+Sigma au carré s'appelle la variance.
+
+152
+00:08:49,040 --> 00:08:51,530
+L'écart-type est sa racine carrée.
+
+153
+00:08:53,383 --> 00:08:58,263
+Appliquons la définition au jeu, avec mu égal à
+moins 1 sur 6.
+
+154
+00:08:58,713 --> 00:09:00,223
+Pour moins 2 :
+
+155
+00:09:00,223 --> 00:09:03,567
+l'écart vaut moins 11 sixièmes.
+
+156
+00:09:03,567 --> 00:09:08,313
+Au carré, 121 sur 36, multiplié par 1 sur 3.
+
+157
+00:09:08,763 --> 00:09:09,623
+Pour 0 :
+
+158
+00:09:09,623 --> 00:09:12,093
+l'écart vaut 1 sixième.
+
+159
+00:09:12,093 --> 00:09:16,603
+Au carré, 1 sur 36, multiplié par 1 sur 2.
+
+160
+00:09:17,053 --> 00:09:17,976
+Pour 3 :
+
+161
+00:09:17,976 --> 00:09:20,859
+l'écart vaut 19 sixièmes.
+
+162
+00:09:20,859 --> 00:09:25,933
+Au carré, 361 sur 36, multiplié par 1 sur 6.
+
+163
+00:09:26,383 --> 00:09:29,704
+On additionne les trois termes :
+
+164
+00:09:29,704 --> 00:09:34,063
+la variance vaut 101 sur 36, environ 2,81.
+
+165
+00:09:34,513 --> 00:09:39,415
+Ça marche, mais il faut calculer tous les
+écarts, et les fractions deviennent vite
+
+166
+00:09:39,415 --> 00:09:39,953
+pénibles.
+
+167
+00:09:41,917 --> 00:09:46,438
+Le cours donne une formule de calcul plus
+rapide, à retenir :
+
+168
+00:09:46,438 --> 00:09:51,997
+sigma au carré égale la somme des p i fois x i
+au carré, moins mu au carré.
+
+169
+00:09:52,447 --> 00:09:54,705
+On ne calcule plus aucun écart :
+
+170
+00:09:54,705 --> 00:09:57,247
+on met juste chaque valeur au carré.
+
+171
+00:09:57,697 --> 00:09:59,179
+Pour le jeu :
+
+172
+00:09:59,179 --> 00:10:05,678
+1 sur 3 fois 4, plus 1 sur 2 fois 0, plus 1 sur
+6 fois 9.
+
+173
+00:10:05,678 --> 00:10:07,617
+Ça fait 17 sur 6.
+
+174
+00:10:08,067 --> 00:10:13,271
+On retire mu au carré, c'est-à-dire 1 sur 36.
+
+175
+00:10:13,271 --> 00:10:16,394
+17 sur 6, c'est 102 sur 36.
+
+176
+00:10:16,394 --> 00:10:18,707
+Il reste 101 sur 36.
+
+177
+00:10:19,157 --> 00:10:22,108
+C'est exactement le résultat de la définition.
+
+178
+00:10:22,108 --> 00:10:25,637
+Le cours le démontre, ici on l'a vérifié sur
+l'exemple.
+
+179
+00:10:26,087 --> 00:10:30,316
+L'écart-type vaut la racine de 101 sur 36 :
+
+180
+00:10:30,316 --> 00:10:32,087
+environ 1,67 euro.
+
+181
+00:10:34,050 --> 00:10:36,196
+Comment interpréter l'écart-type ?
+
+182
+00:10:36,196 --> 00:10:39,730
+Le cours rappelle une propriété déjà vue en
+statistique.
+
+183
+00:10:40,180 --> 00:10:46,497
+Environ 68 % des valeurs de X se trouvent à au
+plus un écart-type de la moyenne :
+
+184
+00:10:46,497 --> 00:10:49,460
+entre mu moins sigma et mu plus sigma.
+
+185
+00:10:49,910 --> 00:10:54,390
+Environ 95 % se trouvent à au plus deux
+écarts-types.
+
+186
+00:10:54,840 --> 00:10:59,480
+Et à peine 1 % des valeurs s'écartent de plus de
+trois écarts-types.
+
+187
+00:10:59,930 --> 00:11:01,449
+Exemple inventé :
+
+188
+00:11:01,449 --> 00:11:06,989
+un examen avec une moyenne de 12 sur 20 et un
+écart-type de 3.
+
+189
+00:11:06,989 --> 00:11:13,690
+Environ deux tiers des notes seraient entre 9 et
+15, et 95 % entre 6 et 18.
+
+190
+00:11:14,140 --> 00:11:17,233
+Garde ces pourcentages comme un ordre de
+grandeur :
+
+191
+00:11:17,233 --> 00:11:21,660
+selon la forme de la distribution, la vraie
+proportion peut s'en écarter.
+
+192
+00:11:23,617 --> 00:11:24,478
+Récapitulons.
+
+193
+00:11:24,478 --> 00:11:29,649
+Une variable aléatoire X associe un nombre à
+chaque résultat d'une expérience.
+
+194
+00:11:29,649 --> 00:11:32,897
+Elle est discrète si on peut compter ses
+valeurs.
+
+195
+00:11:33,347 --> 00:11:40,467
+Sa distribution donne chaque valeur x i avec sa
+probabilité p i, et la somme des p i vaut
+
+196
+00:11:40,467 --> 00:11:41,347
+toujours 1.
+
+197
+00:11:41,797 --> 00:11:49,181
+La fonction de répartition, F de x, est la
+probabilité que X soit inférieure ou égale à x.
+
+198
+00:11:49,181 --> 00:11:51,397
+Son graphe est un escalier.
+
+199
+00:11:51,847 --> 00:11:55,649
+L'espérance, c'est la somme des p i fois x i :
+
+200
+00:11:55,649 --> 00:11:56,807
+le gain moyen.
+
+201
+00:11:57,257 --> 00:12:04,617
+La variance se calcule plus vite avec la somme
+des p i fois x i au carré, moins mu au carré.
+
+202
+00:12:04,617 --> 00:12:06,777
+L'écart-type est sa racine.
+
+203
+00:12:07,227 --> 00:12:10,427
+Dans la partie 2, on passe aux variables
+continues.
+

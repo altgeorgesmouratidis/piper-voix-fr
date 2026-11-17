@@ -1,0 +1,847 @@
+1
+00:00:00,450 --> 00:00:03,950
+Analyse de données, chapitre 6, deuxième partie
+:
+
+2
+00:00:03,950 --> 00:00:06,450
+les variables aléatoires continues.
+
+3
+00:00:06,900 --> 00:00:12,457
+On y voit les classes, la densité de
+probabilité, la fonction de répartition, et
+
+4
+00:00:12,457 --> 00:00:15,860
+enfin la fonction de densité avec ses
+intégrales.
+
+5
+00:00:17,217 --> 00:00:22,126
+Dans la partie 1, X prenait des valeurs qu'on
+pouvait compter :
+
+6
+00:00:22,126 --> 00:00:23,217
+moins 2, 0, 3.
+
+7
+00:00:23,667 --> 00:00:26,216
+Maintenant, X sera une mesure :
+
+8
+00:00:26,216 --> 00:00:29,587
+une taille, un poids, un temps d'attente.
+
+9
+00:00:30,037 --> 00:00:31,205
+Question piège :
+
+10
+00:00:31,205 --> 00:00:38,285
+quelle est la probabilité qu'une personne mesure
+exactement 175 centimètres, avec une infinité de
+
+11
+00:00:38,285 --> 00:00:40,037
+zéros après la virgule ?
+
+12
+00:00:40,487 --> 00:00:41,718
+La réponse est 0.
+
+13
+00:00:41,718 --> 00:00:48,672
+Avec une variable continue, on ne parle plus de
+probabilité en un point, mais de probabilité sur
+
+14
+00:00:48,672 --> 00:00:49,687
+un intervalle.
+
+15
+00:00:51,550 --> 00:00:56,419
+Une variable aléatoire continue peut prendre
+n'importe quelle valeur réelle dans un
+
+16
+00:00:56,419 --> 00:00:57,065
+intervalle.
+
+17
+00:00:57,065 --> 00:00:59,470
+Cet intervalle n'est pas forcément borné.
+
+18
+00:00:59,920 --> 00:01:04,320
+C'est l'équivalent des données quantitatives
+continues en statistique descriptive.
+
+19
+00:01:04,770 --> 00:01:06,944
+Le cours donne trois exemples.
+
+20
+00:01:06,944 --> 00:01:10,930
+On choisit une personne au hasard et on note son
+poids.
+
+21
+00:01:11,380 --> 00:01:16,580
+On lance une pierre dans une direction donnée,
+et on mesure la distance parcourue.
+
+22
+00:01:17,030 --> 00:01:20,568
+On va à un arrêt de bus, et on note le temps
+d'attente.
+
+23
+00:01:20,568 --> 00:01:23,270
+On retrouvera ce bus à la fin de la vidéo.
+
+24
+00:01:25,117 --> 00:01:30,387
+Comme en statistique descriptive, on donne les
+probabilités pour des classes, c'est-à-dire des
+
+25
+00:01:30,387 --> 00:01:31,677
+intervalles de valeurs.
+
+26
+00:01:32,127 --> 00:01:39,247
+p i est la probabilité que X soit entre x i
+moins 1 compris et x i non compris.
+
+27
+00:01:39,697 --> 00:01:40,894
+Exemple du cours :
+
+28
+00:01:40,894 --> 00:01:45,548
+la taille d'une personne choisie au hasard dans
+une grande population.
+
+29
+00:01:45,548 --> 00:01:49,937
+Les probabilités viennent par exemple
+d'observations statistiques.
+
+30
+00:01:50,387 --> 00:01:55,787
+Entre 150 et 170 centimètres :
+
+31
+00:01:55,787 --> 00:01:56,507
+0,3.
+
+32
+00:01:56,507 --> 00:01:59,747
+Entre 170 et 180 :
+
+33
+00:01:59,747 --> 00:02:00,647
+0,45.
+
+34
+00:02:00,647 --> 00:02:03,887
+Entre 180 et 200 :
+
+35
+00:02:03,887 --> 00:02:04,787
+0,25.
+
+36
+00:02:05,237 --> 00:02:06,997
+La somme fait bien 1.
+
+37
+00:02:08,850 --> 00:02:13,827
+Le tableau dit que la probabilité d'être entre
+150 et 170 vaut 0,3.
+
+38
+00:02:13,827 --> 00:02:18,210
+Mais il ne dit pas comment elle se répartit dans
+la classe.
+
+39
+00:02:18,660 --> 00:02:24,178
+Y a-t-il plus de monde entre 150 et 160, ou
+entre 160 et 170 ?
+
+40
+00:02:24,178 --> 00:02:25,780
+On ne le sait pas.
+
+41
+00:02:26,230 --> 00:02:30,434
+On suppose donc que la probabilité est uniforme
+dans la classe :
+
+42
+00:02:30,434 --> 00:02:32,470
+elle est étalée de façon égale.
+
+43
+00:02:32,920 --> 00:02:36,280
+Chaque moitié reçoit donc 0,15.
+
+44
+00:02:36,730 --> 00:02:42,395
+Imagine 30 centilitres de sirop versés dans un
+bac plat de 20 centimètres de large :
+
+45
+00:02:42,395 --> 00:02:44,890
+il s'étale à la même hauteur partout.
+
+46
+00:02:46,750 --> 00:02:51,230
+Cette idée mène à la densité de probabilité,
+notée d p i.
+
+47
+00:02:51,680 --> 00:02:58,400
+C'est la probabilité p i de la classe, divisée
+par la largeur de la classe, notée l i.
+
+48
+00:02:58,850 --> 00:03:04,050
+Elle donne la probabilité par intervalle d'une
+unité, ici par centimètre.
+
+49
+00:03:04,500 --> 00:03:06,584
+Première classe :
+
+50
+00:03:06,584 --> 00:03:12,100
+0,3 divisé par 20 centimètres, ça fait 0,015.
+
+51
+00:03:12,550 --> 00:03:15,218
+Deuxième classe :
+
+52
+00:03:15,218 --> 00:03:20,553
+0,45 divisé par 10, ça fait 0,045.
+
+53
+00:03:20,553 --> 00:03:23,378
+Troisième classe :
+
+54
+00:03:23,378 --> 00:03:28,870
+0,25 divisé par 20, ça fait 0,0125.
+
+55
+00:03:29,320 --> 00:03:35,960
+Donc la probabilité qu'une personne mesure entre
+150 et 151 centimètres vaut 0,015.
+
+56
+00:03:35,960 --> 00:03:41,400
+Et c'est pareil pour chaque tranche d'un
+centimètre de cette classe.
+
+57
+00:03:43,350 --> 00:03:46,499
+On dessine la distribution avec un histogramme :
+
+58
+00:03:46,499 --> 00:03:49,910
+la hauteur de chaque rectangle est la densité d
+p i.
+
+59
+00:03:50,360 --> 00:03:53,167
+Regarde l'aire d'un rectangle :
+
+60
+00:03:53,167 --> 00:03:56,970
+hauteur fois largeur, donc d p i fois l i.
+
+61
+00:03:56,970 --> 00:03:58,600
+Et ça redonne p i.
+
+62
+00:03:59,050 --> 00:04:02,293
+Pour la classe du milieu :
+
+63
+00:04:02,293 --> 00:04:06,410
+0,045 fois 10, ça fait bien 0,45.
+
+64
+00:04:06,860 --> 00:04:11,980
+Comme la somme des p i vaut 1, l'aire totale de
+l'histogramme vaut 1.
+
+65
+00:04:12,430 --> 00:04:17,916
+Et la probabilité d'un intervalle, c'est l'aire
+des rectangles, ou des morceaux de rectangles,
+
+66
+00:04:17,916 --> 00:04:19,550
+au-dessus de cet intervalle.
+
+67
+00:04:21,483 --> 00:04:25,305
+La fonction de répartition garde la même
+définition :
+
+68
+00:04:25,305 --> 00:04:31,723
+F de x est la probabilité que X soit inférieure
+ou égale à x, pour n'importe quel réel x.
+
+69
+00:04:32,173 --> 00:04:36,973
+Son graphe n'est plus un escalier, mais une
+ligne continue faite de segments.
+
+70
+00:04:37,423 --> 00:04:46,404
+À la borne droite d'une classe, F vaut la somme
+des probabilités des classes à gauche :
+
+71
+00:04:46,404 --> 00:04:50,223
+0,3 en 170, 0,75 en 180, et 1 en 200.
+
+72
+00:04:50,673 --> 00:04:56,252
+Dans chaque classe, la probabilité s'accumule
+régulièrement, grâce à l'uniformité.
+
+73
+00:04:56,252 --> 00:04:57,953
+D'où les segments droits.
+
+74
+00:04:58,403 --> 00:05:01,987
+La pente d'un segment est la densité de la
+classe.
+
+75
+00:05:01,987 --> 00:05:08,723
+Le segment le plus raide est celui de la classe
+170 à 180, celle qui a la plus grande densité.
+
+76
+00:05:10,683 --> 00:05:16,833
+Pour un x dans la classe x i moins 1, x i, le
+segment a pour équation :
+
+77
+00:05:16,833 --> 00:05:22,203
+y égale d p i fois x moins x i moins 1, plus F
+de x i moins 1.
+
+78
+00:05:22,653 --> 00:05:24,084
+Ce y, c'est F de x.
+
+79
+00:05:24,084 --> 00:05:31,011
+On part de la valeur cumulée au début de la
+classe, et on ajoute la densité fois la distance
+
+80
+00:05:31,011 --> 00:05:32,893
+parcourue dans la classe.
+
+81
+00:05:33,343 --> 00:05:35,959
+Calculons F de 175.
+
+82
+00:05:35,959 --> 00:05:42,153
+Le début de la classe est 170, où F vaut 0,3.
+
+83
+00:05:42,153 --> 00:05:48,623
+On ajoute 0,045 fois 5 centimètres, soit 0,225.
+
+84
+00:05:49,073 --> 00:05:53,793
+F de 175 vaut donc 0,525.
+
+85
+00:05:54,243 --> 00:05:58,252
+Même chose pour F de 190 :
+
+86
+00:05:58,252 --> 00:06:08,120
+on part de 0,75 en 180, et on ajoute 0,0125 fois
+10, soit 0,125.
+
+87
+00:06:08,120 --> 00:06:11,203
+F de 190 vaut 0,875.
+
+88
+00:06:13,150 --> 00:06:15,953
+Voici la propriété la plus utile :
+
+89
+00:06:15,953 --> 00:06:21,230
+la probabilité que X soit entre a et b vaut F de
+b moins F de a.
+
+90
+00:06:21,680 --> 00:06:24,923
+F de b compte tout ce qui est à gauche de b.
+
+91
+00:06:24,923 --> 00:06:28,460
+On retire F de a, tout ce qui est à gauche de a.
+
+92
+00:06:28,460 --> 00:06:31,040
+Il reste ce qui est entre les deux.
+
+93
+00:06:31,490 --> 00:06:35,800
+Avec a égal 175 et b égal 190 :
+
+94
+00:06:35,800 --> 00:06:38,302
+0,875 moins 0,525.
+
+95
+00:06:38,302 --> 00:06:48,450
+La probabilité d'avoir une taille entre 175 et
+190 centimètres vaut 0,35.
+
+96
+00:06:48,900 --> 00:06:54,435
+Vérifions avec les aires de l'histogramme :
+
+97
+00:06:54,435 --> 00:06:58,811
+0,045 fois 5, plus 0,0125 fois 10.
+
+98
+00:06:58,811 --> 00:07:03,445
+Ça fait 0,225 plus 0,125, donc 0,35.
+
+99
+00:07:03,445 --> 00:07:08,980
+Les deux méthodes donnent le même résultat.
+
+100
+00:07:09,430 --> 00:07:11,154
+Dernière propriété :
+
+101
+00:07:11,154 --> 00:07:15,119
+la probabilité en un point est toujours nulle.
+
+102
+00:07:15,119 --> 00:07:17,016
+P de X égale a vaut 0.
+
+103
+00:07:17,016 --> 00:07:20,550
+Avec une largeur nulle, l'aire est nulle.
+
+104
+00:07:22,483 --> 00:07:28,348
+Pour calculer l'espérance d'une distribution par
+classes, on remplace chaque classe par son
+
+105
+00:07:28,348 --> 00:07:29,443
+centre, noté c i.
+
+106
+00:07:29,893 --> 00:07:33,493
+Le centre, c'est la moyenne des deux bornes :
+
+107
+00:07:33,493 --> 00:07:36,293
+x i moins 1 plus x i, divisé par 2.
+
+108
+00:07:36,743 --> 00:07:42,503
+Ici, les centres valent 160, 175 et 190.
+
+109
+00:07:42,953 --> 00:07:48,496
+La formule est celle du cas discret, avec c i à
+la place de x i :
+
+110
+00:07:48,496 --> 00:07:50,713
+la somme des p i fois c i.
+
+111
+00:07:51,163 --> 00:07:55,865
+0,3 fois 160 donne 48.
+
+112
+00:07:55,865 --> 00:08:01,421
+0,45 fois 175 donne 78,75.
+
+113
+00:08:01,421 --> 00:08:06,763
+0,25 fois 190 donne 47,5.
+
+114
+00:08:07,213 --> 00:08:11,238
+Au total, l'espérance vaut 174,25 centimètres :
+
+115
+00:08:11,238 --> 00:08:13,293
+c'est la taille moyenne.
+
+116
+00:08:15,250 --> 00:08:17,347
+Pour la variance, même idée :
+
+117
+00:08:17,347 --> 00:08:21,107
+on prend la formule du cas discret avec les
+centres.
+
+118
+00:08:21,107 --> 00:08:26,530
+Sigma au carré égale la somme des p i fois c i
+au carré, moins mu au carré.
+
+119
+00:08:26,980 --> 00:08:32,687
+0,3 fois 160 au carré donne 7680.
+
+120
+00:08:32,687 --> 00:08:39,260
+0,45 fois 175 au carré donne 13781,25.
+
+121
+00:08:39,260 --> 00:08:45,140
+0,25 fois 190 au carré donne 9025.
+
+122
+00:08:45,590 --> 00:08:50,390
+La somme vaut 30486,25.
+
+123
+00:08:50,840 --> 00:08:59,441
+On retire mu au carré, 174,25 au carré,
+c'est-à-dire 30363,06.
+
+124
+00:08:59,441 --> 00:09:03,880
+La variance vaut environ 123,19.
+
+125
+00:09:04,330 --> 00:09:06,214
+L'écart-type est la racine :
+
+126
+00:09:06,214 --> 00:09:07,963
+environ 11,10 centimètres.
+
+127
+00:09:07,963 --> 00:09:13,210
+Les tailles s'écartent typiquement d'une dizaine
+de centimètres de la moyenne.
+
+128
+00:09:15,150 --> 00:09:18,352
+Imagine maintenant des classes de 1 centimètre.
+
+129
+00:09:18,352 --> 00:09:23,870
+Au lieu de 3 classes, on en aurait 50, chacune
+avec une toute petite probabilité.
+
+130
+00:09:24,320 --> 00:09:30,191
+Si on réduit encore la largeur, les probabilités
+des classes se rapprochent de 0.
+
+131
+00:09:30,191 --> 00:09:32,800
+Les densités, elles, se stabilisent.
+
+132
+00:09:33,250 --> 00:09:39,419
+À la limite, quand la largeur tend vers 0, la
+probabilité en un point disparaît.
+
+133
+00:09:39,419 --> 00:09:41,810
+Seule la densité garde un sens.
+
+134
+00:09:42,260 --> 00:09:48,833
+On définit alors la variable par une fonction de
+densité de probabilité, notée f de x.
+
+135
+00:09:48,833 --> 00:09:50,820
+Elle est positive partout.
+
+136
+00:09:51,270 --> 00:09:54,407
+Et l'aire totale sous sa courbe vaut 1 :
+
+137
+00:09:54,407 --> 00:09:59,190
+l'intégrale de f, de moins l'infini à plus
+l'infini, égale 1.
+
+138
+00:10:01,150 --> 00:10:05,097
+Comme pour l'histogramme, une probabilité est
+une aire.
+
+139
+00:10:05,097 --> 00:10:10,910
+La probabilité que X soit entre a et b, c'est
+l'aire sous la courbe entre a et b.
+
+140
+00:10:11,360 --> 00:10:14,720
+Cette aire se calcule avec une intégrale :
+
+141
+00:10:14,720 --> 00:10:17,280
+l'intégrale de f de x, de a à b.
+
+142
+00:10:17,730 --> 00:10:22,491
+La fonction de répartition s'écrit aussi avec
+une intégrale :
+
+143
+00:10:22,491 --> 00:10:27,330
+F de x est l'intégrale de f de t, de moins
+l'infini jusqu'à x.
+
+144
+00:10:27,780 --> 00:10:30,402
+F est donc une primitive de f.
+
+145
+00:10:30,402 --> 00:10:32,324
+On retrouve la règle :
+
+146
+00:10:32,324 --> 00:10:39,140
+P de a inférieur ou égal à X inférieur ou égal à
+b, égale F de b moins F de a.
+
+147
+00:10:39,590 --> 00:10:41,168
+Pourquoi ça marche ?
+
+148
+00:10:41,168 --> 00:10:44,955
+F de b, c'est l'intégrale de moins l'infini à b.
+
+149
+00:10:44,955 --> 00:10:48,743
+On lui retire l'intégrale de moins l'infini à a.
+
+150
+00:10:48,743 --> 00:10:51,110
+Il reste l'intégrale de a à b.
+
+151
+00:10:53,050 --> 00:10:55,621
+Un exemple inventé, avec le bus du cours.
+
+152
+00:10:55,621 --> 00:11:00,010
+Un bus passe toutes les 10 minutes, et tu
+arrives à l'arrêt au hasard.
+
+153
+00:11:00,460 --> 00:11:06,212
+Ton attente X est entre 0 et 10 minutes, et
+aucune durée n'est favorisée.
+
+154
+00:11:06,212 --> 00:11:10,860
+La densité vaut 1 sur 10 sur cet intervalle, et
+0 ailleurs.
+
+155
+00:11:11,310 --> 00:11:13,353
+Vérifions l'aire totale :
+
+156
+00:11:13,353 --> 00:11:17,438
+un rectangle de largeur 10 et de hauteur 1 sur
+10.
+
+157
+00:11:17,438 --> 00:11:18,990
+L'aire vaut bien 1.
+
+158
+00:11:19,440 --> 00:11:24,195
+Probabilité d'attendre entre 2 et 5 minutes :
+
+159
+00:11:24,195 --> 00:11:27,787
+l'intégrale de 1 sur 10, de 2 à 5.
+
+160
+00:11:27,787 --> 00:11:30,640
+Ça fait 3 sur 10, soit 0,3.
+
+161
+00:11:31,090 --> 00:11:35,017
+Avec la fonction de répartition :
+
+162
+00:11:35,017 --> 00:11:39,183
+F de x vaut x sur 10 entre 0 et 10.
+
+163
+00:11:39,183 --> 00:11:44,181
+F de 5 moins F de 2, c'est 0,5 moins 0,2 :
+
+164
+00:11:44,181 --> 00:11:45,490
+encore 0,3.
+
+165
+00:11:47,450 --> 00:11:52,935
+Pour une variable définie par une densité, les
+paramètres suivent les mêmes formules, mais les
+
+166
+00:11:52,935 --> 00:11:55,210
+signes somme deviennent des intégrales.
+
+167
+00:11:55,660 --> 00:12:01,820
+L'espérance est l'intégrale de x fois f de x, de
+moins l'infini à plus l'infini.
+
+168
+00:12:02,270 --> 00:12:04,755
+Compare avec le discret :
+
+169
+00:12:04,755 --> 00:12:08,830
+x i devient x, et p i devient f de x d x.
+
+170
+00:12:09,280 --> 00:12:15,675
+La variance suit la même logique, avec sa
+formule de définition et sa formule pratique :
+
+171
+00:12:15,675 --> 00:12:19,600
+l'intégrale de x carré fois f de x, moins mu au
+carré.
+
+172
+00:12:21,550 --> 00:12:27,070
+Reprenons le bus, avec f de x égale 1 sur 10
+entre 0 et 10.
+
+173
+00:12:27,520 --> 00:12:32,131
+L'espérance est l'intégrale de x sur 10, de 0 à
+10.
+
+174
+00:12:32,131 --> 00:12:38,640
+La primitive est x carré sur 20, et ça donne 100
+sur 20, donc 5 minutes.
+
+175
+00:12:39,090 --> 00:12:39,941
+C'est logique :
+
+176
+00:12:39,941 --> 00:12:43,570
+en moyenne, tu attends la moitié de l'intervalle
+entre deux bus.
+
+177
+00:12:44,020 --> 00:12:48,085
+Pour la variance, on intègre x carré sur 10 :
+
+178
+00:12:48,085 --> 00:12:50,885
+la primitive est x cube sur 30.
+
+179
+00:12:50,885 --> 00:12:55,220
+De 0 à 10, ça donne 1000 sur 30, soit 100 sur 3.
+
+180
+00:12:55,670 --> 00:12:59,442
+On retire mu au carré, donc 25.
+
+181
+00:12:59,442 --> 00:13:04,310
+La variance vaut 25 sur 3, environ 8,33.
+
+182
+00:13:04,760 --> 00:13:08,680
+L'écart-type vaut environ 2,89 minutes.
+
+183
+00:13:10,617 --> 00:13:11,539
+Récapitulons.
+
+184
+00:13:11,539 --> 00:13:15,726
+Une variable continue prend ses valeurs dans un
+intervalle.
+
+185
+00:13:15,726 --> 00:13:18,777
+La probabilité en un point vaut toujours 0.
+
+186
+00:13:19,227 --> 00:13:22,313
+Avec des classes, on suppose l'uniformité.
+
+187
+00:13:22,313 --> 00:13:28,118
+La densité est p i divisé par la largeur, et
+chaque probabilité est une aire de
+
+188
+00:13:28,118 --> 00:13:29,147
+l'histogramme.
+
+189
+00:13:29,597 --> 00:13:35,724
+La fonction de répartition est faite de
+segments, et la probabilité d'un intervalle vaut
+
+190
+00:13:35,724 --> 00:13:37,117
+F de b moins F de a.
+
+191
+00:13:37,567 --> 00:13:42,607
+Pour l'espérance et la variance par classes, on
+utilise les centres c i.
+
+192
+00:13:43,057 --> 00:13:49,125
+Avec une fonction de densité, l'aire totale vaut
+1, les probabilités sont des intégrales, et les
+
+193
+00:13:49,125 --> 00:13:53,297
+sommes deviennent des intégrales dans les
+formules de mu et sigma.
+

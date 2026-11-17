@@ -1,0 +1,564 @@
+meta:
+  course: 5ANA1D
+  course_name: Analyse de données
+  chapter: 6
+  part: 2
+  title: Variables aléatoires
+  subtitle: Le cas continu
+  output: cours-5ANA1D-06-partie-2
+
+css: |
+  .katex-display{margin:0.12em 0}
+  .card{padding:28px 44px}
+  .def{padding:30px 44px}
+  table.data.small td, table.data.small th{padding:8px 20px;white-space:nowrap}
+  .recap{grid-template-columns:1fr !important}
+  .recap .item{padding-top:14px;padding-bottom:14px}
+
+scenes:
+  # ================================================================ TITRE
+  - id: s00_titre
+    layout: title
+    notion: 'Introduction'
+    beats:
+      - "Analyse de données, chapitre 6, deuxième partie : les variables aléatoires continues."
+      - "On y voit les classes, la densité de probabilité, la fonction de répartition, et enfin la fonction de densité avec ses intégrales."
+    html: |
+      <svg viewBox="0 0 560 560" width="560" height="560">
+        <circle cx="280" cy="280" r="250" fill="var(--paper)" stroke="var(--line)" stroke-width="3"/>
+        <line class="stroke muted" x1="100" y1="400" x2="460" y2="400" data-beat="1" data-anim="draw"/>
+        <g data-beat="1+0.5" data-anim="grow-y">
+          <rect x="130" y="330" width="100" height="70" fill="var(--gold)" opacity="0.7"/>
+          <rect x="230" y="190" width="70" height="210" fill="var(--main)" opacity="0.85"/>
+          <rect x="300" y="340" width="130" height="60" fill="var(--gold)" opacity="0.7"/>
+        </g>
+        <path class="stroke accent" d="M110 395 C 190 380, 220 170, 265 175 S 330 330, 450 392" data-beat="1+1.2" data-anim="draw"/>
+      </svg>
+
+  # ================================================================ INTRO
+  - id: s01_intro
+    notion: 'Introduction'
+    title: 'Mesurer au lieu de compter'
+    subtitle: 'Exactement 175 cm ?'
+    hold: 0.5
+    beats:
+      - "Dans la partie 1, X prenait des valeurs qu'on pouvait compter : moins 2, 0, 3."
+      - "Maintenant, X sera une mesure : une taille, un poids, un temps d'attente."
+      - "Question piège : quelle est la probabilité qu'une personne mesure exactement 175 centimètres, avec une infinité de zéros après la virgule ?"
+      - "La réponse est 0. Avec une variable continue, on ne parle plus de probabilité en un point, mais de probabilité sur un intervalle."
+    html: |
+      <div class="col w50">
+        <div class="card" data-beat="0"><div class="label">Partie 1 : discrète</div>$X \in \{-2,\ 0,\ 3\}$</div>
+        <div class="card gold" data-beat="1"><div class="label">Partie 2 : continue</div>📏 taille · ⚖️ poids · 🚌 attente</div>
+      </div>
+      <div class="col w50">
+        <div class="calc" data-beat="2">$P[X = 175{,}000\ldots]$ ?</div>
+        <div class="keep" data-beat="3">en continu : on raisonne sur des <b>intervalles</b></div>
+      </div>
+
+  # ================================================================ NOTION 1 : CONTINUE
+  - id: s02_continue
+    notion: 'Variable continue'
+    tag: 'Notion 1 / 7'
+    title: 'Une variable aléatoire continue'
+    subtitle: 'Des valeurs réelles dans un intervalle'
+    hold: 0.5
+    beats:
+      - "Une variable aléatoire continue peut prendre n'importe quelle valeur réelle dans un intervalle. Cet intervalle n'est pas forcément borné."
+      - "C'est l'équivalent des données quantitatives continues en statistique descriptive."
+      - "Le cours donne trois exemples. On choisit une personne au hasard et on note son poids."
+      - "On lance une pierre dans une direction donnée, et on mesure la distance parcourue."
+      - "On va à un arrêt de bus, et on note le temps d'attente. On retrouvera ce bus à la fin de la vidéo."
+    html: |
+      <div class="col w50">
+        <div class="def" data-beat="0"><div class="term">Variable continue</div>toute valeur réelle d'un <b>intervalle</b></div>
+        <div class="calc" data-beat="1">≈ données quantitatives continues</div>
+      </div>
+      <div class="col w50">
+        <div class="analogy" data-beat="2"><div class="icon">⚖️</div><div><b>Poids</b><br><span class="muted">d'une personne au hasard</span></div></div>
+        <div class="analogy" data-beat="3"><div class="icon">🪨</div><div><b>Distance</b><br><span class="muted">d'une pierre lancée</span></div></div>
+        <div class="analogy" data-beat="4"><div class="icon">🚌</div><div><b>Attente</b><br><span class="muted">à l'arrêt de bus</span></div></div>
+      </div>
+
+  # ================================================================ NOTION 2 : CLASSES
+  - id: s03_classes
+    notion: 'Distribution par classes'
+    tag: 'Notion 2 / 7'
+    title: 'Une distribution par classes'
+    subtitle: 'Comme en statistique continue'
+    hold: 0.5
+    beats:
+      - "Comme en statistique descriptive, on donne les probabilités pour des classes, c'est-à-dire des intervalles de valeurs."
+      - "p i est la probabilité que X soit entre x i moins 1 compris et x i non compris."
+      - "Exemple du cours : la taille d'une personne choisie au hasard dans une grande population. Les probabilités viennent par exemple d'observations statistiques."
+      - "Entre 150 et 170 centimètres : 0,3. Entre 170 et 180 : 0,45. Entre 180 et 200 : 0,25."
+      - "La somme fait bien 1."
+    html: |
+      <div class="col w40">
+        <div class="formula sm" data-beat="1">$$p_i = P[x_{i-1} \le X < x_i]$$</div>
+        <div class="calc" data-beat="4">$0{,}3 + 0{,}45 + 0{,}25 =$ <span class="res">$1$</span></div>
+      </div>
+      <table class="data grow" data-beat="2">
+        <tr><th>taille (cm)</th><th>$p_i$</th></tr>
+        <tr data-beat="3"><td>$[150 ;\ 170[$</td><td>$0{,}3$</td></tr>
+        <tr data-beat="3+1.6"><td>$[170 ;\ 180[$</td><td>$0{,}45$</td></tr>
+        <tr data-beat="3+3.2"><td>$[180 ;\ 200[$</td><td>$0{,}25$</td></tr>
+      </table>
+
+  - id: s04_uniformite
+    notion: 'Distribution par classes'
+    tag: 'Notion 2 / 7'
+    title: 'Le principe d''uniformité'
+    subtitle: 'Répartir la probabilité dans la classe'
+    hold: 0.5
+    beats:
+      - "Le tableau dit que la probabilité d'être entre 150 et 170 vaut 0,3. Mais il ne dit pas comment elle se répartit dans la classe."
+      - "Y a-t-il plus de monde entre 150 et 160, ou entre 160 et 170 ? On ne le sait pas."
+      - "On suppose donc que la probabilité est uniforme dans la classe : elle est étalée de façon égale."
+      - "Chaque moitié reçoit donc 0,15."
+      - "Imagine 30 centilitres de sirop versés dans un bac plat de 20 centimètres de large : il s'étale à la même hauteur partout."
+    html: |
+      <svg class="w60" viewBox="0 0 980 520" width="980" height="520">
+        <line class="stroke muted" x1="40" y1="420" x2="940" y2="420" data-beat="0" data-anim="draw"/>
+        <rect x="100" y="180" width="780" height="240" rx="8" fill="var(--main)" opacity="0.85" data-beat="0" data-anim="grow-y"/>
+        <text x="490" y="140" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)" data-beat="0">0,3</text>
+        <g font-size="38" text-anchor="middle" fill="var(--ink)" data-beat="0">
+          <text x="100" y="475">150</text><text x="490" y="475">160</text><text x="880" y="475">170</text>
+        </g>
+        <text x="490" y="320" font-size="80" font-weight="700" text-anchor="middle" fill="#fff" data-beat="1" data-out="3">?</text>
+        <line class="stroke gold" x1="490" y1="180" x2="490" y2="430" stroke-dasharray="14 10" data-beat="2" data-anim="draw"/>
+        <g data-beat="3" data-anim="pop" font-size="48" font-weight="700" text-anchor="middle" fill="#fff">
+          <text x="295" y="318">0,15</text><text x="685" y="318">0,15</text>
+        </g>
+      </svg>
+      <div class="col grow">
+        <div class="def" data-beat="2"><div class="term">Uniformité</div>probabilité étalée <b>également</b> dans la classe</div>
+        <div class="analogy" data-beat="4"><div class="icon">🍯</div><div><b>Le sirop</b><br><span class="muted">même hauteur partout</span></div></div>
+      </div>
+
+  # ================================================================ NOTION 3 : DENSITÉ
+  - id: s05_densite
+    notion: 'Densité de probabilité'
+    tag: 'Notion 3 / 7'
+    title: 'La densité de probabilité'
+    subtitle: 'La probabilité par unité'
+    hold: 0.6
+    beats:
+      - "Cette idée mène à la densité de probabilité, notée d p i."
+      - "C'est la probabilité p i de la classe, divisée par la largeur de la classe, notée l i."
+      - "Elle donne la probabilité par intervalle d'une unité, ici par centimètre."
+      - "Première classe : 0,3 divisé par 20 centimètres, ça fait 0,015."
+      - "Deuxième classe : 0,45 divisé par 10, ça fait 0,045. Troisième classe : 0,25 divisé par 20, ça fait 0,0125."
+      - "Donc la probabilité qu'une personne mesure entre 150 et 151 centimètres vaut 0,015. Et c'est pareil pour chaque tranche d'un centimètre de cette classe."
+    html: |
+      <div class="col w40">
+        <div class="card">
+          <div class="formula lg" data-beat="1">$$dp_i = \frac{p_i}{\htmlData{hl=1}{l_i}}$$</div>
+        </div>
+        <div class="legend" data-beat="2">
+          <span class="sym">$l_i$</span><span>largeur de la classe</span>
+          <span class="sym">$dp_i$</span><span>probabilité par cm</span>
+        </div>
+      </div>
+      <div class="col grow">
+        <table class="data">
+          <tr><th>classe</th><th>$p_i$</th><th>$l_i$</th><th class="hl" data-hl="3">$dp_i$</th></tr>
+          <tr><td>$[150 ;\ 170[$</td><td>$0{,}3$</td><td>$20$</td><td data-beat="3">$0{,}015$</td></tr>
+          <tr><td>$[170 ;\ 180[$</td><td>$0{,}45$</td><td>$10$</td><td data-beat="4">$0{,}045$</td></tr>
+          <tr><td>$[180 ;\ 200[$</td><td>$0{,}25$</td><td>$20$</td><td data-beat="4+2.8">$0{,}0125$</td></tr>
+        </table>
+        <div class="keep" data-beat="5">$P[150 \le X < 151] = 0{,}015$</div>
+      </div>
+
+  - id: s06_histogramme
+    notion: 'Densité de probabilité'
+    tag: 'Notion 3 / 7'
+    title: 'L''histogramme des densités'
+    subtitle: 'Les probabilités sont des aires'
+    hold: 0.6
+    beats:
+      - "On dessine la distribution avec un histogramme : la hauteur de chaque rectangle est la densité d p i."
+      - "Regarde l'aire d'un rectangle : hauteur fois largeur, donc d p i fois l i. Et ça redonne p i."
+      - "Pour la classe du milieu : 0,045 fois 10, ça fait bien 0,45."
+      - "Comme la somme des p i vaut 1, l'aire totale de l'histogramme vaut 1."
+      - "Et la probabilité d'un intervalle, c'est l'aire des rectangles, ou des morceaux de rectangles, au-dessus de cet intervalle."
+    html: |
+      <svg class="w60" viewBox="0 0 980 560" width="980" height="560">
+        <line class="stroke muted" x1="60" y1="480" x2="940" y2="480" data-beat="0" data-anim="draw"/>
+        <line class="stroke muted" x1="90" y1="510" x2="90" y2="40" data-beat="0" data-anim="draw"/>
+        <text x="105" y="55" font-size="36" fill="var(--muted)" data-beat="0">dpᵢ</text>
+        <g data-beat="0+0.6" data-anim="grow-y">
+          <rect x="120" y="360" width="280" height="120" fill="var(--main)" opacity="0.55" stroke="var(--main-ink)" stroke-width="3"/>
+          <rect x="400" y="120" width="140" height="360" fill="var(--main)" opacity="0.85" stroke="var(--main-ink)" stroke-width="3"/>
+          <rect x="540" y="380" width="280" height="100" fill="var(--main)" opacity="0.55" stroke="var(--main-ink)" stroke-width="3"/>
+        </g>
+        <g font-size="34" text-anchor="middle" fill="var(--ink)" data-beat="0">
+          <text x="120" y="530">150</text><text x="260" y="530">160</text><text x="400" y="530">170</text>
+          <text x="540" y="530">180</text><text x="680" y="530">190</text><text x="820" y="530">200</text>
+        </g>
+        <g font-size="34" text-anchor="end" fill="var(--ink)" data-beat="0">
+          <text x="80" y="372">0,015</text><text x="80" y="132">0,045</text>
+        </g>
+        <rect x="470" y="120" width="70" height="360" fill="var(--gold)" opacity="0.6" data-beat="4" data-anim="grow-x"/>
+        <rect x="540" y="380" width="140" height="100" fill="var(--gold)" opacity="0.7" data-beat="4" data-anim="grow-x"/>
+        <g font-size="40" font-weight="700" text-anchor="middle" fill="var(--ink)">
+          <text x="260" y="435" data-beat="3">0,3</text>
+          <text x="470" y="310" data-beat="2">0,45</text>
+          <text x="740" y="445" data-beat="3">0,25</text>
+        </g>
+      </svg>
+      <div class="col grow">
+        <div class="card" data-beat="1"><div class="formula sm">$$\text{aire} = dp_i \times l_i = p_i$$</div></div>
+        <div class="calc" data-beat="2">$0{,}045 \times 10 = 0{,}45$</div>
+        <div class="keep" data-beat="3">aire totale $= 1$</div>
+        <div class="calc" data-beat="4">probabilité = <b>aire</b> au-dessus de l'intervalle</div>
+      </div>
+
+  # ================================================================ NOTION 4 : RÉPARTITION
+  - id: s07_repartition
+    notion: 'Fonction de répartition'
+    tag: 'Notion 4 / 7'
+    title: 'La fonction de répartition'
+    subtitle: 'Une ligne faite de segments'
+    hold: 0.6
+    beats:
+      - "La fonction de répartition garde la même définition : F de x est la probabilité que X soit inférieure ou égale à x, pour n'importe quel réel x."
+      - "Son graphe n'est plus un escalier, mais une ligne continue faite de segments."
+      - "À la borne droite d'une classe, F vaut la somme des probabilités des classes à gauche : 0,3 en 170, 0,75 en 180, et 1 en 200."
+      - "Dans chaque classe, la probabilité s'accumule régulièrement, grâce à l'uniformité. D'où les segments droits."
+      - "La pente d'un segment est la densité de la classe. Le segment le plus raide est celui de la classe 170 à 180, celle qui a la plus grande densité."
+    html: |
+      <svg class="w60" viewBox="0 0 980 560" width="980" height="560">
+        <g data-beat="0" data-anim="fade">
+          <line class="stroke muted" x1="40" y1="480" x2="960" y2="480"/>
+          <line class="stroke muted" x1="90" y1="510" x2="90" y2="40"/>
+          <text x="105" y="55" font-size="36" fill="var(--muted)">F(x)</text>
+          <g font-size="34" text-anchor="middle" fill="var(--ink)">
+            <text x="120" y="530">150</text><text x="260" y="530">160</text><text x="400" y="530">170</text>
+            <text x="540" y="530">180</text><text x="680" y="530">190</text><text x="820" y="530">200</text>
+          </g>
+          <line class="stroke muted" x1="90" y1="366" x2="400" y2="366" stroke-dasharray="6 8"/>
+          <line class="stroke muted" x1="90" y1="195" x2="540" y2="195" stroke-dasharray="6 8"/>
+          <line class="stroke muted" x1="90" y1="100" x2="820" y2="100" stroke-dasharray="6 8"/>
+        </g>
+        <path class="stroke" d="M50 480 L120 480 L400 366 L540 195 L820 100 L950 100" data-beat="1" data-anim="draw" data-dur="1.6"/>
+        <g data-beat="2" data-anim="pop">
+          <circle cx="400" cy="366" r="11" fill="var(--main)"/>
+          <circle cx="540" cy="195" r="11" fill="var(--main)"/>
+          <circle cx="820" cy="100" r="11" fill="var(--main)"/>
+          <g font-size="34" text-anchor="end" fill="var(--ink)">
+            <text x="80" y="378">0,3</text><text x="80" y="207">0,75</text><text x="80" y="112">1</text>
+          </g>
+        </g>
+        <path class="stroke accent" d="M400 366 L540 195" stroke-width="10" data-beat="4" data-anim="draw"/>
+      </svg>
+      <div class="col grow">
+        <div class="formula sm" data-beat="0">$$F(x) = P[X \le x]$$</div>
+        <div class="calc" data-beat="2">$F(x_i)$ = somme des classes à gauche</div>
+        <div class="keep" data-beat="4">pente du segment $= dp_i$</div>
+      </div>
+
+  - id: s08_segment
+    notion: 'Fonction de répartition'
+    tag: 'Notion 4 / 7'
+    title: 'L''équation d''un segment'
+    subtitle: 'Calculer F(x) dans une classe'
+    hold: 0.6
+    beats:
+      - "Pour un x dans la classe x i moins 1, x i, le segment a pour équation : y égale d p i fois x moins x i moins 1, plus F de x i moins 1."
+      - "Ce y, c'est F de x. On part de la valeur cumulée au début de la classe, et on ajoute la densité fois la distance parcourue dans la classe."
+      - "Calculons F de 175. Le début de la classe est 170, où F vaut 0,3. On ajoute 0,045 fois 5 centimètres, soit 0,225."
+      - "F de 175 vaut donc 0,525."
+      - "Même chose pour F de 190 : on part de 0,75 en 180, et on ajoute 0,0125 fois 10, soit 0,125. F de 190 vaut 0,875."
+    html: |
+      <div class="col w100">
+        <div class="card">
+          <div class="formula" data-beat="0">$$\htmlData{hl=1}{F(x)} = dp_i\,(x - x_{i-1}) + \htmlData{hl=1}{F(x_{i-1})}$$</div>
+        </div>
+        <div class="row">
+          <div class="steps w50">
+            <div class="step" data-beat="2">$F(175) = 0{,}045 \times 5 + 0{,}3$</div>
+            <div class="step done" data-beat="3">$F(175) = 0{,}525$</div>
+          </div>
+          <div class="steps w50">
+            <div class="step" data-beat="4">$F(190) = 0{,}0125 \times 10 + 0{,}75$</div>
+            <div class="step done" data-beat="4+4">$F(190) = 0{,}875$</div>
+          </div>
+        </div>
+      </div>
+
+  - id: s09_intervalle
+    notion: 'Fonction de répartition'
+    tag: 'Notion 4 / 7'
+    title: 'La probabilité d''un intervalle'
+    subtitle: 'P[a ≤ X ≤ b] = F(b) − F(a)'
+    hold: 0.6
+    beats:
+      - "Voici la propriété la plus utile : la probabilité que X soit entre a et b vaut F de b moins F de a."
+      - "F de b compte tout ce qui est à gauche de b. On retire F de a, tout ce qui est à gauche de a. Il reste ce qui est entre les deux."
+      - "Avec a égal 175 et b égal 190 : 0,875 moins 0,525. La probabilité d'avoir une taille entre 175 et 190 centimètres vaut 0,35."
+      - "Vérifions avec les aires de l'histogramme : 0,045 fois 5, plus 0,0125 fois 10. Ça fait 0,225 plus 0,125, donc 0,35. Les deux méthodes donnent le même résultat."
+      - "Dernière propriété : la probabilité en un point est toujours nulle. P de X égale a vaut 0. Avec une largeur nulle, l'aire est nulle."
+    html: |
+      <svg viewBox="0 0 860 560" width="860" height="560" style="flex:none">
+        <line class="stroke muted" x1="40" y1="480" x2="840" y2="480"/>
+        <line class="stroke muted" x1="70" y1="510" x2="70" y2="40"/>
+        <text x="85" y="55" font-size="34" fill="var(--muted)">F(x)</text>
+        <path class="stroke" d="M40 480 L100 480 L340 366 L460 195 L700 100 L830 100"/>
+        <g font-size="38" text-anchor="middle" fill="var(--ink)">
+          <text x="100" y="530">150</text><text x="340" y="530">170</text><text x="460" y="530">180</text><text x="700" y="530">200</text>
+        </g>
+        <g data-beat="2" data-anim="fade">
+          <line class="stroke gold" x1="400" y1="480" x2="400" y2="281" stroke-dasharray="8 8"/>
+          <line class="stroke gold" x1="580" y1="480" x2="580" y2="148" stroke-dasharray="8 8"/>
+          <circle cx="400" cy="281" r="11" fill="var(--main)"/>
+          <circle cx="580" cy="148" r="11" fill="var(--main)"/>
+          <text x="400" y="470" font-size="44" font-weight="700" text-anchor="middle" fill="var(--main-ink)" dy="-215">a</text>
+          <text x="580" y="470" font-size="44" font-weight="700" text-anchor="middle" fill="var(--main-ink)" dy="-345">b</text>
+          <line class="stroke accent" x1="760" y1="281" x2="760" y2="148" stroke-width="8"/>
+          <line class="stroke muted" x1="400" y1="281" x2="760" y2="281" stroke-dasharray="4 8"/>
+          <line class="stroke muted" x1="580" y1="148" x2="760" y2="148" stroke-dasharray="4 8"/>
+          <text x="740" y="228" font-size="42" font-weight="700" text-anchor="end" fill="var(--accent)">0,35</text>
+        </g>
+      </svg>
+      <div class="col grow">
+        <div class="card"><div class="formula sm" data-beat="0">$$P[a \le X \le b] = F(b) - F(a)$$</div></div>
+        <div class="calc" data-beat="2">$0{,}875 - 0{,}525 =$ <span class="res">$0{,}35$</span></div>
+        <div class="calc" data-beat="3">aires : $0{,}225 + 0{,}125 = 0{,}35$</div>
+        <div class="keep" data-beat="4">$P[X = a] = 0$ : un point n'a pas de largeur</div>
+      </div>
+
+  # ================================================================ NOTION 5 : PARAMÈTRES PAR CLASSES
+  - id: s10_esperance_classes
+    notion: 'Paramètres par classes'
+    tag: 'Notion 5 / 7'
+    title: 'Espérance avec des classes'
+    subtitle: 'On travaille avec les centres'
+    hold: 0.6
+    beats:
+      - "Pour calculer l'espérance d'une distribution par classes, on remplace chaque classe par son centre, noté c i."
+      - "Le centre, c'est la moyenne des deux bornes : x i moins 1 plus x i, divisé par 2."
+      - "Ici, les centres valent 160, 175 et 190."
+      - "La formule est celle du cas discret, avec c i à la place de x i : la somme des p i fois c i."
+      - "0,3 fois 160 donne 48. 0,45 fois 175 donne 78,75. 0,25 fois 190 donne 47,5."
+      - "Au total, l'espérance vaut 174,25 centimètres : c'est la taille moyenne."
+    html: |
+      <div class="col w50">
+        <div class="card">
+          <div class="formula" data-beat="3">$$E[X] = \sum_{i=1}^{n} p_i\,\htmlData{hl=3}{c_i}$$</div>
+        </div>
+        <div class="formula sm" data-beat="1">$$c_i = \frac{x_{i-1} + x_i}{2}$$</div>
+      </div>
+      <div class="col w50">
+        <table class="data">
+          <tr><th>classe</th><th>$c_i$</th><th>$p_i$</th><th>$p_i c_i$</th></tr>
+          <tr><td>$[150 ;\ 170[$</td><td data-beat="2">$160$</td><td>$0{,}3$</td><td data-beat="4">$48$</td></tr>
+          <tr><td>$[170 ;\ 180[$</td><td data-beat="2">$175$</td><td>$0{,}45$</td><td data-beat="4+2">$78{,}75$</td></tr>
+          <tr><td>$[180 ;\ 200[$</td><td data-beat="2">$190$</td><td>$0{,}25$</td><td data-beat="4+4.2">$47{,}5$</td></tr>
+          <tr class="tot" data-beat="5"><td colspan="3">$\mu$</td><td><span class="res">$174{,}25$</span></td></tr>
+        </table>
+      </div>
+
+  - id: s11_variance_classes
+    notion: 'Paramètres par classes'
+    tag: 'Notion 5 / 7'
+    title: 'Variance avec des classes'
+    subtitle: 'Toujours la formule pratique'
+    hold: 0.6
+    beats:
+      - "Pour la variance, même idée : on prend la formule du cas discret avec les centres. Sigma au carré égale la somme des p i fois c i au carré, moins mu au carré."
+      - "0,3 fois 160 au carré donne 7680. 0,45 fois 175 au carré donne 13781,25. 0,25 fois 190 au carré donne 9025."
+      - "La somme vaut 30486,25."
+      - "On retire mu au carré, 174,25 au carré, c'est-à-dire 30363,06. La variance vaut environ 123,19."
+      - "L'écart-type est la racine : environ 11,10 centimètres. Les tailles s'écartent typiquement d'une dizaine de centimètres de la moyenne."
+    html: |
+      <div class="col w50">
+        <div class="card">
+          <div class="formula" data-beat="0">$$\sigma^2 = \sum_{i=1}^{n} p_i\,c_i^2 - \mu^2$$</div>
+        </div>
+        <div class="keep" data-beat="4">$\sigma \approx 11{,}10$ cm</div>
+      </div>
+      <div class="col w50">
+        <div class="steps">
+          <div class="step" data-beat="1">$7\,680 + 13\,781{,}25 + 9\,025$</div>
+          <div class="step" data-beat="2">$= 30\,486{,}25$</div>
+          <div class="step" data-beat="3">$30\,486{,}25 - 174{,}25^2 \approx 123{,}19$</div>
+          <div class="step done" data-beat="4">$\sigma = \sqrt{123{,}19} \approx 11{,}10$</div>
+        </div>
+      </div>
+
+  # ================================================================ NOTION 6 : FONCTION DE DENSITÉ
+  - id: s12_limite
+    notion: 'Fonction de densité'
+    tag: 'Notion 6 / 7'
+    title: 'Des classes de plus en plus fines'
+    subtitle: 'Vers la fonction de densité'
+    hold: 0.6
+    beats:
+      - "Imagine maintenant des classes de 1 centimètre. Au lieu de 3 classes, on en aurait 50, chacune avec une toute petite probabilité."
+      - "Si on réduit encore la largeur, les probabilités des classes se rapprochent de 0. Les densités, elles, se stabilisent."
+      - "À la limite, quand la largeur tend vers 0, la probabilité en un point disparaît. Seule la densité garde un sens."
+      - "On définit alors la variable par une fonction de densité de probabilité, notée f de x. Elle est positive partout."
+      - "Et l'aire totale sous sa courbe vaut 1 : l'intégrale de f, de moins l'infini à plus l'infini, égale 1."
+    html: |
+      <svg class="w60" viewBox="0 0 980 540" width="980" height="540">
+        <line class="stroke muted" x1="40" y1="480" x2="960" y2="480"/>
+        <g data-beat="0" data-anim="grow-y" opacity="0.5">
+          <rect x="120" y="360" width="280" height="120" fill="var(--gold)"/>
+          <rect x="400" y="120" width="140" height="360" fill="var(--gold)"/>
+          <rect x="540" y="380" width="280" height="100" fill="var(--gold)"/>
+        </g>
+        <g data-beat="1" data-anim="grow-y" fill="var(--main)" opacity="0.75">
+          <rect x="120" y="440" width="40" height="40"/><rect x="160" y="420" width="40" height="60"/>
+          <rect x="200" y="400" width="40" height="80"/><rect x="240" y="375" width="40" height="105"/>
+          <rect x="280" y="345" width="40" height="135"/><rect x="320" y="300" width="40" height="180"/>
+          <rect x="360" y="240" width="40" height="240"/><rect x="400" y="170" width="40" height="310"/>
+          <rect x="440" y="130" width="40" height="350"/><rect x="480" y="135" width="40" height="345"/>
+          <rect x="520" y="185" width="40" height="295"/><rect x="560" y="260" width="40" height="220"/>
+          <rect x="600" y="330" width="40" height="150"/><rect x="640" y="380" width="40" height="100"/>
+          <rect x="680" y="415" width="40" height="65"/><rect x="720" y="440" width="40" height="40"/>
+          <rect x="760" y="455" width="40" height="25"/>
+        </g>
+        <path class="stroke accent" d="M100 478 C 220 470, 330 330, 400 210 S 470 110, 500 120 S 600 300, 660 390 S 780 470, 840 476" stroke-width="8" data-beat="2" data-anim="draw" data-dur="1.4"/>
+        <text x="560" y="140" font-size="44" font-weight="700" fill="var(--accent)" data-beat="3">f(x)</text>
+      </svg>
+      <div class="col grow">
+        <div class="def" data-beat="3"><div class="term">Fonction de densité $f$</div>$f(x) \ge 0$ partout</div>
+        <div class="card"><div class="formula" data-beat="4">$$\int_{-\infty}^{+\infty} f(x)\,dx = 1$$</div></div>
+      </div>
+
+  - id: s13_integrales
+    notion: 'Fonction de densité'
+    tag: 'Notion 6 / 7'
+    title: 'Des aires sous la courbe'
+    subtitle: 'Les sommes deviennent des intégrales'
+    hold: 0.6
+    beats:
+      - "Comme pour l'histogramme, une probabilité est une aire. La probabilité que X soit entre a et b, c'est l'aire sous la courbe entre a et b."
+      - "Cette aire se calcule avec une intégrale : l'intégrale de f de x, de a à b."
+      - "La fonction de répartition s'écrit aussi avec une intégrale : F de x est l'intégrale de f de t, de moins l'infini jusqu'à x."
+      - "F est donc une primitive de f. On retrouve la règle : P de a inférieur ou égal à X inférieur ou égal à b, égale F de b moins F de a."
+      - "Pourquoi ça marche ? F de b, c'est l'intégrale de moins l'infini à b. On lui retire l'intégrale de moins l'infini à a. Il reste l'intégrale de a à b."
+    html: |
+      <div class="col w50">
+        <div class="card"><div class="formula" data-beat="1">$$P[a \le X \le b] = \int_a^b f(x)\,dx$$</div></div>
+        <div class="card"><div class="formula" data-beat="2">$$F(x) = \int_{-\infty}^{x} f(t)\,dt$$</div></div>
+      </div>
+      <div class="col w50">
+        <div class="keep" data-beat="3">$P[a \le X \le b] = F(b) - F(a)$</div>
+        <div class="steps">
+          <div class="step" data-beat="4">$F(b) - F(a) = \displaystyle\int_{-\infty}^{b} f - \int_{-\infty}^{a} f$</div>
+          <div class="step done" data-beat="4+4.5">$= \displaystyle\int_{a}^{b} f(t)\,dt$</div>
+        </div>
+      </div>
+
+  - id: s14_bus
+    notion: 'Fonction de densité'
+    tag: 'Notion 6 / 7 · exemple'
+    title: 'L''attente du bus'
+    subtitle: 'Un exemple inventé'
+    hold: 0.6
+    beats:
+      - "Un exemple inventé, avec le bus du cours. Un bus passe toutes les 10 minutes, et tu arrives à l'arrêt au hasard."
+      - "Ton attente X est entre 0 et 10 minutes, et aucune durée n'est favorisée. La densité vaut 1 sur 10 sur cet intervalle, et 0 ailleurs."
+      - "Vérifions l'aire totale : un rectangle de largeur 10 et de hauteur 1 sur 10. L'aire vaut bien 1."
+      - "Probabilité d'attendre entre 2 et 5 minutes : l'intégrale de 1 sur 10, de 2 à 5. Ça fait 3 sur 10, soit 0,3."
+      - "Avec la fonction de répartition : F de x vaut x sur 10 entre 0 et 10. F de 5 moins F de 2, c'est 0,5 moins 0,2 : encore 0,3."
+    html: |
+      <svg class="w50" viewBox="0 0 860 540" width="860" height="540">
+        <line class="stroke muted" x1="40" y1="440" x2="840" y2="440" data-beat="0" data-anim="draw"/>
+        <line class="stroke muted" x1="90" y1="470" x2="90" y2="60" data-beat="0" data-anim="draw"/>
+        <text x="105" y="75" font-size="36" fill="var(--muted)" data-beat="0">f(x)</text>
+        <g font-size="34" text-anchor="middle" fill="var(--ink)" data-beat="0">
+          <text x="120" y="490">0</text><text x="240" y="490">2</text><text x="420" y="490">5</text><text x="720" y="490">10</text>
+          <text x="800" y="490">min</text>
+        </g>
+        <g data-beat="1" data-anim="draw">
+          <path class="stroke" d="M40 440 L120 440 L120 240 L720 240 L720 440 L830 440"/>
+        </g>
+        <text x="60" y="252" font-size="34" text-anchor="middle" fill="var(--ink)" data-beat="1">1/10</text>
+        <rect x="120" y="240" width="600" height="200" fill="var(--gold)" opacity="0.35" data-beat="2" data-anim="grow-x"/>
+        <text x="600" y="210" font-size="36" font-weight="700" text-anchor="middle" fill="var(--main-ink)" data-beat="2">aire = 1</text>
+        <rect x="240" y="240" width="180" height="200" fill="var(--accent)" opacity="0.7" data-beat="3" data-anim="grow-x"/>
+        <text x="330" y="355" font-size="40" font-weight="700" text-anchor="middle" fill="#fff" data-beat="3">0,3</text>
+      </svg>
+      <div class="col grow">
+        <div class="formula sm" data-beat="1">$$f(x) = \frac{1}{10} \text{ sur } [0 ;\ 10]$$</div>
+        <div class="calc" data-beat="2">$10 \times \dfrac{1}{10} = 1$</div>
+        <div class="calc" data-beat="3">$\displaystyle\int_2^5 \frac{1}{10}\,dx = \frac{3}{10} =$ <span class="res">$0{,}3$</span></div>
+        <div class="calc" data-beat="4">$F(5) - F(2) = 0{,}5 - 0{,}2 = 0{,}3$</div>
+      </div>
+
+  # ================================================================ NOTION 7 : PARAMÈTRES CONTINUS
+  - id: s15_params_continus
+    notion: 'Paramètres continus'
+    tag: 'Notion 7 / 7'
+    title: 'Espérance et variance continues'
+    subtitle: 'Les Σ deviennent des ∫'
+    hold: 0.6
+    beats:
+      - "Pour une variable définie par une densité, les paramètres suivent les mêmes formules, mais les signes somme deviennent des intégrales."
+      - "L'espérance est l'intégrale de x fois f de x, de moins l'infini à plus l'infini."
+      - "Compare avec le discret : x i devient x, et p i devient f de x d x."
+      - "La variance suit la même logique, avec sa formule de définition et sa formule pratique : l'intégrale de x carré fois f de x, moins mu au carré."
+    html: |
+      <div class="col w100">
+        <div class="row">
+          <div class="card grow"><div class="formula" data-beat="1">$$E[X] = \int_{-\infty}^{+\infty} x\,\htmlData{hl=2}{f(x)\,dx}$$</div></div>
+          <table class="data" data-beat="2">
+            <tr><th>discret</th><td>$\sum$</td><td>$x_i$</td><td>$p_i$</td></tr>
+            <tr><th>continu</th><td>$\int$</td><td>$x$</td><td>$f(x)\,dx$</td></tr>
+          </table>
+        </div>
+        <div class="card"><div class="formula sm" data-beat="3">$$\sigma^2 = \int_{-\infty}^{+\infty} (x-\mu)^2 f(x)\,dx = \int_{-\infty}^{+\infty} x^2 f(x)\,dx - \mu^2$$</div></div>
+      </div>
+
+  - id: s16_bus_params
+    notion: 'Paramètres continus'
+    tag: 'Notion 7 / 7 · exemple'
+    title: 'L''attente moyenne du bus'
+    subtitle: 'E[X] et σ avec des intégrales'
+    hold: 0.6
+    beats:
+      - "Reprenons le bus, avec f de x égale 1 sur 10 entre 0 et 10."
+      - "L'espérance est l'intégrale de x sur 10, de 0 à 10. La primitive est x carré sur 20, et ça donne 100 sur 20, donc 5 minutes."
+      - "C'est logique : en moyenne, tu attends la moitié de l'intervalle entre deux bus."
+      - "Pour la variance, on intègre x carré sur 10 : la primitive est x cube sur 30. De 0 à 10, ça donne 1000 sur 30, soit 100 sur 3."
+      - "On retire mu au carré, donc 25. La variance vaut 25 sur 3, environ 8,33."
+      - "L'écart-type vaut environ 2,89 minutes."
+    html: |
+      <div class="col w50">
+        <div class="steps">
+          <div class="step" data-beat="1">$E[X] = \displaystyle\int_0^{10} \frac{x}{10}\,dx = \Big[\frac{x^2}{20}\Big]_0^{10}$</div>
+          <div class="step done" data-beat="1+5.5">$E[X] = \dfrac{100}{20} = 5$ min</div>
+        </div>
+        <div class="keep" data-beat="2">la moitié de l'intervalle entre deux bus</div>
+      </div>
+      <div class="col w50">
+        <div class="steps">
+          <div class="step" data-beat="3">$\displaystyle\int_0^{10} \frac{x^2}{10}\,dx = \Big[\frac{x^3}{30}\Big]_0^{10} = \frac{100}{3}$</div>
+          <div class="step" data-beat="4">$\sigma^2 = \dfrac{100}{3} - 25 = \dfrac{25}{3} \approx 8{,}33$</div>
+          <div class="step done" data-beat="5">$\sigma \approx 2{,}89$ min</div>
+        </div>
+      </div>
+
+  # ================================================================ RÉCAP
+  - id: s17_recap
+    notion: 'Récapitulatif'
+    title: 'À retenir'
+    subtitle: 'Variables aléatoires continues'
+    hold: 1.2
+    beats:
+      - "Récapitulons. Une variable continue prend ses valeurs dans un intervalle. La probabilité en un point vaut toujours 0."
+      - "Avec des classes, on suppose l'uniformité. La densité est p i divisé par la largeur, et chaque probabilité est une aire de l'histogramme."
+      - "La fonction de répartition est faite de segments, et la probabilité d'un intervalle vaut F de b moins F de a."
+      - "Pour l'espérance et la variance par classes, on utilise les centres c i."
+      - "Avec une fonction de densité, l'aire totale vaut 1, les probabilités sont des intégrales, et les sommes deviennent des intégrales dans les formules de mu et sigma."
+    html: |
+      <div class="recap w100">
+        <div class="item" data-beat="0"><b>Continue</b> : un intervalle de valeurs · <span class="tex">$P[X = a] = 0$</span></div>
+        <div class="item" data-beat="1"><span class="tex">$dp_i = \dfrac{p_i}{l_i}$</span> · aire = probabilité</div>
+        <div class="item" data-beat="2"><span class="tex">$P[a \le X \le b] = F(b) - F(a)$</span></div>
+        <div class="item" data-beat="3"><span class="tex">$\mu = \sum p_i c_i$ · $\sigma^2 = \sum p_i c_i^2 - \mu^2$</span></div>
+        <div class="item" data-beat="4"><span class="tex">$\int f = 1$ · $P[a \le X \le b] = \int_a^b f$ · $\mu = \int x f(x)\,dx$</span></div>
+      </div>
