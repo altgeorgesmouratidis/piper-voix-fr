@@ -6,7 +6,7 @@ Analyse de données, chapitre 1 : la statistique descriptive.
 
 Dans cette première partie, on pose le vocabulaire, puis on range des données discrètes.
 
-## Des données en vrac  ·  00:00:10
+## Des données en vrac  ·  00:00:11
 
 Tu demandes leur âge aux étudiants d'une classe, un par un. Tu obtiens ces seize nombres.
 
@@ -16,7 +16,7 @@ La statistique descriptive sert à ça : trier, compter, puis présenter les don
 
 On va voir le vocabulaire, les fréquences, les fréquences cumulées et la fonction de répartition.
 
-## Population et échantillon  ·  00:00:36
+## Population et échantillon  ·  00:00:39
 
 Pense à un cuisinier qui goûte sa soupe. Une cuillère suffit, pas besoin de boire toute la marmite.
 
@@ -28,7 +28,7 @@ Souvent, on ne peut pas interroger tout le monde. On prend un échantillon assez
 
 Le nombre d'individus de l'échantillon s'appelle l'effectif. On le note n.
 
-## Trois familles d'observations  ·  00:01:08
+## Trois familles d'observations  ·  00:01:15
 
 Les informations récoltées s'appellent des observations. Il en existe deux grandes familles.
 
@@ -40,7 +40,7 @@ Discrète : des valeurs isolées, qu'on peut compter. Le nombre d'enfants d'une 
 
 Continue : toutes les valeurs réelles d'un intervalle. Le poids d'un œuf peut valoir 52,375 grammes.
 
-## Deux pièges  ·  00:01:42
+## Deux pièges  ·  00:01:52
 
 Premier piège : une observation discrète n'est pas forcément un nombre entier.
 
@@ -52,7 +52,7 @@ On parle alors de continu discrétisé.
 
 Dernier mot de vocabulaire. Des mesures prises chaque jour à la même heure forment une série chronologique. Des mesures prises toutes au même moment forment une série statistique.
 
-## Effectif et valeurs observées  ·  00:02:18
+## Effectif et valeurs observées  ·  00:02:34
 
 Revenons aux âges. Ce sont des données brutes : non triées, telles qu'on les a récoltées.
 
@@ -64,7 +64,7 @@ Ici, il y a cinq âges différents, de 17 à 21. Donc k vaut 5.
 
 x 1 vaut 17, x 2 vaut 18, et ainsi de suite jusqu'à x 5, qui vaut 21.
 
-## Fréquence absolue $n_i$  ·  00:02:51
+## Fréquence absolue $n_i$  ·  00:03:12
 
 Pour chaque valeur x i, on compte combien de fois elle apparaît. C'est sa fréquence absolue, notée n i.
 
@@ -78,7 +78,7 @@ La formule se lit : la somme des n i, pour i allant de 1 à k, égale n.
 
 Ici, 2 plus 4 plus 6 plus 2 plus 2, ça fait bien 16.
 
-## Fréquence relative $f_i$  ·  00:03:28
+## Fréquence relative $f_i$  ·  00:03:55
 
 Dire 6 étudiants sur 16, c'est bien. Mais pour comparer deux classes de tailles différentes, un pourcentage est plus parlant.
 
@@ -90,7 +90,7 @@ Pour 19 ans : 6 divisé par 16, ça donne 0,375. Soit 37,5 pour cent.
 
 Une fréquence relative est donc toujours un réel entre 0 et 1. On la retrouvera dans la partie probabilités du cours.
 
-## La somme des $f_i$ vaut 1  ·  00:04:06
+## La somme des $f_i$ vaut 1  ·  00:04:37
 
 Voici le tableau avec les fréquences relatives. Le total fait cent pour cent.
 
@@ -102,7 +102,7 @@ Or la somme des n i, c'est n. Il reste n divisé par n, donc 1.
 
 Ce tableau a un avantage : on compare facilement. Son inconvénient : on ne voit plus l'effectif, 16 étudiants.
 
-## Diagramme en bâtonnets  ·  00:04:40
+## Diagramme en bâtonnets  ·  00:05:15
 
 On peut dessiner ce tableau. En abscisse, les valeurs x i. En hauteur, les n i.
 
@@ -112,7 +112,7 @@ Avec les f i en hauteur, l'allure est exactement la même. Seule la graduation d
 
 Petite remarque. Si les valeurs sont très différentes, par exemple 90 656 contre 8, on utilise une échelle logarithmique.
 
-## Cumuler, c'est additionner au fur et à mesure  ·  00:05:07
+## Cumuler, c'est additionner au fur et à mesure  ·  00:05:45
 
 Imagine que tu ranges les étudiants par âge, du plus jeune au plus vieux, et que tu comptes en avançant.
 
@@ -122,7 +122,7 @@ Après les 19 ans, 6 plus 6, donc 12. Ce compteur qui ne fait que monter, c'est 
 
 Elle répond directement à la question : combien d'observations sont inférieures ou égales à une valeur ?
 
-## Fréquence absolue cumulée $N_i$  ·  00:05:34
+## Fréquence absolue cumulée $N_i$  ·  00:06:16
 
 La fréquence absolue cumulée se note N i, avec un grand N. C'est le nombre d'observations inférieures ou égales à x i.
 
@@ -132,7 +132,7 @@ En pratique, on calcule ligne par ligne. Grand N i, c'est le précédent, plus l
 
 La première ligne recopie n 1, ici 2. La dernière donne toujours l'effectif total, ici 16.
 
-## Fréquence relative cumulée $F_i$  ·  00:06:06
+## Fréquence relative cumulée $F_i$  ·  00:06:54
 
 Même idée en pourcentage. La fréquence relative cumulée, grand F i, c'est la somme des f j jusqu'à i.
 
@@ -142,7 +142,7 @@ Pour 19 ans : 12 divisé par 16, ça donne 0,75. Donc 75 pour cent.
 
 La première ligne recopie f 1. La dernière vaut toujours 1, c'est-à-dire cent pour cent.
 
-## Lire le tableau complet  ·  00:06:31
+## Lire le tableau complet  ·  00:07:25
 
 Avec ce tableau complet, on répond à trois types de questions.
 
@@ -154,7 +154,7 @@ Combien ont entre 18 et 20 ans ? On prend grand F de 20, moins grand F de 17. At
 
 87,5 moins 12,5, ça fait 75 pour cent. On soustrait la valeur juste avant 18, sinon on enlève les 18 ans du compte.
 
-## La fonction de répartition $F(x)$  ·  00:07:11
+## La fonction de répartition $F(x)$  ·  00:08:15
 
 Pour représenter les fréquences relatives cumulées, on dessine un graphique en escalier.
 
@@ -166,7 +166,7 @@ Chaque palier commence à une valeur observée et monte d'une marche. Le point p
 
 Le palier est fermé à gauche et ouvert à droite. Au bout, le point est exclu : à 20 pile, on est déjà sur la marche suivante.
 
-## $F(x)$ existe pour tout réel $x$  ·  00:07:50
+## $F(x)$ existe pour tout réel $x$  ·  00:08:58
 
 Contrairement aux bâtonnets, F a une valeur pour n'importe quel x, pas seulement pour les âges observés.
 
@@ -178,7 +178,7 @@ Et F de 25 vaut 1. Tout le monde a 25 ans ou moins. Au-delà de 21, F vaut toujo
 
 À retenir : F de x monte de 0 à 1, par marches, et ne redescend jamais.
 
-## Récap de la partie 1  ·  00:08:26
+## Récap de la partie 1  ·  00:09:42
 
 Récapitulons. L'effectif n, c'est le nombre d'observations. n i compte les apparitions de x i, et leur somme fait n.
 

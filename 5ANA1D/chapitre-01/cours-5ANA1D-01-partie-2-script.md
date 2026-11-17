@@ -6,7 +6,7 @@ Analyse de données, chapitre 1, deuxième partie.
 
 On passe aux observations continues : classes, histogrammes, polygone et fonction de répartition. Puis on termine par le qualitatif.
 
-## Pourquoi regrouper en classes ?  ·  00:00:12
+## Pourquoi regrouper en classes ?  ·  00:00:14
 
 Imagine que tu pèses 80 étudiants avec une balance précise au dixième de gramme.
 
@@ -16,7 +16,7 @@ Et sa colonne des n i ne contiendrait que des 1. Ça ne nous apprend rien.
 
 La solution : grouper les données en classes. Ce sont des intervalles contigus, collés les uns aux autres, qui couvrent toutes les observations.
 
-## Le tableau par classes  ·  00:00:38
+## Le tableau par classes  ·  00:00:43
 
 Voici le tableau des poids, groupés en quatre classes.
 
@@ -28,7 +28,7 @@ Grand N i, c'est le nombre d'observations inférieures à x i, le bord droit de 
 
 Et grand F i, c'est ce même nombre en pourcentage : 48 sur 80, donc 0,60.
 
-## Comment choisir les classes ?  ·  00:01:13
+## Comment choisir les classes ?  ·  00:01:26
 
 Le choix des classes est arbitraire. Il dépend du bon sens du statisticien.
 
@@ -40,7 +40,7 @@ Pour 80 étudiants, ça donne environ 7 classes. C'est une indication, pas une o
 
 Les classes peuvent avoir des largeurs différentes. Et elles sont fermées à gauche, ouvertes à droite : 65 kilos pile tombe dans une seule classe.
 
-## Hypothèse d'uniformité  ·  00:01:48
+## Hypothèse d'uniformité  ·  00:02:05
 
 Grouper en classes fait perdre de l'information. Des étudiants de 68, 72 et 74 kilos tombent tous dans la classe 65 à 75.
 
@@ -52,7 +52,7 @@ Autrement dit, il y a le même nombre d'étudiants par tranche d'un kilo. Ici, 2
 
 Cette hypothèse est la clé de toute la suite : densité, polygone et fonction de répartition.
 
-## Le piège des rectangles  ·  00:02:23
+## Le piège des rectangles  ·  00:02:45
 
 Premier réflexe pour dessiner le tableau : des rectangles posés sur chaque classe, de hauteur n i.
 
@@ -64,7 +64,7 @@ Pire : les deux dernières classes ont des aires proches, 200 et 180. Pourtant l
 
 C'est un défaut visuel majeur. Il faut des rectangles dont l'aire, et pas la hauteur, représente l'effectif.
 
-## Densité de fréquence absolue $dn_i$  ·  00:03:03
+## Densité de fréquence absolue $dn_i$  ·  00:03:31
 
 La solution : prendre comme hauteur la densité de fréquence absolue, d n i. C'est n i divisé par l i, la largeur de la classe.
 
@@ -76,7 +76,7 @@ Et maintenant, l'aire de chaque rectangle vaut d n i fois l i, donc exactement n
 
 Ce graphique s'appelle l'histogramme des densités de fréquence absolue.
 
-## Densité de fréquence relative $df_i$  ·  00:03:44
+## Densité de fréquence relative $df_i$  ·  00:04:21
 
 Même idée avec les fréquences relatives. La densité de fréquence relative, d f i, c'est f i divisé par l i.
 
@@ -88,7 +88,7 @@ Cette fois, l'aire de chaque rectangle vaut f i, et l'aire totale vaut 1.
 
 L'histogramme a exactement la même forme que le précédent. Seule l'échelle verticale change.
 
-## Le polygone des fréquences cumulées  ·  00:04:24
+## Le polygone des fréquences cumulées  ·  00:05:07
 
 On passe à un point très important. En discret, on dessinait un escalier. En continu, on dessine un polygone.
 
@@ -102,7 +102,7 @@ Entre les deux, on trace un segment oblique. Pourquoi ? Grâce à l'hypothèse d
 
 Les observations sont réparties régulièrement dans la classe. Donc le pourcentage cumulé augmente à vitesse constante, de façon linéaire.
 
-## L'équation d'un segment  ·  00:05:08
+## L'équation d'un segment  ·  00:05:59
 
 Autre point très important : l'équation de ce segment.
 
@@ -116,7 +116,7 @@ On part de la hauteur de début de classe, et on monte de d f i par unité parco
 
 Pour la classe 65 à 75 : y égale 0,035 fois x moins 65, plus 0,25. En 75, on retrouve bien 0,60.
 
-## $F(x)$ par morceaux  ·  00:05:53
+## $F(x)$ par morceaux  ·  00:06:54
 
 En mettant les segments bout à bout, on obtient le polygone des fréquences cumulées. C'est le graphe de la fonction de répartition F de x.
 
@@ -128,7 +128,7 @@ La définition reste : le pourcentage des observations inférieures, ou égales,
 
 En continu, strictement inférieur ou inférieur ou égal, c'est pareil. La fréquence d'une valeur ponctuelle est toujours 0.
 
-## À quoi sert $F(x)$ ?  ·  00:06:36
+## À quoi sert $F(x)$ ?  ·  00:07:42
 
 Avec F, tu trouves le pourcentage d'observations dans n'importe quel intervalle. Il y a trois cas.
 
@@ -140,7 +140,7 @@ Entre x 1 et x 2 : F de x 2 moins F de x 1.
 
 Pour un effectif, multiplie le pourcentage par n. Et dans l'autre sens, on peut chercher le x qui correspond à un pourcentage donné.
 
-## Exemple : moins de 73 kilos  ·  00:07:04
+## Exemple : moins de 73 kilos  ·  00:08:13
 
 Quel pourcentage d'étudiants pèse moins de 73 kilos ? 73 est dans la classe 65 à 75, donc on prend la troisième ligne de F.
 
@@ -150,7 +150,7 @@ Plus de 73 kilos ? Le complément : 1 moins 0,53, donc 47 pour cent.
 
 Et combien d'étudiants pèsent moins de 73 kilos ? 80 fois 0,53, ça fait 42,4. Donc environ 42 étudiants.
 
-## Exemple : un intervalle et la lecture inverse  ·  00:07:48
+## Exemple : un intervalle et la lecture inverse  ·  00:09:06
 
 Entre 73 et 81 kilos ? On soustrait : F de 81 moins F de 73.
 
@@ -162,7 +162,7 @@ Sur le graphique, 0,3 est entre 0,25 et 0,60. La solution est donc dans la deuxi
 
 On résout : 0,035 fois x moins 65, plus 0,25, égale 0,3. On trouve x environ égal à 66,4 kilos.
 
-## Observations qualitatives  ·  00:08:43
+## Observations qualitatives  ·  00:10:12
 
 Dernier cas : les observations qualitatives. On définit n i et f i exactement comme en discret.
 
@@ -172,7 +172,7 @@ On choisit quand même un ordre de présentation. Parfois, le contexte l'impose 
 
 Sinon, on classe par fréquences décroissantes, comme les voitures les plus vendues. Ou par ordre alphabétique, pour éviter un classement arbitraire.
 
-## Le diagramme en fromage  ·  00:09:15
+## Le diagramme en fromage  ·  00:10:48
 
 Pour le qualitatif, on utilise souvent un diagramme en tarte, ou en fromage.
 
@@ -182,7 +182,7 @@ Satisfait : 42 sur 80, donc 52,5 pour cent. C'est plus de la moitié du disque.
 
 Pour l'angle d'une part, on multiplie la fréquence par 360 degrés. 0,525 fois 360, ça donne 189 degrés.
 
-## Récap de la partie 2  ·  00:09:45
+## Récap de la partie 2  ·  00:11:21
 
 Récapitulons. En continu, on groupe en classes et on suppose les observations uniformes dans chaque classe.
 
