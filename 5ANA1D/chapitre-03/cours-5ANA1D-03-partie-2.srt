@@ -1,493 +1,493 @@
 1
-00:00:00,450 --> 00:00:04,084
+00:00:00,450 --> 00:00:03,970
 Analyse de données, chapitre 3, deuxième partie.
 
 2
-00:00:04,534 --> 00:00:08,255
+00:00:04,420 --> 00:00:08,942
 On passe aux données continues, rangées dans un
 tableau à deux dimensions.
 
 3
-00:00:08,255 --> 00:00:10,919
+00:00:08,942 --> 00:00:12,180
 Puis on voit quand deux variables sont
 indépendantes.
 
 4
-00:00:12,283 --> 00:00:16,208
+00:00:13,517 --> 00:00:17,997
 Dans la première partie, chaque étudiant donnait
 un couple de cotes bien précis.
 
 5
-00:00:16,658 --> 00:00:21,478
+00:00:18,447 --> 00:00:23,902
 Avec des données continues, comme la taille en
 centimètres et le poids en kilos, presque toutes
 
 6
-00:00:21,478 --> 00:00:22,950
+00:00:23,902 --> 00:00:25,567
 les valeurs sont différentes.
 
 7
-00:00:23,400 --> 00:00:26,930
+00:00:26,017 --> 00:00:30,177
 On regroupe donc chaque variable en classes,
 comme au chapitre 1.
 
 8
-00:00:27,380 --> 00:00:31,875
+00:00:30,627 --> 00:00:35,467
 Puis on range les individus dans une grille, un
 peu comme au jeu de la bataille navale :
 
 9
-00:00:31,875 --> 00:00:35,553
+00:00:35,467 --> 00:00:39,427
 une ligne pour la classe de taille, une colonne
 pour la classe de poids.
 
 10
-00:00:36,917 --> 00:00:38,826
+00:00:40,783 --> 00:00:42,863
 Voici l'exemple du cours :
 
 11
-00:00:38,826 --> 00:00:42,571
+00:00:42,863 --> 00:00:46,943
 la taille X, en lignes, et le poids Y, en
 colonnes.
 
 12
-00:00:43,021 --> 00:00:46,163
+00:00:47,393 --> 00:00:51,343
 Chaque case contient une fréquence, notée f i j
 :
 
 13
-00:00:46,163 --> 00:00:51,484
+00:00:51,343 --> 00:00:58,033
 la proportion d'individus qui sont dans la
 classe i de X, et dans la classe j de Y.
 
 14
-00:00:51,934 --> 00:00:54,978
+00:00:58,483 --> 00:01:02,075
 Par exemple, cette case vaut 0,17.
 
 15
-00:00:54,978 --> 00:01:03,393
+00:01:02,075 --> 00:01:12,003
 Donc 17 % des individus mesurent entre 170 et
 180 centimètres, et pèsent entre 75 et 85 kilos.
 
 16
-00:01:03,843 --> 00:01:08,069
+00:01:12,453 --> 00:01:17,413
 Pour que la distribution soit correcte, la somme
 de toutes les cases doit valoir 1.
 
 17
-00:01:09,917 --> 00:01:13,609
+00:01:19,250 --> 00:01:23,330
 Ce tableau contient aussi la distribution de
 chaque variable prise seule.
 
 18
-00:01:14,059 --> 00:01:17,395
+00:01:23,780 --> 00:01:27,587
 En additionnant une ligne, on obtient f i point
 :
 
 19
-00:01:17,395 --> 00:01:21,141
+00:01:27,587 --> 00:01:31,860
 la fréquence de la classe i de X, tous poids
 confondus.
 
 20
-00:01:21,591 --> 00:01:24,260
+00:01:32,310 --> 00:01:35,724
 Pour la ligne 140 à 160 :
 
 21
-00:01:24,260 --> 00:01:29,171
+00:01:35,724 --> 00:01:42,004
 0,05 plus 0,10 plus 0,05 plus 0, ça fait 0,20.
 
 22
-00:01:29,171 --> 00:01:35,790
+00:01:42,004 --> 00:01:50,470
 Donc 20 % des individus mesurent entre 140 et
 160 centimètres.
 
 23
-00:01:36,240 --> 00:01:39,341
+00:01:50,920 --> 00:01:54,951
 En additionnant une colonne, on obtient f point
 j :
 
 24
-00:01:39,341 --> 00:01:41,348
+00:01:54,951 --> 00:01:57,560
 la fréquence de la classe j de Y.
 
 25
-00:01:41,798 --> 00:01:45,631
+00:01:58,010 --> 00:02:02,869
 Pour la colonne 50 à 65 kilos :
 
 26
-00:01:45,631 --> 00:01:50,947
+00:02:02,869 --> 00:02:09,610
 0,05 plus 0,05 plus 0 plus 0, ça fait 0,10.
 
 27
-00:01:51,397 --> 00:01:55,736
+00:02:10,060 --> 00:02:14,979
 On les appelle fréquences marginales, parce
 qu'elles sont écrites dans la marge.
 
 28
-00:01:55,736 --> 00:01:58,665
+00:02:14,979 --> 00:02:18,300
 Le point remplace l'indice sur lequel on a
 additionné.
 
 29
-00:02:00,517 --> 00:02:06,707
+00:02:20,150 --> 00:02:26,885
 Pour calculer les paramètres, chaque classe est
 représentée par son centre.
 
 30
-00:02:06,707 --> 00:02:10,587
+00:02:26,885 --> 00:02:31,106
 Pour 140 à 160 centimètres, le centre vaut 150.
 
 31
-00:02:10,587 --> 00:02:13,311
+00:02:31,106 --> 00:02:34,070
 Pour 50 à 65 kilos, il vaut 57,5.
 
 32
-00:02:13,761 --> 00:02:20,053
+00:02:34,520 --> 00:02:42,040
 La moyenne de X, c'est la somme des f i point
 fois x i, où x i est le centre de la classe i.
 
 33
-00:02:20,503 --> 00:02:21,515
+00:02:42,490 --> 00:02:43,733
 Tu l'avais noté :
 
 34
-00:02:21,515 --> 00:02:24,669
+00:02:43,733 --> 00:02:47,609
 on peut aussi écrire une double somme avec les f
 i j.
 
 35
-00:02:24,669 --> 00:02:28,120
+00:02:47,609 --> 00:02:51,850
 C'est pareil, car additionner une ligne redonne
 f i point.
 
 36
-00:02:28,570 --> 00:02:29,951
+00:02:52,300 --> 00:02:54,076
 Calculons :
 
 37
-00:02:29,951 --> 00:02:38,990
+00:02:54,076 --> 00:03:05,698
 150 fois 0,2, plus 165 fois 0,3, plus 175 fois
 0,33, plus 190 fois 0,17.
 
 38
-00:02:38,990 --> 00:02:42,757
+00:03:05,698 --> 00:03:10,540
 On obtient 169,55 centimètres.
 
 39
-00:02:43,207 --> 00:02:49,221
+00:03:10,990 --> 00:03:18,910
 De la même façon, avec les centres des colonnes,
 la moyenne de Y vaut 76,125 kilos.
 
 40
-00:02:49,671 --> 00:02:52,956
+00:03:19,360 --> 00:03:23,520
 La variance suit la formule pratique du chapitre
 2 :
 
 41
-00:02:52,956 --> 00:02:56,683
+00:03:23,520 --> 00:03:28,240
 la somme des f i point fois x i carré, moins x
 barre carré.
 
 42
-00:02:57,133 --> 00:03:04,703
+00:03:28,690 --> 00:03:37,650
 On trouve un écart-type de 12,789 centimètres
 pour X, et de 9,698 kilos pour Y.
 
 43
-00:03:06,550 --> 00:03:10,528
+00:03:39,483 --> 00:03:43,430
 Pour la covariance, il faut parcourir toutes les
 cases du tableau.
 
 44
-00:03:10,528 --> 00:03:12,518
+00:03:43,430 --> 00:03:45,403
 On utilise donc une double somme.
 
 45
-00:03:12,968 --> 00:03:14,555
+00:03:45,853 --> 00:03:47,882
 La formule pratique :
 
 46
-00:03:14,555 --> 00:03:21,132
+00:03:47,882 --> 00:03:56,285
 la somme, sur toutes les lignes i et toutes les
 colonnes j, de f i j fois x i fois y j.
 
 47
-00:03:21,132 --> 00:03:23,173
+00:03:56,285 --> 00:03:58,893
 Moins x barre fois y barre.
 
 48
-00:03:23,623 --> 00:03:24,401
+00:03:59,343 --> 00:04:00,310
 Concrètement :
 
 49
-00:03:24,401 --> 00:03:29,519
+00:04:00,310 --> 00:04:06,659
 pour chaque case, on multiplie sa fréquence par
 le centre de sa ligne et par le centre de sa
 
 50
-00:03:29,519 --> 00:03:29,964
+00:04:06,659 --> 00:04:07,212
 colonne.
 
 51
-00:03:29,964 --> 00:03:32,133
+00:04:07,212 --> 00:04:09,903
 Puis on additionne les seize résultats.
 
 52
-00:03:32,583 --> 00:03:41,302
+00:04:10,353 --> 00:04:21,233
 Par exemple, la case 0,17 donne 0,17 fois 175
 fois 80, soit 2380.
 
 53
-00:03:41,752 --> 00:03:45,148
+00:04:21,683 --> 00:04:25,633
 Le total vaut 12952,25.
 
 54
-00:03:45,148 --> 00:03:53,861
+00:04:25,633 --> 00:04:35,763
 On retire 169,55 fois 76,125, et la covariance
 vaut 45,256.
 
 55
-00:03:54,311 --> 00:04:00,971
+00:04:36,213 --> 00:04:43,905
 Le coefficient de corrélation garde la même
 formule :
 
 56
-00:04:00,971 --> 00:04:05,494
+00:04:43,905 --> 00:04:49,130
 45,256 divisé par 12,789 fois 9,698.
 
 57
-00:04:05,494 --> 00:04:08,510
+00:04:49,130 --> 00:04:52,613
 On trouve r égale 0,365.
 
 58
-00:04:08,960 --> 00:04:12,538
+00:04:53,063 --> 00:04:56,810
 Le lien entre taille et poids est positif, mais
 plutôt faible.
 
 59
-00:04:12,538 --> 00:04:16,983
+00:04:56,810 --> 00:05:01,463
 Et la droite de régression se calcule avec les
 mêmes formules qu'en partie 1.
 
 60
-00:04:18,817 --> 00:04:23,514
+00:05:03,317 --> 00:05:08,057
 Deux variables sont indépendantes quand l'une
 n'a aucune influence sur l'autre.
 
 61
-00:04:23,514 --> 00:04:27,617
+00:05:08,057 --> 00:05:12,197
 Par exemple, la cote d'une interro de maths, et
 la taille de l'élève.
 
 62
-00:04:28,067 --> 00:04:32,402
+00:05:12,647 --> 00:05:18,084
 Dans chaque tranche de taille, on retrouverait
 alors la même proportion de réussites et
 
 63
-00:04:32,402 --> 00:04:32,850
+00:05:18,084 --> 00:05:18,647
 d'échecs.
 
 64
-00:04:33,300 --> 00:04:36,507
+00:05:19,097 --> 00:05:23,303
 Dans le tableau, ça se traduit par une propriété
 simple :
 
 65
-00:04:36,507 --> 00:04:41,288
+00:05:23,303 --> 00:05:29,577
 chaque f i j est égal au produit des fréquences
 marginales, f i point fois f point j.
 
 66
-00:04:41,738 --> 00:04:44,075
+00:05:30,027 --> 00:05:33,166
 Testons sur notre tableau.
 
 67
-00:04:44,075 --> 00:04:45,423
+00:05:33,166 --> 00:05:34,977
 Première case :
 
 68
-00:04:45,423 --> 00:04:49,377
+00:05:34,977 --> 00:05:40,290
 f 1 point vaut 0,20, et f point 1 vaut 0,10.
 
 69
-00:04:49,377 --> 00:04:51,444
+00:05:40,290 --> 00:05:43,067
 Leur produit vaut 0,02.
 
 70
-00:04:51,894 --> 00:04:54,929
+00:05:43,517 --> 00:05:46,836
 Mais la case contient 0,05, pas 0,02.
 
 71
-00:04:54,929 --> 00:04:56,816
+00:05:46,836 --> 00:05:48,900
 Une seule case suffit :
 
 72
-00:04:56,816 --> 00:05:00,671
+00:05:48,900 --> 00:05:53,117
 la taille et le poids ne sont pas indépendants.
 
 73
-00:05:02,517 --> 00:05:06,528
+00:05:54,950 --> 00:05:59,102
 Si X et Y sont indépendants, leur covariance est
 nulle.
 
 74
-00:05:06,528 --> 00:05:07,695
+00:05:59,102 --> 00:06:00,310
 Voyons pourquoi.
 
 75
-00:05:08,145 --> 00:05:12,231
+00:06:00,760 --> 00:06:06,680
 Dans la double somme, on remplace f i j par f i
 point fois f point j.
 
 76
-00:05:12,681 --> 00:05:16,040
+00:06:07,130 --> 00:06:11,281
 La double somme se sépare alors en deux sommes
 simples :
 
 77
-00:05:16,040 --> 00:05:19,218
+00:06:11,281 --> 00:06:15,210
 une qui ne parle que de X, une qui ne parle que
 de Y.
 
 78
-00:05:19,668 --> 00:05:21,630
+00:06:15,660 --> 00:06:18,083
 La première vaut x barre.
 
 79
-00:05:21,630 --> 00:05:23,592
+00:06:18,083 --> 00:06:20,506
 La deuxième vaut y barre.
 
 80
-00:05:23,592 --> 00:05:27,437
+00:06:20,506 --> 00:06:25,255
 Il reste x barre y barre, moins x barre y barre
 :
 
 81
-00:05:27,437 --> 00:05:27,830
+00:06:25,255 --> 00:06:25,740
 zéro.
 
 82
-00:05:28,280 --> 00:05:33,230
+00:06:26,190 --> 00:06:31,954
 Donc deux variables indépendantes ont toujours
 une covariance nulle, et un coefficient de
 
 83
-00:05:33,230 --> 00:05:34,119
+00:06:31,954 --> 00:06:32,990
 corrélation nul.
 
 84
-00:05:36,283 --> 00:05:38,582
+00:06:35,150 --> 00:06:37,616
 Attention, la réciproque est fausse.
 
 85
-00:05:38,582 --> 00:05:44,712
+00:06:37,616 --> 00:06:44,191
 Au début de ce paragraphe, le cours dit que deux
 variables sont indépendantes lorsque r est nul.
 
 86
-00:05:44,712 --> 00:05:45,606
+00:06:44,191 --> 00:06:45,150
 C'est inexact.
 
 87
-00:05:46,056 --> 00:05:47,474
+00:06:45,600 --> 00:06:47,627
 Contre-exemple :
 
 88
-00:05:47,474 --> 00:05:51,549
+00:06:47,627 --> 00:06:53,453
 x vaut moins 1, 0 et 1, et y égale x au carré.
 
 89
-00:05:51,549 --> 00:05:53,498
+00:06:53,453 --> 00:06:56,240
 Donc y vaut 1, 0 et 1.
 
 90
-00:05:53,948 --> 00:05:55,593
+00:06:56,690 --> 00:06:59,295
 La moyenne de x vaut 0.
 
 91
-00:05:55,593 --> 00:06:00,383
+00:06:59,295 --> 00:07:06,884
 La moyenne des produits x i y i vaut moins 1
 plus 0 plus 1, sur 3 :
 
 92
-00:06:00,383 --> 00:06:01,170
+00:07:06,884 --> 00:07:08,130
 zéro aussi.
 
 93
-00:06:01,620 --> 00:06:06,473
+00:07:08,580 --> 00:07:15,349
 La covariance vaut donc 0 moins 0 fois deux
 tiers, c'est-à-dire 0.
 
 94
-00:06:06,473 --> 00:06:07,355
+00:07:15,349 --> 00:07:16,580
 Et r vaut 0.
 
 95
-00:06:07,805 --> 00:06:10,098
+00:07:17,030 --> 00:07:19,722
 Pourtant, y dépend complètement de x !
 
 96
-00:06:10,098 --> 00:06:13,598
+00:07:19,722 --> 00:07:23,830
 Le coefficient r ne détecte que les liens en
 ligne droite.
 
 97
-00:06:14,048 --> 00:06:14,839
+00:07:24,280 --> 00:07:25,238
 À retenir :
 
 98
-00:06:14,839 --> 00:06:17,282
+00:07:25,238 --> 00:07:28,200
 l'indépendance entraîne r égale 0.
 
 99
-00:06:17,282 --> 00:06:20,515
+00:07:28,200 --> 00:07:32,120
 Mais r égale 0 n'entraîne pas l'indépendance.
 
 100
-00:06:22,650 --> 00:06:23,869
+00:07:34,283 --> 00:07:35,323
 Récapitulons.
 
 101
-00:06:24,319 --> 00:06:28,227
+00:07:35,773 --> 00:07:41,074
 Pour des données continues, on construit un
 tableau à deux dimensions.
 
 102
-00:06:28,227 --> 00:06:31,633
+00:07:41,074 --> 00:07:45,693
 Chaque case contient une fréquence f i j, et le
 total vaut 1.
 
 103
-00:06:32,083 --> 00:06:36,240
+00:07:46,143 --> 00:07:51,370
 Les totaux des lignes et des colonnes sont les
 fréquences marginales :
 
 104
-00:06:36,240 --> 00:06:38,318
+00:07:51,370 --> 00:07:53,983
 f i point pour X, f point j pour Y.
 
 105
-00:06:38,768 --> 00:06:41,545
+00:07:54,433 --> 00:07:57,700
 Les paramètres utilisent les centres des
 classes.
 
 106
-00:06:41,545 --> 00:06:43,756
+00:07:57,700 --> 00:08:00,300
 La covariance devient une double somme.
 
 107
-00:06:43,756 --> 00:06:46,930
+00:08:00,300 --> 00:08:04,033
 r et la droite de régression gardent les mêmes
 formules.
 
 108
-00:06:47,380 --> 00:06:53,496
+00:08:04,483 --> 00:08:13,152
 Enfin, si X et Y sont indépendants, chaque f i j
 vaut f i point fois f point j, et r vaut 0.
 
 109
-00:06:53,496 --> 00:06:56,354
+00:08:13,152 --> 00:08:17,203
 Mais un r nul ne prouve pas l'indépendance.
 

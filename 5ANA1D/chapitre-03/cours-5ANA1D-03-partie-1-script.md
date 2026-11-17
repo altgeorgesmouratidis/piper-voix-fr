@@ -6,7 +6,7 @@ Analyse de données, chapitre 3 : les distributions à deux dimensions.
 
 Dans cette première partie, on étudie des couples de données discrètes : la covariance, la corrélation et la droite de régression.
 
-## Deux mesures à la fois  ·  00:00:14
+## Deux mesures à la fois  ·  00:00:15
 
 Jusqu'ici, on étudiait une seule caractéristique à la fois : le poids, ou la taille.
 
@@ -18,7 +18,7 @@ Pour mesurer ce lien, on va construire un nombre : le coefficient de corrélatio
 
 Ensuite, on tracera la droite qui résume le mieux ce lien : la droite de régression.
 
-## Couple de données et nuage de points  ·  00:00:45
+## Couple de données et nuage de points  ·  00:00:48
 
 Prenons dix étudiants. Pour chacun, on note sa cote de maths, x i, et sa cote de stat, y i.
 
@@ -30,7 +30,7 @@ L'ensemble de ces points s'appelle un nuage de points.
 
 On voit déjà une tendance : en gros, quand la cote de maths monte, la cote de stat monte aussi.
 
-## Moyennes et écarts-types  ·  00:01:14
+## Moyennes et écarts-types  ·  00:01:23
 
 Chaque variable garde ses propres paramètres, calculés comme au chapitre 2.
 
@@ -40,7 +40,7 @@ Les écarts-types : s x vaut 2,75, et s y vaut 1,97. Les cotes de maths sont un 
 
 Mais ces quatre nombres décrivent chaque variable séparément. Ils ne disent rien du lien entre les deux.
 
-## La covariance : l'idée  ·  00:01:43
+## La covariance : l'idée  ·  00:01:58
 
 Pour mesurer le lien, on découpe le nuage avec les deux moyennes. Ça fait quatre zones.
 
@@ -54,7 +54,7 @@ Par exemple, le point 16, 14. Ses écarts valent 4,2 et 2,9. Leur produit vaut p
 
 Si la plupart des points sont dans les zones positives, X et Y montent ensemble.
 
-## La covariance $s_{xy}$  ·  00:02:28
+## La covariance $s_{xy}$  ·  00:02:50
 
 La covariance, notée s x y, est la moyenne de ces produits.
 
@@ -72,7 +72,7 @@ Avec la définition, on trouve exactement la même valeur. Les deux formules son
 
 À retenir : une covariance positive signifie que X et Y ont tendance à varier dans le même sens.
 
-## Le coefficient de corrélation $r$  ·  00:03:22
+## Le coefficient de corrélation $r$  ·  00:03:55
 
 La covariance a un défaut : sa valeur dépend des unités. En centimètres ou en mètres, on n'obtient pas le même nombre.
 
@@ -86,7 +86,7 @@ Dans notre exemple : 3,02 divisé par 2,75 fois 1,97. On trouve r égale 0,557.
 
 C'est une corrélation positive, d'intensité moyenne : les bons en maths ont plutôt de bonnes cotes en stat, mais pas toujours.
 
-## Lire un nuage selon $r$  ·  00:04:07
+## Lire un nuage selon $r$  ·  00:04:49
 
 Voyons à quoi ressemble un nuage selon la valeur de r.
 
@@ -100,7 +100,7 @@ Si r est négatif, c'est l'inverse : quand X augmente, Y diminue. Pour r égal m
 
 À retenir : le signe de r donne le sens du lien. Sa valeur absolue donne sa force.
 
-## La forme du nuage  ·  00:04:44
+## La forme du nuage  ·  00:05:33
 
 Attention : r mesure l'alignement des points, pas la pente.
 
@@ -112,7 +112,7 @@ Si s x est plus petit que s y, le nuage est étiré vers le haut : la pente est 
 
 La forme dépend donc des écarts-types. La force du lien, elle, ne dépend que de r.
 
-## La droite de régression  ·  00:05:14
+## La droite de régression  ·  00:06:09
 
 Quand la corrélation est forte, le nuage ressemble à une droite. L'idée : trouver la droite qui passe au plus près de tous les points.
 
@@ -126,7 +126,7 @@ C'est pour ça qu'on l'appelle aussi la droite des moindres carrés.
 
 Pourquoi des carrés ? Sans eux, les écarts au-dessus et en dessous de la droite s'annuleraient.
 
-## Calculer $a$ et $b$  ·  00:05:50
+## Calculer $a$ et $b$  ·  00:06:51
 
 La droite a pour équation y égale a x plus b. Le cours donne directement les deux coefficients.
 
@@ -140,7 +140,7 @@ Et b égale 11,1, moins 0,399 fois 11,8. On obtient environ 6,39.
 
 La droite de régression est donc : y égale 0,4 x, plus 6,4.
 
-## Lire et utiliser la droite  ·  00:06:36
+## Lire et utiliser la droite  ·  00:07:47
 
 Comment lire cette droite ?
 
@@ -152,7 +152,7 @@ Surtout, la droite sert à prédire. Un étudiant a 14 en maths : 0,4 fois 14, p
 
 On estime donc sa cote de stat à environ 12. C'est une estimation, pas une certitude.
 
-## D'où viennent ces formules ? (1/2)  ·  00:07:14
+## D'où viennent ces formules ? (1/2)  ·  00:08:29
 
 Pourquoi ces formules ? Tu as annoté cette démonstration, alors on la refait pas à pas, sans se presser.
 
@@ -166,7 +166,7 @@ Ici, u vaut a x i plus b moins y i, et n vaut 2. Par rapport à a, u prime vaut 
 
 On obtient deux équations. La première : la somme de 2 u fois x i égale 0. La deuxième : la somme de 2 u égale 0.
 
-## D'où viennent ces formules ? (2/2)  ·  00:08:04
+## D'où viennent ces formules ? (2/2)  ·  00:09:31
 
 Commençons par l'équation 2. On simplifie par 2 et on sépare la somme : a fois la somme des x i, plus n fois b, moins la somme des y i, égale 0.
 
@@ -180,7 +180,7 @@ On reconnaît la formule pratique de la variance de X d'un côté, et celle de l
 
 Donc a fois s x carré égale s x y, et a égale s x y sur s x carré. C'est démontré.
 
-## Le signe de la pente  ·  00:08:48
+## Le signe de la pente  ·  00:10:25
 
 Dernière remarque. Dans a égale s x y sur s x carré, le dénominateur est un carré : il est toujours positif.
 
@@ -192,7 +192,7 @@ Et si la covariance est nulle, a vaut 0 : la droite est horizontale. Son équati
 
 À retenir : la pente de la droite et la covariance ont toujours le même signe.
 
-## Récap de la partie 1  ·  00:09:20
+## Récap de la partie 1  ·  00:11:03
 
 Récapitulons cette première partie.
 
