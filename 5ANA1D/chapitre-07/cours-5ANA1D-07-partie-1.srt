@@ -1,0 +1,698 @@
+1
+00:00:00,450 --> 00:00:04,102
+Analyse de données, chapitre 7, première partie
+:
+
+2
+00:00:04,102 --> 00:00:05,890
+la distribution normale.
+
+3
+00:00:06,340 --> 00:00:11,540
+On y découvre la courbe en cloche, la normale
+réduite, et comment lire sa table.
+
+4
+00:00:12,883 --> 00:00:16,963
+Pèse mille œufs d'un même élevage, et dessine
+l'histogramme de leurs poids.
+
+5
+00:00:17,413 --> 00:00:20,600
+Tu obtiendras presque toujours la même forme :
+
+6
+00:00:20,600 --> 00:00:24,133
+une cloche, haute au milieu et basse sur les
+bords.
+
+7
+00:00:24,583 --> 00:00:26,178
+Cette forme a un nom :
+
+8
+00:00:26,178 --> 00:00:32,341
+la distribution normale, aussi appelée
+distribution de Gauss, du nom du mathématicien
+
+9
+00:00:32,341 --> 00:00:33,863
+Carl Friedrich Gauss.
+
+10
+00:00:34,313 --> 00:00:35,957
+On la retrouve partout :
+
+11
+00:00:35,957 --> 00:00:42,394
+la taille des individus, le poids des œufs, la
+température, le quotient intellectuel, la durée
+
+12
+00:00:42,394 --> 00:00:42,873
+de vie.
+
+13
+00:00:43,323 --> 00:00:45,587
+C'est la loi continue la plus utilisée.
+
+14
+00:00:45,587 --> 00:00:49,883
+Et elle sera au centre des chapitres sur les
+échantillons et l'estimation.
+
+15
+00:00:51,717 --> 00:00:56,522
+La courbe en cloche est le graphique d'une
+fonction de densité de probabilité.
+
+16
+00:00:56,522 --> 00:00:57,077
+La voici.
+
+17
+00:00:57,527 --> 00:00:59,847
+Elle n'a que deux paramètres.
+
+18
+00:00:59,847 --> 00:01:00,807
+D'abord mu :
+
+19
+00:01:00,807 --> 00:01:03,767
+l'espérance, c'est-à-dire la moyenne.
+
+20
+00:01:04,217 --> 00:01:05,760
+Ensuite sigma :
+
+21
+00:01:05,760 --> 00:01:07,097
+l'écart-type.
+
+22
+00:01:07,547 --> 00:01:10,228
+Le reste, ce sont des constantes :
+
+23
+00:01:10,228 --> 00:01:13,147
+pi, et e, la base de l'exponentielle.
+
+24
+00:01:13,597 --> 00:01:16,370
+Si X suit cette loi, on écrit :
+
+25
+00:01:16,370 --> 00:01:20,397
+X suit une normale de paramètres mu et sigma.
+
+26
+00:01:20,847 --> 00:01:25,716
+Le cours ne démontre pas que mu et sigma sont
+bien la moyenne et l'écart-type :
+
+27
+00:01:25,716 --> 00:01:27,689
+les intégrales sont trop ardues.
+
+28
+00:01:27,689 --> 00:01:28,367
+On l'admet.
+
+29
+00:01:30,317 --> 00:01:32,038
+Prenons un exemple inventé.
+
+30
+00:01:32,038 --> 00:01:38,157
+Le poids des œufs d'un élevage suit une normale
+de moyenne 60 grammes et d'écart-type 5 grammes.
+
+31
+00:01:38,607 --> 00:01:39,798
+On note :
+
+32
+00:01:39,798 --> 00:01:42,447
+X suit N de 60 et 5.
+
+33
+00:01:42,897 --> 00:01:48,248
+Calculons la hauteur de la courbe au sommet, en
+x égale 60.
+
+34
+00:01:48,248 --> 00:01:55,777
+Le terme x moins mu vaut 0, donc l'exponentielle
+vaut e exposant 0, c'est-à-dire 1.
+
+35
+00:01:56,227 --> 00:02:01,428
+Il reste 1 divisé par 5 fois racine de 2 pi.
+
+36
+00:02:01,428 --> 00:02:04,147
+Ça fait environ 0,0798.
+
+37
+00:02:04,597 --> 00:02:05,410
+Attention :
+
+38
+00:02:05,410 --> 00:02:07,555
+ce n'est pas une probabilité.
+
+39
+00:02:07,555 --> 00:02:10,587
+C'est une hauteur de courbe, une densité.
+
+40
+00:02:10,587 --> 00:02:13,397
+Les probabilités, ce seront des aires.
+
+41
+00:02:15,350 --> 00:02:17,154
+Regardons le graphique de f.
+
+42
+00:02:17,154 --> 00:02:22,310
+C'est la fameuse courbe en cloche, aussi appelée
+courbe de Gauss, ou gaussienne.
+
+43
+00:02:22,760 --> 00:02:25,128
+Elle est symétrique par rapport à mu :
+
+44
+00:02:25,128 --> 00:02:28,680
+elle a la même allure à gauche et à droite de la
+moyenne.
+
+45
+00:02:29,130 --> 00:02:31,340
+Son sommet est en x égale mu.
+
+46
+00:02:31,340 --> 00:02:34,616
+C'est là que la densité est la plus grande.
+
+47
+00:02:34,616 --> 00:02:37,130
+On peut le montrer en dérivant f.
+
+48
+00:02:37,580 --> 00:02:42,018
+Quand x s'éloigne beaucoup de mu,
+l'exponentielle tend vers 0.
+
+49
+00:02:42,018 --> 00:02:45,096
+L'axe des x est une asymptote horizontale :
+
+50
+00:02:45,096 --> 00:02:48,460
+la courbe s'en approche sans jamais le toucher.
+
+51
+00:02:48,910 --> 00:02:54,061
+Enfin, l'aire totale sous la courbe vaut 1,
+quels que soient mu et sigma.
+
+52
+00:02:54,061 --> 00:02:56,530
+C'est obligatoire pour une densité.
+
+53
+00:02:56,530 --> 00:02:59,070
+Le cours l'admet sans démonstration.
+
+54
+00:03:01,017 --> 00:03:03,734
+Sur le schéma, on marque deux points :
+
+55
+00:03:03,734 --> 00:03:05,737
+P I, les points d'inflexion.
+
+56
+00:03:06,187 --> 00:03:10,215
+En un point d'inflexion, la courbe change de
+concavité.
+
+57
+00:03:10,215 --> 00:03:13,218
+Au milieu, elle est bombée comme un dôme.
+
+58
+00:03:13,218 --> 00:03:16,587
+Après ces points, elle se creuse et s'aplatit.
+
+59
+00:03:17,037 --> 00:03:20,879
+Pour la normale, ils sont à un écart-type du
+sommet :
+
+60
+00:03:20,879 --> 00:03:23,634
+en mu moins sigma et en mu plus sigma.
+
+61
+00:03:23,634 --> 00:03:26,317
+On le montre avec la dérivée seconde.
+
+62
+00:03:26,767 --> 00:03:30,270
+Avec nos œufs, le sommet est à 60 grammes.
+
+63
+00:03:30,270 --> 00:03:34,607
+Les points d'inflexion sont donc à 55 et 65
+grammes.
+
+64
+00:03:35,057 --> 00:03:37,508
+Sigma se lit donc sur le graphique :
+
+65
+00:03:37,508 --> 00:03:41,457
+c'est la distance entre le sommet et un point
+d'inflexion.
+
+66
+00:03:41,457 --> 00:03:44,657
+Plus sigma est grand, plus la cloche est large.
+
+67
+00:03:46,617 --> 00:03:48,219
+Rappel du chapitre 6.
+
+68
+00:03:48,219 --> 00:03:55,465
+Pour une variable continue, la probabilité que X
+soit entre a et b, c'est l'aire sous la courbe
+
+69
+00:03:55,465 --> 00:03:56,457
+entre a et b.
+
+70
+00:03:56,907 --> 00:04:00,501
+Cette aire est l'intégrale de f, de a à b.
+
+71
+00:04:00,501 --> 00:04:07,947
+Elle vaut F de b moins F de a, où F est la
+fonction de répartition, une primitive de f.
+
+72
+00:04:08,397 --> 00:04:15,357
+Par exemple, la probabilité qu'un œuf pèse entre
+55 et 65 grammes, c'est cette aire-ci.
+
+73
+00:04:15,807 --> 00:04:17,436
+Mais il y a un problème.
+
+74
+00:04:17,436 --> 00:04:21,374
+On ne sait pas intégrer f par les techniques
+habituelles :
+
+75
+00:04:21,374 --> 00:04:26,127
+la fonction e exposant moins x carré n'a pas de
+primitive élémentaire.
+
+76
+00:04:26,577 --> 00:04:27,487
+La solution :
+
+77
+00:04:27,487 --> 00:04:28,957
+une table de valeurs.
+
+78
+00:04:28,957 --> 00:04:33,087
+Mais elle est établie pour une seule normale
+particulière :
+
+79
+00:04:33,087 --> 00:04:34,417
+la normale réduite.
+
+80
+00:04:36,350 --> 00:04:40,910
+La normale réduite, c'est la normale de moyenne
+0 et d'écart-type 1.
+
+81
+00:04:41,360 --> 00:04:44,876
+On dit qu'elle est centrée, parce que mu vaut 0.
+
+82
+00:04:44,876 --> 00:04:47,440
+Et réduite, parce que sigma vaut 1.
+
+83
+00:04:47,890 --> 00:04:54,138
+Pour la distinguer d'une normale quelconque, on
+la note Z plutôt que X.
+
+84
+00:04:54,138 --> 00:04:55,018
+On écrit :
+
+85
+00:04:55,018 --> 00:04:56,690
+Z suit N de 0 et 1.
+
+86
+00:04:57,140 --> 00:05:02,797
+En remplaçant mu par 0 et sigma par 1, sa
+densité se simplifie :
+
+87
+00:05:02,797 --> 00:05:08,100
+1 sur racine de 2 pi, fois e exposant moins un
+demi x carré.
+
+88
+00:05:08,550 --> 00:05:10,793
+Son graphique est centré en 0.
+
+89
+00:05:10,793 --> 00:05:14,083
+Ses points d'inflexion sont en moins 1 et 1.
+
+90
+00:05:14,083 --> 00:05:16,550
+Et l'aire totale vaut toujours 1.
+
+91
+00:05:18,517 --> 00:05:25,237
+La fonction de répartition F de x donne la
+probabilité que Z soit inférieur ou égal à x.
+
+92
+00:05:25,687 --> 00:05:30,247
+Sur le graphique, c'est toute l'aire à gauche de
+x, depuis moins l'infini.
+
+93
+00:05:30,697 --> 00:05:33,434
+Elle s'écrit avec une intégrale :
+
+94
+00:05:33,434 --> 00:05:40,984
+1 sur racine de 2 pi, fois l'intégrale de moins
+l'infini à x, de e exposant moins un demi t
+
+95
+00:05:40,984 --> 00:05:41,897
+carré, d t.
+
+96
+00:05:42,347 --> 00:05:45,637
+Ici, t est juste la variable d'intégration.
+
+97
+00:05:45,637 --> 00:05:49,387
+Et x, c'est la borne jusqu'où on accumule
+l'aire.
+
+98
+00:05:49,837 --> 00:05:53,736
+Cette intégrale ne se calcule pas par les
+méthodes classiques.
+
+99
+00:05:53,736 --> 00:05:58,957
+Les valeurs de F sont donc obtenues par
+approximation, puis rangées dans une table.
+
+100
+00:06:00,917 --> 00:06:02,240
+Comment approcher F ?
+
+101
+00:06:02,240 --> 00:06:06,334
+Le plus simple est de remplacer l'exponentielle
+par un polynôme :
+
+102
+00:06:06,334 --> 00:06:08,917
+son développement en série de Mac Laurin.
+
+103
+00:06:09,367 --> 00:06:14,247
+En s'arrêtant à l'ordre 6, puis en intégrant, on
+obtient cette formule.
+
+104
+00:06:14,697 --> 00:06:18,369
+Testons-la en x égale 0,5.
+
+105
+00:06:18,369 --> 00:06:20,911
+Elle donne 0,6915.
+
+106
+00:06:20,911 --> 00:06:25,007
+La table donne aussi 0,6915 :
+
+107
+00:06:25,007 --> 00:06:26,137
+parfait.
+
+108
+00:06:26,587 --> 00:06:34,839
+Mais en x égale 2, elle donne 0,9331, alors que
+la table donne 0,9772.
+
+109
+00:06:34,839 --> 00:06:37,787
+C'est beaucoup trop loin.
+
+110
+00:06:38,237 --> 00:06:43,833
+C'est pourquoi le cours précise que cette
+formule n'est satisfaisante que pour x entre
+
+111
+00:06:43,833 --> 00:06:44,679
+moins 1 et 1.
+
+112
+00:06:44,679 --> 00:06:46,957
+En pratique, on utilisera la table.
+
+113
+00:06:48,917 --> 00:06:57,439
+La table du cours donne F de x, arrondie à 4
+décimales, pour x positif, de 0 à 3, par pas de
+
+114
+00:06:57,439 --> 00:06:57,902
+0,01.
+
+115
+00:06:57,902 --> 00:06:59,477
+Voici un extrait.
+
+116
+00:06:59,927 --> 00:07:02,173
+On découpe x en deux morceaux.
+
+117
+00:07:02,173 --> 00:07:06,967
+L'unité et le premier chiffre après la virgule
+donnent la ligne.
+
+118
+00:07:07,417 --> 00:07:11,177
+Le deuxième chiffre après la virgule donne la
+colonne.
+
+119
+00:07:11,627 --> 00:07:12,941
+Exemple :
+
+120
+00:07:12,941 --> 00:07:14,401
+F de 1,25.
+
+121
+00:07:14,401 --> 00:07:20,827
+On prend la ligne 1,2, puis la colonne 0,05.
+
+122
+00:07:21,277 --> 00:07:25,449
+À l'intersection, on lit 0,8944.
+
+123
+00:07:25,449 --> 00:07:34,317
+La probabilité que Z soit inférieur ou égal à
+1,25 vaut donc 0,8944.
+
+124
+00:07:34,767 --> 00:07:39,102
+Au-delà de 3, F vaut presque 1 :
+
+125
+00:07:39,102 --> 00:07:44,927
+0,9987 en 3, et 1 en 4, à 4 décimales près.
+
+126
+00:07:46,883 --> 00:07:49,446
+La table ne donne que des x positifs.
+
+127
+00:07:49,446 --> 00:07:51,523
+Comment trouver F de moins 1 ?
+
+128
+00:07:51,973 --> 00:07:55,298
+F de moins 1, c'est l'aire à gauche de moins 1 :
+
+129
+00:07:55,298 --> 00:07:56,613
+la queue de gauche.
+
+130
+00:07:57,063 --> 00:08:03,173
+Comme la courbe est symétrique par rapport à 0,
+cette queue est égale à la queue de droite,
+
+131
+00:08:03,173 --> 00:08:04,583
+l'aire à droite de 1.
+
+132
+00:08:05,033 --> 00:08:11,711
+Or l'aire à droite de 1, c'est l'aire totale,
+qui vaut 1, moins l'aire à gauche de 1.
+
+133
+00:08:11,711 --> 00:08:13,753
+C'est donc 1 moins F de 1.
+
+134
+00:08:14,203 --> 00:08:15,747
+D'où la formule :
+
+135
+00:08:15,747 --> 00:08:18,833
+F de moins x égale 1 moins F de x.
+
+136
+00:08:18,833 --> 00:08:22,101
+Le cours l'écrit dans l'autre sens :
+
+137
+00:08:22,101 --> 00:08:25,188
+F de x égale 1 moins F de moins x.
+
+138
+00:08:25,188 --> 00:08:27,003
+C'est la même chose.
+
+139
+00:08:27,453 --> 00:08:31,933
+Ici, F de 1 vaut 0,8413.
+
+140
+00:08:31,933 --> 00:08:41,453
+Donc F de moins 1 vaut 1 moins 0,8413, soit
+0,1587.
+
+141
+00:08:43,417 --> 00:08:47,097
+Entraînons-nous avec F de moins 1,25.
+
+142
+00:08:47,547 --> 00:08:50,547
+On applique la formule :
+
+143
+00:08:50,547 --> 00:08:55,547
+F de moins 1,25 égale 1 moins F de 1,25.
+
+144
+00:08:55,997 --> 00:09:01,079
+On a lu F de 1,25 dans la table :
+
+145
+00:09:01,079 --> 00:09:02,157
+0,8944.
+
+146
+00:09:02,607 --> 00:09:06,539
+Donc F de moins 1,25 vaut 0,1056.
+
+147
+00:09:06,539 --> 00:09:14,047
+Un peu plus de 10 % de l'aire se trouve à gauche
+de moins 1,25.
+
+148
+00:09:14,497 --> 00:09:17,019
+Petit réflexe de vérification :
+
+149
+00:09:17,019 --> 00:09:24,017
+pour x négatif, F de x est toujours plus petit
+que 0,5, car on est à gauche du centre.
+
+150
+00:09:25,950 --> 00:09:26,999
+Récapitulons.
+
+151
+00:09:26,999 --> 00:09:34,748
+Une normale, X suit N de mu et sigma, c'est une
+courbe en cloche, symétrique, avec son sommet en
+
+152
+00:09:34,748 --> 00:09:34,990
+mu.
+
+153
+00:09:35,440 --> 00:09:42,071
+Ses points d'inflexion sont en mu moins sigma et
+mu plus sigma, et l'aire totale sous la courbe
+
+154
+00:09:42,071 --> 00:09:42,560
+vaut 1.
+
+155
+00:09:43,010 --> 00:09:45,205
+Une probabilité est une aire.
+
+156
+00:09:45,205 --> 00:09:48,309
+Mais f n'a pas de primitive élémentaire :
+
+157
+00:09:48,309 --> 00:09:50,050
+on passe par une table.
+
+158
+00:09:50,500 --> 00:09:56,162
+Cette table est celle de la normale réduite, Z
+suit N de 0 et 1.
+
+159
+00:09:56,162 --> 00:09:59,700
+Elle donne F de x, l'aire à gauche de x.
+
+160
+00:10:00,150 --> 00:10:04,091
+Pour x négatif, F de moins x égale 1 moins F de
+x.
+
+161
+00:10:04,091 --> 00:10:10,870
+Dans la partie 2, on verra comment utiliser
+cette table pour n'importe quelle normale.
+

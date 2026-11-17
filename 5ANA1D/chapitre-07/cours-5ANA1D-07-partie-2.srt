@@ -1,0 +1,529 @@
+1
+00:00:00,450 --> 00:00:03,692
+Analyse de données, chapitre 7, deuxième partie
+:
+
+2
+00:00:03,692 --> 00:00:07,330
+calculer une probabilité pour n'importe quelle
+normale.
+
+3
+00:00:07,780 --> 00:00:14,740
+On passe de X à Z, puis on retrouve les fameuses
+valeurs 68 % et 95 %.
+
+4
+00:00:16,083 --> 00:00:22,643
+Dans la partie 1, on a appris à lire la table de
+la normale réduite, Z suit N de 0 et 1.
+
+5
+00:00:23,093 --> 00:00:25,815
+Mais nos œufs suivent N de 60 et 5.
+
+6
+00:00:25,815 --> 00:00:28,847
+Et il existe une infinité de normales :
+
+7
+00:00:28,847 --> 00:00:31,413
+une pour chaque couple mu, sigma.
+
+8
+00:00:31,863 --> 00:00:35,063
+Pas question de faire une table pour chacune !
+
+9
+00:00:35,063 --> 00:00:35,620
+L'idée :
+
+10
+00:00:35,620 --> 00:00:39,863
+transformer X en Z, pour se ramener à la seule
+table qu'on a.
+
+11
+00:00:40,313 --> 00:00:41,533
+C'est comme dire :
+
+12
+00:00:41,533 --> 00:00:46,546
+cet œuf est à deux écarts-types au-dessus de la
+moyenne, au lieu de dire :
+
+13
+00:00:46,546 --> 00:00:47,833
+il pèse 70 grammes.
+
+14
+00:00:49,683 --> 00:00:51,911
+La transformation s'écrit :
+
+15
+00:00:51,911 --> 00:00:54,963
+Z égale X moins mu, divisé par sigma.
+
+16
+00:00:55,413 --> 00:00:57,585
+D'abord, on soustrait mu :
+
+17
+00:00:57,585 --> 00:01:00,092
+c'est un changement d'origine.
+
+18
+00:01:00,092 --> 00:01:04,853
+La moyenne vient se placer en 0, car mu moins mu
+égale 0.
+
+19
+00:01:05,303 --> 00:01:07,799
+Ensuite, on divise par sigma :
+
+20
+00:01:07,799 --> 00:01:10,127
+c'est un changement d'unité.
+
+21
+00:01:10,127 --> 00:01:15,783
+Un écart-type devient une unité, car sigma
+divisé par sigma égale 1.
+
+22
+00:01:16,233 --> 00:01:21,827
+Tu as vu au chapitre 2 qu'un tel changement
+linéaire transforme la moyenne de la même façon,
+
+23
+00:01:21,827 --> 00:01:25,353
+alors que l'écart-type ne subit que le
+changement d'unité.
+
+24
+00:01:25,803 --> 00:01:26,799
+Résultat :
+
+25
+00:01:26,799 --> 00:01:30,481
+Z a une moyenne 0 et un écart-type 1.
+
+26
+00:01:30,481 --> 00:01:34,363
+Z suit la normale réduite, N de 0 et 1.
+
+27
+00:01:34,813 --> 00:01:40,093
+Concrètement, la valeur z dit à combien
+d'écarts-types de la moyenne on se trouve.
+
+28
+00:01:42,050 --> 00:01:42,921
+Visualisons.
+
+29
+00:01:42,921 --> 00:01:46,770
+Voici la courbe de nos œufs, avec son axe en
+grammes.
+
+30
+00:01:47,220 --> 00:01:50,370
+Sous cet axe, on ajoute celui de Z.
+
+31
+00:01:50,370 --> 00:01:54,420
+La moyenne, 60 grammes, correspond au 0 de Z.
+
+32
+00:01:54,870 --> 00:02:00,187
+Un écart-type, 5 grammes, correspond à une unité
+de Z.
+
+33
+00:02:00,187 --> 00:02:05,110
+Donc 65 grammes correspond à 1, et 70 grammes à
+2.
+
+34
+00:02:05,560 --> 00:02:12,440
+De l'autre côté, 55 grammes correspond à moins
+1, et 50 grammes à moins 2.
+
+35
+00:02:12,890 --> 00:02:14,918
+La courbe ne change pas de forme.
+
+36
+00:02:14,918 --> 00:02:17,130
+On change seulement les graduations.
+
+37
+00:02:19,083 --> 00:02:23,563
+Quelle est la probabilité qu'un œuf pèse au plus
+67 grammes ?
+
+38
+00:02:24,013 --> 00:02:26,256
+On centre-réduit :
+
+39
+00:02:26,256 --> 00:02:30,493
+z égale 67 moins 60, divisé par 5.
+
+40
+00:02:30,943 --> 00:02:34,170
+Ça fait 7 divisé par 5, soit 1,4.
+
+41
+00:02:34,170 --> 00:02:40,623
+Un œuf de 67 grammes est à 1,4 écart-type
+au-dessus de la moyenne.
+
+42
+00:02:41,073 --> 00:02:49,900
+Donc P de X inférieur ou égal à 67 égale P de Z
+inférieur ou égal à 1,4 :
+
+43
+00:02:49,900 --> 00:02:51,713
+c'est F de 1,4.
+
+44
+00:02:52,163 --> 00:02:57,685
+Dans la table, ligne 1,4, colonne 0,00 :
+
+45
+00:02:57,685 --> 00:02:59,617
+on lit 0,9192.
+
+46
+00:02:59,617 --> 00:03:06,243
+Environ 92 % des œufs pèsent au plus 67 grammes.
+
+47
+00:03:08,183 --> 00:03:14,023
+Pour un intervalle de a à b, on applique la même
+transformation aux trois membres de l'inégalité.
+
+48
+00:03:14,473 --> 00:03:19,092
+A inférieur ou égal à X inférieur ou égal à b
+devient :
+
+49
+00:03:19,092 --> 00:03:26,313
+a moins mu sur sigma, inférieur ou égal à Z,
+inférieur ou égal à b moins mu sur sigma.
+
+50
+00:03:26,763 --> 00:03:28,979
+Ensuite, comme au chapitre 6 :
+
+51
+00:03:28,979 --> 00:03:33,483
+c'est F de la borne de droite, moins F de la
+borne de gauche.
+
+52
+00:03:33,933 --> 00:03:34,664
+Attention :
+
+53
+00:03:34,664 --> 00:03:40,573
+ce F, c'est toujours la fonction de répartition
+de la normale réduite, celle de la table.
+
+54
+00:03:42,517 --> 00:03:47,077
+Quelle proportion des œufs pèse entre 52 et 67
+grammes ?
+
+55
+00:03:47,527 --> 00:03:49,544
+Borne de gauche :
+
+56
+00:03:49,544 --> 00:03:54,647
+52 moins 60, divisé par 5, égale moins 1,6.
+
+57
+00:03:55,097 --> 00:03:56,595
+Borne de droite :
+
+58
+00:03:56,595 --> 00:03:59,417
+on l'a déjà calculée, c'est 1,4.
+
+59
+00:03:59,867 --> 00:04:05,947
+La probabilité vaut donc F de 1,4 moins F de
+moins 1,6.
+
+60
+00:04:06,397 --> 00:04:10,335
+F de 1,4 vaut 0,9192.
+
+61
+00:04:10,335 --> 00:04:21,964
+Et F de moins 1,6 vaut 1 moins F de 1,6, soit 1
+moins 0,9452 :
+
+62
+00:04:21,964 --> 00:04:23,277
+0,0548.
+
+63
+00:04:23,727 --> 00:04:25,721
+Résultat :
+
+64
+00:04:25,721 --> 00:04:32,300
+0,9192 moins 0,0548 égale 0,8644.
+
+65
+00:04:32,300 --> 00:04:36,687
+Environ 86 % des œufs.
+
+66
+00:04:38,650 --> 00:04:41,840
+Et la probabilité qu'un œuf pèse plus de 70
+grammes ?
+
+67
+00:04:41,840 --> 00:04:44,970
+La table donne l'aire à gauche, pas l'aire à
+droite.
+
+68
+00:04:45,420 --> 00:04:50,540
+Comme l'aire totale vaut 1, l'aire à droite
+égale 1 moins l'aire à gauche.
+
+69
+00:04:50,990 --> 00:04:53,055
+On centre-réduit :
+
+70
+00:04:53,055 --> 00:04:57,070
+70 moins 60, divisé par 5, égale 2.
+
+71
+00:04:57,520 --> 00:05:07,440
+Donc P de X supérieur à 70 égale 1 moins F de 2,
+soit 1 moins 0,9772.
+
+72
+00:05:07,890 --> 00:05:09,854
+Ça fait 0,0228 :
+
+73
+00:05:09,854 --> 00:05:15,010
+à peine 2 % des œufs dépassent 70 grammes.
+
+74
+00:05:15,460 --> 00:05:17,138
+Rappel du chapitre 6 :
+
+75
+00:05:17,138 --> 00:05:21,790
+pour une variable continue, la probabilité d'un
+point vaut 0.
+
+76
+00:05:21,790 --> 00:05:26,900
+Inférieur ou strictement inférieur, c'est donc
+la même probabilité.
+
+77
+00:05:28,850 --> 00:05:31,029
+Terminons par des valeurs à connaître.
+
+78
+00:05:31,029 --> 00:05:35,330
+Quelle est la probabilité de tomber à moins d'un
+écart-type de la moyenne ?
+
+79
+00:05:35,780 --> 00:05:38,143
+On centre-réduit les bornes.
+
+80
+00:05:38,143 --> 00:05:43,290
+Mu moins sigma, moins mu, divisé par sigma, ça
+donne moins 1.
+
+81
+00:05:43,290 --> 00:05:48,100
+Et mu plus sigma, moins mu, divisé par sigma, ça
+donne 1.
+
+82
+00:05:48,550 --> 00:05:51,990
+C'est donc F de 1 moins F de moins 1.
+
+83
+00:05:52,440 --> 00:05:56,344
+Or F de moins 1, c'est 1 moins F de 1.
+
+84
+00:05:56,344 --> 00:06:00,557
+On obtient F de 1, moins 1, plus F de 1 :
+
+85
+00:06:00,557 --> 00:06:02,920
+c'est 2 F de 1 moins 1.
+
+86
+00:06:03,370 --> 00:06:05,885
+Avec la table :
+
+87
+00:06:05,885 --> 00:06:12,090
+2 fois 0,8413, moins 1, égale 0,6826.
+
+88
+00:06:12,540 --> 00:06:18,844
+Environ 68 % des valeurs sont à moins d'un
+écart-type de la moyenne, quels que soient mu et
+
+89
+00:06:18,844 --> 00:06:19,260
+sigma.
+
+90
+00:06:21,217 --> 00:06:24,131
+Même raisonnement à deux écarts-types :
+
+91
+00:06:24,131 --> 00:06:26,897
+la probabilité vaut 2 F de 2 moins 1.
+
+92
+00:06:27,347 --> 00:06:30,061
+Avec la table :
+
+93
+00:06:30,061 --> 00:06:36,755
+2 fois 0,9772, moins 1, égale 0,9544.
+
+94
+00:06:36,755 --> 00:06:39,107
+Environ 95 %.
+
+95
+00:06:39,557 --> 00:06:48,758
+Au-delà de deux écarts-types, il ne reste que 1
+moins 0,9544, soit 0,0456.
+
+96
+00:06:48,758 --> 00:06:50,997
+C'est très faible.
+
+97
+00:06:51,447 --> 00:06:54,694
+À trois écarts-types :
+
+98
+00:06:54,694 --> 00:07:00,156
+2 fois 0,9987, moins 1, égale 0,9974.
+
+99
+00:07:00,156 --> 00:07:03,847
+Au-delà, c'est quasi nul.
+
+100
+00:07:04,297 --> 00:07:08,220
+Tu reconnais la règle des 68 et 95 % du chapitre
+6 :
+
+101
+00:07:08,220 --> 00:07:10,937
+maintenant, tu sais d'où elle vient.
+
+102
+00:07:12,883 --> 00:07:17,683
+Appliquons ça à nos œufs, de moyenne 60 grammes
+et d'écart-type 5 grammes.
+
+103
+00:07:18,133 --> 00:07:19,847
+À un écart-type :
+
+104
+00:07:19,847 --> 00:07:25,493
+entre 55 et 65 grammes, on trouve environ 68 %
+des œufs.
+
+105
+00:07:25,943 --> 00:07:28,261
+À deux écarts-types :
+
+106
+00:07:28,261 --> 00:07:32,343
+entre 50 et 70 grammes, environ 95 %.
+
+107
+00:07:32,793 --> 00:07:35,499
+À trois écarts-types :
+
+108
+00:07:35,499 --> 00:07:40,172
+entre 45 et 75 grammes, presque tous :
+
+109
+00:07:40,172 --> 00:07:41,033
+99,7 %.
+
+110
+00:07:41,483 --> 00:07:44,654
+Un œuf de 80 grammes serait donc très étonnant :
+
+111
+00:07:44,654 --> 00:07:47,163
+il est à 4 écarts-types de la moyenne.
+
+112
+00:07:49,117 --> 00:07:50,245
+Récapitulons.
+
+113
+00:07:50,245 --> 00:07:56,753
+Pour utiliser la table avec X qui suit N de mu
+et sigma, on centre-réduit :
+
+114
+00:07:56,753 --> 00:07:59,357
+Z égale X moins mu, sur sigma.
+
+115
+00:07:59,807 --> 00:08:07,247
+La valeur z dit à combien d'écarts-types de la
+moyenne on se trouve, et Z suit N de 0 et 1.
+
+116
+00:08:07,697 --> 00:08:15,052
+Sur un intervalle, la probabilité vaut F de b
+moins mu sur sigma, moins F de a moins mu sur
+
+117
+00:08:15,052 --> 00:08:15,537
+sigma.
+
+118
+00:08:15,987 --> 00:08:19,285
+Au-dessus d'un seuil, c'est 1 moins F.
+
+119
+00:08:19,285 --> 00:08:24,147
+Et pour un z négatif, F de moins x égale 1 moins
+F de x.
+
+120
+00:08:24,597 --> 00:08:28,179
+Enfin, les valeurs typiques :
+
+121
+00:08:28,179 --> 00:08:34,357
+68 % à un écart-type, 95 % à deux, 99,7 % à
+trois.
+
